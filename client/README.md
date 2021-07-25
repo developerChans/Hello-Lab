@@ -68,3 +68,29 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `yarn build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+webpack이 src만 관리해주기 때문에 웬만하면 이미지 등을 넣을 때 src에 넣어 웹팩이 작동할 수 있도록 하기
+
+_actions
+_reducer
+	Redux를 위한 폴더들
+
+components/views 
+	이 안에는 Page를 넣는다.
+
+components/views/Sections 
+	이 안에는 해당 페이지에 관련된 css파일이나, component 들을 넣는다.
+
+App.js 
+	Routing 관련 일들을 처리
+Config.js 
+	환경 변수같은 것들을 정하는 곳
+
+hoc
+	Higher Order Components의 약자
+	컴포넌트 안에 function으로 다른 컴포넌트를 갖는 function
+
+utils 
+	여러 군데에서 쓰일 수 있는 것들을 이곳에 넣어둬서
+	어디서든 쓸 수 있게 해줌
