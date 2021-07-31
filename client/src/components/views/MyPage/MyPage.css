@@ -1,0 +1,47 @@
+#container{
+    height: 647px;
+}
+
+h1{
+    position: relative;
+    left: 5%;
+}
+#profile{
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+#profile img{
+    width: 200px;
+}
+#my_lab{
+    position: absolute;
+    top: 65%;
+    left: 20%;
+    transform: translateX(-50%);
+}
+​
+#lab_list{
+    list-style: none;    
+    border-width: 6px;
+    border-style: solid;
+    margin: 0;
+    padding: 0;
+}
+
+#lab_list li{
+    list-style: none;    
+}
+.dashboard_link{
+    text-decoration: none;
+    color: black;
+}
+.dashboard_card{
+    margin: 20px;
+}
+.lab_img{
+    width: 200px;
+    margin: 20px;
+}
