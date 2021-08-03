@@ -4,7 +4,13 @@ import { withRouter } from 'react-router-dom';
 
 function NoticePage() {
 
-  return <div>NoticePage</div>;
+  return (
+    <div>
+      <h1 className="title-logo">DK. Lab</h1>
+      <div>
+        NoticePage
+      </div>
+    </div>);
 }
 
 export default withRouter(NoticePage);
