@@ -10,30 +10,55 @@
 }
 #my_lab{
     position: absolute;
-    top: 65%;
-    left: 20%;
+    width: 100%;
+    top: 450px;
+    left: 800px;
     transform: translateX(-50%);
 }
-​
+h2 {
+    width: 75%;
+    color: black;
+    text-align: left;
+    box-shadow: 0 4px 4px -4px rgb(85, 85, 85);
+
+}
+h2 span{
+    margin-left: 10px;
+    margin-bottom: 10px;
+    display:inline-block;
+
+}
 #lab_list{
     list-style: none;    
-    border-width: 6px;
-    border-style: solid;
-    margin: 0;
-    padding: 0;
 }
 
 #lab_list li{
     list-style: none;    
+    display: inline-block;
 }
 .dashboard_link{
     text-decoration: none;
     color: black;
 }
 .dashboard_card{
-    margin: 20px;
+    margin: 20px;    
+    box-shadow: 1px 1px 10px 1px rgb(196, 196, 196);
 }
 .lab_img{
-    width: 200px;
-    margin: 20px;
+    width: 250px;
+    height: 150px;
+    margin: 0px;
+}
+.lab_name{
+    font-weight: bolder;
+    font-size: 17pt;
+    padding: 0 0 0 20px;
+    margin-bottom: 10px;
+}
+
+.prof{
+    font-weight: 600;
+    color: rgb(99, 99, 99);
+    margin-top: 0;
+    padding: 0 0 30px 20px;
 }
