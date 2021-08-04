@@ -1,13 +1,19 @@
 import { useEffect } from "react";
 import axios from "axios";
 import { withRouter } from 'react-router-dom';
-
+import '../views.css';
+import './LandingPage.css';
 
 function LandingPage(props) {
 
   const onLoginHandler = () => {
     props.history.push('/login')
   }
+
+  const onRegisterHandler = () => {
+    props.history.push('/register')
+  }
+
   const onNoticeHandler = () =>{
     props.history.push('/notice')
   }
@@ -22,10 +28,17 @@ function LandingPage(props) {
   }
 
   return (
-    <div>
-      <h1>DK. Lab</h1>
-      <div>
+    <div className="wrap">
+      <div className="header">
+        <h1>
+            <a href="/">
+              <div className="logo"></div>
+            </a>
+            <span className="page"></span>
+        </h1>
         <button onClick={onLoginHandler}>로그인</button>
+        <button onClick={onRegisterHandler}>회원가입</button>
+
         <div>
           <h3>공지사항</h3>
           <button onClick={onNoticeHandler}>+</button>
@@ -39,6 +52,8 @@ function LandingPage(props) {
           <input type="text" />
           <button type="submit">검색</button>
         </form>
+      </div>
+      <div>
       </div>
     </div>
   );

@@ -12,6 +12,7 @@ import RecruitmentPage from './components/views/RecruitmentPage/RecruitmentPage'
 import NoticePage from "./components/views/NoticePage/NoticePage";
 import SearchPage from "./components/views/SearchPage/SearchPage";
 import MyPage from "./components/views/MyPage/MyPage";
+import LabPage from "./components/views/LabPage/LabPage";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route exact path="/notice" component={NoticePage} />
           <Route exact path="/search" component={SearchPage} />
           <Route exact path="/mypage" component={MyPage} />
+          <Route exact path="/lab" component={LabPage} />
         </Switch>
       </div>
     </Router>
