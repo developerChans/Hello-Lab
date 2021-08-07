@@ -1,11 +1,18 @@
 const users = new Array();
+const db = require("../../config/db");
 
 exports.test = function (req, res) {
   res.send("분리");
 };
 
 exports.getAllUser = function (req, res) {
-  res.send(users);
+  const users = db.query("SELECT * FROM users", (err, data) => {
+    if (err) {
+      console.log(err);
+    }
+    console.log(data);
+  });
+  res.send(users.RowDataPacket);
 };
 
 exports.register = function (req, res) {
@@ -20,18 +27,7 @@ exports.register = function (req, res) {
 };
 
 exports.login = function (req, res) {
-  const id = req.body.id;
-  const password = req.body.password;
-
-  const user = users.filter({ id: id });
-  if (user) {
-    console.log(user);
-    // if (user.password === password) {
-    //   return res.send("로그인 성공");
-    // }
-  }
-
-  res.send("로그인 실패");
+  res.send("test");
 };
 
 exports.user = new Array();
