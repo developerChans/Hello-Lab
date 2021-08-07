@@ -19,6 +19,8 @@ app.post("/test", (req, res) => {
   res.send(req.body);
 });
 
+//왜 푸쉬가 안되지?
+
 const user = require("./src/routers/user/user.router");
 app.use("/user", user);
 
