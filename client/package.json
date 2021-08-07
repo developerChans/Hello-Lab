@@ -2,11 +2,19 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
+<<<<<<< HEAD
   "proxy" : "http://localhost:5000",
+=======
+  "proxy": "http://localhost:5000",
+>>>>>>> b25a0c3dc5a583bdfc707ffa32689896e94be7fa
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+<<<<<<< HEAD
+=======
+    "antd": "^4.16.9",
+>>>>>>> b25a0c3dc5a583bdfc707ffa32689896e94be7fa
     "axios": "^0.21.1",
     "http-proxy-middleware": "^2.0.1",
     "react": "^17.0.2",

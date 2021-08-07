@@ -2,9 +2,9 @@ import { useEffect } from "react";
 import axios from "axios";
 import { withRouter } from 'react-router-dom';
 
-function LoginPage() {
+function SearchPage() {
 
-  return <div>LoginPage</div>;
+  return <div>SearchPage</div>;
 }
 
-export default withRouter(LoginPage);
+export default withRouter(SearchPage);

@@ -2,9 +2,9 @@ import { useEffect } from "react";
 import axios from "axios";
 import { withRouter } from 'react-router-dom';
 
-function LoginPage() {
+function RecruitmentPage() {
 
-  return <div>LoginPage</div>;
+  return <div>RecruitmentPage</div>;
 }
 
-export default withRouter(LoginPage);
+export default withRouter(RecruitmentPage);
