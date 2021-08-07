@@ -1,12 +1,11 @@
 import { useEffect } from "react";
 import axios from 'axios';
+import MenuBar from '../MenuBar/MenuBar';
 
 function ExamplePage() {
-    useEffect(() => {
-        axios.get('/test').then((response) => console.log(response.data));
-    }, []);
-
-    return <div> example here </div>
+    return (
+        <MenuBar/>
+    );
 }
 
 export default ExamplePage;

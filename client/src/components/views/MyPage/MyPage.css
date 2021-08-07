@@ -10,13 +10,13 @@
 }
 #my_lab{
     position: absolute;
-    width: 100%;
+    width: 1000px;
     top: 450px;
-    left: 800px;
+    left: 50%;
     transform: translateX(-50%);
 }
 h2 {
-    width: 75%;
+    width: 100%;
     color: black;
     text-align: left;
     box-shadow: 0 4px 4px -4px rgb(85, 85, 85);
