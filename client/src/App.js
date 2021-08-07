@@ -1,6 +1,5 @@
 import React from "react";
 
-import './App.css';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import ExamplePage from './components/views/ExamplePage/ExamplePage';
@@ -13,8 +12,10 @@ import NoticePage from "./components/views/NoticePage/NoticePage";
 import SearchPage from "./components/views/SearchPage/SearchPage";
 import MyPage from "./components/views/MyPage/MyPage";
 import LabPage from "./components/views/LabPage/LabPage";
+import MenuBar from "./components/views/MenuBar/MenuBar";
 
 function App() {
+
   return (
     <Router>
       <div>
@@ -25,6 +26,7 @@ function App() {
           you have multiple routes, but you want only one
           of them to render at a time
         */}
+        <MenuBar/>
         <Switch>
           <Route exact path="/test" component={ExamplePage} />
           <Route exact path="/" component={LandingPage} />

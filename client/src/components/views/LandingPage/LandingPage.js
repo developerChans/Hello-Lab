@@ -13,7 +13,11 @@ function LandingPage(props) {
   const onRegisterHandler = () => {
     props.history.push('/register')
   }
-
+ 
+  const onMypageHandler = () => {
+    props.history.push('/mypage')
+  }
+ 
   const onNoticeHandler = () =>{
     props.history.push('/notice')
   }
@@ -38,7 +42,7 @@ function LandingPage(props) {
         </h1>
         <button onClick={onLoginHandler}>로그인</button>
         <button onClick={onRegisterHandler}>회원가입</button>
-
+        <button onClick={onMypageHandler}>마이페이지</button>
         <div>
           <h3>공지사항</h3>
           <button onClick={onNoticeHandler}>+</button>
