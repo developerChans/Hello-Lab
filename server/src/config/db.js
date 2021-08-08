@@ -8,7 +8,11 @@ const db = mysql.createConnection({
   database: "DKLTEST",
 });
 
-db.connect();
-console.log("db connected");
+db.connect((err) => {
+  if (err) {
+    throw err;
+  }
+  console.log("LOCAL DB connected");
+});
 
 module.exports = db;
