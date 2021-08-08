@@ -12,7 +12,7 @@ exports.getAllUser = function (req, res) {
     }
     console.log(data);
   });
-  res.send(users.RowDataPacket);
+  res.send(users.RowDataPacket[1]);
 };
 
 exports.register = function (req, res) {
