@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const LoginAuth = require("../../middleware/logintAuth");
 const userService = require("./user.service");
 
 router.get("/", userService.getAllUser);
@@ -10,6 +11,6 @@ router.get("/register", userService.getAllUser);
 
 router.post("/register", userService.register);
 
-router.post("/login", userService.login);
+router.post("/login", LoginAuth, userService.login);
 
 module.exports = router;
