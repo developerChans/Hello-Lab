@@ -1,7 +1,7 @@
 const users = new Array();
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
-const db = require("../../config/db");
+const db = require("../../../config/db");
 
 exports.test = function (req, res) {
   res.send("분리");
