@@ -1,17 +1,10 @@
-const router = require("express").Router();
-const LoginAuth = require("../../middleware/logintAuth");
-const userService = require("./user.service");
-const userController = require("./userController");
+module.exports = function(app){
+const user = require("./userController");
+const LoginAuth = require("../../../config/logintAuth");
 
-router.get("/", userController.getAllUser);
+//app.post('/app/users/students', user.postStudents);
+app.get('/app/users/students', user.getStudents);
 
-router.get("/test", userController.test);
+app.get("/test", user.test);
 
-//삭제예정
-router.get("/register", userController.getAllUser);
-
-router.post("/register", userController.register);
-
-router.post("/login", LoginAuth, userController.login);
-
-module.exports = router;
+};
