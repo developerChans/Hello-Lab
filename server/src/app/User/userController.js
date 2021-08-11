@@ -1,8 +1,6 @@
 const userProvider = require("./userProvider");
 const userService = require("./userService");
-const bcrypt = require("bcrypt");
-const saltRounds = 10;
-
+const regexEmail = require("regex-email");
 exports.test = function (req, res) {
   return res.json({
     success: 성공,
@@ -10,43 +8,56 @@ exports.test = function (req, res) {
       "test성공",
   });
 };
-/*
+
 exports.postStudents = async function (req, res) {
   const {email,password,name,studentNum,major,phoneNumber} =req.body;
   if (!email)
-        return res.send(response(baseResponse.SIGNUP_EMAIL_EMPTY));
+      return res.json({
+          result:성공,
+          message: "회원가입 성공"
+      });
 
     // 이메일 길이 체크
-    if (email.length > 30)
-        return res.send(response(baseResponse.SIGNUP_EMAIL_LENGTH));
-    
+  if (email.length > 30)
+      return res.json({
+        result:실패,
+          message: "이메일 길이를 확인해주세요(30자 이하)"
+      })
     // 형식 체크 (by 정규표현식)
     if (!regexEmail.test(email))
-        return res.send(response(baseResponse.SIGNUP_EMAIL_ERROR_TYPE));
-    
+    return res.json({
+      result:실패,
+      message: "이메일 형식을 확인해주세요."
+  });
     // 이름 빈 값 체크
     if (!name)
-        return res.send(response(baseResponse.SIGNUP_NAME_EMPTY));
+    return res.json({
+      result:실패,
+      message: "이름을 입력해주세요."
+  });
 
     // 이름 길이 체크
     if (name.length > 30)
-        return res.send(response(baseResponse.SIGNUP_NAME_LENGTH));
+    return res.json({
+      result:실패,
+      message: "이름 길이를 확인해주세요.(30자이하)"
+  });
 
-    if(!nickname)
-        return res.send(response(baseResponse.SIGNUP_NICKNAME_EMPTY));
     
-    if(nickname.length>20)
-    return res.send(response(baseResponse.SIGNUP_NICKNAME_LENGTH));
     // 비밀번호 빈 값 체크 
     if(!password)
-        return res.send(response(baseResponse.SIGNUP_PASSWORD_EMPTY));
-        
+    return res.json({
+      result:실패,
+      message: "비밀번호를 입력해주세요."
+  });  
     // 비밀번호 길이 체크
     if(password.length>20||password.length<6)
-        return res.send(response(baseResponse.SIGNUP_PASSWORD_LENGTH));
-
+    return res.json({
+      result:실패,
+      message: "비밀번호 길이를 확인해주세요.(6자 이상 20자 이하)"
+  });
    
-    const signUpResponse = await userService.createUser(
+    const signUpResponse = await userService.createStudent(
         email,
         name,
         studentNum,
@@ -56,15 +67,14 @@ exports.postStudents = async function (req, res) {
     );
 
     return res.send(signUpResponse);
-  const studentList = await userProvider.retrieveStudentList();
-  return res.send(response(studentList));
 };
-*/
+
 
 exports.getStudents = async function (req, res) {
   const studentList = await userProvider.retrieveStudentList();
   return res.send(studentList);
 };
+
 
 exports.register = async function (req, res) {
   // todo 비밀번호 암호화 후 저장
