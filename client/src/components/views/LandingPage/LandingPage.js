@@ -1,14 +1,19 @@
 import { useEffect } from "react";
 import axios from "axios";
 import { withRouter } from 'react-router-dom';
+<<<<<<< HEAD
 import '../views.css';
 import './LandingPage.css';
+=======
+
+>>>>>>> 52ded8f6f785539dafa16c51431d72dd6ca4fe4d
 
 function LandingPage(props) {
 
   const onLoginHandler = () => {
     props.history.push('/login')
   }
+<<<<<<< HEAD
 
   const onRegisterHandler = () => {
     props.history.push('/register')
@@ -18,6 +23,8 @@ function LandingPage(props) {
     props.history.push('/mypage')
   }
  
+=======
+>>>>>>> 52ded8f6f785539dafa16c51431d72dd6ca4fe4d
   const onNoticeHandler = () =>{
     props.history.push('/notice')
   }
@@ -32,6 +39,7 @@ function LandingPage(props) {
   }
 
   return (
+<<<<<<< HEAD
     <div className="wrap">
       <div className="header">
         <h1>
@@ -43,6 +51,12 @@ function LandingPage(props) {
         <button onClick={onLoginHandler}>로그인</button>
         <button onClick={onRegisterHandler}>회원가입</button>
         <button onClick={onMypageHandler}>마이페이지</button>
+=======
+    <div>
+      <h1>DK. Lab</h1>
+      <div>
+        <button onClick={onLoginHandler}>로그인</button>
+>>>>>>> 52ded8f6f785539dafa16c51431d72dd6ca4fe4d
         <div>
           <h3>공지사항</h3>
           <button onClick={onNoticeHandler}>+</button>
@@ -57,8 +71,11 @@ function LandingPage(props) {
           <button type="submit">검색</button>
         </form>
       </div>
+<<<<<<< HEAD
       <div>
       </div>
+=======
+>>>>>>> 52ded8f6f785539dafa16c51431d72dd6ca4fe4d
     </div>
   );
 }

@@ -1,7 +1,6 @@
 const {pool} = require('../../../config/db');
 const userProvider = require('./userProvider');
 const userDao = require('./userDao');
-const userProvider = require('./userProvider');
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 

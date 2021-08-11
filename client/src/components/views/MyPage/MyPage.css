@@ -1,3 +1,14 @@
+<<<<<<< HEAD
+=======
+#container{
+    height: 647px;
+}
+
+h1{
+    position: relative;
+    left: 5%;
+}
+>>>>>>> 52ded8f6f785539dafa16c51431d72dd6ca4fe4d
 #profile{
     position: absolute;
     top: 20%;
@@ -10,6 +21,7 @@
 }
 #my_lab{
     position: absolute;
+<<<<<<< HEAD
     width: 1000px;
     top: 450px;
     left: 50%;
@@ -30,17 +42,34 @@ h2 span{
 }
 #lab_list{
     list-style: none;    
+=======
+    top: 65%;
+    left: 20%;
+    transform: translateX(-50%);
+}
+​
+#lab_list{
+    list-style: none;    
+    border-width: 6px;
+    border-style: solid;
+    margin: 0;
+    padding: 0;
+>>>>>>> 52ded8f6f785539dafa16c51431d72dd6ca4fe4d
 }
 
 #lab_list li{
     list-style: none;    
+<<<<<<< HEAD
     display: inline-block;
+=======
+>>>>>>> 52ded8f6f785539dafa16c51431d72dd6ca4fe4d
 }
 .dashboard_link{
     text-decoration: none;
     color: black;
 }
 .dashboard_card{
+<<<<<<< HEAD
     margin: 20px;    
     box-shadow: 1px 1px 10px 1px rgb(196, 196, 196);
 }
@@ -61,4 +90,11 @@ h2 span{
     color: rgb(99, 99, 99);
     margin-top: 0;
     padding: 0 0 30px 20px;
+=======
+    margin: 20px;
+}
+.lab_img{
+    width: 200px;
+    margin: 20px;
+>>>>>>> 52ded8f6f785539dafa16c51431d72dd6ca4fe4d
 }
