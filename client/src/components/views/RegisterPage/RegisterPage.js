@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { withRouter } from 'react-router-dom';
@@ -117,6 +118,15 @@ function RegisterPage(props) {
       </div>
     </div>
   );
+=======
+import { useEffect } from "react";
+import axios from "axios";
+import { withRouter } from 'react-router-dom';
+
+function RegisterPage() {
+
+  return <div>RegisterPage</div>;
+>>>>>>> 52ded8f6f785539dafa16c51431d72dd6ca4fe4d
 }
 
 export default withRouter(RegisterPage);

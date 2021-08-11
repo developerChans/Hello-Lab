@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import axios from "axios";
 import { withRouter } from 'react-router-dom';
+<<<<<<< HEAD
 import '../views.css';
 import useTabs from './useTabs'
 
@@ -72,6 +73,12 @@ function LabPage() {
       </div>
     </div>
   );
+=======
+
+function LabPage() {
+
+  return <div>LabPage 내 연구실 중 하나 들어갔을 때</div>;
+>>>>>>> 52ded8f6f785539dafa16c51431d72dd6ca4fe4d
 }
 
 export default withRouter(LabPage);

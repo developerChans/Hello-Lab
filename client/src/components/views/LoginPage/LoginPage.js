@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import '../views.css';
@@ -51,6 +52,15 @@ function LoginPage(props) {
       </div>
     </div>
   );
+=======
+import { useEffect } from "react";
+import axios from "axios";
+import { withRouter } from 'react-router-dom';
+
+function LoginPage() {
+
+  return <div>LoginPage</div>;
+>>>>>>> 52ded8f6f785539dafa16c51431d72dd6ca4fe4d
 }
 
 export default withRouter(LoginPage);
