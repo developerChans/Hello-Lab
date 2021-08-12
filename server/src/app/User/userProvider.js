@@ -8,3 +8,11 @@ exports.retrieveStudentList = async function(){
 
     return studentListResult;
 }
+
+exports.retrieveProfessorList = async function(){
+    const connection = await pool.getConnection(async (conn) => conn);
+    const professorListResult = await userDao.selectProfessor(connection);
+    connection.release();
+
+    return professorListResult;
+}
