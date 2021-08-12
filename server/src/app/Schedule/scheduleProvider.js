@@ -4,6 +4,7 @@ const scheduleDao = require("./scheduleDao");
 exports.getScheduleList = async function(studentIdx) {
     const connection = await pool.getConnection(async(conn) => conn);
     const scheduleListResult = await scheduleDao.callSchedules(connection, studentIdx);
+    connection.release();
     return scheduleListResult;
 };
 /*

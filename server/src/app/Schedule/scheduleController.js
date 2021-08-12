@@ -43,15 +43,13 @@ exports.getSchedules = async function(req, res) {
     /**
      * Path variable : studentIdx
      */
-
-    console.log(1);
     
     const studentIdx = req.params.studentIdx;
 
     console.log(studentIdx);
 
     if(!studentIdx) return res.send(errResponse(baseResponse.USER_USERID_EMPTY));
-
     const scheduleListResult = await scheduleProvider.getScheduleList(studentIdx);
-    return res.send(reponse(baseResponse.SUCCESS, scheduleListResult));
+    return res.send(response(baseResponse.SUCCESS, scheduleListResult));
+
 };
