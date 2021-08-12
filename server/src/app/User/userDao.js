@@ -22,8 +22,33 @@ async function selectStudent(connection){
     return selectStudentRow[0];
 }
 
+// 교수 생성
+async function insertProfessorInfo(connection, insertProfessorInfoParams) {
+    const insertProfessorInfoQuery = `
+          INSERT INTO Professor(email, name, professorId, major,phoneNumber,password,imageUrl)
+          VALUES (?, ?, ?, ?, ?, ?,?);
+      `;
+    const insertProfessorInfoRow = await connection.query(
+      insertProfessorInfoQuery,
+      insertProfessorInfoParams
+    );
+  
+    return insertProfessorInfoRow;
+}
+
+// 교수 조회
+async function selectProfessor(connection){
+    const selectProfessorQuery = `
+    select name, professorId, major
+    from Professor;
+    `
+    const selectProfessorRow = await connection.query(selectProfessorQuery);
+    return selectProfessorRow[0];
+}
 
 module.exports = {
     insertStudentInfo,
-    selectStudent
+    selectStudent,
+    insertProfessorInfo,
+    selectProfessor
 };
