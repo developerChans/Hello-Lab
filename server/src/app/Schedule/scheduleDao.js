@@ -18,6 +18,9 @@ async function createSchedule(connection, createScheduleParams) {
     const createScheduleRow = await connection.query(createScheduleQuery, createScheduleParams);
     return createScheduleRow;
 }
+
+// 스케줄 삭제 (교수 전용) ==> patch입니다.
+async function modify
 /*
 async function selectProfessionalId(connection,selectProfessionalIdParams) {
     const selectProfessionalIdQuery = `

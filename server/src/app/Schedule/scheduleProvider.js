@@ -7,6 +7,8 @@ exports.getScheduleList = async function(studentIdx) {
     connection.release();
     return scheduleListResult;
 };
+
+
 /*
 exports.professorIdCheck = async function(selectProfessionalIdParams) {
     const connection = await pool.getConnection(async(conn) => conn);
