@@ -4,8 +4,10 @@ const pool = mysql.createPool({
   host: "localhost",
   user: "root",
   port: "3306",
-  password: "wnstjr0406",
-  database: "dkkdb"
+  password: "wlasl102003!",
+  //password: "wnstjr0406",
+  database: "DKLTEST"
+  //database: "dkkdb"
 });
 
 module.exports = {
