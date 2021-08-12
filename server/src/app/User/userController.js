@@ -10,7 +10,7 @@ exports.test = function (req, res) {
 };
 
 exports.postStudents = async function (req, res) {
-  const {email,password,name,studentNum,major,phoneNumber} =req.body;
+  const {email,password,name,studentNum,major,phoneNumber,imageUrl} =req.body;
   if (!email)
       return res.json({
           result:성공,
@@ -63,7 +63,8 @@ exports.postStudents = async function (req, res) {
         studentNum,
         major,
         phoneNumber,
-        password
+        password,
+        imageUrl
     );
 
     return res.send(signUpResponse);

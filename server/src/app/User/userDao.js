@@ -1,8 +1,8 @@
 // 학생 생성
-async function insertUserInfo(connection, insertStudentInfoParams) {
+async function insertStudentInfo(connection, insertStudentInfoParams) {
     const insertStudentInfoQuery = `
-          INSERT INTO Student(email, name, studentNum, major,phoneNum,password)
-          VALUES (?, ?, ?, ?, ?, ?);
+          INSERT INTO Student(email, name, studentId, major,phoneNumber,password,imageUrl)
+          VALUES (?, ?, ?, ?, ?, ?,?);
       `;
     const insertStudentInfoRow = await connection.query(
       insertStudentInfoQuery,
@@ -24,5 +24,6 @@ async function selectStudent(connection){
 
 
 module.exports = {
+    insertStudentInfo,
     selectStudent
 };
