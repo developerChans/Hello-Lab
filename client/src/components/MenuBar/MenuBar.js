@@ -9,12 +9,14 @@ const profile = {img: imgPath};
 const MenuBar = () => {
 
   useEffect(()=>{
-    
+    console.log(document.location.href);
+    const menu = document.querySelector("#menu");
     if(!document.location.href.includes('lab')){
-      const menu = document.querySelector("#menu");
       menu.classList.remove("hidden");
+    }else{
+      menu.classList.add("hidden");
     }
-  }, []);
+  }, [document.location.href]);
   
   const dropdown = useRef();
   const [drop, setDrop] = useState(false);
