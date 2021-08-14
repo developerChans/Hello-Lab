@@ -33,7 +33,6 @@ function App() {
           you have multiple routes, but you want only one
           of them to render at a time
         */}
-        <MenuBar/>
         <Switch>
           <Route exact path="/test" component={ExamplePage} />
           <Route exact path="/" component={LandingPage} />
