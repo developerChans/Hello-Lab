@@ -6,6 +6,7 @@ const scheduleService = require("../../app/Schedule/scheduleService");
 
 const regexEmail = require("regex-email");
 const {emit} = require("nodemon");
+const { checkUpdateRights } = require("./scheduleDao");
 
 /**
  * schedule API NO. 0
@@ -41,7 +42,7 @@ exports.createSchedule = async function(req, res) {
  */
 exports.getSchedules = async function(req, res) {
     /**
-     * Path variable : studentIdx
+     * Path Variable : studentIdx
      */
     
     const studentIdx = req.params.studentIdx;
@@ -53,3 +54,30 @@ exports.getSchedules = async function(req, res) {
     return res.send(response(baseResponse.SUCCESS, scheduleListResult));
 
 };
+
+/**
+ * schedule API NO. 3
+ * API NAME : 일정 삭제 및 복구 API
+ * [PATCH] /app/schedules/:labIdx
+ * body : status
+ */
+exports.updateScheduleStatus = async function(req,res) {
+    /**
+     * Path Variable : labIdx
+     */
+    const {status} = req.body;
+    const labIdx = req.params.labIdx;
+    const userIdFromJwt = 1; // 임시
+    // const userIdFromJWT = req.verifiedToken.userId
+    const checkUpdateRightsIdRow = scheduleProvider.checkUpdateRights(labIdx);
+    const professorIdx = checkUpdateRightsIdRow.professorId;
+    const associateProfessorIdx = checkUpdateRightsIdRow.associateProfessorId;
+    if (userIdFromJwt === professorIdx || userIdFromJwt === associateProfessorIdx) {
+        const updateScheduleStatusResult = await scheduleService.updateScheduleStatus(status, professorIdx);
+        return res.send(updateScheduleStatusResult);
+    } else {
+        res.send(errResponse(baseResponse.TOKEN_VERIFICATION_FAILURE));
+    }
+
+
+}

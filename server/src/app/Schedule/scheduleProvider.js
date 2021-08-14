@@ -8,15 +8,9 @@ exports.getScheduleList = async function(studentIdx) {
     return scheduleListResult;
 };
 
-
-/*
-exports.professorIdCheck = async function(selectProfessionalIdParams) {
+exports.checkUpdateRights = async function(labIdx) {
     const connection = await pool.getConnection(async(conn) => conn);
-    const professorIdCheckResult = await scheduleDao.selectProfessionalId(
-        connection,
-        selectProfessionalIdParams
-    );
+    const checkUpdateRightsResult = await scheduleDao.checkUpdateRights(connection, labIdx);
     connection.release();
-    return professorIdCheckResult[0];
+    return checkUpdateRightsResult[0];
 };
-*/
