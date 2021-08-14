@@ -1,14 +1,17 @@
 #lab-header{
-    padding: 50px;
-    position: sticky;
+    position: fixed;
+    width: 80vw;
+    left: 80px;
+    height: 150px;
+    margin-left: 80px;
+    border-bottom: solid 2px rgb(173, 173, 173);
 }
 #lab-header>:first-child{
-    position: absolute;
-    left: 80px;
+    position: relative;
+    top: 90px;
     padding:0;
     margin:0;
     padding-bottom: 5px;
-    border-bottom: solid 3px rgb(116, 116, 116);
 }
 #lab-name{
     font-weight: bold;
