@@ -6,8 +6,7 @@ function SearchPage() {
 
   return (
     <div>
-      <h1 className="title-logo">DK. Lab</h1>
-      <div>SearchtPage</div>;
+
     </div>
   );
 }

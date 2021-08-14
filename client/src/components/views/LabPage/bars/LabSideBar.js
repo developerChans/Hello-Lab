@@ -4,8 +4,7 @@ import {useRef, useEffect, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import './LabSideBar.css';
 import { FaUserCircle } from "react-icons/fa";
-import {GrOverview} from "react-icons/gr";
-
+import {IoIosApps, IoIosCalendar} from "react-icons/io";
 const profile = {img: imgPath};
 
 const LabSideBar = () => {
@@ -36,18 +35,20 @@ const LabSideBar = () => {
         <ul id="sidebar-ul" className="navbar-nav nav-pills nav-flush flex-column mb-auto text-center">
           <li className="nav-item sidebar-item">
             <a className="nav-link" href="#">
-            <GrOverview id="labs-icon"/>
+            <IoIosApps className="labs-icon"/>
             </a>
           </li>
           <li className="nav-item sidebar-item">
-            <a className="nav-link" href="#">메뉴2</a>
+            <a className="nav-link" href="#">
+              <IoIosCalendar className="labs-icon"/>
+            </a>
           </li>
         </ul>
         <FaUserCircle type="button" id="profile_icon" onClick={profileClick}/>
         <div id="side-dropdown" ref={dropdown} className="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <a className="dropdown-item" href="/mypage">Dashboard</a>
-          <a className="dropdown-item" href="/home">Another action</a>
-          <a className="dropdown-item" href="#">Something else here</a>
+          <a className="dropdown-item" href="#">Something else</a>
+          <a className="dropdown-item" href="/home">Sign out</a>
         </div>
       </nav>
 

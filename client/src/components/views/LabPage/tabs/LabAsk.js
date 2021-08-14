@@ -1,14 +1,10 @@
 import { withRouter, useLocation } from 'react-router-dom';
-import LabBar from '../bars/LabBar';
-import LabHeader from '../bars/LabHeader';
-import LabSideBar from '../bars/LabSideBar';
-
+import LabPage from '../LabPage';
 const LabAsk = () =>{
-    
     return (
-        <div>
-            something
-        </div>
-    );
+    <div>
+      <LabPage/>
+    </div>
+  );
 }
 export default withRouter(LabAsk);

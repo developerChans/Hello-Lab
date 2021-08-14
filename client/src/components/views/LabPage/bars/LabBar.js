@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import './LabBar.css';
 import {useState, useEffect} from 'react';
+import { useHistory } from 'react-router-dom';
 
 const pageInfo =[
     {
@@ -31,38 +32,25 @@ const pageInfo =[
   ]
 
 const LabBar = (lab) =>{
-
-    useEffect(()=>{
-      const tabFrame = document.querySelector("#frame");
-
-      if(!localStorage.getItem('tab')){
-        localStorage.setItem('tab', 'info');
-      }
-      const storedTab = localStorage.getItem('tab');
-      tabFrame.src = `/lab/${lab.id}/${storedTab}`;
-    }, [])
-
-    const onTabClick = (section) =>{
-      const tabFrame = document.querySelector("#frame");
-
-      tabFrame.src = `/lab/${lab.id}/${section.link}`;
-      localStorage.setItem('tab', section.link); 
+    const history = useHistory();
+    const onTabHandler = (section) =>{
+      history.push({
+        pathname: `/lab/${lab.id}/${section.link}`
+      })
     }
-
     return (
         <div id="content">
             <nav id="lab-bar" className="navbar">
                 <ul id="lab-ul" className="navbar-nav">
                     {pageInfo.map((section, index)=>(
-                        <button id="btn" key={index} className="tab nav-item" onClick={() => onTabClick(section)} type="button">
-                            <span className="nav-item tab-link nav-link">
+                        <li id="btn" key={index} className="tab nav-item nav-link" onClick={() => onTabHandler(section)} type="button">
+                            <span className="nav-item tab-link">
                               {section.tab}
                             </span>
-                        </button>
+                        </li>
                     ))}
                 </ul>
             </nav>
-            <iframe id="frame"></iframe>
         </div>
     );
 }
