@@ -34,6 +34,7 @@ function LabPage() {
   const lab = labs.find(element => element.id === id);
   return (
     <div>
+      <LabSideBar/>
       <LabHeader {...lab}/>
       <LabBar {...lab}/>
     </div>

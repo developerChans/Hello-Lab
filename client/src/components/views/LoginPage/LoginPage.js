@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import '../views.css';
 import './LoginPage.css';
+import MenuBar from '../../MenuBar/MenuBar';
 
 function LoginPage(props) {
 
@@ -30,6 +31,7 @@ function LoginPage(props) {
 
   return (
     <div className="wrap">
+      <MenuBar/>
       <div className="header">
         <h1>
             <a href="/">

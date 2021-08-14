@@ -3,6 +3,7 @@ import axios from "axios";
 import { withRouter } from 'react-router-dom';
 import '../views.css';
 import './LandingPage.css';
+import MenuBar from "../../MenuBar/MenuBar";
 
 function LandingPage(props) {
 
@@ -33,6 +34,7 @@ function LandingPage(props) {
 
   return (
     <div className="wrap">
+      <MenuBar/>
       <div className="header">
         <h1>
             <a href="/">

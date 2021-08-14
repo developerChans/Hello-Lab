@@ -8,16 +8,6 @@ const profile = {img: imgPath};
 
 const MenuBar = () => {
 
-  useEffect(()=>{
-    console.log(document.location.href);
-    const menu = document.querySelector("#menu");
-    if(!document.location.href.includes('lab')){
-      menu.classList.remove("hidden");
-    }else{
-      menu.classList.add("hidden");
-    }
-  }, [document.location.href]);
-  
   const dropdown = useRef();
   const [drop, setDrop] = useState(false);
 
@@ -34,8 +24,8 @@ const MenuBar = () => {
   }
 
   return (
-    <div id="menu" className="hidden">
-      <nav className="navbar navbar-expand bg-white navbar-light">
+    <div id="menu">
+      <nav id="menubar" className="navbar navbar-expand bg-white navbar-light">
         <a className="navbar-brand" href="/">
           <img src={logo} id="logo"/>
         </a>
