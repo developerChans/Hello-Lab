@@ -35,15 +35,13 @@ function LandingPage(props) {
   return (
     <div className="wrap">
       <MenuBar/>
-      <div className="header">
+      <div id="content">
         <h1>
             <a href="/">
               <div className="logo"></div>
             </a>
             <span className="page"></span>
         </h1>
-        <button onClick={onLoginHandler}>로그인</button>
-        <button onClick={onRegisterHandler}>회원가입</button>
         <button onClick={onMypageHandler}>마이페이지</button>
         <div>
           <h3>공지사항</h3>

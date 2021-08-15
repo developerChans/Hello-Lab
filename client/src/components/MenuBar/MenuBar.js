@@ -1,13 +1,16 @@
 import logo from '../../components/views/hellolab.png';
 import imgPath from '../../components/views/default.png';
 import './MenuBar.css';
-import {useRef, useEffect, useState} from 'react';
+import {useRef, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
+import { withRouter } from 'react-router-dom';
+
+// auth에 따라 보이기 안보이기 구현
 
 const profile = {img: imgPath};
 
-const MenuBar = () => {
-
+const MenuBar = (props) => {
+  
   const dropdown = useRef();
   const [drop, setDrop] = useState(false);
 
@@ -23,6 +26,12 @@ const MenuBar = () => {
     }
   }
 
+  const onSigninBtnClick = ()=>{
+    props.history.push('/login');
+  }
+  const onJoinBtnClick = () =>{
+    props.history.push('/register');
+  }
   return (
     <div id="menu">
       <nav id="menubar" className="navbar navbar-expand bg-white navbar-light">
@@ -38,19 +47,32 @@ const MenuBar = () => {
             <a className="nav-link" href="#">메뉴2</a>
           </li>
         </ul>
-        <button id="profile_button" className="border border-white rounded-circle"
-        onClick={profileClick}>
-          <img id="profile_img" src={profile.img}/>
-        </button>
-        <div ref={dropdown} className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a className="dropdown-item" href="/mypage">Dashboard</a>
-          <a className="dropdown-item" href="/home">Another action</a>
-          <a className="dropdown-item" href="#">Something else here</a>
-        </div>
-      </nav>
 
+        <div id="dropdown-profile">
+          <button id="profile_button" className="border border-white rounded-circle"
+          onClick={profileClick}>
+            <img id="profile_img" src={profile.img}/>
+          </button>
+          <div ref={dropdown} className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a className="dropdown-item" href="/mypage">Dashboard</a>
+            <a className="dropdown-item" href="/home">Another action</a>
+            <a className="dropdown-item" href="/">Sign out</a>
+          </div>
+        </div>
+
+        <span id="other-page">
+          <span id="sign-in" onClick={onSigninBtnClick} type="button">
+            Sign in
+          </span>
+          <span id="join" onClick={onJoinBtnClick} type="button">
+            Join
+          </span>
+        </span>
+
+      </nav>
     </div>
+      
   );
 }
 
-export default MenuBar;
+export default withRouter(MenuBar);

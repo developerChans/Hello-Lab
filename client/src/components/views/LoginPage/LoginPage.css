@@ -1,6 +1,43 @@
-form{
+#content{
+    padding-top: 75px;
+    height: fit-content;
+}
+
+#ment{
     position: absolute;
     left: 50%;
-    top: 50%;
+    top: 25%;
     transform: translateX(-50%);
+    font-weight: 400;
+}
+
+#form-box{
+    border-radius: 10px;
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    transform: translateX(-50%);
+    width: 450px;
+    height: 280px;
+    box-shadow: 0px 1px 2px 1px rgb(196, 196, 196);
+}
+
+#login-form{
+    position: relative;
+    left: 50%;
+    top: 20%;
+    transform: translateX(-50%);
+    width: 50%;
+}
+
+.btn-primary{
+    background-color: #ffa03a !important;
+    border-color: #ffa03a !important;
+}
+
+#login-btn{
+    position: relative;
+    left: 66%;
+    top: 5%;
+    margin-top: 10px;
 }
