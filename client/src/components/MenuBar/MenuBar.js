@@ -4,12 +4,16 @@ import './MenuBar.css';
 import {useRef, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import { withRouter } from 'react-router-dom';
+import {BiLinkExternal} from 'react-icons/bi';
 
 // auth에 따라 보이기 안보이기 구현
 
 const profile = {img: imgPath};
+const user_univ = "https://www.dankook.ac.kr/web/kor";
 
 const MenuBar = (props) => {
+
+  const RISS_URL = "http://www.riss.kr/index.do";
   
   const dropdown = useRef();
   const [drop, setDrop] = useState(false);
@@ -41,10 +45,22 @@ const MenuBar = (props) => {
 
         <ul className="navbar-nav">
           <li className="nav-item">
-            <a className="nav-link" href="#">Open Lab</a>
+            <a className="nav-link" href="/openlab">Open Lab</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#">메뉴2</a>
+            <a className="nav-link" href="/recruitment">Connect</a>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link" href={user_univ}>
+              Univ.
+            <BiLinkExternal className="link-icon"/>
+            </a>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link" href={RISS_URL}>
+              RISS
+            <BiLinkExternal  className="link-icon" />
+            </a>
           </li>
         </ul>
 
