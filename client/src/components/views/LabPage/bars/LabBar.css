@@ -1,6 +1,6 @@
 #content{
     padding-left: 80px;
-    height: 2000px;
+    height: fit-content
 }
 #lab-bar{
     position: fixed;
