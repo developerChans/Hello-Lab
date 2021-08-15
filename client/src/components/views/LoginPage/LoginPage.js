@@ -30,26 +30,23 @@ function LoginPage(props) {
   }
 
   return (
-    <div className="wrap">
+    <div id="wrap">
       <MenuBar/>
-      <div className="header">
-        <h1>
-            <a href="/">
-              <div className="logo"></div>
-            </a>
-            <span className="page">Login</span>
-        </h1>
-      </div>
-      <div className="container">
-        <form className="login-form" onSubmit={onSubmitHandler}>
-          <span>아이디</span>
-          <input placeholder="아이디" value={LoginId} onChange={onLoginIdHandler} required/>
-          <br />
-          <span>비밀번호</span>
-          <input type="password" placeholder="비밀번호" value={Password} onChange={onPasswordHandler} required/>
-          <br />
-          <button type="submit">로그인</button>
-        </form>
+      <div id="content">
+        <h1 id="ment">Sign in</h1>
+        <div id="form-box">
+          <form id="login-form" onSubmit={onSubmitHandler}>
+            <div class="form-group">
+              <label for="uid">ID</label>
+              <input type="text" class="form-control" id="uid" name="uid" value={LoginId} onChange={onLoginIdHandler} required/>
+            </div>
+            <div class="form-group">
+              <label for="pwd">Password</label>
+              <input id="pwd" class="form-control" name="pwd" type="password" value={Password} onChange={onPasswordHandler} required/>
+            </div>
+            <button type="submit" id="login-btn" class="btn btn-primary">Sign in</button>
+          </form>
+        </div>
       </div>
     </div>
   );
