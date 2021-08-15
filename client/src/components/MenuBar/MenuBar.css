@@ -28,6 +28,7 @@
     z-index: 10;
     overflow: hidden;
     position: absolute;
+    top: 20px;
     right:25px;
 }
 #profile_img{
@@ -52,5 +53,22 @@
 
 .dropdown-item:active{
     background-color:rgb(196, 196, 196) !important;
+    color: black;
+}
+
+#other-page{
+    position: absolute;
+    right: 30px;
+    color: rgb(110, 110, 110);
+    z-index: 10;
+}
+
+#sign-in{
+    padding-right: 10px;
+}
+#sign-in:hover{
+    color: black;
+}
+#join:hover{
     color: black;
 }
