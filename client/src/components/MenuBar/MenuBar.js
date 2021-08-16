@@ -51,13 +51,13 @@ const MenuBar = (props) => {
             <a className="nav-link" href="/recruitment">Connect</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href={user_univ}>
+            <a className="nav-link" target='_blank' href={user_univ}>
               Univ.
             <BiLinkExternal className="link-icon"/>
             </a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href={RISS_URL}>
+            <a className="nav-link" target='_blank' href={RISS_URL}>
               RISS
             <BiLinkExternal  className="link-icon" />
             </a>
