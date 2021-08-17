@@ -46,7 +46,6 @@ function LoginPage(props) {
 
   return (
     <div id="wrap">
-      <MenuBar/>
       <div id="login-content">
         <h1 id="ment">Sign in</h1>
         <div id="form-box">
