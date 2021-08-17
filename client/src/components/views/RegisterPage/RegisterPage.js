@@ -77,7 +77,6 @@ function RegisterPage(props) {
 
   return (
     <div className="wrap">
-      <MenuBar/>
       <div id="register-content">
         <h1 id="ment">Join</h1>
         <div id="register-form-box">

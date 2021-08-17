@@ -9,8 +9,6 @@ function LandingPage(props) {
 
   return (
     <div className="wrap">
-      <MenuBar/>
-   
     </div>
   );
 }

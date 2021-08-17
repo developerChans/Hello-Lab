@@ -39,7 +39,6 @@ function MyPage() {
 
   return (
     <div className="wrap">
-        <MenuBar/>
         <div className="header">
             <h1>
                 <a href="/">
