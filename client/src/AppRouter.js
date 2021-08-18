@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
 import LandingPage from 'components/views/LandingPage/LandingPage';
 import LoginPage from 'components/views/LoginPage/LoginPage';
 import RegisterPage from 'components/views/RegisterPage/RegisterPage';
@@ -16,11 +15,11 @@ import OpenlabPage from "components/views/OpenlabPage/OpenlabPage";
 
 import MenuBar from "components/MenuBar/MenuBar";
 
-const AppRouter = ({isLoggedIn, isLabPage}) =>{
-    
+const AppRouter = ({isLoggedIn, needMenubar}) =>{
+
     return(
     <Router>
-        {isLabPage ? <></>:<MenuBar isLoggedIn={isLoggedIn}/>}
+        {needMenubar?<MenuBar isLoggedIn={isLoggedIn}/>:<></>}
         <Switch>
           <Route exact path="/" component={LandingPage}></Route>
           <Route exact path="/open" component={OpenlabPage} />

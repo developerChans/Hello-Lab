@@ -1,21 +1,20 @@
 import React, {useState, useEffect} from "react";
 import AppRouter from 'AppRouter';
-import {useLocation} from 'react-router-dom';
 function App() {
 
   const [isLoggedIn, setIsLoggedIn] = useState(true);
-  const [isLabPage, setIsLabPage] = useState(false);
+  const [needMenubar, setNeedMenubar] = useState(false);
 
   useEffect(()=>{
-    if(isLoggedIn && document.location.href.includes('lab')){
-      setIsLabPage(true);
+    if(!document.location.href.includes('lab')){
+      setNeedMenubar(true);
     }else{
-      setIsLabPage(false);
-    } 
-  }, [])
+      setNeedMenubar(false);
+    }
+  })
 
   return (
-    <AppRouter isLoggedIn={isLoggedIn} isLabPage={isLabPage}/>
+    <AppRouter isLoggedIn={isLoggedIn} needMenubar={needMenubar}/>
   );
 }
 
