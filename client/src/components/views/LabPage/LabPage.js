@@ -28,9 +28,11 @@ const labs = [
 function LabPage() {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
-  console.log(id);
-  const test = axios.get(`/app/lab/${id}`);
-  console.log(test);
+  useEffect(() => {
+    axios
+      .get(`/app/lab/${id}`)
+      .then((response) => console.log(response.data[0]));
+  }, []);
   const lab = labs.find((element) => element.id === parseInt(id));
   return (
     <div>
