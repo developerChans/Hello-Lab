@@ -30,7 +30,9 @@ exports.getOneLab = async (req, res) => {
 
     return result[0]
       ? res.status(200).send(result)
-      : res.status(400).send("요청하신 id에 해당하는 Lab이 존재하지 않습니다.");
+      : res
+          .status(404)
+          .json({ success: "fail", message: "해당 id에 Lab이 없습니다." });
   } catch (e) {}
   res.send(labId);
 };
