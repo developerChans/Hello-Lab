@@ -1,5 +1,5 @@
-// import { useEffect } from "react";
-// import axios from "axios";
+import { useEffect } from "react";
+import axios from "axios";
 import { withRouter, useLocation } from "react-router-dom";
 import "../views.css";
 import LabTemplate from "./LabTemplate";
@@ -28,6 +28,9 @@ const labs = [
 function LabPage() {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
+  console.log(id);
+  const test = axios.get(`/app/lab/${id}`);
+  console.log(test);
   const lab = labs.find((element) => element.id === parseInt(id));
   return (
     <div>
