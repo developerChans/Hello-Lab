@@ -1,4 +1,4 @@
-#content{
+#login-content{
     padding-top: 75px;
     height: fit-content;
 }
@@ -29,7 +29,9 @@
     transform: translateX(-50%);
     width: 50%;
 }
-
+#id-group{
+    padding-bottom: 5px;
+}
 .btn-primary{
     background-color: #ffa03a !important;
     border-color: #ffa03a !important;
