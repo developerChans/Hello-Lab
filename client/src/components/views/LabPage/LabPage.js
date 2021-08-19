@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { withRouter, useLocation } from "react-router-dom";
 import "../views.css";
-import LabTemplate from "./LabTemplate";
+import LabTemplate from 'components/views/LabPage/LabTemplate';
+
 
 function LabPage() {
 
@@ -13,7 +14,8 @@ function LabPage() {
 
   const [lab, setLab] = useState({
     name: "",
-    prof: ""
+    prof: "",
+    id: null
   })
 
   useEffect(() => {
@@ -22,7 +24,7 @@ function LabPage() {
       .get(`/app/lab/${storedId}`)
       .then((response) => {
         const {name, professorId} = response.data[0]
-        setLab({name: name, prof: professorId});
+        setLab({name: name, prof: professorId, id:professorId});
       });
     
   }, []);
