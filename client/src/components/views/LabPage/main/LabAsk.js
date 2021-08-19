@@ -7,4 +7,4 @@ const LabAsk = () =>{
     </div>
   );
 }
-export default withRouter(LabAsk);
+export default LabAsk;

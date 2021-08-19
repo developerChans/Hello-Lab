@@ -5,13 +5,21 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './LabSideBar.css';
 import { FaUserCircle } from "react-icons/fa";
 import {IoIosApps, IoIosCalendar} from "react-icons/io";
+import { HiOutlineDocumentSearch } from 'react-icons/hi';
+import LabMainPage from 'components/views/LabPage/main/_LabMainPage';
+import LabResearchPage from 'components/views/LabPage/research/_LabResearchPage';
+import {Route} from 'react-router-dom';
+
 const profile = {img: imgPath};
 
-const LabSideBar = () => {
+const LabSideBar = (lab) => {
 
-  
+  console.log(lab);
   const dropdown = useRef();
   const [drop, setDrop] = useState(false);
+
+  const mainLink =`/lab/${lab.id}/main`
+  const researchLink =`/lab/${lab.id}/research`;
 
   const profileClick = () =>{
     if(dropdown.current){
@@ -34,8 +42,13 @@ const LabSideBar = () => {
 
         <ul id="sidebar-ul" className="navbar-nav nav-pills nav-flush flex-column mb-auto text-center">
           <li className="nav-item sidebar-item">
-            <a className="nav-link" href="#">
+            <a className="nav-link" href={mainLink}>
             <IoIosApps className="labs-icon"/>
+            </a>
+          </li>          
+          <li className="nav-item sidebar-item">
+            <a className="nav-link" href={researchLink}>
+              <HiOutlineDocumentSearch className="labs-icon"/>
             </a>
           </li>
           <li className="nav-item sidebar-item">
@@ -51,6 +64,10 @@ const LabSideBar = () => {
           <a className="dropdown-item" href="/home">Sign out</a>
         </div>
       </nav>
+
+
+      <Route path="/lab/:id/main" component={LabMainPage}/>
+      <Route path="/lab/:id/research" component={LabResearchPage}/>
 
     </div>
   );
