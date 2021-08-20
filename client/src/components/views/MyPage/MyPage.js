@@ -3,6 +3,8 @@ import axios from "axios";
 import { useHistory, withRouter } from 'react-router-dom';
 import './MyPage.css';
 import '../views.css';
+import { actionCreators } from "components/LabStore";
+import {connect} from 'react-redux';
 
 const labs = [
     {
@@ -25,17 +27,24 @@ const labs = [
     }
 ];
 
-function MyPage() {
+function MyPage({replaceLab}) {
+
     const history = useHistory();
 
     const onDashboardHandler = (section) => {
-        history.push({
-            pathname: "#",
-            id: section.id
+        
+        // // 실제 동작 시 lab 페이지로 정보 넘겨줘야 함
+        // // lab 페이지는 정보 받아서 해당 lab 페이지 출력해야 함
+        axios
+        .get(`/app/lab/${section.id}`)
+        .then((response) => {
+            const {name, professorId} = response.data[0]
+            const newLab = {name: name, prof:professorId, id:professorId};
+            replaceLab(newLab);
         });
-        window.location.replace(`/lab/${section.id}`)
-        // 실제 동작 시 lab 페이지로 정보 넘겨줘야 함
-        // lab 페이지는 정보 받아서 해당 lab 페이지 출력해야 함
+        history.push({
+            pathname: `/lab/${section.id}`
+        });
     }
 
   return (
@@ -61,7 +70,17 @@ function MyPage() {
             </div>
         </div>
     </div>
+    
   );
 }
 
-export default withRouter(MyPage);
+
+const mapDispatchToProps = (dispatch) =>{
+    return {
+      replaceLab: (lab) => dispatch(actionCreators.replaceLab(lab))
+    }
+  }
+  
+  export default connect(null, mapDispatchToProps) (MyPage);
+  
+  

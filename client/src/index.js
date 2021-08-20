@@ -2,12 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import { Provider } from 'react-redux';
-import {createStore} from 'redux';
-import Reducer from './_reducers';
-const store = createStore(Reducer);
+import LabStore from 'components/LabStore';
+
 ReactDOM.render(
-  <Provider
-  store={store}>
+  <Provider store={LabStore}>
     <App />
   </Provider>
   ,document.getElementById('root'));

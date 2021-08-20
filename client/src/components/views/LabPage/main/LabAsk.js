@@ -3,7 +3,6 @@ import LabPage from '../LabPage';
 const LabAsk = () =>{
     return (
     <div>
-      <LabPage/>
     </div>
   );
 }

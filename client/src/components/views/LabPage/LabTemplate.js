@@ -1,9 +1,9 @@
-import LabBar from "./bars/LabBar";
-import LabHeader from "./bars/LabHeader";
-import LabSideBar from "./bars/LabSideBar";
+import LabBar from "./template/LabBar";
+import LabHeader from "./template/LabHeader";
+import LabSideBar from "./template/LabSideBar";
 
 const LabTemplate = (lab) =>{
-
+    
     return (
         <div>
             <LabSideBar {...lab}/>

@@ -1,40 +1,43 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { withRouter, useLocation } from "react-router-dom";
+import { Route, useLocation, useHistory } from "react-router-dom";
 import "../views.css";
 import LabTemplate from 'components/views/LabPage/LabTemplate';
+import LabMainPage from "components/views/LabPage/main/_LabMainPage";
+import LabResearchPage from "components/views/LabPage/research/_LabResearchPage";
+import { connect } from "react-redux";
+import { actionCreators } from "components/LabStore";
+import { useBeforeunload } from 'react-beforeunload';
 
 
-function LabPage() {
+function LabPage({currentLab, replacePage}) {
 
-  const location = useLocation();
-  if(location.id){
-    localStorage.setItem('labId', location.id);
-  }
 
-  const [lab, setLab] = useState({
-    name: "",
-    prof: "",
-    id: null
-  })
+  // const history = useHistory();
+  // useEffect(()=>{
+  //   const { state: {id, category} } = location;
+  //   history.push({
+  //     pathname: `/lab/${id}/${category}`,
+  //     state:{
+  //       id,
+  //       category
+  //     }
+  //   })
+  // }, [])
 
-  useEffect(() => {
-    const storedId = window.localStorage.getItem('labId');
-    axios
-      .get(`/app/lab/${storedId}`)
-      .then((response) => {
-        const {name, professorId} = response.data[0]
-        setLab({name: name, prof: professorId, id:professorId});
-      });
-    
-  }, []);
-  
 
   return (
     <div>
-      <LabTemplate {...lab} />
+      <LabTemplate {...currentLab} />
+      <Route path="/lab/:id/main" component={LabMainPage}/>
+      <Route path="/lab/:id/research" component={LabResearchPage}/>
     </div>
   );
 }
 
-export default withRouter(LabPage);
+const mapStateToProps = (state)=>{
+  return {currentLab: state};
+}
+
+export default connect(mapStateToProps)(LabPage);
+

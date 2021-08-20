@@ -8,18 +8,43 @@ import {IoIosApps, IoIosCalendar} from "react-icons/io";
 import { HiOutlineDocumentSearch } from 'react-icons/hi';
 import LabMainPage from 'components/views/LabPage/main/_LabMainPage';
 import LabResearchPage from 'components/views/LabPage/research/_LabResearchPage';
-import {Route} from 'react-router-dom';
+import {Route, useHistory, useLocation} from 'react-router-dom';
 
 const profile = {img: imgPath};
 
 const LabSideBar = (lab) => {
+  const location = useLocation();
+  useEffect(()=>{
 
-  console.log(lab);
+  }, [location])
   const dropdown = useRef();
   const [drop, setDrop] = useState(false);
 
   const mainLink =`/lab/${lab.id}/main`
   const researchLink =`/lab/${lab.id}/research`;
+
+  const history = useHistory();
+
+  const onClick = (event) =>{
+    const { target: {classList} } = event;
+    if(classList.contains("main-link")){
+      history.replace({
+        pathname: mainLink,
+        category: "main",
+        id: lab.id
+      })
+      window.location.replace(mainLink);
+    }else if(classList.contains("research-link")){
+      history.replace({
+        pathname: researchLink,
+        category: "research",
+        id: lab.id
+      })
+      window.location.replace(researchLink);
+
+    }
+  }
+
 
   const profileClick = () =>{
     if(dropdown.current){
@@ -41,15 +66,15 @@ const LabSideBar = (lab) => {
         </a>
 
         <ul id="sidebar-ul" className="navbar-nav nav-pills nav-flush flex-column mb-auto text-center">
-          <li className="nav-item sidebar-item">
-            <a className="nav-link" href={mainLink}>
-            <IoIosApps className="labs-icon"/>
-            </a>
+          <li type="button" className="main-link nav-item sidebar-item" onClick={onClick}>
+            <div className="main-link nav-link">
+              <IoIosApps className="main-link labs-icon"/>
+            </div>
           </li>          
-          <li className="nav-item sidebar-item">
-            <a className="nav-link" href={researchLink}>
-              <HiOutlineDocumentSearch className="labs-icon"/>
-            </a>
+          <li type="button" name="research" className="research-link nav-item sidebar-item" onClick={onClick}>
+            <div className="research-link nav-link">
+              <HiOutlineDocumentSearch className="research-link labs-icon"/>
+            </div>
           </li>
           <li className="nav-item sidebar-item">
             <a className="nav-link" href="#">
@@ -64,10 +89,6 @@ const LabSideBar = (lab) => {
           <a className="dropdown-item" href="/home">Sign out</a>
         </div>
       </nav>
-
-
-      <Route path="/lab/:id/main" component={LabMainPage}/>
-      <Route path="/lab/:id/research" component={LabResearchPage}/>
 
     </div>
   );

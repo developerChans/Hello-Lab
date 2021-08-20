@@ -1,8 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import './LabBar.css';
 import {useState, useEffect} from 'react';
-import { useHistory } from 'react-router-dom';
-import { BiOutline } from 'react-icons/bi';
+import { useHistory, useLocation } from 'react-router-dom';
 
 const mainInfo =[
     {
@@ -55,25 +54,33 @@ const researchInfo = [
 ]
 const LabBar = (lab) =>{
     const history = useHistory();
-    const [category, setCategory] = useState("research");
+    const location = useLocation();
+    const [category, setCategory] = useState("main");
+    const [tabs, setTabs] = useState(mainInfo);
+    
     const onTabHandler = (section) =>{
-      history.push({
+      history.replace({
         pathname: `/lab/${lab.id}/${category}/${section.id}`,
+        category: category,
         id: section.id
       })
     }
-    let infos;
-    if(category==="main"){
-      infos = mainInfo;
-    }else{
-      infos = researchInfo;
-    }
+
+    useEffect(()=>{
+      setCategory(location.category);
+      
+      if(category==="main"){
+        setTabs(mainInfo);
+      }else if(category==="research"){
+        setTabs(researchInfo);
+      }
+    }, [location])
 
     return (
         <div id="content">
             <nav id="lab-bar" className="navbar">
                 <ul id="lab-ul" className="navbar-nav">
-                    {infos.map((section, index)=>(
+                    {tabs.map((section, index)=>(
                         <li id="btn" key={index} className="tab nav-item nav-link" onClick={() => onTabHandler(section)} type="button">
                             <span className="nav-item tab-link">
                               {section.tab}
