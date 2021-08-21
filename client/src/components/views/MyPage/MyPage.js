@@ -3,7 +3,7 @@ import axios from "axios";
 import { useHistory, withRouter } from 'react-router-dom';
 import './MyPage.css';
 import '../views.css';
-import { actionCreators } from "components/LabStore";
+import { actionCreators } from "_actions/lab_action";
 import {connect} from 'react-redux';
 
 const labs = [
@@ -27,25 +27,28 @@ const labs = [
     }
 ];
 
-function MyPage({replaceLab}) {
+function MyPage({data, replaceLab}) {
 
-    const history = useHistory();
-
-    const onDashboardHandler = (section) => {
+    const onDashboardHandler = async(section) => {
         
-        // // 실제 동작 시 lab 페이지로 정보 넘겨줘야 함
-        // // lab 페이지는 정보 받아서 해당 lab 페이지 출력해야 함
+        // 실제 동작 시 lab 페이지로 정보 넘겨줘야 함
+        // lab 페이지는 정보 받아서 해당 lab 페이지 출력해야 함
         axios
         .get(`/app/lab/${section.id}`)
         .then((response) => {
             const {name, professorId} = response.data[0]
-            const newLab = {name: name, prof:professorId, id:professorId};
+            const newLab = {
+                name: name, 
+                prof:professorId, 
+                id:professorId,
+                category: "main",
+                tab: "info"
+            };
             replaceLab(newLab);
-        });
-        history.push({
-            pathname: `/lab/${section.id}`
+            window.location.replace(`/lab/${data.lab.id}`);
         });
     }
+
 
   return (
     <div className="wrap">
@@ -74,6 +77,9 @@ function MyPage({replaceLab}) {
   );
 }
 
+const mapStateToProps = (state)=>{
+    return{data: state}
+}
 
 const mapDispatchToProps = (dispatch) =>{
     return {
@@ -81,6 +87,6 @@ const mapDispatchToProps = (dispatch) =>{
     }
   }
   
-  export default connect(null, mapDispatchToProps) (MyPage);
+  export default connect(mapStateToProps, mapDispatchToProps) (MyPage);
   
   

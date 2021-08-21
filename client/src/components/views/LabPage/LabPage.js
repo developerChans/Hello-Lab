@@ -6,29 +6,11 @@ import LabTemplate from 'components/views/LabPage/LabTemplate';
 import LabMainPage from "components/views/LabPage/main/_LabMainPage";
 import LabResearchPage from "components/views/LabPage/research/_LabResearchPage";
 import { connect } from "react-redux";
-import { actionCreators } from "components/LabStore";
-import { useBeforeunload } from 'react-beforeunload';
-
-
-function LabPage({currentLab, replacePage}) {
-
-
-  // const history = useHistory();
-  // useEffect(()=>{
-  //   const { state: {id, category} } = location;
-  //   history.push({
-  //     pathname: `/lab/${id}/${category}`,
-  //     state:{
-  //       id,
-  //       category
-  //     }
-  //   })
-  // }, [])
-
+function LabPage({data}) {
 
   return (
     <div>
-      <LabTemplate {...currentLab} />
+      <LabTemplate {...data.lab} />
       <Route path="/lab/:id/main" component={LabMainPage}/>
       <Route path="/lab/:id/research" component={LabResearchPage}/>
     </div>
@@ -36,7 +18,7 @@ function LabPage({currentLab, replacePage}) {
 }
 
 const mapStateToProps = (state)=>{
-  return {currentLab: state};
+  return {data: state};
 }
 
 export default connect(mapStateToProps)(LabPage);
