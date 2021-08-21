@@ -12,4 +12,7 @@ module.exports = function (app) {
 
   //공지사항 수정 api
   app.patch("/app/lab/:labId/notices/:noticeId", controller.updateNotice);
+
+  //공지사항 삭제 api
+  app.delete("/app/lab/:labId/notices/:noticeId", controller.deleteNotice);
 };
