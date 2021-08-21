@@ -22,6 +22,7 @@ module.exports = function () {
   require("../src/app/Schedule/scheduleRoute")(app);
   require("../src/app/Lab/labRoute")(app);
   require("../src/app/Search/searchRoute")(app);
+  require("../src/app/LabNotice/noticeRoute")(app);
 
   return app;
 };
