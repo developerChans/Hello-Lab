@@ -49,10 +49,25 @@ async function updateNotice(con, updateNoticeEntity, noticeId) {
     await con.beginTransaction();
     const row = await con.query(updateNoticeQuery, updateNoticeEntity);
     await con.commit();
-    return row[0];
+    return row[0].affectedRows;
   } catch (e) {
     await con.rollback();
     await con.release();
+    console.log(`query error \n ${e}`);
+    return false;
+  }
+}
+
+async function deleteNotice(con, deleteNoticeInfo) {
+  const deleteNoticeQuery = `DELETE FROM LabNotice WHERE labId= ? AND Id = ?`;
+  try {
+    await con.beginTransaction();
+    const row = await con.query(deleteNoticeQuery, deleteNoticeInfo);
+    await con.commit();
+    return row[0].affectedRows;
+  } catch (e) {
+    await con.rollback();
+    con.release();
     console.log(`query error \n ${e}`);
     return false;
   }
@@ -63,4 +78,5 @@ module.exports = {
   getAllNotice,
   getOneNotice,
   updateNotice,
+  deleteNotice,
 };

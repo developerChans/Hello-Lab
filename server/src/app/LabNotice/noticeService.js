@@ -29,3 +29,15 @@ exports.updateNotice = async (updateNoticeEntity, noticeId) => {
     return false;
   }
 };
+
+exports.deleteNotice = async (deleteNoticeInfo) => {
+  try {
+    const con = await pool.getConnection(async (conn) => conn);
+    const result = await noticeDao.deleteNotice(con, deleteNoticeInfo);
+    await con.release();
+    return result ? true : false;
+  } catch (e) {
+    console.log(`DB connect Error \n ${e}`);
+    return false;
+  }
+};
