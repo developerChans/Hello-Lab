@@ -1,80 +1,100 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import './LabBar.css';
 import {useState, useEffect} from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import {connect} from 'react-redux';
+import {actionCreators} from '_actions/lab_action'
 
 const mainInfo =[
     {
       id: 1,
       tab: "소개",
+      route: "info"
     },
     { id: 2,
       tab: "공지",
+      route: "notice"
+
     },
     {
       id: 3,
       tab: "일정",
+      route: "calendar"
+
     },
     {
       id: 4,
       tab: "질문",
+      route: "ask"
+
     },
     {
       id: 5,
       tab: "멤버",
+      route: "member"
+
     },
   ]
 
 const researchInfo = [
   {
     id:1,
-    tab: "개요"
+    tab: "개요",
+    route: "outline"
   },
   {
     id:2,
-    tab: "자료실"
+    tab: "자료실",
+    route: "doc"
+
   },
   {
     id:3,
-    tab: "질문"
+    tab: "질문",
+    route: "ask"
+
   },
   {
     id:4,
-    tab: "프로세스"
+    tab: "프로세스",
+    route: "process"
+
   },
   {
     id:5,
-    tab: "리포트"
+    tab: "리포트",
+    route: "report"
+
   },
   {
     id:6,
-    tab: "멤버"
-
+    tab: "멤버",
+    route: "member"
   },
 ]
-const LabBar = (lab) =>{
+const LabBar = ({data, updateTab}) =>{
     const history = useHistory();
-    const location = useLocation();
-    const [category, setCategory] = useState("main");
-    const [tabs, setTabs] = useState(mainInfo);
+
+    const {lab:{
+      id, category, tab
+    }} = data;
+
+    const [isMain, setIsMain] = useState(true);
+
+    useEffect(()=>{
+      setIsMain(Boolean(category==="main"));
+    })
+    const tabs = isMain ? mainInfo : researchInfo;
     
-    const onTabHandler = (section) =>{
-      history.replace({
-        pathname: `/lab/${lab.id}/${category}/${section.id}`,
-        category: category,
-        id: section.id
-      })
+    const onTabHandler = async (section) =>{
+      updateTab(section.route);
     }
 
     useEffect(()=>{
-      setCategory(location.category);
-      
-      if(category==="main"){
-        setTabs(mainInfo);
-      }else if(category==="research"){
-        setTabs(researchInfo);
-      }
-    }, [location])
+      history.push({
+        pathname: `/lab/${id}/${category}/${tab}`
+      })
+    }, [data])
 
     return (
         <div id="content">
@@ -90,7 +110,17 @@ const LabBar = (lab) =>{
                 </ul>
             </nav>
         </div>
+
     );
 }
 
-export default LabBar;
+
+const mapStateToProps = (state)=>{
+  return { data: state }
+}
+
+const mapDispatchToProps = (dispatch)=>{
+  return { updateTab: tab=>dispatch(actionCreators.updateTab(tab)) };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LabBar);

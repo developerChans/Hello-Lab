@@ -5,8 +5,6 @@ import RegisterPage from 'components/views/RegisterPage/RegisterPage';
 import RecruitmentPage from 'components/views/RecruitmentPage/RecruitmentPage';
 import MyPage from "components/views/MyPage/MyPage";
 import LabPage from "components/views/LabPage/LabPage";
-import LabMainPage from "components/views/LabPage/main/_LabMainPage";
-import LabResearchPage from "components/views/LabPage/research/_LabResearchPage";
 import OpenlabPage from "components/views/OpenlabPage/OpenlabPage";
 
 import MenuBar from "components/MenuBar/MenuBar";
@@ -15,7 +13,7 @@ const AppRouter = ({isLoggedIn, needMenubar}) =>{
 
     return(
     <Router>
-        {needMenubar?<MenuBar isLoggedIn={isLoggedIn}/>:<></>}
+        {needMenubar ? <MenuBar isLoggedIn={isLoggedIn}/>:<></>}
         <Switch>
           <Route exact path="/" component={LandingPage}></Route>
           <Route exact path="/open" component={OpenlabPage} />
