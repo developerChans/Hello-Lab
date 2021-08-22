@@ -4,7 +4,6 @@ import LabPage from '../LabPage';
 const LabInfo = () =>{
     return (
         <div>
-            <LabPage/>
         </div>
     );
 }

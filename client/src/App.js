@@ -11,7 +11,7 @@ function App() {
     }else{
       setNeedMenubar(false);
     }
-  })
+  }, [document.location])
 
   return (
     <AppRouter isLoggedIn={isLoggedIn} needMenubar={needMenubar}/>

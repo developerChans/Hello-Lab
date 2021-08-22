@@ -73,28 +73,18 @@ const researchInfo = [
   },
 ]
 const LabBar = ({data, updateTab}) =>{
-    const history = useHistory();
-
-    const {lab:{
-      id, category, tab
-    }} = data;
 
     const [isMain, setIsMain] = useState(true);
 
     useEffect(()=>{
-      setIsMain(Boolean(category==="main"));
-    })
+      setIsMain(Boolean(data.lab.category==="main"));
+    }, [data])
     const tabs = isMain ? mainInfo : researchInfo;
     
     const onTabHandler = async (section) =>{
       updateTab(section.route);
     }
 
-    useEffect(()=>{
-      history.push({
-        pathname: `/lab/${id}/${category}/${tab}`
-      })
-    }, [data])
 
     return (
         <div id="content">

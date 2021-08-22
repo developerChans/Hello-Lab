@@ -2,18 +2,52 @@ import { useState } from "react";
 
 const asks = [
   {
-    key: 1,
+    id: 1,
     writer: "김채은",
     content: "안녕",
     image: "",
-    date: "2021-08-21 21:35"
+    date: "2021-08-21 21:35",
+    comment: [2, 3]
   },  
   {
-    key: 2,
+    id: 2,
     writer: "김지민",
     content: "질문",
     image: "",
-    date: "2021-08-21 21:50"
+    date: "2021-08-21 21:50",
+    comment: []
+  },
+  {
+    id: 3,
+    writer: "박찬진",
+    content: "hello world",
+    image: "",
+    date: "2021-08-22 21:54",
+    comment: []
+  }
+]
+
+const comments = [
+  {
+    id: 1,
+    writer: "김채은",
+    content: "안녕",
+    image: "",
+    date: "2021-08-21 21:35",
+  },  
+  {
+    id: 2,
+    writer: "김지민",
+    content: "답글",
+    image: "",
+    date: "2021-08-21 21:50",
+  },
+  {
+    id: 3,
+    writer: "박찬진",
+    content: "답글2",
+    image: "",
+    date: "2021-08-22 21:54",
   }
 ]
 
@@ -65,7 +99,7 @@ const LabAsk = () =>{
 
       <div>
           {asks.map((section, index)=>(
-            <div key={section.key}>
+            <div key={section.id}>
               <div>{section.writer}</div>
               <div>{section.content}</div>
               {section.image && <img src={section.image}/>}

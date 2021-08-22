@@ -24,16 +24,7 @@ const LabSideBar = ({data, updateCategory, updateTab}) => {
   const dropdown = useRef();
   const [drop, setDrop] = useState(false);
 
-  const history = useHistory();
-
-  const {lab: {
-    id, category
-  }} = data;
   
-  useEffect(()=>{
-    history.push(`/lab/${id}/${category}`);
-  }, [data])
-
   const onMainClick = async() =>{
     updateCategory("main");
     updateTab("info");
@@ -43,8 +34,6 @@ const LabSideBar = ({data, updateCategory, updateTab}) => {
     updateCategory("research");
     updateTab("outline");
   }
-
-
 
   const profileClick = () =>{
     if(dropdown.current){
