@@ -131,18 +131,27 @@ exports.postProfessorSignIn = async function (email, password) {
       const emailRows = await userProvider.professorEmailCheck(email);
       if (emailRows.length < 1) return errResponse(baseResponse.SIGNIN_EMAIL_WRONG);
      
-      const selectEmail = emailRows[0].email
-
+      const selectEmail = emailRows[0].email;
+    
       // 비밀번호 확인
+      /*
       const salt = await bcrypt.genSalt(saltRounds);
       const hashedPassword = await bcrypt.hash(password, salt);
       const selectUserPasswordParams = [selectEmail, hashedPassword];
-      const passwordRows = await userProvider.professorPasswordCheck(selectUserPasswordParams);
-
+      const passwordRows = await userProvider.studentPasswordCheck(selectUserPasswordParams);
+      console.log(hashedPassword);
+      console.log(1);
       if (passwordRows[0].password !== hashedPassword) {
           return errResponse(baseResponse.SIGNIN_PASSWORD_WRONG);
       }
-
+      */
+      const hashedPassword = await userProvider.selectProfessorPassword(selectEmail);
+      console.log(hashedPassword.password);
+      const check = await bcrypt.compare(password,hashedPassword.password);
+      console.log(check);
+      if(!check) {
+        return errResponse(baseResponse.SIGNIN_PASSWORD_WRONG);
+      }
       // 계정 상태 확인
       const userInfoRows = await userProvider.professorAccountCheck(email);
 
@@ -150,7 +159,7 @@ exports.postProfessorSignIn = async function (email, password) {
           return errResponse(baseResponse.SIGNIN_WITHDRAWAL_ACCOUNT);
       }
 
-      console.log(userInfoRows[0].id) // DB의 userId
+      console.log(`DB의 userId:`,userInfoRows[0].id) // DB의 userId
 
       //토큰 생성 Service
       let token = await jwt.sign(

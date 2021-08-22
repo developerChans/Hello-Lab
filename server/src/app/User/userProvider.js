@@ -57,9 +57,16 @@ exports.selectStudentPassword = async function (email) {
         email
     );
     connection.release();
-    console.log(1);
-    console.log(passwordCheckResult[0].password);
-    //console.log(passwordCheckResult);
+    return passwordCheckResult[0];
+};
+
+exports.selectProfessorPassword = async function (email) {
+    const connection = await pool.getConnection(async (conn) => conn);
+    const passwordCheckResult = await userDao.selectProfessorPassword(
+        connection,
+        email
+    );
+    connection.release();
     return passwordCheckResult[0];
 };
 
