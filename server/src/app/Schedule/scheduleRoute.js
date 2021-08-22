@@ -15,6 +15,6 @@ module.exports = function(app) {
     app.patch('/app/schedules/patch/:LabScheduleIdx', schedule.changeSchedule);
 
     //5. 특정 연구실 스케줄 전체 조회 API
-    app.get('/app/schedules/:labIdx', schedule.getSchedulesEachLab);
+    app.get('/app/schedules/lab/:labIdx', schedule.getSchedulesEachLab);
 }
 
