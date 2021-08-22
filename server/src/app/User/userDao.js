@@ -93,11 +93,24 @@ async function checkProfessorPassword(connection, selectUserPasswordParams) {
 
   return selectUserPasswordRow;
 }
-//hashed 비밀번호 가져오기
+//학생 hashed 비밀번호 가져오기
 async function selectStudentPassword(connection, email) {
   const selectUserPasswordQuery = `
         SELECT password
         FROM Student
+        WHERE email = ?;`;
+  const selectUserPasswordRow = await connection.query(
+      selectUserPasswordQuery, email
+  );
+
+  return selectUserPasswordRow[0];
+}
+
+//교수 hashed 비밀번호 가져오기
+async function selectProfessorPassword(connection, email) {
+  const selectUserPasswordQuery = `
+        SELECT password
+        FROM Professor
         WHERE email = ?;`;
   const selectUserPasswordRow = await connection.query(
       selectUserPasswordQuery, email
@@ -140,6 +153,7 @@ module.exports = {
     selectStudentEmail,
     selectProfessorEmail,
     selectStudentPassword,
+    selectProfessorPassword,
     checkStudentPassword,
     checkProfessorPassword,
     selectStudentAccount,
