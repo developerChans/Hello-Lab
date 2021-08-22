@@ -1,10 +1,10 @@
-import { useEffect } from "react";
-import axios from 'axios';
+// import { useEffect } from "react";
+// import axios from 'axios';
 
-function ExamplePage() {
-    return (
-        <div></div>
-    );
-}
+// function ExamplePage() {
+//     return (
+//         <div></div>
+//     );
+// }
 
-export default ExamplePage;
+// export default ExamplePage;

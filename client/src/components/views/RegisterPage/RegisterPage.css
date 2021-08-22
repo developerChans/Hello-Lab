@@ -1,0 +1,62 @@
+.hidden{
+    display: none !important;
+}
+
+#register-content{
+    padding-top: 75px;
+    height: 1000px;
+}
+
+#register-form-box{
+
+    border-radius: 10px;
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    transform: translateX(-50%);
+    width: 450px;
+    height: auto;
+    box-shadow: 0px 1px 2px 1px rgb(196, 196, 196);
+    padding: 20px 0px;
+}
+
+#register-form{
+    position: relative;
+    left: 50%;
+    top: 20%;
+    transform: translateX(-50%);
+    width: 50%;
+}
+
+.form-group{
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+}
+
+#email-select{
+
+    width: 100%;
+    padding: 5px 5px;
+    border: none;
+    border-radius: 4px;
+    background-color: #f1f1f1;
+    
+}
+
+#confirmBtn{
+    position: relative;
+    left: 70%;
+    padding: 5px 0px;
+}
+#confirm-dup{
+    position: relative;
+    left: 75%;
+}
+
+#join-btn{
+    position: relative;
+    left: 75%;
+    top: 5%;
+    margin-top: 10px;
+}

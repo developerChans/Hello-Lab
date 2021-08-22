@@ -48,7 +48,6 @@ exports.getSchedules = async function(req, res) {
     const studentIdx = req.params.studentIdx;
 
     if(!studentIdx) return res.send(errResponse(baseResponse.USER_USERID_EMPTY));
-
     const scheduleListResult = await scheduleProvider.getScheduleList(studentIdx);
     return res.send(response(baseResponse.SUCCESS, scheduleListResult));
 };

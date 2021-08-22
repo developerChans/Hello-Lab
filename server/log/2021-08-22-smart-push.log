@@ -1,0 +1,9 @@
+{"message":"App - postSignIn Service error\n: secret_config is not defined \n{}","level":"error","timestamp":"2021-08-22 17:58:53"}
+{"message":"App - postSignIn Service error\n: secret_config is not defined \n{}","level":"error","timestamp":"2021-08-22 18:00:06"}
+{"message":"App - postSignIn Service error\n: secret_config is not defined \n{}","level":"error","timestamp":"2021-08-22 18:00:57"}
+{"message":"App - postSignIn Service error\n: data and hash must be strings \n{}","level":"error","timestamp":"2021-08-22 18:01:18"}
+{"message":"App - postSignIn Service error\n: secret_config is not defined \n{}","level":"error","timestamp":"2021-08-22 18:01:52"}
+{"message":"App - postSignIn Service error\n: res is not defined \n{}","level":"error","timestamp":"2021-08-22 18:13:45"}
+{"message":"App - postSignIn Service error\n: userProvider.selectProfessorPassword is not a function \n{}","level":"error","timestamp":"2021-08-22 19:25:57"}
+{"message":"App - postSignIn Service error\n: userProvider.selectProfessorPassword is not a function \n{}","level":"error","timestamp":"2021-08-22 19:26:35"}
+{"message":"App - postSignIn Service error\n: Unknown column 'id' in 'field list' \n{\"message\":\"Unknown column 'id' in 'field list'\",\"code\":\"ER_BAD_FIELD_ERROR\",\"errno\":1054,\"sql\":\"\\n          SELECT status, id\\n          FROM Professor\\n          WHERE email = 'dankkuko@dkk.com';\",\"sqlState\":\"42S22\",\"sqlMessage\":\"Unknown column 'id' in 'field list'\"}","level":"error","timestamp":"2021-08-22 19:27:10"}

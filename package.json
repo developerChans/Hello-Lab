@@ -18,12 +18,14 @@
     "concurrently": "^6.2.0",
     "cookie-parser": "^1.4.5",
     "express": "^4.17.1",
+    "history": "^4.10.1",
     "nodemon": "^2.0.12",
     "react-bootstrap": "^1.6.1",
     "react-icons": "^4.2.0",
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
     "reactstrap": "^8.9.0",
-    "redux": "^4.1.1"
+    "redux": "^4.1.1",
+    "redux-persist": "^6.0.0"
   }
 }

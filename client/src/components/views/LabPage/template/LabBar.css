@@ -1,0 +1,30 @@
+#content{
+    padding-left: 80px;
+    height: fit-content
+}
+#lab-bar{
+    position: fixed;
+    width: 200px;
+    top: 180px;
+    box-shadow: none;
+    padding-left: 80px;
+    padding-right: 20px;
+}
+
+#lab-ul{
+    width: 200px;
+}
+
+#btn {
+    background-color: rgba( 255, 255, 255, 0 ) !important;
+    border: none;
+    color: black !important;
+}
+#btn:active,
+#btn:hover{
+    background-color:rgb(196, 196, 196) !important;
+    color: black !important;
+}
+#btn>:first-child{
+    padding-left: 10px;
+}

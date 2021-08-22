@@ -1,28 +1,17 @@
-import logo from '../../components/views/hellolab.png';
-import imgPath from '../../components/views/default.png';
+import logo from '../views/hellolab.png';
+import {BiLinkExternal} from 'react-icons/bi';
+
 import './MenuBar.css';
-import {useRef, useEffect, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
+import ProfileBtn from 'components/MenuBar/ProfileBtn'
+import SignBtn from 'components/MenuBar/SignBtn';
+// auth에 따라 보이기 안보이기 구현
 
-const profile = {img: imgPath};
+const user_univ = "https://www.dankook.ac.kr/web/kor";
 
-const MenuBar = () => {
-
-  const dropdown = useRef();
-  const [drop, setDrop] = useState(false);
-
-  const profileClick = () =>{
-    if(dropdown.current){
-      if(!drop){
-        dropdown.current.classList.add("show");
-        setDrop(true);
-      }else{
-        dropdown.current.classList.remove("show");
-        setDrop(false);
-      }
-    }
-  }
-
+const MenuBar = ({isLoggedIn}) => {
+  const RISS_URL = "http://www.riss.kr/index.do";
+  
   return (
     <div id="menu">
       <nav id="menubar" className="navbar navbar-expand bg-white navbar-light">
@@ -32,24 +21,30 @@ const MenuBar = () => {
 
         <ul className="navbar-nav">
           <li className="nav-item">
-            <a className="nav-link" href="#">Open Lab</a>
+            <a className="nav-link" href="/open">Open Lab</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#">메뉴2</a>
+            <a className="nav-link" href="/recruitment">Connect</a>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link" target='_blank' href={user_univ}>
+              Univ.
+            <BiLinkExternal className="link-icon"/>
+            </a>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link" target='_blank' href={RISS_URL}>
+              RISS
+            <BiLinkExternal  className="link-icon" />
+            </a>
           </li>
         </ul>
-        <button id="profile_button" className="border border-white rounded-circle"
-        onClick={profileClick}>
-          <img id="profile_img" src={profile.img}/>
-        </button>
-        <div ref={dropdown} className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a className="dropdown-item" href="/mypage">Dashboard</a>
-          <a className="dropdown-item" href="/home">Another action</a>
-          <a className="dropdown-item" href="#">Something else here</a>
-        </div>
-      </nav>
 
+        {isLoggedIn ? <ProfileBtn/>:<SignBtn/>}
+
+      </nav>
     </div>
+      
   );
 }
 
