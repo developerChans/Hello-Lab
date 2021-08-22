@@ -1,11 +1,11 @@
 import { withRouter } from 'react-router-dom';
 import LabPage from '../LabPage';
 
-const LabCal = () =>{
+const LabSession = () =>{
     return (
         <div>
             <LabPage/>
         </div>
     );
 }
-export default withRouter(LabCal);
+export default withRouter(LabSession);

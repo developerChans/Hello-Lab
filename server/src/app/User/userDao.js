@@ -4,12 +4,12 @@ async function insertStudentInfo(connection, insertStudentInfoParams) {
           INSERT INTO Student(email, name, StudentNum, major,phoneNumber,password,imageURL)
           VALUES (?, ?, ?, ?, ?, ?,?);
       `;
-    const insertStudentInfoRow = await connection.query(
-      insertStudentInfoQuery,
-      insertStudentInfoParams
-    );
-  
-    return insertStudentInfoRow;
+  const insertStudentInfoRow = await connection.query(
+    insertStudentInfoQuery,
+    insertStudentInfoParams
+  );
+
+  return insertStudentInfoRow;
 }
 
 // 학생 조회
@@ -17,9 +17,9 @@ async function selectStudent(connection){
     const selectStudentQuery = `
     select name, studentNum, major
     from Student;
-    `
-    const selectStudentRow = await connection.query(selectStudentQuery);
-    return selectStudentRow[0];
+    `;
+  const selectStudentRow = await connection.query(selectStudentQuery);
+  return selectStudentRow[0];
 }
 
 // 교수 생성
@@ -28,12 +28,12 @@ async function insertProfessorInfo(connection, insertProfessorInfoParams) {
           INSERT INTO Professor(email, name, professorNum, major,phoneNumber,password,imageUrl)
           VALUES (?, ?, ?, ?, ?, ?,?);
       `;
-    const insertProfessorInfoRow = await connection.query(
-      insertProfessorInfoQuery,
-      insertProfessorInfoParams
-    );
-  
-    return insertProfessorInfoRow;
+  const insertProfessorInfoRow = await connection.query(
+    insertProfessorInfoQuery,
+    insertProfessorInfoParams
+  );
+
+  return insertProfessorInfoRow;
 }
 
 // 교수 조회
@@ -41,9 +41,9 @@ async function selectProfessor(connection){
     const selectProfessorQuery = `
     select name, professorNum, major
     from Professor;
-    `
-    const selectProfessorRow = await connection.query(selectProfessorQuery);
-    return selectProfessorRow[0];
+    `;
+  const selectProfessorRow = await connection.query(selectProfessorQuery);
+  return selectProfessorRow[0];
 }
 
 // 이메일로 학생 조회
