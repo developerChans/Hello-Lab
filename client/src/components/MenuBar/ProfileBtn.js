@@ -1,5 +1,5 @@
 import {useRef, useState} from 'react';
-import imgPath from '../../components/views/default.png';
+import imgPath from '../views/default.png';
 
 import './MenuBar.css';
 import 'bootstrap/dist/css/bootstrap.css';

@@ -1,0 +1,14 @@
+{"message":"App - postSignIn Service error\n: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?' at line 3 \n{\"message\":\"You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?' at line 3\",\"code\":\"ER_PARSE_ERROR\",\"errno\":1064,\"sql\":\"\\n                  SELECT email, name \\n                  FROM Student \\n                  WHERE email = ?;\\n                  \",\"sqlState\":\"42000\",\"sqlMessage\":\"You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?' at line 3\"}","level":"error","timestamp":"2021-08-20 17:15:24"}
+{"message":"App - postSignIn Service error\n: Cannot read property 'name' of undefined \n{}","level":"error","timestamp":"2021-08-20 17:19:34"}
+{"message":"App - postSignIn Service error\n: Cannot read property 'password' of undefined \n{}","level":"error","timestamp":"2021-08-20 21:40:49"}
+{"message":"App - postSignIn Service error\n: Cannot read property 'password' of undefined \n{}","level":"error","timestamp":"2021-08-20 21:43:27"}
+{"message":"App - postSignIn Service error\n: Cannot read property 'password' of undefined \n{}","level":"error","timestamp":"2021-08-20 21:45:24"}
+{"message":"App - postSignIn Service error\n: Cannot read property 'password' of undefined \n{}","level":"error","timestamp":"2021-08-20 21:47:43"}
+{"message":"App - postSignIn Service error\n: Cannot read property 'password' of undefined \n{}","level":"error","timestamp":"2021-08-20 21:48:20"}
+{"message":"App - postSignIn Service error\n: Cannot read property 'password' of undefined \n{}","level":"error","timestamp":"2021-08-20 21:49:09"}
+{"message":"App - postSignIn Service error\n: Cannot read property 'password' of undefined \n{}","level":"error","timestamp":"2021-08-20 21:49:28"}
+{"message":"App - postSignIn Service error\n: Cannot read property 'password' of undefined \n{}","level":"error","timestamp":"2021-08-20 21:50:16"}
+{"message":"App - postSignIn Service error\n: Cannot read property '0' of undefined \n{}","level":"error","timestamp":"2021-08-20 21:51:08"}
+{"message":"App - postSignIn Service error\n: Cannot read property '0' of undefined \n{}","level":"error","timestamp":"2021-08-20 21:51:24"}
+{"message":"App - postSignIn Service error\n: Cannot read property 'password' of undefined \n{}","level":"error","timestamp":"2021-08-20 21:53:00"}
+{"message":"App - postSignIn Service error\n: Cannot read property 'password' of undefined \n{}","level":"error","timestamp":"2021-08-20 21:53:32"}
