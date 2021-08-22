@@ -1,41 +1,38 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { withRouter, useLocation } from 'react-router-dom';
-import '../views.css';
-import LabBar from './bars/LabBar';
-import LabHeader from './bars/LabHeader';
-import LabSideBar from './bars/LabSideBar';
+import { withRouter, useLocation } from "react-router-dom";
+import "../views.css";
+import LabTemplate from 'components/views/LabPage/LabTemplate';
 
-const labs = [
-  {
-      id: 0,
-      name: "운영체제",
-      prof: "최종무",
-      imgPath: '/img/solid/mint.png'
-     },
-  {
-      id: 1,
-      name: "보안",
-      prof: "조성제",
-      imgPath: '/img/solid/pink.png'
-     },
-  {
-      id: 2,
-      name: "모바일",
-      prof: "어쩌고",
-      imgPath: '/img/solid/yellow.png'
-  }
-];
 
 function LabPage() {
 
   const location = useLocation();
-  const id = location.state.id;
-  const lab = labs.find(element => element.id === id);
+  if(location.id){
+    localStorage.setItem('labId', location.id);
+  }
+
+  const [lab, setLab] = useState({
+    name: "",
+    prof: "",
+    id: null
+  })
+
+  useEffect(() => {
+    const storedId = window.localStorage.getItem('labId');
+    axios
+      .get(`/app/lab/${storedId}`)
+      .then((response) => {
+        const {name, professorId} = response.data[0]
+        setLab({name: name, prof: professorId, id:professorId});
+      });
+    
+  }, []);
+  
+
   return (
     <div>
-      <LabHeader {...lab}/>
-      <LabBar {...lab}/>
+      <LabTemplate {...lab} />
     </div>
   );
 }

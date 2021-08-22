@@ -1,0 +1,6 @@
+{"message":"App - postSignIn Service error\n: secret_config is not defined \n{}","level":"error","timestamp":"2021-08-22 17:58:53"}
+{"message":"App - postSignIn Service error\n: secret_config is not defined \n{}","level":"error","timestamp":"2021-08-22 18:00:06"}
+{"message":"App - postSignIn Service error\n: secret_config is not defined \n{}","level":"error","timestamp":"2021-08-22 18:00:57"}
+{"message":"App - postSignIn Service error\n: data and hash must be strings \n{}","level":"error","timestamp":"2021-08-22 18:01:18"}
+{"message":"App - postSignIn Service error\n: secret_config is not defined \n{}","level":"error","timestamp":"2021-08-22 18:01:52"}
+{"message":"App - postSignIn Service error\n: res is not defined \n{}","level":"error","timestamp":"2021-08-22 18:13:45"}

@@ -1,9 +1,16 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
+import {useDispatch} from 'react-redux';
+import MenuBar from '../../MenuBar/MenuBar';
+import {loginUser} from '../../../_actions/user_action'
 import '../views.css';
 import './LoginPage.css';
+import 'bootstrap/dist/css/bootstrap.css';
+
 
 function LoginPage(props) {
+
+  const dispatch = useDispatch();
 
   const [LoginId, setLoginId] = useState("");
   const [Password, setPassword] = useState("");
@@ -20,34 +27,40 @@ function LoginPage(props) {
     event.preventDefault();
 
     let userBody = {
-      LoginId: {LoginId},
-      password: {Password}
+      id: LoginId,
+      password: Password
     }
     // server 연결 시 userBody fetch. 현재는 state 확인 용으로 console log
     console.log(userBody);
-    props.history.push('/');
+    
+    // dispatch(loginUser(userBody))
+    // .then(response=>{
+    //   if(response.payload.loginSuccess){
+    //     props.history.push('/');
+    //   }else{
+    //     alert('login dispatch error');
+    //   }
+    // })
+
   }
 
   return (
-    <div className="wrap">
-      <div className="header">
-        <h1>
-            <a href="/">
-              <div className="logo"></div>
-            </a>
-            <span className="page">Login</span>
-        </h1>
-      </div>
-      <div className="container">
-        <form className="login-form" onSubmit={onSubmitHandler}>
-          <span>아이디</span>
-          <input placeholder="아이디" value={LoginId} onChange={onLoginIdHandler} required/>
-          <br />
-          <span>비밀번호</span>
-          <input type="password" placeholder="비밀번호" value={Password} onChange={onPasswordHandler} required/>
-          <br />
-          <button type="submit">로그인</button>
-        </form>
+    <div id="wrap">
+      <div id="login-content">
+        <h1 id="ment">Sign in</h1>
+        <div id="form-box">
+          <form id="login-form" onSubmit={onSubmitHandler}>
+            <div id="id-group" className="form-group">
+              <label for="uid">ID</label>
+              <input type="text" className="form-control" id="uid" name="uid" value={LoginId} onChange={onLoginIdHandler} required/>
+            </div>
+            <div className="form-group">
+              <label for="pwd">Password</label>
+              <input id="pwd" className="form-control" name="pwd" type="password" value={Password} onChange={onPasswordHandler} required/>
+            </div>
+            <button type="submit" id="login-btn" className="btn btn-primary">Sign in</button>
+          </form>
+        </div>
       </div>
     </div>
   );

@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { withRouter } from 'react-router-dom';
 import '../views.css';
+import MenuBar from '../../MenuBar/MenuBar';
+import 'bootstrap/dist/css/bootstrap.css';
+import './RegisterPage.css'
 
 function RegisterPage(props) {
 
@@ -27,6 +30,7 @@ function RegisterPage(props) {
     // 중복 확인 조건 맞췄을 때 (서버 연결)
     if(isDuplicate){
       const confirmDup = document.createElement("span");
+      confirmDup.id="confirm-dup";
       confirmDup.innerText = "Good!";
       event.currentTarget.classList.add("hidden");
       const loginForm = document.querySelector("#id-form");
@@ -73,47 +77,57 @@ function RegisterPage(props) {
 
   return (
     <div className="wrap">
-      <div className="header">
-        <h1>
-            <a href="/">
-              <div className="logo"></div>
-            </a>
-            <span className="page">회원가입</span>
-        </h1>
-      </div>
-      <div className="container">
-        <form className="login-form" onSubmit={onSubmitHandler}>
-          <div>
-            <span>이름</span>
-            <input value={Name} onChange={onNameHandler} required/>
+      <div id="register-content">
+        <h1 id="ment">Join</h1>
+        <div id="register-form-box">
+
+        <form id="register-form" onSubmit={onSubmitHandler}>
+          <div className="form-group">
+            <label for="name">이름</label>
+            <input className="form-control" name="name" type="text" value={Name} onChange={onNameHandler} required/>
           </div>
-          <div>    
-            <span>학과</span>
-            <input value={Major} onChange={onMajorHandler} required/>
+          <div className="form-group">    
+            <label for="major">학교</label>
+            <input className="form-control" name="major" type="text" value={Major} onChange={onMajorHandler} required/>
           </div>
-          <div id="id-form">    
-            <span>아이디</span>
-            <input value={LoginId} onChange={onLoginIdHandler} required/>
-            <button type="button" onClick={onConfirmDuplicate}>중복확인</button>
+          <div className="form-group">    
+            <label for="major">학과</label>
+            <input className="form-control" name="major" type="text" value={Major} onChange={onMajorHandler} required/>
           </div>
-          <div>
-            <span>비밀번호</span>
-            <input type="password" value={Password} onChange={onPasswordHandler} required/>       
+          <div className="form-group" id="id-form">    
+            <label for="uid">아이디</label>
+            <input className="form-control" name="uid" type="text" 
+            value={LoginId} onChange={onLoginIdHandler} required/>
+            <button id="confirmBtn" className="btn" type="button" onClick={onConfirmDuplicate}>중복확인</button>
           </div>
-          <div>
-            <span>비밀번호 확인</span>
-            <input type="password" value={ConfirmPassword} onChange={onConfirmPasswordHandler} required/>       
+          <div className="form-group">
+            <label for="pwd">비밀번호</label>
+            <input className="form-control" name="pwd" type="password" 
+            value={Password} onChange={onPasswordHandler} required/>       
           </div>
-          <div>    
-            <span>이메일</span>
-            <input value={Email} onChange={onEmailHandler} required/>
+          <div className="form-group">
+            <label for="pconfirm">비밀번호 확인</label>
+            <input className="form-control" name="pconfirm" type="password" 
+            value={ConfirmPassword} onChange={onConfirmPasswordHandler} required/>       
           </div>
-          <div>    
-            <span>핸드폰 번호</span>
-            <input value={PhoneNumber} onChange={onPhoneNumberHandler} required/>
+          <div className="form-group">    
+            <label for="email">이메일</label>
+            <input className="form-control" name="email" type="text" value={Email} onChange={onEmailHandler} required/>
+            <select id="email-select" name="email">
+              <option value="naver">@naver.com</option>
+              <option value="daum">@daum.net</option>
+              <option value="gmail">@gmail.com</option>
+              <option value="self">직접입력</option>
+            </select>
           </div>
-          <button type="submit">가입하기</button>
+          <div className="form-group">    
+            <label for="pnum">핸드폰 번호</label>
+            <input className="form-control" name="pnum" maxlength='11' value={PhoneNumber} onChange={onPhoneNumberHandler} required/>
+            <span>'-' 없이 입력</span>
+          </div>
+          <button id="join-btn" type="submit" className="btn btn-primary">Join</button>
         </form>
+        </div>
       </div>
     </div>
   );

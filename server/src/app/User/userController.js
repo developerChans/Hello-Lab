@@ -1,6 +1,10 @@
+const jwtMiddleware = require("../../../config/jwtMiddleware");
 const userProvider = require("./userProvider");
 const userService = require("./userService");
 const regexEmail = require("regex-email");
+const baseResponse = require("../../../config/baseResponseStatus");
+const {response, errResponse} = require("../../../config/response");
+
 exports.test = function (req, res) {
   return res.json({
     success: 성공,
@@ -12,57 +16,45 @@ exports.test = function (req, res) {
 exports.postStudents = async function (req, res) {
   const {email,password,name,studentNum,major,phoneNumber,imageUrl} =req.body;
   if (!email)
-      return res.json({
-          result:성공,
-          message: "회원가입 성공"
-      });
+        return res.send(response(baseResponse.SIGNUP_EMAIL_EMPTY));
+    
+    // 이메일 중복 확인
+    const emailRows1 = await userProvider.studentEmailCheck(email);
+    const emailRows2 = await userProvider.professorEmailCheck(email);
+    if(emailRows1.length > 0) return res.send(errResponse(baseResponse.SIGNUP_REDUNDANT_EMAIL));
+    if(emailRows2.length > 0) return res.send(errResponse(baseResponse.SIGNUP_REDUNDANT_EMAIL));
 
     // 이메일 길이 체크
-  if (email.length > 30)
-      return res.json({
-        result:실패,
-          message: "이메일 길이를 확인해주세요(30자 이하)"
-      })
+    if (email.length > 30)
+        return res.send(response(baseResponse.SIGNUP_EMAIL_LENGTH));
+    
     // 형식 체크 (by 정규표현식)
     if (!regexEmail.test(email))
-    return res.json({
-      result:실패,
-      message: "이메일 형식을 확인해주세요."
-  });
+        return res.send(response(baseResponse.SIGNUP_EMAIL_ERROR_TYPE));
+    
     // 이름 빈 값 체크
     if (!name)
-    return res.json({
-      result:실패,
-      message: "이름을 입력해주세요."
-  });
+        return res.send(response(baseResponse.SIGNUP_NAME_EMPTY));
 
     // 이름 길이 체크
     if (name.length > 30)
-    return res.json({
-      result:실패,
-      message: "이름 길이를 확인해주세요.(30자이하)"
-  });
-
+        return res.send(response(baseResponse.SIGNUP_NAME_LENGTH));
     
-    // 비밀번호 빈 값 체크 
-    if(!password)
-    return res.json({
-      result:실패,
-      message: "비밀번호를 입력해주세요."
-  });  
-    // 비밀번호 길이 체크
-    if(password.length>20||password.length<6)
-    return res.json({
-      result:실패,
-      message: "비밀번호 길이를 확인해주세요.(6자 이상 20자 이하)"
-  });
+   // 비밀번호 빈 값 체크 
+   if(!password)
+   return res.send(response(baseResponse.SIGNUP_PASSWORD_EMPTY));
+   
+  // 비밀번호 길이 체크
+  if(password.length>20||password.length<6)
+  return res.send(response(baseResponse.SIGNUP_PASSWORD_LENGTH));
+
    
     const signUpResponse = await userService.createStudent(
         email,
         name,
         studentNum,
         major,
-        phoneNumber,
+        phoneNumber,//phoneNum validation 나중에..
         password,
         imageUrl
     );
@@ -175,10 +167,18 @@ exports.register = async function (req, res) {
   });
 };
 
-exports.login = function (req, res) {
-  //
-  // console.log(req.userId);
-  res.send("여기까지 오면 로그인 인증 성공");
+exports.studentLogin = async function (req, res) {
+  const{email, password} = req.body;
+  
+  const signInResponse = await userService.postStudentSignIn(email, password);
+  return res.send(signInResponse);
+};
+
+exports.professorLogin = async function (req, res) {
+  const{email, password} = req.body;
+  
+  const signInResponse = await userService.postProfessorSignIn(email, password);
+  return res.send(signInResponse);
 };
 
 // const encriptPwd = function (plainPwd) {
