@@ -73,10 +73,57 @@ async function deleteNotice(con, deleteNoticeInfo) {
   }
 }
 
+async function insertComment(con, insertCommentInfo) {
+  const insertCommentQuery = `INSERT INTO LabNoticeComment(noticeId, content) VALUES(?,?) `;
+  try {
+    await con.beginTransaction();
+    const row = await con.query(insertCommentQuery, insertCommentInfo);
+    await con.commit();
+    return row[0];
+  } catch (e) {
+    await con.rollback();
+    con.release();
+    console.log(`query error \n ${e}`);
+    return false;
+  }
+}
+
+async function updateComment(con, updateCommentInfo) {
+  const updateCommentQuery = `UPDATE LabNoticeComment SET content = ? WHERE noticeId = ? AND  id = ?`;
+  try {
+    await con.beginTransaction();
+    const row = await con.query(updateCommentQuery, updateCommentInfo);
+    await con.commit();
+    return row[0].affectedRows;
+  } catch (e) {
+    await con.rollback();
+    con.release();
+    console.log(`query error \n ${e}`);
+    return false;
+  }
+}
+
+async function deleteComment(con, commentId) {
+  const deleteCommentQuery = `DELETE FROM LabNoticeComment WHERE id = ${commentId}`;
+  try {
+    await con.beginTransaction();
+    const row = await con.query(deleteCommentQuery);
+    await con.commit();
+    return row[0].affectedRows;
+  } catch (e) {
+    await con.rollback();
+    con.release();
+    console.log(`query error \n ${e}`);
+  }
+}
+
 module.exports = {
   insertNoticeInfo,
   getAllNotice,
   getOneNotice,
   updateNotice,
   deleteNotice,
+  insertComment,
+  updateComment,
+  deleteComment,
 };

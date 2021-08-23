@@ -15,4 +15,25 @@ module.exports = function (app) {
 
   //공지사항 삭제 api
   app.delete("/app/lab/:labId/notices/:noticeId", controller.deleteNotice);
+
+  //공지사항 댓글 생성 api
+  app.post("/app/lab/:labId/notices/:noticeId", controller.createComment);
+
+  //공지사항 댓글 수정 api
+  app.patch(
+    "/app/lab/:labId/notices/:noticeId/:commentId",
+    controller.updateComment
+  );
+
+  //공지사항 댓글 삭제 api
+  app.delete(
+    "/app/lab/:labId/notices/:noticeId/:commentId",
+    controller.deleteComment
+  );
+
+  // // 대댓글 작성 api
+  // app.post(
+  //   "/app/lab/:labId/notices/:noticeId/:commentId",
+  //   controller.createReply
+  // );
 };
