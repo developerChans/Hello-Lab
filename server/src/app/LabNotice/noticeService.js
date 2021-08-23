@@ -1,3 +1,4 @@
+const e = require("express");
 const { pool } = require("../../../config/db");
 const noticeDao = require("./noticeDao");
 
@@ -39,5 +40,43 @@ exports.deleteNotice = async (deleteNoticeInfo) => {
   } catch (e) {
     console.log(`DB connect Error \n ${e}`);
     return false;
+  }
+};
+
+exports.createComment = async (createCommentInfo) => {
+  try {
+    const con = await pool.getConnection(async (conn) => conn);
+    const result = await noticeDao.insertComment(con, createCommentInfo);
+    con.release();
+    return result ? true : false;
+  } catch (e) {
+    console.log(`DB connect Error \n ${e}`);
+    return false;
+  }
+};
+
+exports.updateComment = async (updateCommentInfo) => {
+  try {
+    const con = await pool.getConnection(async (conn) => conn);
+    const result = await noticeDao.updateComment(con, updateCommentInfo);
+    con.release();
+    return result ? true : false;
+  } catch (e) {
+    console.log(`DB connect Error \n ${e}`);
+    return false;
+  }
+};
+
+exports.deleteComment = async (commentId) => {
+  try {
+    const con = await pool.getConnection(async (conn) => conn);
+    const result = await noticeDao.deleteComment(con, commentId);
+    if (result === undefined) {
+      throw Error("최상단 에러를 확인하시오");
+    }
+    con.release();
+    return result ? true : false;
+  } catch (e) {
+    console.log(`DB connet Error \n ${e}`);
   }
 };
