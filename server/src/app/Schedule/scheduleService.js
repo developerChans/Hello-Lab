@@ -24,18 +24,29 @@ exports.createSchedule = async function (date, content, labIdx) {
     //}   //catch(console.error();)
 };
 
-exports.updateScheduleStatus = async function (status, professorIdx) {
+exports.updateScheduleStatus = async function (status, LabScheduleIdx) {
     try {
-        console.log(professorIdx) // idx 가 아닌 나중엔 아이디를 받아야함
         const connection = await pool.getConnection(async (conn) => conn);
-        const updateScheduleStatusResult = await scheduleDao.updateScheduleStatus(connection, status, professorIdx);
+        const updateScheduleStatusResult = await scheduleDao.updateScheduleStatus(connection, status, LabScheduleIdx);
         connection.release();
-        logger.SUCCESS(`해당 일정이 삭제되었습니다.\n`)
+        //logger.SUCCESS(`해당 일정이 삭제되었습니다.\n`)
 
         return response(baseResponse.SUCCESS);
 
     } catch(err) {
-        logger.error(`App - updateStatus Service error\n : ${err.message}`);
+        // logger.error(`App - updateStatus Service error\n : ${err.message}`);
         return errResponse(baseResponse.DB_ERROR);
     }
 };
+
+exports.changeSchedule = async function (date, content, LabScheduleIdx) {
+    try {
+        const connection = await pool.getConnection(async(conn) => conn);
+        const changeScheduleResult = await scheduleDao.changeSchedule(connection, date, content, LabScheduleIdx);
+
+        return response(baseResponse.SUCCESS);
+        
+    } catch(err) {
+        return errResponse(baseResponse.DB_ERROR);
+    }
+}

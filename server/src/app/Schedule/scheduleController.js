@@ -1,15 +1,15 @@
 // const jwtMiddleware = require("../../../config/jwtMiddleware");
 const scheduleProvider = require("../../app/Schedule/scheduleProvider");
 const scheduleService = require("../../app/Schedule/scheduleService");
- const baseResponse = require("../../../config/baseResponseStatus");
- const {response, errResponse} = require("../../../config/response");
+const baseResponse = require("../../../config/baseResponseStatus");
+const {response, errResponse} = require("../../../config/response");
 
 const regexEmail = require("regex-email");
 const {emit} = require("nodemon");
 const { checkUpdateRights } = require("./scheduleDao");
 
 /**
- * schedule API NO. 0
+ * schedule API NO. 1
  * API NAME : 스케줄 생성 API
  * [GET] /app/schedules
  */
@@ -47,37 +47,77 @@ exports.getSchedules = async function(req, res) {
     
     const studentIdx = req.params.studentIdx;
 
-    console.log(studentIdx);
-
     if(!studentIdx) return res.send(errResponse(baseResponse.USER_USERID_EMPTY));
     const scheduleListResult = await scheduleProvider.getScheduleList(studentIdx);
     return res.send(response(baseResponse.SUCCESS, scheduleListResult));
-
 };
 
 /**
  * schedule API NO. 3
  * API NAME : 일정 삭제 및 복구 API
- * [PATCH] /app/schedules/:labIdx
+ * [PATCH] /app/schedules/:LabScheduleIdx
  * body : status
  */
-exports.updateScheduleStatus = async function(req,res) {
+ exports.updateScheduleStatus = async function(req,res) {
     /**
-     * Path Variable : labIdx
+     * Path Variable : LabScheduleIdx
      */
-    const {status} = req.body;
-    const labIdx = req.params.labIdx;
+    const {status, labIdx} = req.body;
+    const LabScheduleIdx = req.params.LabScheduleIdx;
     const userIdFromJwt = 1; // 임시
     // const userIdFromJWT = req.verifiedToken.userId
+    /*
     const checkUpdateRightsIdRow = scheduleProvider.checkUpdateRights(labIdx);
     const professorIdx = checkUpdateRightsIdRow.professorId;
     const associateProfessorIdx = checkUpdateRightsIdRow.associateProfessorId;
-    if (userIdFromJwt === professorIdx || userIdFromJwt === associateProfessorIdx) {
+    console.log(professorIdx);
+    console.log(associateProfessorIdx);
+    if (userIdFromJwt !== professorIdx || userIdFromJwt !== associateProfessorIdx) {
+        res.send(errResponse(baseResponse.TOKEN_VERIFICATION_FAILURE));
+    } else {
         const updateScheduleStatusResult = await scheduleService.updateScheduleStatus(status, professorIdx);
         return res.send(updateScheduleStatusResult);
-    } else {
-        res.send(errResponse(baseResponse.TOKEN_VERIFICATION_FAILURE));
     }
+    */
+    const updateScheduleStatusResult = await scheduleService.updateScheduleStatus(status, LabScheduleIdx);
+    return res.send(updateScheduleStatusResult);
 
+};
 
-}
+/** 
+ * schedule API NO. 4
+ * API NAME : 일정 수정 API
+ * [PATCH] /app/schedules/patch/:LabScheduleIdx
+ * body : date, content
+ */
+
+exports.changeSchedule = async function(req,res) {
+    /**
+     * Path Variable : LabScheduleIdx
+     */
+    const {date, content} = req.body;
+    const LabScheduleIdx = req.params.LabScheduleIdx;
+    const changeScheduleResult = await scheduleService.changeSchedule(date, content, LabScheduleIdx);
+    return res.send(changeScheduleResult);
+};
+
+/**
+ * schedule API NO 5
+ * API NAME : 특정 연구실 스케줄 조회 API
+ * [GET] /app/schedules/:labIdx
+ */
+
+exports.getSchedulesEachLab = async function(req, res) {
+    /**
+     * Path Variable : labIdx
+     */
+    console.log(1);
+    const labIdx = req.params.labIdx;
+    console.log(1);
+
+    if(!labIdx) return res.send(errResponse(baseResponse.USER_USERID_EMPTY));
+    console.log(1);
+
+    const scheduleListEachLabResult = await scheduleProvider.getScheduleListEachLab(labIdx);
+    return res.send(response(baseResponse.SUCCESS, scheduleListEachLabResult));
+};

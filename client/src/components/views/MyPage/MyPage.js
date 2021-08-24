@@ -29,7 +29,7 @@ const labs = [
 
 function MyPage({data, replaceLab}) {
 
-    const onDashboardHandler = async(section) => {
+    const onDashboardHandler = (section) => {
         
         // 실제 동작 시 lab 페이지로 정보 넘겨줘야 함
         // lab 페이지는 정보 받아서 해당 lab 페이지 출력해야 함
@@ -45,7 +45,11 @@ function MyPage({data, replaceLab}) {
                 tab: "info"
             };
             replaceLab(newLab);
-            window.location.replace(`/lab/${data.lab.id}`);
+            const {lab: {
+                id, category, tab
+              }} = data;
+              
+            window.location.replace(`/lab/${id}`);
         });
     }
 

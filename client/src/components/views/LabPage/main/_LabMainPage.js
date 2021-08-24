@@ -11,11 +11,11 @@ const LabMainPage = () =>{
     return (
     <div>
         <h1>main</h1>
-        <Route exact path="/lab/:id/main/info"><LabInfo/></Route>
-        <Route exact path="/lab/:id/main/notice"><LabNotice/></Route>
-        <Route exact path="/lab/:id/main/calendar"><LabCal/></Route>
-        <Route exact path="/lab/:id/main/ask"><LabAsk/></Route>
-        <Route exact path="/lab/:id/main/member"><LabMember/></Route>
+        <Route path="/lab/:id/main/info"><LabInfo/></Route>
+        <Route path="/lab/:id/main/notice"><LabNotice/></Route>
+        <Route path="/lab/:id/main/calendar"><LabCal/></Route>
+        <Route path="/lab/:id/main/ask"><LabAsk/></Route>
+        <Route path="/lab/:id/main/member"><LabMember/></Route>
     </div>);
 }
 export default LabMainPage;
