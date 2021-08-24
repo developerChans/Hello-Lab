@@ -18,7 +18,7 @@ exports.createStudent = async function (
   phoneNum,
   password,
   imageUrl
-) {
+) {try {
   const salt = await bcrypt.genSalt(saltRounds);
   const hashedPwd = await bcrypt.hash(password, salt);
   console.log(hashedPwd);
@@ -37,7 +37,11 @@ exports.createStudent = async function (
     insertStudentInfoParams
   );
   connection.release();
-  return;
+  return response(baseResponse.SUCCESS);
+} catch(err){
+  logger.error(`App - createUser Service error\n: ${err.message}`);
+  return errResponse(baseResponse.DB_ERROR);
+}
 };
 
 exports.createProfessor = async function (
@@ -48,7 +52,7 @@ exports.createProfessor = async function (
   phoneNum,
   password,
   imageUrl
-) {
+){try{
   const salt = await bcrypt.genSalt(saltRounds);
   const hashedPwd = await bcrypt.hash(password, salt);
   const insertProfessorInfoParams = [
@@ -66,7 +70,11 @@ exports.createProfessor = async function (
     insertProfessorInfoParams
   );
   connection.release();
-  return;
+  return response(baseResponse.SUCCESS);
+} catch(err){
+  logger.error(`App - createUser Service error\n: ${err.message}`);
+  return errResponse(baseResponse.DB_ERROR);
+}
 }
 
 exports.postStudentSignIn = async function (email, password) {
@@ -112,9 +120,9 @@ exports.postStudentSignIn = async function (email, password) {
           }, // 토큰의 내용(payload)
           secret_config.jwtsecret, // 비밀키
           {
-              expiresIn: "365d",
+              expiresIn: "1week",
               subject: "Student",
-          } // 유효 기간 365일
+          } // 유효 기간 1주
       );
 
       return response(baseResponse.SUCCESS, {'userId': userInfoRows[0].id, 'jwt': token});
