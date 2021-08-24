@@ -70,50 +70,38 @@ exports.getStudents = async function (req, res) {
 exports.postProfessors = async function (req, res) {
   const {email,password,name,professorNum,major,phoneNumber,imageUrl} =req.body;
   if (!email)
-      return res.json({
-          result:성공,
-          message: "회원가입 성공"
-      });
+        return res.send(response(baseResponse.SIGNUP_EMAIL_EMPTY));
+    
+    // 이메일 중복 확인
+    const emailRows1 = await userProvider.studentEmailCheck(email);
+    const emailRows2 = await userProvider.professorEmailCheck(email);
+    if(emailRows1.length > 0) return res.send(errResponse(baseResponse.SIGNUP_REDUNDANT_EMAIL));
+    if(emailRows2.length > 0) return res.send(errResponse(baseResponse.SIGNUP_REDUNDANT_EMAIL));
 
     // 이메일 길이 체크
-  if (email.length > 30)
-      return res.json({
-        result:실패,
-          message: "이메일 길이를 확인해주세요(30자 이하)"
-      })
+    if (email.length > 30)
+        return res.send(response(baseResponse.SIGNUP_EMAIL_LENGTH));
+    
     // 형식 체크 (by 정규표현식)
     if (!regexEmail.test(email))
-    return res.json({
-      result:실패,
-      message: "이메일 형식을 확인해주세요."
-  });
+        return res.send(response(baseResponse.SIGNUP_EMAIL_ERROR_TYPE));
+    
     // 이름 빈 값 체크
     if (!name)
-    return res.json({
-      result:실패,
-      message: "이름을 입력해주세요."
-  });
+        return res.send(response(baseResponse.SIGNUP_NAME_EMPTY));
 
     // 이름 길이 체크
     if (name.length > 30)
-    return res.json({
-      result:실패,
-      message: "이름 길이를 확인해주세요.(30자이하)"
-  });
-
+        return res.send(response(baseResponse.SIGNUP_NAME_LENGTH));
     
-    // 비밀번호 빈 값 체크 
-    if(!password)
-    return res.json({
-      result:실패,
-      message: "비밀번호를 입력해주세요."
-  });  
-    // 비밀번호 길이 체크
-    if(password.length>20||password.length<6)
-    return res.json({
-      result:실패,
-      message: "비밀번호 길이를 확인해주세요.(6자 이상 20자 이하)"
-  });
+   // 비밀번호 빈 값 체크 
+   if(!password)
+   return res.send(response(baseResponse.SIGNUP_PASSWORD_EMPTY));
+   
+  // 비밀번호 길이 체크
+  if(password.length>20||password.length<6)
+  return res.send(response(baseResponse.SIGNUP_PASSWORD_LENGTH));
+
    
     const signUpResponse = await userService.createProfessor(
         email,
