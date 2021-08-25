@@ -49,7 +49,7 @@ async function selectProfessor(connection){
 // 이메일로 학생 조회
 async function selectStudentEmail(connection, email) {
     const selectStudentEmailQuery = `
-                  SELECT name 
+                  SELECT email,name 
                   FROM Student 
                   WHERE email = ?;
                   `;
@@ -59,7 +59,7 @@ async function selectStudentEmail(connection, email) {
 // 이메일로 교수 조회
 async function selectProfessorEmail(connection, email) {
     const selectProfessorEmailQuery = `
-                  SELECT name 
+                  SELECT email,name 
                   FROM Professor 
                   WHERE email = ?;
                   `;
