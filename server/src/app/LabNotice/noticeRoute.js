@@ -19,6 +19,9 @@ module.exports = function (app) {
   //공지사항 댓글 생성 api
   app.post("/app/lab/:labId/notices/:noticeId", controller.createComment);
 
+  //공지사항 댓글 가져오는 api
+  app.get("/app/lab/:labId/notices/:noticeId/comments", controller.getComment);
+
   //공지사항 댓글 수정 api
   app.patch(
     "/app/lab/:labId/notices/:noticeId/:commentId",
@@ -31,9 +34,12 @@ module.exports = function (app) {
     controller.deleteComment
   );
 
-  // // 대댓글 작성 api
-  // app.post(
-  //   "/app/lab/:labId/notices/:noticeId/:commentId",
-  //   controller.createReply
-  // );
+  // 대댓글 작성 api
+  app.post(
+    "/app/lab/:labId/notices/:noticeId/:commentId",
+    controller.createReply
+  );
+
+  // 대댓글 불러오는 api
+  app.get("/app/lab/:labId/notices/:noticeId/:commentId", controller.getReply);
 };
