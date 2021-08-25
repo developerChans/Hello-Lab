@@ -18,10 +18,9 @@ exports.createStudent = async function (
   phoneNum,
   password,
   imageUrl
-) {try{
+) {
   const salt = await bcrypt.genSalt(saltRounds);
   const hashedPwd = await bcrypt.hash(password, salt);
-  console.log(hashedPwd);
   const insertStudentInfoParams = [
     email,
     name,
@@ -32,16 +31,23 @@ exports.createStudent = async function (
     imageUrl,
   ];
   const connection = await pool.getConnection(async (conn) => conn);
+  try{
+    await connection.beginTransaction();
   const createStudentResult = await userDao.insertStudentInfo(
     connection,
     insertStudentInfoParams
   );
-  connection.release();
+  await connection.commit();
   return response(baseResponse.SUCCESS);
-} catch(err){
-  logger.error(`App - createUser Service error\n: ${err.message}`);
-        return errResponse(baseResponse.DB_ERROR);
-}
+
+  }
+  catch(e){
+    await connection.rollback();
+    logger.error(`App - createUser Service error\n: ${err.message}`);
+    return errResponse(baseResponse.DB_ERROR);  }
+  finally{
+  connection.release();
+  }
 };
 
 exports.createProfessor = async function (
@@ -52,7 +58,7 @@ exports.createProfessor = async function (
   phoneNum,
   password,
   imageUrl
-) {try{
+) {
   const salt = await bcrypt.genSalt(saltRounds);
   const hashedPwd = await bcrypt.hash(password, salt);
   const insertProfessorInfoParams = [
@@ -65,25 +71,28 @@ exports.createProfessor = async function (
     imageUrl,
   ];
   const connection = await pool.getConnection(async (conn) => conn);
-  const createProfessorResult = await userDao.insertProfessorInfo(
+  try{
+    await connection.beginTransaction();
+    const createProfessorResult = await userDao.insertProfessorInfo(
     connection,
     insertProfessorInfoParams
   );
-  connection.release();
+  await connection.commit();
   return response(baseResponse.SUCCESS);
-}catch(err){
-  logger.error(`App - createUser Service error\n: ${err.message}`);
+  }catch(e){
+    await connection.rollback();
+    logger.error(`App - createUser Service error\n: ${err.message}`);
   return errResponse(baseResponse.DB_ERROR);
-}
-}
+  }finally{
+  connection.release();
+  }
+};
 exports.postStudentSignIn = async function (email, password) {
   try {
       // 이메일 여부 확인
       const emailRows = await userProvider.studentEmailCheck(email);
       if (emailRows.length < 1) return errResponse(baseResponse.SIGNIN_EMAIL_EMPTY);
-     
       const selectEmail = emailRows[0].email;
-    
       // 비밀번호 확인
       /*
       const salt = await bcrypt.genSalt(saltRounds);
@@ -98,7 +107,6 @@ exports.postStudentSignIn = async function (email, password) {
       */
       const hashedPassword = await userProvider.selectStudentPassword(selectEmail);
       const check = await bcrypt.compare(password,hashedPassword.password);
-      
       if(!check) {
         return errResponse(baseResponse.SIGNIN_PASSWORD_WRONG);
       }
@@ -137,18 +145,15 @@ exports.postProfessorSignIn = async function (email, password) {
       const emailRows = await userProvider.professorEmailCheck(email);
       if (emailRows.length < 1) return errResponse(baseResponse.SIGNIN_EMAIL_EMPTY);
      
-      const selectEmail = emailRows[0].email
-
+      const selectEmail = emailRows[0].email;
+    console.log(selectEmail);
       // 비밀번호 확인
-      const salt = await bcrypt.genSalt(saltRounds);
-      const hashedPassword = await bcrypt.hash(password, salt);
-      const selectUserPasswordParams = [selectEmail, hashedPassword];
-      const passwordRows = await userProvider.professorPasswordCheck(selectUserPasswordParams);
-
-      if (passwordRows[0].password !== hashedPassword) {
-          return errResponse(baseResponse.SIGNIN_PASSWORD_WRONG);
+      const hashedPassword = await userProvider.selectProfessorPassword(selectEmail);
+      const check = await bcrypt.compare(password,hashedPassword.password);
+      if(!check) {
+        return errResponse(baseResponse.SIGNIN_PASSWORD_WRONG);
       }
-
+      console.log(check);
       // 계정 상태 확인
       const userInfoRows = await userProvider.professorAccountCheck(email);
 
