@@ -100,3 +100,141 @@ exports.deleteNotice = async (req, res) => {
     res.status(500).json({ success: false, message: "서버오류" });
   }
 };
+
+exports.createComment = async (req, res) => {
+  const noticeId = req.params.noticeId;
+  const content = req.body.content;
+
+  if (!content) {
+    res.status(400).json({
+      success: false,
+      message: "댓글 내용(content)는 필수 값 입니다. ",
+    });
+  }
+
+  const createCommentInfo = [noticeId, content];
+  try {
+    const result = await noticeService.createComment(createCommentInfo);
+    result
+      ? res.status(201).json({ success: true, message: "댓글 생성 성공" })
+      : res.status(400).json({
+          success: false,
+          message: "noticeId에 해당하는 공지가 없습니다.",
+        });
+  } catch (e) {
+    console.log(`Routing Error \n ${e}`);
+    res.status(500);
+  }
+};
+
+exports.getComment = async (req, res) => {
+  const noticeId = req.params.noticeId;
+
+  try {
+    const result = await noticeProvider.getComment(noticeId);
+    if (result === undefined) {
+      throw Error("최상단 오류를 확인하세요");
+    }
+    return res.status(200).send(result);
+  } catch (e) {
+    console.log(`Routing Error \n ${e}`);
+    res.status(500).json(`${JSON.stringify(e)}`);
+  }
+};
+
+exports.updateComment = async (req, res) => {
+  const noticeId = req.params.noticeId;
+  const commentId = req.params.commentId;
+  const content = req.body.content;
+  if (!content) {
+    res.status(400).json({
+      success: false,
+      message: "댓글 내용(content)는 필수 값 입니다.",
+    });
+  }
+
+  const updateCommentInfo = [content, noticeId, commentId];
+  try {
+    const result = await noticeService.updateComment(updateCommentInfo);
+    return result
+      ? res
+          .status(201)
+          .json({ success: true, message: "성공적으로 변경 되었습니다." })
+      : res.status(400).json({
+          success: false,
+          message: "commentId에 해당하는 댓글이 없습니다.",
+        });
+  } catch (e) {
+    console.log(`Routing Error \n ${e}`);
+    res.status(500);
+  }
+};
+
+exports.deleteComment = async (req, res) => {
+  const commentId = req.params.commentId;
+
+  try {
+    const result = await noticeService.deleteComment(commentId);
+    if (result === undefined) {
+      throw Error("최상단 에러를 확인하시오");
+    }
+    return result
+      ? res
+          .status(200)
+          .json({ success: true, message: "성공적으로 삭제 되었습니다." })
+      : res.status(400).json({
+          success: false,
+          message: "commentId에 해당하는 댓글이 없습니다.",
+        });
+  } catch (e) {
+    console.log(`Routing Error \n ${e}`);
+    res.status(500).json("서버 에러 발생");
+  }
+};
+
+exports.createReply = async (req, res) => {
+  const noticeId = req.params.noticeId;
+  const commentId = req.params.commentId;
+  const content = req.body.content;
+
+  if (!content) {
+    res.status(400).json({
+      success: false,
+      message: "대댓글 내용 (content)는 필수 값 입니다.",
+    });
+  }
+
+  const createReplyInfo = [content, commentId, noticeId];
+  try {
+    const result = await noticeService.createReply(createReplyInfo);
+    if (result === undefined) {
+      throw Error("최상단 오류를 확인하세요");
+    }
+    return result
+      ? res.status(201).json({ success: true, message: "대댓글 생성 성공" })
+      : res.status(400).json({ success: false, message: "대댓글 생성 실패" });
+  } catch (e) {
+    console.log(`Routing Error \n ${e}`);
+    res.status(500).json("서버 에러 발생");
+  }
+};
+
+exports.getReply = async (req, res) => {
+  const commentId = req.params.commentId;
+
+  try {
+    const result = await noticeProvider.getReply(commentId);
+    if (result === undefined) {
+      throw Error("최상단 오류를 확인하세요");
+    }
+    return result[0]
+      ? res.status(200).send(result)
+      : res.status(400).json({
+          success: false,
+          message: "해당 댓글에는 대댓글이 존재하지 않습니다.",
+        });
+  } catch (e) {
+    console.log(`Routing Error \n ${e}`);
+    res.status(500).json({ success: false, message: "서버 에러 발생" });
+  }
+};
