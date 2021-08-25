@@ -15,4 +15,5 @@ const Root = () =>(
     </PersistGate>
   </Provider>
 );
+
 ReactDOM.render(<Root/>, document.getElementById('root'));

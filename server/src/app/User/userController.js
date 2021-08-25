@@ -40,14 +40,15 @@ exports.postStudents = async function (req, res) {
     if (name.length > 30)
         return res.send(response(baseResponse.SIGNUP_NAME_LENGTH));
     
-   // 비밀번호 빈 값 체크 
-   if(!password)
-   return res.send(response(baseResponse.SIGNUP_PASSWORD_EMPTY));
+    // 비밀번호 빈 값 체크 
+    if(!password)
+    return res.send(response(baseResponse.SIGNUP_PASSWORD_EMPTY));
    
-  // 비밀번호 길이 체크
-  if(password.length>20||password.length<6)
-  return res.send(response(baseResponse.SIGNUP_PASSWORD_LENGTH));
+    // 비밀번호 길이 체크
+    if(password.length>20||password.length<6)
+    return res.send(response(baseResponse.SIGNUP_PASSWORD_LENGTH));
 
+    
    
     const signUpResponse = await userService.createStudent(
         email,
