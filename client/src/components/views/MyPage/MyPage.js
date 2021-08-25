@@ -29,6 +29,8 @@ const labs = [
 
 function MyPage({data, replaceLab}) {
 
+
+
     const onDashboardHandler = (section) => {
         
         // 실제 동작 시 lab 페이지로 정보 넘겨줘야 함
