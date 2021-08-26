@@ -1,9 +1,18 @@
 import React, {useState, useEffect} from "react";
 import AppRouter from 'AppRouter';
+import axios from 'axios'
+
 function App() {
 
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [needMenubar, setNeedMenubar] = useState(false);
+
+  useEffect(()=>{
+    axios
+    .get(`/app/users/students`)
+    .then(res=>console.log(res))
+    .catch(err=>console.log(err))
+}, [])
 
   useEffect(()=>{
     if(!document.location.href.includes('lab')){

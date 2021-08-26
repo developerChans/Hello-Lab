@@ -1,22 +1,23 @@
 import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import {useDispatch} from 'react-redux';
-import MenuBar from '../../MenuBar/MenuBar';
 import {loginUser} from '../../../_actions/user_action'
 import '../views.css';
 import './LoginPage.css';
 import 'bootstrap/dist/css/bootstrap.css';
+
+import axios from 'axios'
 
 
 function LoginPage(props) {
 
   const dispatch = useDispatch();
 
-  const [LoginId, setLoginId] = useState("");
+  const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
   
-  const onLoginIdHandler = (event) => {
-    setLoginId(event.currentTarget.value);
+  const onEmailHandler = (event) => {
+    setEmail(event.currentTarget.value);
   }
   
   const onPasswordHandler = (event) => {
@@ -27,21 +28,17 @@ function LoginPage(props) {
     event.preventDefault();
 
     let userBody = {
-      id: LoginId,
+      email: Email,
       password: Password
     }
     // server 연결 시 userBody fetch. 현재는 state 확인 용으로 console log
     console.log(userBody);
-    
-    // dispatch(loginUser(userBody))
-    // .then(response=>{
-    //   if(response.payload.loginSuccess){
-    //     props.history.push('/');
-    //   }else{
-    //     alert('login dispatch error');
-    //   }
-    // })
-
+  
+    axios.post('/app/login/students', userBody)
+    .then(response=>{
+      console.log(response)
+    })
+    .catch(err=>console.log(err))
   }
 
   return (
@@ -51,8 +48,8 @@ function LoginPage(props) {
         <div id="form-box">
           <form id="login-form" onSubmit={onSubmitHandler}>
             <div id="id-group" className="form-group">
-              <label for="uid">ID</label>
-              <input type="text" className="form-control" id="uid" name="uid" value={LoginId} onChange={onLoginIdHandler} required/>
+              <label for="uid">이메일</label>
+              <input type="email" className="form-control" id="uid" name="uid" value={Email} onChange={onEmailHandler} required/>
             </div>
             <div className="form-group">
               <label for="pwd">Password</label>
