@@ -79,3 +79,12 @@ exports.deleteLab = async (req, res) => {
     console.log(e);
   }
 };
+
+exports.test = async (req, res) => {
+  const userId = req.userId;
+  res.status(200).json({ userId: userId });
+};
+
+exports.test2 = () => {
+  return 123;
+};
