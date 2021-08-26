@@ -1,3 +1,5 @@
+const { auth } = require("../../middleware/auth");
+
 module.exports = function (app) {
   const controller = require("./labController");
 
@@ -12,4 +14,6 @@ module.exports = function (app) {
 
   // lab 삭제 api
   app.delete("/app/lab/:labId", controller.deleteLab);
+
+  app.get("/app/test", auth, controller.getStudentLab);
 };
