@@ -60,8 +60,10 @@ function MyPage({data, replaceLab}) {
     <div className="wrap">
         <div id="container">
             <div id="profile">
-                <img src="https://static.nid.naver.com/images/web/user/default.png?type=s160"/>
-                <p>User name</p>
+                <img src=""/>
+                <span>Name</span>
+                <span>Student Number</span>
+                <span>Email</span>
             </div>
             <div id="my_lab">
                 <h2><span>내 연구실</span></h2>

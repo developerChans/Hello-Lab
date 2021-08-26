@@ -156,19 +156,24 @@ exports.studentLogin = async function (req, res) {
   const { email, password } = req.body;
 
   const signInResponse = await userService.postStudentSignIn(email, password);
-
-  res.cookie("accessToken", signInResponse.result.accessJwt);
-  res.cookie("refreshToken", signInResponse.result.refreshJwt);
-  return res.send(signInResponse);
+  return signInResponse.isSuccess
+    ? res
+        .cookie("accessToken", signInResponse.result.accessJwt)
+        .cookie("refreshToken", signInResponse.result.refreshJwt)
+        .send(signInResponse)
+    : res.send(signInResponse);
 };
 
 exports.professorLogin = async function (req, res) {
   const { email, password } = req.body;
 
   const signInResponse = await userService.postProfessorSignIn(email, password);
-  res.cookie("accessToken", signInResponse.result.accessJwt);
-  res.cookie("refreshToken", signInResponse.result.refreshJwt);
-  return res.send(signInResponse);
+  return signInResponse.isSuccess
+    ? res
+        .cookie("accessToken", signInResponse.result.accessJwt)
+        .cookie("refreshToken", signInResponse.result.refreshJwt)
+        .send(signInResponse)
+    : res.send(signInResponse);
 };
 
 // const encriptPwd = function (plainPwd) {
