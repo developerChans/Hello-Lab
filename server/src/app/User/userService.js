@@ -133,7 +133,7 @@ exports.postStudentSignIn = async function (email, password) {
       }, // 토큰의 내용(payload)
       secret_config.jwtsecret, // 비밀키
       {
-        expiresIn: "10s",
+        expiresIn: "1h",
         subject: "Student",
       } // 유효 기간 1시간
     );
