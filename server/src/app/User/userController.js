@@ -156,15 +156,18 @@ exports.studentLogin = async function (req, res) {
   const { email, password } = req.body;
 
   const signInResponse = await userService.postStudentSignIn(email, password);
-  return res
-    .cookie("access_token", signInResponse.result.jwt)
-    .send(signInResponse);
+
+  res.cookie("accessToken", signInResponse.result.accessJwt);
+  res.cookie("refreshToken", signInResponse.result.refreshJwt);
+  return res.send(signInResponse);
 };
 
 exports.professorLogin = async function (req, res) {
   const { email, password } = req.body;
 
   const signInResponse = await userService.postProfessorSignIn(email, password);
+  res.cookie("accessToken", signInResponse.result.accessJwt);
+  res.cookie("refreshToken", signInResponse.result.refreshJwt);
   return res.send(signInResponse);
 };
 

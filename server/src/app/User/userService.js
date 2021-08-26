@@ -109,8 +109,6 @@ exports.postStudentSignIn = async function (email, password) {
       return errResponse(baseResponse.SIGNIN_WITHDRAWAL_ACCOUNT);
     }
 
-    console.log(`DB의 userId:`, userInfoRows[0].id); // DB의 userId
-
     //토큰 생성 Service
     const refreshToken = jwt.sign(
       {}, //payload
@@ -139,7 +137,8 @@ exports.postStudentSignIn = async function (email, password) {
     );
     return response(baseResponse.SUCCESS, {
       userId: userInfoRows[0].id,
-      jwt: accessToken,
+      accessJwt: accessToken,
+      refreshJwt: refreshToken,
     });
   } catch (err) {
     await connection.rollback();
@@ -209,10 +208,10 @@ exports.postProfessorSignIn = async function (email, password) {
           subject: "Professor",
         } // 유효 기간 1시간
       );
-
       return response(baseResponse.SUCCESS, {
         userId: userInfoRows[0].id,
-        jwt: accessToken,
+        accessJwt: accessToken,
+        refreshJwt: refreshToken,
       });
     } catch (e) {
       await connection.rollback();
