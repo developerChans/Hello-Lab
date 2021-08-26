@@ -3,61 +3,64 @@ const userProvider = require("./userProvider");
 const userService = require("./userService");
 const regexEmail = require("regex-email");
 const baseResponse = require("../../../config/baseResponseStatus");
-const { response, errResponse } = require("../../../config/response");
+const {response, errResponse} = require("../../../config/response");
 
 exports.test = function (req, res) {
   return res.json({
     success: 성공,
-    message: "test성공",
+    message:
+      "test성공",
   });
 };
 
 exports.postStudents = async function (req, res) {
-  const { email, password, name, studentNum, major, phoneNumber, imageUrl } =
-    req.body;
-  if (!email) return res.send(response(baseResponse.SIGNUP_EMAIL_EMPTY));
+  const {email,password,name,studentNum,major,phoneNumber,imageUrl} =req.body;
+  if (!email)
+        return res.send(response(baseResponse.SIGNUP_EMAIL_EMPTY));
+    
+    // 이메일 중복 확인
+    const emailRows1 = await userProvider.studentEmailCheck(email);
+    const emailRows2 = await userProvider.professorEmailCheck(email);
+    if(emailRows1.length > 0) return res.send(errResponse(baseResponse.SIGNUP_REDUNDANT_EMAIL));
+    if(emailRows2.length > 0) return res.send(errResponse(baseResponse.SIGNUP_REDUNDANT_EMAIL));
 
-  // 이메일 중복 확인
-  const emailRows1 = await userProvider.studentEmailCheck(email);
-  const emailRows2 = await userProvider.professorEmailCheck(email);
-  if (emailRows1.length > 0)
-    return res.send(errResponse(baseResponse.SIGNUP_REDUNDANT_EMAIL));
-  if (emailRows2.length > 0)
-    return res.send(errResponse(baseResponse.SIGNUP_REDUNDANT_EMAIL));
+    // 이메일 길이 체크
+    if (email.length > 30)
+        return res.send(response(baseResponse.SIGNUP_EMAIL_LENGTH));
+    
+    // 형식 체크 (by 정규표현식)
+    if (!regexEmail.test(email))
+        return res.send(response(baseResponse.SIGNUP_EMAIL_ERROR_TYPE));
+    
+    // 이름 빈 값 체크
+    if (!name)
+        return res.send(response(baseResponse.SIGNUP_NAME_EMPTY));
 
-  // 이메일 길이 체크
-  if (email.length > 30)
-    return res.send(response(baseResponse.SIGNUP_EMAIL_LENGTH));
-
-  // 형식 체크 (by 정규표현식)
-  if (!regexEmail.test(email))
-    return res.send(response(baseResponse.SIGNUP_EMAIL_ERROR_TYPE));
-
-  // 이름 빈 값 체크
-  if (!name) return res.send(response(baseResponse.SIGNUP_NAME_EMPTY));
-
-  // 이름 길이 체크
-  if (name.length > 30)
-    return res.send(response(baseResponse.SIGNUP_NAME_LENGTH));
-
-  // 비밀번호 빈 값 체크
-  if (!password) return res.send(response(baseResponse.SIGNUP_PASSWORD_EMPTY));
-
-  // 비밀번호 길이 체크
-  if (password.length > 20 || password.length < 6)
+    // 이름 길이 체크
+    if (name.length > 30)
+        return res.send(response(baseResponse.SIGNUP_NAME_LENGTH));
+    
+    // 비밀번호 빈 값 체크 
+    if(!password)
+    return res.send(response(baseResponse.SIGNUP_PASSWORD_EMPTY));
+   
+    // 비밀번호 길이 체크
+    if(password.length>20||password.length<6)
     return res.send(response(baseResponse.SIGNUP_PASSWORD_LENGTH));
 
-  const signUpResponse = await userService.createStudent(
-    email,
-    name,
-    studentNum,
-    major,
-    phoneNumber, //phoneNum validation 나중에..
-    password,
-    imageUrl
-  );
+    
+   
+    const signUpResponse = await userService.createStudent(
+        email,
+        name,
+        studentNum,
+        major,
+        phoneNumber,//phoneNum validation 나중에..
+        password,
+        imageUrl
+    );
 
-  return res.send(signUpResponse);
+    return res.send(signUpResponse);
 };
 
 exports.getStudents = async function (req, res) {
@@ -66,51 +69,52 @@ exports.getStudents = async function (req, res) {
 };
 
 exports.postProfessors = async function (req, res) {
-  const { email, password, name, professorNum, major, phoneNumber, imageUrl } =
-    req.body;
-  if (!email) return res.send(response(baseResponse.SIGNUP_EMAIL_EMPTY));
+  const {email,password,name,professorNum,major,phoneNumber,imageUrl} =req.body;
+  if (!email)
+        return res.send(response(baseResponse.SIGNUP_EMAIL_EMPTY));
+    
+    // 이메일 중복 확인
+    const emailRows1 = await userProvider.studentEmailCheck(email);
+    const emailRows2 = await userProvider.professorEmailCheck(email);
+    if(emailRows1.length > 0) return res.send(errResponse(baseResponse.SIGNUP_REDUNDANT_EMAIL));
+    if(emailRows2.length > 0) return res.send(errResponse(baseResponse.SIGNUP_REDUNDANT_EMAIL));
 
-  // 이메일 중복 확인
-  const emailRows1 = await userProvider.studentEmailCheck(email);
-  const emailRows2 = await userProvider.professorEmailCheck(email);
-  if (emailRows1.length > 0)
-    return res.send(errResponse(baseResponse.SIGNUP_REDUNDANT_EMAIL));
-  if (emailRows2.length > 0)
-    return res.send(errResponse(baseResponse.SIGNUP_REDUNDANT_EMAIL));
+    // 이메일 길이 체크
+    if (email.length > 30)
+        return res.send(response(baseResponse.SIGNUP_EMAIL_LENGTH));
+    
+    // 형식 체크 (by 정규표현식)
+    if (!regexEmail.test(email))
+        return res.send(response(baseResponse.SIGNUP_EMAIL_ERROR_TYPE));
+    
+    // 이름 빈 값 체크
+    if (!name)
+        return res.send(response(baseResponse.SIGNUP_NAME_EMPTY));
 
-  // 이메일 길이 체크
-  if (email.length > 30)
-    return res.send(response(baseResponse.SIGNUP_EMAIL_LENGTH));
-
-  // 형식 체크 (by 정규표현식)
-  if (!regexEmail.test(email))
-    return res.send(response(baseResponse.SIGNUP_EMAIL_ERROR_TYPE));
-
-  // 이름 빈 값 체크
-  if (!name) return res.send(response(baseResponse.SIGNUP_NAME_EMPTY));
-
-  // 이름 길이 체크
-  if (name.length > 30)
-    return res.send(response(baseResponse.SIGNUP_NAME_LENGTH));
-
-  // 비밀번호 빈 값 체크
-  if (!password) return res.send(response(baseResponse.SIGNUP_PASSWORD_EMPTY));
-
+    // 이름 길이 체크
+    if (name.length > 30)
+        return res.send(response(baseResponse.SIGNUP_NAME_LENGTH));
+    
+   // 비밀번호 빈 값 체크 
+   if(!password)
+   return res.send(response(baseResponse.SIGNUP_PASSWORD_EMPTY));
+   
   // 비밀번호 길이 체크
-  if (password.length > 20 || password.length < 6)
-    return res.send(response(baseResponse.SIGNUP_PASSWORD_LENGTH));
+  if(password.length>20||password.length<6)
+  return res.send(response(baseResponse.SIGNUP_PASSWORD_LENGTH));
 
-  const signUpResponse = await userService.createProfessor(
-    email,
-    name,
-    professorNum,
-    major,
-    phoneNumber,
-    password,
-    imageUrl
-  );
+   
+    const signUpResponse = await userService.createProfessor(
+        email,
+        name,
+        professorNum,
+        major,
+        phoneNumber,
+        password,
+        imageUrl
+    );
 
-  return res.send(signUpResponse);
+    return res.send(signUpResponse);
 };
 
 exports.getProfessors = async function (req, res) {
@@ -153,19 +157,21 @@ exports.register = async function (req, res) {
 };
 
 exports.studentLogin = async function (req, res) {
-  const { email, password } = req.body;
-
+  const{email, password} = req.body;
+  
   const signInResponse = await userService.postStudentSignIn(email, password);
-  console.log(signInResponse);
-  return res
-    .cookie("access_token", signInResponse.result.jwt)
-    .send(signInResponse);
+  
+  res.cookie('accessToken',signInResponse.result.accessJwt);
+  res.cookie('refreshToken',signInResponse.result.refreshJwt);
+  return res.send(signInResponse);
 };
 
 exports.professorLogin = async function (req, res) {
-  const { email, password } = req.body;
-
+  const{email, password} = req.body;
+  
   const signInResponse = await userService.postProfessorSignIn(email, password);
+  res.cookie('accessToken',signInResponse.result.accessJwt);
+  res.cookie('refreshToken',signInResponse.result.refreshJwt);
   return res.send(signInResponse);
 };
 
