@@ -156,6 +156,7 @@ exports.studentLogin = async function (req, res) {
   const { email, password } = req.body;
 
   const signInResponse = await userService.postStudentSignIn(email, password);
+  console.log(signInResponse);
   return res
     .cookie("access_token", signInResponse.result.jwt)
     .send(signInResponse);

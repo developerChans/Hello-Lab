@@ -1,5 +1,5 @@
-export const USER_LOGIN = 'user_login';
-export const USER_REGISTER = 'user_register';
+export const STUDENT_LOGIN = 'STUDENT_LOGIN';
+export const STUDENT_REGISTER = 'STUDENT_REGISTER';
 export const USER_AUTH = 'user_auth';
 
 
