@@ -132,7 +132,7 @@ exports.postStudentSignIn = async function (email, password) {
               subject: "Student",
           } // 유효 기간 1시간
         );
-        return response(baseResponse.SUCCESS, {'userId': userInfoRows[0].id, 'jwt': accessToken});
+        return response(baseResponse.SUCCESS, {'userId': userInfoRows[0].id, 'accessJwt': accessToken, 'refreshJwt':refreshToken});
 
       }catch(err){
         await connection.rollback();
@@ -192,7 +192,7 @@ exports.postProfessorSignIn = async function (email, password) {
           } // 유효 기간 1시간
         );
 
-        return response(baseResponse.SUCCESS, {'userId': userInfoRows[0].id, 'jwt': accessToken});
+        return response(baseResponse.SUCCESS, {'userId': userInfoRows[0].id, 'accessJwt': accessToken, 'refreshJwt':refreshToken});
 
       }catch(e){
         await connection.rollback();
