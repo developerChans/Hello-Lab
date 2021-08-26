@@ -145,6 +145,31 @@ async function selectProfessorPassword(connection, email) {
     return selectUserAccountRow[0];
   }
 
+  async function inputTokenStudent(connection, rtoken, id){
+    const inputTokenStudentQuery =`
+    update Student
+    set refreshToken=?
+    where id = ?;
+    `;
+    const inputTokenStudentRow = await connection.query(
+      inputTokenStudentQuery, [rtoken, id]
+    );
+  
+    return inputTokenStudentRow;
+  }
+
+  async function inputTokenProfessor(connection, rtoken, index){
+    const inputTokenProfessorQuery =`
+    update Professor
+    set refreshToken=?
+    where id=?;
+    `
+    const inputTokenProfessorRow = await connection.query(
+      inputTokenProfessorQuery,[rtoken,index]
+    );
+  
+    return inputTokenProfessorRow;
+  }
 module.exports = {
     insertStudentInfo,
     selectStudent,
@@ -158,4 +183,6 @@ module.exports = {
     checkProfessorPassword,
     selectStudentAccount,
     selectProfessorAccount,
+    inputTokenStudent,
+    inputTokenProfessor
 };
