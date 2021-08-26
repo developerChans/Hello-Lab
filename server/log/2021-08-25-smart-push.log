@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+{"message":"App - createUser Service error\n: Column 'imageURL' cannot be null","level":"error","timestamp":"2021-08-25 21:01:55"}
+{"message":"App - createUser Service error\n: Column 'imageURL' cannot be null","level":"error","timestamp":"2021-08-25 21:02:57"}
+{"message":"App - createUser Service error\n: Column 'imageURL' cannot be null","level":"error","timestamp":"2021-08-25 21:03:05"}
+=======
 {"message":"App - postSignIn Service error\n: Cannot read property 'password' of undefined \n{}","level":"error","timestamp":"2021-08-25 22:55:11"}
 {"message":"App - postSignIn Service error\n: Cannot read property 'password' of undefined \n{}","level":"error","timestamp":"2021-08-25 22:55:29"}
 {"message":"App - postSignIn Service error\n: Cannot read property 'password' of undefined \n{}","level":"error","timestamp":"2021-08-25 22:55:53"}
@@ -12,3 +17,4 @@
 {"message":"App - postSignIn Service error\n: data and hash arguments required \n{}","level":"error","timestamp":"2021-08-25 23:04:57"}
 {"message":"App - postSignIn Service error\n: Cannot read property 'password' of undefined \n{}","level":"error","timestamp":"2021-08-25 23:06:04"}
 {"message":"App - postSignIn Service error\n: Cannot read property 'password' of undefined \n{}","level":"error","timestamp":"2021-08-25 23:06:29"}
+>>>>>>> 27558233d9de84b29086a6a9c7248c800cd425f6

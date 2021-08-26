@@ -1,6 +1,8 @@
 const express = require("express");
 const compression = require("compression");
 const methodOverride = require("method-override");
+const cookieParser = require("cookie-parser");
+
 var cors = require("cors");
 module.exports = function () {
   const app = express();
@@ -12,6 +14,8 @@ module.exports = function () {
   app.use(express.urlencoded({ extended: true }));
 
   app.use(methodOverride());
+
+  app.use(cookieParser());
 
   app.use(cors());
   // app.use(express.static(process.cwd() + '/public'));
