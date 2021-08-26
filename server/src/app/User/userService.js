@@ -8,7 +8,8 @@ const baseResponse = require("../../../config/baseResponseStatus");
 const {response} = require("../../../config/response");
 const {errResponse} = require("../../../config/response");
 const jwt = require("jsonwebtoken");
-const secret_config = require("../../../config/secret")
+const secret_config = require("../../../config/secret");
+const secret = require("../../../config/secret");
 
 exports.createStudent = async function (
   email,
@@ -88,23 +89,13 @@ exports.createProfessor = async function (
   }
 };
 exports.postStudentSignIn = async function (email, password) {
-  try {
-      // 이메일 여부 확인
+  const connection = await pool.getConnection(async conn => await conn);
+  try{
+        // 이메일 여부 확인
       const emailRows = await userProvider.studentEmailCheck(email);
       if (emailRows.length < 1) return errResponse(baseResponse.SIGNIN_EMAIL_EMPTY);
       const selectEmail = emailRows[0].email;
-      // 비밀번호 확인
-      /*
-      const salt = await bcrypt.genSalt(saltRounds);
-      const hashedPassword = await bcrypt.hash(password, salt);
-      const selectUserPasswordParams = [selectEmail, hashedPassword];
-      const passwordRows = await userProvider.studentPasswordCheck(selectUserPasswordParams);
-      console.log(hashedPassword);
-      console.log(1);
-      if (passwordRows[0].password !== hashedPassword) {
-          return errResponse(baseResponse.SIGNIN_PASSWORD_WRONG);
-      }
-      */
+      
       const hashedPassword = await userProvider.selectStudentPassword(selectEmail);
       const check = await bcrypt.compare(password,hashedPassword.password);
       if(!check) {
@@ -119,8 +110,19 @@ exports.postStudentSignIn = async function (email, password) {
 
       console.log(`DB의 userId:`,userInfoRows[0].id) // DB의 userId
 
-      //토큰 생성 Service
-      let token = await jwt.sign(
+        //토큰 생성 Service
+      const refreshToken = jwt.sign(
+        {},//payload
+        secret_config.jwtsecret, //secret key
+        {
+          expiresIn:"14d",
+          subject:"Student"
+        }
+        );
+        await connection.beginTransaction();
+        const inputToken=await userDao.inputTokenStudent(connection, refreshToken, userInfoRows[0].id);
+        await connection.commit();
+        const accessToken = jwt.sign(
           {
               userId: userInfoRows[0].id,
           }, // 토큰의 내용(payload)
@@ -129,14 +131,16 @@ exports.postStudentSignIn = async function (email, password) {
               expiresIn: "1h",
               subject: "Student",
           } // 유효 기간 1시간
-      );
+        );
+        return response(baseResponse.SUCCESS, {'userId': userInfoRows[0].id, 'jwt': accessToken});
 
-      return response(baseResponse.SUCCESS, {'userId': userInfoRows[0].id, 'jwt': token});
-
-  } catch (err) {
-      logger.error(`App - postSignIn Service error\n: ${err.message} \n${JSON.stringify(err)}`);
-      return errResponse(baseResponse.DB_ERROR);
-  }
+      }catch(err){
+        await connection.rollback();
+        logger.error(`App - postSignIn Service error\n: ${err.message} \n${JSON.stringify(err)}`);
+        return errResponse(baseResponse.DB_ERROR);
+      }finally{
+        connection.release();
+      }    
 };
 
 exports.postProfessorSignIn = async function (email, password) {
@@ -153,7 +157,6 @@ exports.postProfessorSignIn = async function (email, password) {
       if(!check) {
         return errResponse(baseResponse.SIGNIN_PASSWORD_WRONG);
       }
-      console.log(check);
       // 계정 상태 확인
       const userInfoRows = await userProvider.professorAccountCheck(email);
 
@@ -162,9 +165,23 @@ exports.postProfessorSignIn = async function (email, password) {
       }
 
       console.log(userInfoRows[0].id) // DB의 userId
+      
+      const connection = await pool.getConnection(async conn => await conn);
+      try{
+        //토큰 생성 Service
+      const refreshToken = jwt.sign(
+        {},//payload
+        secret_config.jwtsecret, //secret key
+        {
+          expiresIn:"14d",
+          subject:"Professor"
+        }
+        );
+        await connection.beginTransaction();
+        const inputToken=await userDao.inputTokenProfessor(connection,refreshToken,userInfoRows[0].id);
+        await connection.commit();
 
-      //토큰 생성 Service
-      let token = await jwt.sign(
+        const accessToken = jwt.sign(
           {
               userId: userInfoRows[0].id,
           }, // 토큰의 내용(payload)
@@ -173,10 +190,16 @@ exports.postProfessorSignIn = async function (email, password) {
               expiresIn: "1h",
               subject: "Professor",
           } // 유효 기간 1시간
-      );
+        );
 
-      return response(baseResponse.SUCCESS, {'userId': userInfoRows[0].id, 'jwt': token});
+        return response(baseResponse.SUCCESS, {'userId': userInfoRows[0].id, 'jwt': accessToken});
 
+      }catch(e){
+        await connection.rollback();
+        
+      }finally{
+        connection.release();
+      }
   } catch (err) {
       logger.error(`App - postSignIn Service error\n: ${err.message} \n${JSON.stringify(err)}`);
       return errResponse(baseResponse.DB_ERROR);
