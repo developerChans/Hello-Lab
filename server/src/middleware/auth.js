@@ -1,10 +1,8 @@
 const secret_config = require("../../config/secret");
 const jwt = require("jsonwebtoken");
 
-const labController = require("../app/Lab/labController");
-
 const auth = (req, res, next) => {
-  const token = req.cookies.access_token;
+  const token = req.cookies.accessToken;
   try {
     const check = jwt.verify(token, secret_config.jwtsecret);
     req.userId = check.userId;
