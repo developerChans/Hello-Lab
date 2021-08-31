@@ -5,13 +5,6 @@ const regexEmail = require("regex-email");
 const baseResponse = require("../../../config/baseResponseStatus");
 const { response, errResponse } = require("../../../config/response");
 
-exports.test = function (req, res) {
-  return res.json({
-    success: 성공,
-    message: "test성공",
-  });
-};
-
 exports.postStudents = async function (req, res) {
   const { email, password, name, studentNum, major, phoneNumber, imageUrl } =
     req.body;

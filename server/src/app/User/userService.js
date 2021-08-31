@@ -42,7 +42,7 @@ exports.createStudent = async function (
     return response(baseResponse.SUCCESS);
   } catch (e) {
     await connection.rollback();
-    logger.error(`App - createUser Service error\n: ${err.message}`);
+    logger.error(`App - createUser Service error\n: ${e.message}`);
     return errResponse(baseResponse.DB_ERROR);
   } finally {
     connection.release();
@@ -80,7 +80,7 @@ exports.createProfessor = async function (
     return response(baseResponse.SUCCESS);
   } catch (e) {
     await connection.rollback();
-    logger.error(`App - createUser Service error\n: ${err.message}`);
+    logger.error(`App - createUser Service error\n: ${e.message}`);
     return errResponse(baseResponse.DB_ERROR);
   } finally {
     connection.release();
