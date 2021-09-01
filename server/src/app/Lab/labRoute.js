@@ -1,3 +1,6 @@
+const { studentAuth } = require("../../middleware/studentAuth");
+const { professorAuth } = require("../../middleware/professorAuth");
+
 module.exports = function (app) {
   const controller = require("./labController");
 
@@ -12,4 +15,16 @@ module.exports = function (app) {
 
   // lab 삭제 api
   app.delete("/app/lab/:labId", controller.deleteLab);
+
+  // lab 가입 요청 api
+  app.post("/app/lab/:labId", studentAuth, controller.joinLab);
+
+  // lab 가입 요청 처리 api
+  app.patch(
+    "/app/labrequest/:requestId",
+    professorAuth,
+    controller.updateJoinLab
+  );
+  // test api
+  app.get("/test", studentAuth, controller.test);
 };

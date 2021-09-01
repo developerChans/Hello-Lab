@@ -13,7 +13,7 @@ async function insertLabInfo(con, createLabEntity) {
 }
 
 async function getOneLab(con, labId) {
-  const getOneLabQuery = `SELECT l.*, p.name from Lab l join professor p on p.professorId = l.professorId where l.id = ${labId}`;
+  const getOneLabQuery = `SELECT l.*, p.name from Lab l join professor p on p.id = l.professorId where l.id = ${labId}`;
   try {
     await con.beginTransaction();
     const row = await con.query(getOneLabQuery);
@@ -52,9 +52,19 @@ async function deleteLab(con, labId) {
     console.log(`query Error \n ${e}`);
   }
 }
+
+const joinLabRequestQuery = `INSERT INTO LabJoinRequest(studentId, labId) VALUES(?, ?)`;
+const updateJoinLabQuery = `UPDATE LabJoinRequest SET status = 1 WHERE Id = ?`;
+const getNotieOfRequest = `SELECT r.studentId, r.labId FROM LabJoinRequest r WHERE id = ?`;
+const insertStudentLabQeury = `INSERT INTO StudentLab(studentId, labId) VALUES(?, ?) `;
+
 module.exports = {
   insertLabInfo,
   getOneLab,
   updateLabInfo,
   deleteLab,
+  joinLabRequestQuery,
+  updateJoinLabQuery,
+  getNotieOfRequest,
+  insertStudentLabQeury,
 };
