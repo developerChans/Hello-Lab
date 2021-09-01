@@ -81,7 +81,7 @@ exports.createProfessor = async function (
     return response(baseResponse.SUCCESS);
   } catch (e) {
     await connection.rollback();
-    console.log(`App - createUser Service error\n: ${e.message}`);
+    logger.error(`App - createUser Service error\n: ${e.message}`);
     return errResponse(baseResponse.DB_ERROR);
   } finally {
     connection.release();
