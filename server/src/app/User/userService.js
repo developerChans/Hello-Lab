@@ -43,7 +43,7 @@ exports.createStudent = async function (
     return response(baseResponse.SUCCESS);
   } catch (e) {
     await connection.rollback();
-    console.log(`App - createUser Service error\n: ${e.message}`);
+    console.log(`App - createStudent Service error\n: ${e.message}`);
     return errResponse(baseResponse.DB_ERROR);
   } finally {
     connection.release();
@@ -81,7 +81,7 @@ exports.createProfessor = async function (
     return response(baseResponse.SUCCESS);
   } catch (e) {
     await connection.rollback();
-    logger.error(`App - createUser Service error\n: ${e.message}`);
+    logger.error(`App - createProfessor Service error\n: ${e.message}`);
     return errResponse(baseResponse.DB_ERROR);
   } finally {
     connection.release();
@@ -237,7 +237,23 @@ exports.withdrawStudent = async function (userId) {
     return response(baseResponse.SUCCESS);
   } catch (e) {
     await connecdtion.rollback();
-    console.log(`App - createUser Service error\n: ${e.message}`);
+    console.log(`App - withdrawStudent Service error\n: ${e.message}`);
+    return errResponse(baseResponse.DB_ERROR);
+  } finally {
+    connection.release();
+  }
+};
+
+exports.updateTokenStudent = async function (token, userId) {
+  const connection = await pool.getConnection(async (conn) => conn);
+  try {
+    await connection.beginTransaction();
+    const Result = await userDao.updateTokenStudent(connection, token, userId);
+    await connection.commit();
+    return response(baseResponse.SUCCESS);
+  } catch (e) {
+    await connection.rollback();
+    console.log(`App - updateToken Service error\n: ${e.message}`);
     return errResponse(baseResponse.DB_ERROR);
   } finally {
     connection.release();

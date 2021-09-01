@@ -19,4 +19,11 @@ module.exports = function (app) {
 
   //교수 로그인
   app.post("/app/login/professors", user.professorLogin);
+
+  //학생 탈퇴
+  app.patch(
+    "/app/users/students/:studentId",
+    jwtMiddleware,
+    user.studentWithdraw
+  );
 };
