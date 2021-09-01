@@ -1,6 +1,6 @@
 // 학생 생성
 async function insertStudentInfo(connection, insertStudentInfoParams) {
-    const insertStudentInfoQuery = `
+  const insertStudentInfoQuery = `
           INSERT INTO Student(email, name, StudentNum, major,phoneNumber,password,imageURL)
           VALUES (?, ?, ?, ?, ?, ?,?);
       `;
@@ -13,8 +13,8 @@ async function insertStudentInfo(connection, insertStudentInfoParams) {
 }
 
 // 학생 조회
-async function selectStudent(connection){
-    const selectStudentQuery = `
+async function selectStudent(connection) {
+  const selectStudentQuery = `
     select name, studentNum, major
     from Student;
     `;
@@ -24,7 +24,7 @@ async function selectStudent(connection){
 
 // 교수 생성
 async function insertProfessorInfo(connection, insertProfessorInfoParams) {
-    const insertProfessorInfoQuery = `
+  const insertProfessorInfoQuery = `
           INSERT INTO Professor(email, name, professorNum, major,phoneNumber,password,imageUrl)
           VALUES (?, ?, ?, ?, ?, ?,?);
       `;
@@ -37,8 +37,8 @@ async function insertProfessorInfo(connection, insertProfessorInfoParams) {
 }
 
 // 교수 조회
-async function selectProfessor(connection){
-    const selectProfessorQuery = `
+async function selectProfessor(connection) {
+  const selectProfessorQuery = `
     select name, professorNum, major
     from Professor;
     `;
@@ -48,47 +48,47 @@ async function selectProfessor(connection){
 
 // 이메일로 학생 조회
 async function selectStudentEmail(connection, email) {
-    const selectStudentEmailQuery = `
+  const selectStudentEmailQuery = `
                   SELECT email,name 
                   FROM Student 
                   WHERE email = ?;
                   `;
-    const [emailRows] = await connection.query(selectStudentEmailQuery, email);
-    return emailRows;
+  const [emailRows] = await connection.query(selectStudentEmailQuery, email);
+  return emailRows;
 }
 // 이메일로 교수 조회
 async function selectProfessorEmail(connection, email) {
-    const selectProfessorEmailQuery = `
+  const selectProfessorEmailQuery = `
                   SELECT email,name 
                   FROM Professor 
                   WHERE email = ?;
                   `;
-    const [emailRows] = await connection.query(selectProfessorEmailQuery, email);
-    return emailRows;
-}  
-  // 학생 패스워드 체크
+  const [emailRows] = await connection.query(selectProfessorEmailQuery, email);
+  return emailRows;
+}
+// 학생 패스워드 체크
 async function checkStudentPassword(connection, selectUserPasswordParams) {
-    const selectUserPasswordQuery = `
+  const selectUserPasswordQuery = `
           SELECT email, name, password
           FROM Student
           WHERE email = ? AND password = ?;`;
-    const selectUserPasswordRow = await connection.query(
-        selectUserPasswordQuery,
-        selectUserPasswordParams
-    );
-  
-    return selectUserPasswordRow;
-  }
-  
-  // 교수 패스워드 체크
+  const selectUserPasswordRow = await connection.query(
+    selectUserPasswordQuery,
+    selectUserPasswordParams
+  );
+
+  return selectUserPasswordRow;
+}
+
+// 교수 패스워드 체크
 async function checkProfessorPassword(connection, selectUserPasswordParams) {
   const selectUserPasswordQuery = `
         SELECT email, name, password
         FROM Professor
         WHERE email = ? AND password = ?;`;
   const selectUserPasswordRow = await connection.query(
-      selectUserPasswordQuery,
-      selectUserPasswordParams
+    selectUserPasswordQuery,
+    selectUserPasswordParams
   );
 
   return selectUserPasswordRow;
@@ -100,7 +100,8 @@ async function selectStudentPassword(connection, email) {
         FROM Student
         WHERE email = ?;`;
   const selectUserPasswordRow = await connection.query(
-      selectUserPasswordQuery, email
+    selectUserPasswordQuery,
+    email
   );
 
   return selectUserPasswordRow[0];
@@ -113,76 +114,102 @@ async function selectProfessorPassword(connection, email) {
         FROM Professor
         WHERE email = ?;`;
   const selectUserPasswordRow = await connection.query(
-      selectUserPasswordQuery, email
+    selectUserPasswordQuery,
+    email
   );
 
   return selectUserPasswordRow[0];
 }
 
-  // 학생 계정 상태 체크 (jwt 생성 위해 id 값도 가져온다.)
-  async function selectStudentAccount(connection, email) {
-    const selectUserAccountQuery = `
+// 학생 계정 상태 체크 (jwt 생성 위해 id 값도 가져온다.)
+async function selectStudentAccount(connection, email) {
+  const selectUserAccountQuery = `
           SELECT status, id
           FROM Student
           WHERE email = ?;`;
-    const selectUserAccountRow = await connection.query(
-        selectUserAccountQuery,
-        email
-    );
-    return selectUserAccountRow[0];
-  }
+  const selectUserAccountRow = await connection.query(
+    selectUserAccountQuery,
+    email
+  );
+  return selectUserAccountRow[0];
+}
 
-  // 교수 계정 상태 체크 (jwt 생성 위해 id 값도 가져온다.)
-  async function selectProfessorAccount(connection, email) {
-    const selectUserAccountQuery = `
+// 교수 계정 상태 체크 (jwt 생성 위해 id 값도 가져온다.)
+async function selectProfessorAccount(connection, email) {
+  const selectUserAccountQuery = `
           SELECT status, id
           FROM Professor
           WHERE email = ?;`;
-    const selectUserAccountRow = await connection.query(
-        selectUserAccountQuery,
-        email
-    );
-    return selectUserAccountRow[0];
-  }
+  const selectUserAccountRow = await connection.query(
+    selectUserAccountQuery,
+    email
+  );
+  return selectUserAccountRow[0];
+}
 
-  async function inputTokenStudent(connection, rtoken, id){
-    const inputTokenStudentQuery =`
+async function inputTokenStudent(connection, rtoken, id) {
+  const inputTokenStudentQuery = `
     update Student
     set refreshToken=?
     where id = ?;
     `;
-    const inputTokenStudentRow = await connection.query(
-      inputTokenStudentQuery, [rtoken, id]
-    );
-  
-    return inputTokenStudentRow;
-  }
+  const inputTokenStudentRow = await connection.query(inputTokenStudentQuery, [
+    rtoken,
+    id,
+  ]);
 
-  async function inputTokenProfessor(connection, rtoken, index){
-    const inputTokenProfessorQuery =`
+  return inputTokenStudentRow;
+}
+
+async function inputTokenProfessor(connection, rtoken, index) {
+  const inputTokenProfessorQuery = `
     update Professor
     set refreshToken=?
     where id=?;
-    `
-    const inputTokenProfessorRow = await connection.query(
-      inputTokenProfessorQuery,[rtoken,index]
-    );
-  
-    return inputTokenProfessorRow;
-  }
+    `;
+  const inputTokenProfessorRow = await connection.query(
+    inputTokenProfessorQuery,
+    [rtoken, index]
+  );
+
+  return inputTokenProfessorRow;
+}
+
+// 해당 id의 학생 회원 탈퇴
+async function withdrawStudentId(connection, userId) {
+  const withdrawUserIdQuery = `
+        update Student set status = 1 
+        where id =?;
+        `;
+  const [userRow] = await connection.query(withdrawUserIdQuery, userId);
+  return userRow;
+}
+// 해당 id의 학생 refresh 토큰 get
+async function getTokenFromStudent(connection, userId) {
+  const withdrawUserIdQuery = `
+        select refreshToken
+        from Student
+        where id = ?;
+        `;
+  const [userRow] = await connection.query(withdrawUserIdQuery, userId);
+  return userRow;
+}
+
 module.exports = {
-    insertStudentInfo,
-    selectStudent,
-    insertProfessorInfo,
-    selectProfessor,
-    selectStudentEmail,
-    selectProfessorEmail,
-    selectStudentPassword,
-    selectProfessorPassword,
-    checkStudentPassword,
-    checkProfessorPassword,
-    selectStudentAccount,
-    selectProfessorAccount,
-    inputTokenStudent,
-    inputTokenProfessor
+  insertStudentInfo,
+  selectStudent,
+  insertProfessorInfo,
+  selectProfessor,
+  selectStudentEmail,
+  selectProfessorEmail,
+  selectStudentPassword,
+  selectProfessorPassword,
+  checkStudentPassword,
+  checkProfessorPassword,
+  selectStudentAccount,
+  selectProfessorAccount,
+  inputTokenStudent,
+  inputTokenProfessor,
+  withdrawStudentId,
+  getTokenFromStudent,
 };

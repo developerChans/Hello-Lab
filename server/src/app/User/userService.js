@@ -10,6 +10,7 @@ const { errResponse } = require("../../../config/response");
 const jwt = require("jsonwebtoken");
 const secret_config = require("../../../config/secret");
 const secret = require("../../../config/secret");
+const { connect } = require("react-redux");
 
 exports.createStudent = async function (
   email,
@@ -42,7 +43,7 @@ exports.createStudent = async function (
     return response(baseResponse.SUCCESS);
   } catch (e) {
     await connection.rollback();
-    logger.error(`App - createUser Service error\n: ${err.message}`);
+    console.log(`App - createUser Service error\n: ${e.message}`);
     return errResponse(baseResponse.DB_ERROR);
   } finally {
     connection.release();
@@ -80,7 +81,7 @@ exports.createProfessor = async function (
     return response(baseResponse.SUCCESS);
   } catch (e) {
     await connection.rollback();
-    logger.error(`App - createUser Service error\n: ${err.message}`);
+    console.log(`App - createUser Service error\n: ${e.message}`);
     return errResponse(baseResponse.DB_ERROR);
   } finally {
     connection.release();
@@ -142,7 +143,7 @@ exports.postStudentSignIn = async function (email, password) {
     });
   } catch (err) {
     await connection.rollback();
-    logger.error(
+    console.log(
       `App - postSignIn Service error\n: ${err.message} \n${JSON.stringify(
         err
       )}`
@@ -219,11 +220,26 @@ exports.postProfessorSignIn = async function (email, password) {
       connection.release();
     }
   } catch (err) {
-    logger.error(
+    console.log(
       `App - postSignIn Service error\n: ${err.message} \n${JSON.stringify(
         err
       )}`
     );
     return errResponse(baseResponse.DB_ERROR);
+  }
+};
+exports.withdrawStudent = async function (userId) {
+  const connection = await pool.getConnection(async (conn) => conn);
+  try {
+    await connection.beginTransaction();
+    const userResult = await userDao.withdrawStudentId(connection, userId);
+    await connection.commit();
+    return response(baseResponse.SUCCESS);
+  } catch (e) {
+    await connecdtion.rollback();
+    console.log(`App - createUser Service error\n: ${e.message}`);
+    return errResponse(baseResponse.DB_ERROR);
+  } finally {
+    connection.release();
   }
 };
