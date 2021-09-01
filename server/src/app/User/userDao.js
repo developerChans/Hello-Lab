@@ -195,6 +195,18 @@ async function getTokenFromStudent(connection, userId) {
   return userRow;
 }
 
+async function updateTokenStudent(connection, token, id) {
+  const updateTokenStudentQuery = `
+        update Student set refreshToken = ?
+        where id = ?;
+        `;
+  const [userRow] = await connection.query(updateTokenStudentQuery, [
+    token,
+    id,
+  ]);
+  return userRow;
+}
+
 module.exports = {
   insertStudentInfo,
   selectStudent,
@@ -212,4 +224,5 @@ module.exports = {
   inputTokenProfessor,
   withdrawStudentId,
   getTokenFromStudent,
+  updateTokenStudent,
 };
