@@ -13,6 +13,12 @@
   "license": "ISC",
   "dependencies": {
     "@react-icons/all-files": "^4.1.0",
+    "@toast-ui/editor-plugin-chart": "^3.0.1",
+    "@toast-ui/editor-plugin-code-syntax-highlight": "^3.0.0",
+    "@toast-ui/editor-plugin-color-syntax": "^3.0.1",
+    "@toast-ui/editor-plugin-table-merged-cell": "^3.0.0",
+    "@toast-ui/editor-plugin-uml": "^3.0.1",
+    "@toast-ui/react-editor": "^3.0.3",
     "axios": "^0.21.1",
     "bootstrap": "^5.1.0",
     "concurrently": "^6.2.0",

@@ -10,7 +10,6 @@ const LabMainPage = () =>{
 
     return (
     <div>
-        <h1>main</h1>
         <Route path="/lab/:id/main/info"><LabInfo/></Route>
         <Route path="/lab/:id/main/notice"><LabNotice/></Route>
         <Route path="/lab/:id/main/calendar"><LabCal/></Route>

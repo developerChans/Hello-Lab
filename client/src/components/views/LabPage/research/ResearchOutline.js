@@ -16,7 +16,7 @@ import './style/markdown.css'
 
 export default function() {
     const text = useRef();
-    const [info, setInfo] = useState();
+    const [outline, setOutline] = useState();
     const [editing, setEditing] = useState(false);
 
     const onSubmit = () =>{
@@ -30,16 +30,16 @@ export default function() {
     }
 
     useEffect(()=>{
-        // Info 데이터 불러오기
-        setInfo("어쩌고")
-        console.log(info);
+        // outline 데이터 불러오기
+        setOutline("어쩌고")
+        console.log(outline);
     }, [])
     
     return(
         <div>
             {editing? <>
             <Editor
-                initialValue="불러온 info 데이터"
+                initialValue="불러온 Outline 데이터"
                 usageStatistics={false}
                 plugins={[chart, codeSyntaxHighlight, colorSyntax, tableMergedCell, uml]}
                 ref={text}
@@ -47,7 +47,7 @@ export default function() {
             <button className="md-save" onClick={onSubmit}>저장</button></>:
             <><button className="md-edit" onClick={toggleEditing}>수정</button>
             <Viewer
-              initialValue="{info}"
+              initialValue="{outline}"
       	    />
             </>}
         </div>
