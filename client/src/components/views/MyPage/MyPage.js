@@ -38,6 +38,7 @@ function MyPage({data, replaceLab}) {
         axios
         .get(`/app/lab/${section.id}`)
         .then((response) => {
+            console.log(response)
             const {name, professorId} = response.data[0]
             const newLab = {
                 name: name, 
@@ -51,7 +52,7 @@ function MyPage({data, replaceLab}) {
                 id, category, tab
               }} = data;
               
-            window.location.replace(`/lab/${id}`);
+            // window.location.replace(`/lab/${id}`);
         });
     }
 

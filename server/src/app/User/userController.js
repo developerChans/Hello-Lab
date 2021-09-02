@@ -5,7 +5,6 @@ const regexEmail = require("regex-email");
 const baseResponse = require("../../../config/baseResponseStatus");
 const { response, errResponse } = require("../../../config/response");
 const secret_config = require("../../../config/secret");
-const jwt = require("jsonwebtoken");
 
 exports.postStudents = async function (req, res) {
   const { email, password, name, studentNum, major, phoneNumber, imageUrl } =
@@ -153,8 +152,8 @@ exports.studentLogin = async function (req, res) {
   const signInResponse = await userService.postStudentSignIn(email, password);
   return signInResponse.isSuccess
     ? res
-        .cookie("accessStudent", signInResponse.result.accessJwt)
-        .cookie("refreshStudent", signInResponse.result.refreshJwt)
+        .cookie("access", signInResponse.result.accessJwt)
+        .cookie("refresh", signInResponse.result.refreshJwt)
         .send(signInResponse)
     : res.send(signInResponse);
 };
@@ -165,66 +164,66 @@ exports.professorLogin = async function (req, res) {
   const signInResponse = await userService.postProfessorSignIn(email, password);
   return signInResponse.isSuccess
     ? res
-        .cookie("accessProfessor", signInResponse.result.accessJwt)
-        .cookie("refreshProfessor", signInResponse.result.refreshJwt)
+        .cookie("access", signInResponse.result.accessJwt)
+        .cookie("refresh", signInResponse.result.refreshJwt)
         .send(signInResponse)
     : res.send(signInResponse);
 };
 
 exports.studentWithdraw = async function (req, res) {
-  const userIdFromJWT = req.verifiedToken.userId;
-  const userId = req.params.studentId;
-  if (req.cookies.accessStudent === undefined)
+  if (req.cookies.access === undefined)
     res.send(errResponse(baseResponse.TOKEN_ACCESS_EMPTY));
+
+  const userIdFromJWT = req.verifiedToken.userId;
+  const userId = req.params.userId;
+  const accessToken = verifyToken(req.cookies.access);
+  const refreshToken = await userProvider.getTokenFromStudent(userId);
+
+  if (!accessToken) {
+    if (!refreshToken) {
+      //둘 다 없을 때
+      res.send(errResponse(baseResponse.TOKEN_EXPIRED_ALL));
+    } else {
+      //접근, 갱신 토큰 모두 만료
+      const newAccessToken = jwt.sign(
+        {
+          id: userId,
+        },
+        secret_config.jwtsecret,
+        {
+          expiresIn: "1h",
+          subject: "Student",
+        }
+      );
+      res.cookie("access", newAccessToken);
+      req.cookies.access = newAccessToken;
+    }
+  } else {
+    if (refreshToken === undefined) {
+      //access token 존재, refresh token 만료
+      const newRefreshToken = jwt.sign(
+        {
+          id: userId,
+        },
+        secret_config.jwtsecret,
+        {
+          expiresIn: "14d",
+          subject: "Student",
+        }
+      );
+      //여기에 리프레쉬 토큰 업데이트하는 거 넣어야
+
+      res.cookie("refresh", newRefreshToken);
+      req.cookies.refresh = newRefreshToken;
+    }
+  }
+
   if (!userId) return res.send(errResponse(baseResponse.USER_USERID_EMPTY));
   if (userIdFromJWT != userId) {
     res.send(errResponse(baseResponse.USER_ID_NOT_MATCH));
   } else {
-    const accessToken = req.cookies.accessStudent;
-    const refreshToken = await userProvider.getTokenFromStudent(userId);
-
-    if (!accessToken) {
-      if (!refreshToken) {
-        //둘 다 없을 때
-        res.send(errResponse(baseResponse.TOKEN_EXPIRED_ALL));
-      } else {
-        //접근, 갱신 토큰 모두 만료
-        const newAccessToken = jwt.sign(
-          {
-            id: userId,
-          },
-          secret_config.jwtsecret,
-          {
-            expiresIn: "1h",
-            subject: "Student",
-          }
-        );
-        res.cookie("accessStudent", newAccessToken);
-        req.cookies.accessStudent = newAccessToken;
-      }
-    } else {
-      if (refreshToken === undefined) {
-        //access token 존재, refresh token 만료
-        const newRefreshToken = jwt.sign(
-          {
-            id: userId,
-          },
-          secret_config.jwtsecret,
-          {
-            expiresIn: "14d",
-            subject: "Student",
-          }
-        );
-        const updateRefrshToken = await userService.updateTokenStudent(
-          newRefreshToken,
-          userId
-        );
-        res.cookie("refreshStudent", newRefreshToken);
-        req.cookies.refreshStudent = newRefreshToken;
-      }
-      const withdrawStudent = await userService.withdrawStudent(userId);
-      return res.send(response(baseResponse.SUCCESS, withdrawStudent));
-    }
+    const withdrawStudent = await userService.withdrawStudent(userId);
+    return res.send(response(baseResponse.SUCCESS, withdrawStudent));
   }
 };
 // const encriptPwd = function (plainPwd) {
@@ -241,3 +240,4 @@ exports.studentWithdraw = async function (req, res) {
 //     });
 //   });
 // };
+exports.user = new Array();

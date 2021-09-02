@@ -165,12 +165,12 @@ module.exports = {
   //token 권한 오류
   TOKEN_ACCESS_EMPTY: {
     isSuccess: false,
-    code: 4002,
+    code: 401,
     message: "API 사용 권한이 없습니다.(접근 토큰이 존재하지 않습니다.)",
   },
   TOKEN_EXPIRED_ALL: {
     isSuccess: false,
-    code: 4003,
+    code: 500,
     message: "모든 토큰이 만료되었습니다.",
   },
   //TOKEN_EXPIRED_ACCESS : { "isSuccess": false, "code": 501, "message": "접근 토큰이 만료되었습니다."},
