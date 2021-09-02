@@ -13,7 +13,7 @@ async function insertLabInfo(con, createLabEntity) {
 }
 
 async function getOneLab(con, labId) {
-  const getOneLabQuery = `SELECT l.*, p.name from Lab l join professor p on p.id = l.professorId where l.id = ${labId}`;
+  const getOneLabQuery = `SELECT l.*, p.name as "pname" from Lab l join professor p on p.id = l.professorId where l.id = ${labId}`;
   try {
     await con.beginTransaction();
     const row = await con.query(getOneLabQuery);
