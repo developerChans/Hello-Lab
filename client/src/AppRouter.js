@@ -8,6 +8,7 @@ import LabPage from "components/views/LabPage/LabPage";
 import OpenlabPage from "components/views/OpenlabPage/OpenlabPage";
 
 import MenuBar from "components/MenuBar/MenuBar";
+import ExamplePage from "components/views/ExamplePage/ExamplePage";
 
 const AppRouter = ({isLoggedIn, needMenubar}) =>{
 
@@ -22,6 +23,7 @@ const AppRouter = ({isLoggedIn, needMenubar}) =>{
           <Route exact path="/register">{isLoggedIn ? <LandingPage/>:<RegisterPage/>}</Route>
           <Route exact path="/mypage">{isLoggedIn ? <MyPage/>:<LoginPage/>}</Route>
           <Route path="/lab" component={LabPage} />
+          <Route exact path="/example"><ExamplePage/></Route>
         </Switch>
     </Router>
     );
