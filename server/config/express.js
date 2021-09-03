@@ -28,6 +28,7 @@ module.exports = function () {
   require("../src/app/Search/searchRoute")(app);
   require("../src/app/LabNotice/noticeRoute")(app);
   require("../src/app/Mypage/mypageRoute")(app);
+  require("../src/app/Qna/qnaRoute")(app);
 
   return app;
 };

@@ -10,7 +10,6 @@ const { errResponse } = require("../../../config/response");
 const jwt = require("jsonwebtoken");
 const secret_config = require("../../../config/secret");
 const secret = require("../../../config/secret");
-const { connect } = require("react-redux");
 
 exports.createStudent = async function (
   email,

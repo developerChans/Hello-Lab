@@ -2,7 +2,7 @@ const secret_config = require("../../config/secret");
 const jwt = require("jsonwebtoken");
 
 const studentAuth = (req, res, next) => {
-  const token = req.cookies.accessToken;
+  const token = req.cookies.access;
   try {
     const check = jwt.verify(token, secret_config.jwtsecret);
     if (check.sub !== "Student") {
