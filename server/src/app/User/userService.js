@@ -12,32 +12,34 @@ const secret_config = require("../../../config/secret");
 const secret = require("../../../config/secret");
 const { connect } = require("react-redux");
 
-exports.createStudent = async function (
+exports.createUser = async function (
   email,
   name,
-  studentNum,
+  userNum,
   major,
   phoneNum,
   password,
-  imageUrl
+  imageUrl,
+  job
 ) {
   const salt = await bcrypt.genSalt(saltRounds);
   const hashedPwd = await bcrypt.hash(password, salt);
-  const insertStudentInfoParams = [
+  const insertUserInfoParams = [
     email,
     name,
-    studentNum,
+    userNum,
     major,
     phoneNum,
     hashedPwd,
     imageUrl,
+    job,
   ];
   const connection = await pool.getConnection(async (conn) => conn);
   try {
     await connection.beginTransaction();
-    const createStudentResult = await userDao.insertStudentInfo(
+    const createUserResult = await userDao.insertUserInfo(
       connection,
-      insertStudentInfoParams
+      insertUserInfoParams
     );
     await connection.commit();
     return response(baseResponse.SUCCESS);
@@ -50,77 +52,36 @@ exports.createStudent = async function (
   }
 };
 
-exports.createProfessor = async function (
-  email,
-  name,
-  professorNum,
-  major,
-  phoneNum,
-  password,
-  imageUrl
-) {
-  const salt = await bcrypt.genSalt(saltRounds);
-  const hashedPwd = await bcrypt.hash(password, salt);
-  const insertProfessorInfoParams = [
-    email,
-    name,
-    professorNum,
-    major,
-    phoneNum,
-    hashedPwd,
-    imageUrl,
-  ];
-  const connection = await pool.getConnection(async (conn) => conn);
-  try {
-    await connection.beginTransaction();
-    const createProfessorResult = await userDao.insertProfessorInfo(
-      connection,
-      insertProfessorInfoParams
-    );
-    await connection.commit();
-    return response(baseResponse.SUCCESS);
-  } catch (e) {
-    await connection.rollback();
-    logger.error(`App - createUser Service error\n: ${e.message}`);
-    return errResponse(baseResponse.DB_ERROR);
-  } finally {
-    connection.release();
-  }
-};
-exports.postStudentSignIn = async function (email, password) {
+exports.postUserSignIn = async function (email, password) {
   const connection = await pool.getConnection(async (conn) => await conn);
   try {
     // 이메일 여부 확인
-    const emailRows = await userProvider.studentEmailCheck(email);
-    if (emailRows.length < 1)
+    const emailRows = await userProvider.userEmailCheck(email);
+    if (emailRows.email.length < 1)
       return errResponse(baseResponse.SIGNIN_EMAIL_EMPTY);
-    const selectEmail = emailRows[0].email;
-
-    const hashedPassword = await userProvider.selectStudentPassword(
-      selectEmail
-    );
+    const selectEmail = emailRows.email;
+    const hashedPassword = await userProvider.selectUserPassword(selectEmail);
     const check = await bcrypt.compare(password, hashedPassword.password);
     if (!check) {
       return errResponse(baseResponse.SIGNIN_PASSWORD_WRONG);
     }
     // 계정 상태 확인
-    const userInfoRows = await userProvider.studentAccountCheck(email);
+    const userInfoRows = await userProvider.userAccountCheck(email);
 
     if (userInfoRows[0].status === 1) {
-      return errResponse(baseResponse.SIGNIN_WITHDRAWAL_ACCOUNT);
+      return errResponse(conbaseResponse.SIGNIN_WITHDRAWAL_ACCOUNT);
     }
-
     //토큰 생성 Service
     const refreshToken = jwt.sign(
       {}, //payload
       secret_config.jwtsecret, //secret key
       {
         expiresIn: "14d",
-        subject: "Student",
+        subject: "User",
       }
     );
     await connection.beginTransaction();
-    const inputToken = await userDao.inputTokenStudent(
+    const inputToken = await userDao.inputTokenUser(
       connection,
       refreshToken,
       userInfoRows[0].id
@@ -133,7 +94,7 @@ exports.postStudentSignIn = async function (email, password) {
       secret_config.jwtsecret, // 비밀키
       {
         expiresIn: "1h",
-        subject: "Student",
+        subject: "User",
       } // 유효 기간 1시간
     );
     return response(baseResponse.SUCCESS, {
@@ -144,7 +105,7 @@ exports.postStudentSignIn = async function (email, password) {
   } catch (err) {
     await connection.rollback();
     console.log(
-      `App - postSignIn Service error\n: ${err.message} \n${JSON.stringify(
+      `App - postUserSignIn Service error\n: ${err.message} \n${JSON.stringify(
         err
       )}`
     );
@@ -154,90 +115,16 @@ exports.postStudentSignIn = async function (email, password) {
   }
 };
 
-exports.postProfessorSignIn = async function (email, password) {
-  try {
-    // 이메일 여부 확인
-    const emailRows = await userProvider.professorEmailCheck(email);
-    if (emailRows.length < 1)
-      return errResponse(baseResponse.SIGNIN_EMAIL_EMPTY);
-
-    const selectEmail = emailRows[0].email;
-    console.log(selectEmail);
-    // 비밀번호 확인
-    const hashedPassword = await userProvider.selectProfessorPassword(
-      selectEmail
-    );
-    const check = await bcrypt.compare(password, hashedPassword.password);
-    if (!check) {
-      return errResponse(baseResponse.SIGNIN_PASSWORD_WRONG);
-    }
-    // 계정 상태 확인
-    const userInfoRows = await userProvider.professorAccountCheck(email);
-
-    if (userInfoRows[0].status === 1) {
-      return errResponse(baseResponse.SIGNIN_WITHDRAWAL_ACCOUNT);
-    }
-
-    console.log(userInfoRows[0].id); // DB의 userId
-
-    const connection = await pool.getConnection(async (conn) => await conn);
-    try {
-      //토큰 생성 Service
-      const refreshToken = jwt.sign(
-        {}, //payload
-        secret_config.jwtsecret, //secret key
-        {
-          expiresIn: "14d",
-          subject: "Professor",
-        }
-      );
-      await connection.beginTransaction();
-      const inputToken = await userDao.inputTokenProfessor(
-        connection,
-        refreshToken,
-        userInfoRows[0].id
-      );
-      await connection.commit();
-
-      const accessToken = jwt.sign(
-        {
-          userId: userInfoRows[0].id,
-        }, // 토큰의 내용(payload)
-        secret_config.jwtsecret, // 비밀키
-        {
-          expiresIn: "1h",
-          subject: "Professor",
-        } // 유효 기간 1시간
-      );
-      return response(baseResponse.SUCCESS, {
-        userId: userInfoRows[0].id,
-        accessJwt: accessToken,
-        refreshJwt: refreshToken,
-      });
-    } catch (e) {
-      await connection.rollback();
-    } finally {
-      connection.release();
-    }
-  } catch (err) {
-    console.log(
-      `App - postSignIn Service error\n: ${err.message} \n${JSON.stringify(
-        err
-      )}`
-    );
-    return errResponse(baseResponse.DB_ERROR);
-  }
-};
-exports.withdrawStudent = async function (userId) {
+exports.withdrawUser = async function (userId) {
   const connection = await pool.getConnection(async (conn) => conn);
   try {
     await connection.beginTransaction();
-    const userResult = await userDao.withdrawStudentId(connection, userId);
+    const userResult = await userDao.withdrawUserId(connection, userId);
     await connection.commit();
     return response(baseResponse.SUCCESS);
   } catch (e) {
     await connecdtion.rollback();
-    console.log(`App - createUser Service error\n: ${e.message}`);
+    console.log(`App - withdrawUser Service error\n: ${e.message}`);
     return errResponse(baseResponse.DB_ERROR);
   } finally {
     connection.release();
