@@ -39,20 +39,20 @@ function MyPage({data, replaceLab}) {
         .get(`/app/lab/${section.id}`)
         .then((response) => {
             console.log(response)
-            const {name, professorId} = response.data[0]
+            const {name, pname, professorId} = response.data[0]
             const newLab = {
                 name: name, 
-                prof:professorId, 
+                pname:pname, 
                 id:professorId,
                 category: "main",
                 tab: "info"
             };
             replaceLab(newLab);
             const {lab: {
-                id, category, tab
+                id
               }} = data;
               
-            // window.location.replace(`/lab/${id}`);
+            window.location.href=`/lab/${id}`;
         });
     }
 
