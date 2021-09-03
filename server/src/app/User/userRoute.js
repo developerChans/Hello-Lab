@@ -3,20 +3,14 @@ module.exports = function (app) {
   const LoginAuth = require("../../../config/logintAuth");
   const jwtMiddleware = require("../../../config/jwtMiddleware");
 
-  //학생 회원가입
-  app.post("/app/users/students", user.postStudents);
-  //학생 정보 get
-  app.get("/app/users/students", user.getStudents);
+  //회원가입
+  app.post("/app/users", user.postUsers);
 
-  //교수 회원가입
-  app.post("/app/users/professors", user.postProfessors);
+  //사용자 정보 get
+  app.get("/app/users", user.getUsers);
 
-  //교수 정보 get
-  app.get("/app/users/professors", user.getProfessors);
+  //로그인
+  app.post("/app/login", user.login);
 
-  //학생 로그인
-  app.post("/app/login/students", user.studentLogin);
-
-  //교수 로그인
-  app.post("/app/login/professors", user.professorLogin);
+  //탈퇴
 };
