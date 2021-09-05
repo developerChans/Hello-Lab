@@ -25,6 +25,4 @@ module.exports = function (app) {
     professorAuth,
     controller.updateJoinLab
   );
-  // test api
-  app.get("/test", studentAuth, controller.test);
 };

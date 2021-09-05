@@ -93,7 +93,7 @@ exports.postUserSignIn = async function (email, password) {
       secret_config.jwtsecret, // 비밀키
       {
         expiresIn: "1h",
-        subject: "User",
+        subject: userInfoRows[0].job ? "professor" : "student",
       } // 유효 기간 1시간
     );
     return response(baseResponse.SUCCESS, {
