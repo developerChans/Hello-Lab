@@ -1,14 +1,16 @@
 const labProvider = require("./labProvider");
 const labService = require("./labService");
+const userProvider = require("../User/userProvider");
 
 exports.createLab = async (req, res) => {
-  const { name, professorId, associateProfessorId } = req.body;
-  if (!name || !professorId) {
+  const { name, associateProfessorId } = req.body;
+  if (!name) {
     return res.status(400).json({
       success: false,
-      message: "연구실이름(name)과 교수 id(professorId)는 필수 값 입니다.",
+      message: "연구실이름(name)은 필수 값 입니다.",
     });
   }
+  const professorId = req.userId;
   const createLabEntity = [name, professorId, associateProfessorId];
 
   try {
