@@ -5,7 +5,7 @@ const studentAuth = (req, res, next) => {
   const token = req.cookies.access;
   try {
     const check = jwt.verify(token, secret_config.jwtsecret);
-    if (check.sub !== "Student") {
+    if (check.sub !== "student") {
       throw Error("No Student LogIn");
     }
     req.userId = check.userId;
