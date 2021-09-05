@@ -1,13 +1,11 @@
 const secret_config = require("../../config/secret");
 const jwt = require("jsonwebtoken");
 
-const professorAuth = (req, res, next) => {
+const userAuth = (req, res, next) => {
   const token = req.cookies.access;
   try {
     const check = jwt.verify(token, secret_config.jwtsecret);
-    if (check.sub !== "Professor") {
-      throw Error("No Professor LogIn");
-    }
+    console.log(check);
     req.userId = check.userId;
   } catch (e) {
     res.status(401).json({ success: false, message: "유효하지 않은 토큰" });
@@ -17,4 +15,4 @@ const professorAuth = (req, res, next) => {
   }
 };
 
-module.exports = { professorAuth };
+module.exports = { userAuth };

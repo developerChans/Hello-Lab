@@ -10,7 +10,6 @@ const { errResponse } = require("../../../config/response");
 const jwt = require("jsonwebtoken");
 const secret_config = require("../../../config/secret");
 const secret = require("../../../config/secret");
-const { connect } = require("react-redux");
 
 exports.createUser = async function (
   email,
@@ -94,7 +93,7 @@ exports.postUserSignIn = async function (email, password) {
       secret_config.jwtsecret, // 비밀키
       {
         expiresIn: "1h",
-        subject: "User",
+        subject: userInfoRows[0].job ? "professor" : "student",
       } // 유효 기간 1시간
     );
     return response(baseResponse.SUCCESS, {
