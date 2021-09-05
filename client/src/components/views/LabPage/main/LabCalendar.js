@@ -21,7 +21,6 @@ const schedules = [
     calendarId: "1",
     category: "time",
     isVisible: true,
-    isPending: false,
     title: "Study",
     id: "1",
     body: "Test",
@@ -32,7 +31,6 @@ const schedules = [
     calendarId: "2",
     category: "time",
     isVisible: true,
-    isPending: true,
     title: "yes",
     id: "2",
     body: "something",
@@ -45,10 +43,10 @@ const calendars = [
   {
     id: "1",
     name: "My Calendar",
-    color: "#ffffff",
-    bgColor: "#9e5fff",
-    dragBgColor: "#9e5fff",
-    borderColor: "#9e5fff"
+    color: "#83c36a",
+    bgColor: "#83c36a",
+    dragBgColor: "#83c36a",
+    borderColor: "#83c36a"
   },
   {
     id: "2",
@@ -64,9 +62,7 @@ function LabCalendar() {
     const calendarRef = useRef();
 
     const calendarInstance = calendarRef.current;
-
     console.log(calendarInstance);
-
 
     const onClickSchedule = useCallback(e => {
         console.log(e);
@@ -75,20 +71,20 @@ function LabCalendar() {
       const onBeforeCreateSchedule = useCallback(scheduleData => {
         console.log(scheduleData);
     
-        const schedule = {
-          id: String(Math.random()),
-          title: scheduleData.title,
-          isAllDay: scheduleData.isAllDay,
-          start: scheduleData.start,
-          end: scheduleData.end,
-          category: scheduleData.isAllDay ? "allday" : "time",
-          dueDateClass: "",
-          location: scheduleData.location,
-          raw: {
-            class: scheduleData.raw["class"]
-          },
-          state: scheduleData.state
-        };
+      const schedule = {
+        id: String(Math.random()),
+        title: scheduleData.title,
+        isAllDay: scheduleData.isAllDay,
+        start: scheduleData.start,
+        end: scheduleData.end,
+        category: scheduleData.isAllDay ? "allday" : "time",
+        dueDateClass: "",
+        location: scheduleData.location,
+        raw: {
+          class: scheduleData.raw["class"]
+        },
+        state: scheduleData.state
+      };
     
         calendarRef.current.calendarInst.createSchedules([schedule]);
       }, []);
@@ -156,6 +152,7 @@ function LabCalendar() {
 
     return (
         <div>
+          <button>New Calendar</button>
             <TUICalendar
             ref={calendarRef}
             usageStatistics={false}

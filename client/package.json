@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^29.2.0",
+    "@ckeditor/ckeditor5-react": "^3.0.2",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
@@ -15,6 +17,7 @@
     "@toast-ui/react-editor": "^3.0.3",
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
+    "ckeditor5": "^29.2.0",
     "http-proxy-middleware": "^2.0.1",
     "react": "^17.0.2",
     "react-beforeunload": "^2.5.1",
