@@ -15,9 +15,7 @@ exports.createQna = async (req, res) => {
   const createQnaInfo = [content, userId, labId];
   try {
     const result = await service.createQna(createQnaInfo);
-    if (result === undefined) {
-      throw Error("최상단 오류 확인");
-    }
+    errorCheck(reuslt);
     return result
       ? res.status(201).json({ success: true })
       : res.status(400).json({ success: false });
@@ -32,9 +30,7 @@ exports.getQna = async (req, res) => {
 
   try {
     const result = await provider.getQna(labId);
-    if (result === undefined) {
-      throw Error("최상단 에러 확인");
-    }
+    errorCheck(result);
     return res.status(200).send(result);
   } catch (e) {
     console.log(`Routing Error \n ${e}`);
@@ -54,9 +50,7 @@ exports.updateQna = async (req, res) => {
   const updateQnaInfo = [content, qnaId, labId];
   try {
     const result = await service.updateQna(updateQnaInfo);
-    if (result === undefined) {
-      throw Error("최상단 오류 확인");
-    }
+    errorCheck(result);
     return result
       ? res.status(201).json({ success: true })
       : res.status(400).json({
@@ -78,9 +72,7 @@ exports.deleteQna = async (req, res) => {
 
   try {
     const result = await service.deleteQna(deleteInfo);
-    if (result === undefined) {
-      throw new Error("최상단 에러를 확인하세요");
-    }
+    errorCheck(result);
     return result
       ? res.status(200).json({ success: true })
       : res.status(400).json({
@@ -110,9 +102,7 @@ exports.createQnaReply = async (req, res) => {
   const createQnaReplyInfo = [content, userId, qnaId, labId];
   try {
     const result = await service.createQnaReply(createQnaReplyInfo);
-    if (result === undefined) {
-      throw Error("최상단 에러 확인");
-    }
+    errorCheck(result);
     return result
       ? res.status(201).json({ success: true, message: "대댓글 생성 성공" })
       : res.status(400).json({ success: false });
