@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './RegisterPage.css'
 
 
-const RegisterForm = ({auth})=>{
+const RegisterForm = ()=>{
 
     
 
@@ -48,11 +48,11 @@ const RegisterForm = ({auth})=>{
     let userBody = {
       email: Email,
       name: Name,
-      studentNum: StudentNum,
+      userNum: StudentNum,
       major: Major,
       phoneNumber:PhoneNumber,
       password: Password,
-      imageUrl: "",
+      job:0
     }
     // server 연결 시 userBody fetch. 현재는 state 확인 용으로 console log
 
@@ -60,31 +60,18 @@ const RegisterForm = ({auth})=>{
       return alert("비밀번호를 확인해주세요.");
     }
     
-    if(auth==="student"){
-        axios.post('/app/users/students', {...userBody})
-        .then(response=>{ 
-        console.log(response)
-        if(!response.data.isSuccess) {
-            alert(response.data.message) 
-        }else{
-            window.location.replace("/")
-        }})
-        .catch(error=>{
-        console.log(error)})
-    }else if(auth==="professor"){
-        axios.post('/app/users/professors', {...userBody})
-        .then(response=>{ 
-        console.log(response)
-        if(!response.data.isSuccess) {
-            alert(response.data.message) 
-        }else{
-            window.location.replace("/")
-        }})
-        .catch(error=>{
-        console.log(error)
-        })
+    axios.post('/app/users', {...userBody})
+    .then(response=>{ 
+    console.log(response)
+    if(!response.data.isSuccess) {
+        alert(response.data.message) 
+    }else{
+        window.location.replace("/")
+    }})
+    .catch(error=>{
+    console.log(error)})
     }
-}
+
   
     return (
         <div id="register-form-box">
@@ -121,6 +108,8 @@ const RegisterForm = ({auth})=>{
             <label for="pnum">핸드폰 번호</label>
             <input className="form-control" name="pnum" maxlength='11' value={PhoneNumber} onChange={onPhoneNumberHandler} required/>
             <span>'-' 없이 입력</span>
+          </div>
+          <div>
           </div>
           <button id="join-btn" type="submit" className="btn btn-primary">Join</button>
         </form>

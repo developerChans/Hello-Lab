@@ -65,7 +65,7 @@ exports.updateJoinLab = async (requestId, allow) => {
     await con.beginTransaction();
     if (allow) {
       const info = await con.query(getQeury, requestId);
-      const insertInfo = [info[0][0].studentId, info[0][0].labId];
+      const insertInfo = [info[0][0].userId, info[0][0].labId];
       await con.query(insertQuery, insertInfo);
     }
     const row = await con.query(updateQuery, requestId);
