@@ -109,6 +109,12 @@ async function withdrawUserId(connection, userId) {
   return userRow;
 }
 
+const getUserQuery = `
+SELECT *
+FROM User
+WHERE id = ? AND status = 0
+`;
+
 module.exports = {
   insertUserInfo,
   selectUser,
@@ -119,4 +125,5 @@ module.exports = {
   inputTokenUser,
   withdrawUserId,
   getTokenFromUser,
+  getUserQuery,
 };

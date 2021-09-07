@@ -7,7 +7,7 @@ const userAuth = (req, res, next) => {
     const check = jwt.verify(token, secret_config.jwtsecret);
     req.userId = check.userId;
   } catch (e) {
-    res.status(401).json({ success: false, message: "유효하지 않은 토큰" });
+    res.status(401).json({ message: "유효하지 않은 토큰", isAuth: false });
     next(e);
   } finally {
     next();

@@ -96,3 +96,19 @@ exports.getTokenFromUser = async function (userId) {
     connection.release();
   }
 };
+
+exports.getUser = async (userId) => {
+  const con = await pool.getConnection(async (conn) => conn);
+  const query = userDao.getUserQuery;
+  try {
+    await con.beginTransaction();
+    const row = await con.query(query, userId);
+    await con.commit();
+    return row[0];
+  } catch (e) {
+    await con.rollback();
+    console.log(`DB error \n ${e}`);
+  } finally {
+    con.release();
+  }
+};
