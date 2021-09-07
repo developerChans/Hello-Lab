@@ -2,6 +2,7 @@ module.exports = function (app) {
   const user = require("./userController");
   const LoginAuth = require("../../../config/logintAuth");
   const jwtMiddleware = require("../../../config/jwtMiddleware");
+  const { userAuth } = require("../../middleware/userAuth");
 
   //회원가입
   app.post("/app/users", user.postUsers);
@@ -13,4 +14,7 @@ module.exports = function (app) {
   app.post("/app/login", user.login);
 
   //탈퇴
+
+  //유저 인증
+  app.get("/app/users/auth", userAuth, user.userAuth);
 };

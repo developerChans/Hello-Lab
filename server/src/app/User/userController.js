@@ -239,4 +239,33 @@ exports.userWithdraw = async function (req, res) {
 //     });
 //   });
 // };
+
+// 최승용 코드
+exports.userAuth = async (req, res) => {
+  const userId = req.userId;
+  try {
+    const result = await userProvider.getUser(userId);
+    if (result === undefined) {
+      throw Error("최상위 에러 확인");
+    }
+    console.log(result);
+    return result
+      ? res.status(200).json({
+          isAuth: true,
+          id: result[0].id,
+          userNum: result[0].userNum,
+          name: result[0].name,
+          email: result[0].email,
+          major: result[0].major,
+          phoneNum: result[0].phoneNum,
+          imageUrl: result[0].imageUrl,
+          job: result[0].job,
+        })
+      : res.status(400).json({ success: false });
+  } catch (e) {
+    console.log(`Routing error \n${e}`);
+    res.status(500).send("서버 오류 발생");
+  }
+};
+
 exports.user = new Array();

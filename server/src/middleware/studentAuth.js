@@ -10,7 +10,7 @@ const studentAuth = (req, res, next) => {
     }
     req.userId = check.userId;
   } catch (e) {
-    res.status(401).json({ success: false, message: "유효하지 않은 토큰" });
+    res.status(401).json({ isAuth: false, message: "유효하지 않은 토큰" });
     next(e);
   } finally {
     next();
