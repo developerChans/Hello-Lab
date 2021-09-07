@@ -53,9 +53,9 @@ async function deleteLab(con, labId) {
   }
 }
 
-const joinLabRequestQuery = `INSERT INTO LabJoinRequest(studentId, labId) VALUES(?, ?)`;
+const joinLabRequestQuery = `INSERT INTO LabJoinRequest(userId, labId) VALUES(?, ?)`;
 const updateJoinLabQuery = `UPDATE LabJoinRequest SET status = 1 WHERE Id = ?`;
-const getNotieOfRequest = `SELECT r.studentId, r.labId FROM LabJoinRequest r WHERE id = ?`;
+const getNotieOfRequest = `SELECT r.userId, r.labId FROM LabJoinRequest r WHERE id = ?`;
 const insertStudentLabQeury = `INSERT INTO StudentLab(studentId, labId) VALUES(?, ?) `;
 
 module.exports = {

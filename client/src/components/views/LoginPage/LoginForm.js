@@ -28,7 +28,7 @@ const LoginForm = ({auth}) =>{
     console.log(userBody);
   
     if(auth==="student"){
-        axios.post('/app/login/students', userBody)
+        axios.post('/app/login', userBody)
         .then(response=>{
         if(response.data.isSuccess){
             window.location.replace('/');
