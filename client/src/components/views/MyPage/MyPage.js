@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useHistory, withRouter } from 'react-router-dom';
 import './MyPage.css';
@@ -6,26 +6,6 @@ import '../views.css';
 import { actionCreators } from "_actions/lab_action";
 import {connect} from 'react-redux';
 
-const labs = [
-    {
-        id: 1,
-        name: "운영체제",
-        prof: "최종무",
-        imgPath: '/img/solid/mint.png'
-       },
-    {
-        id: 2,
-        name: "보안",
-        prof: "조성제",
-        imgPath: '/img/solid/pink.png'
-       },
-    {
-        id: 3,
-        name: "모바일",
-        prof: "어쩌고",
-        imgPath: '/img/solid/yellow.png'
-    }
-];
 
 function MyPage({data, replaceLab}) {
 
@@ -69,12 +49,12 @@ function MyPage({data, replaceLab}) {
             <div id="my_lab">
                 <h2><span>내 연구실</span></h2>
                 <ul id="lab_list">
-                    {labs.map((section) => (
+                    {lab.map((section) => (
                         <li key={section.id}>
                             <div type="button" onClick={() => onDashboardHandler(section)} className="dashboard_card">
                                 <img className="lab_img" src={section.imgPath}/>
                                 <p className="lab_name">{section.name} 연구실</p>
-                                <p className="prof">{section.prof} 교수</p>
+                                <p className="prof">{section.pname} 교수</p>
                             </div>
                         </li>  
                     ))}
