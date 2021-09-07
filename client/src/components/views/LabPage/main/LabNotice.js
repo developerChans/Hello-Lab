@@ -13,7 +13,7 @@ import {useState, useEffect} from 'react';
 import axios from 'axios';
 import LabNoticeList from "./LabNoticeList";
 
-const LabNotice = ({data}) =>{
+const LabNotice = ({data, isProfessor}) =>{
     const [title, setTitle] = useState();
     const [content, setContent] = useState();
     const [list, setList] = useState();
@@ -56,7 +56,7 @@ const LabNotice = ({data}) =>{
 
     return (
         <div>
-            {toggleWriting? 
+            {isProfessor && toggleWriting? 
             <>
             <div className="form-wrapper">
                 <input className="title-input" 

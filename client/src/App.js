@@ -4,15 +4,20 @@ import axios from 'axios'
 
 function App() {
 
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [needMenubar, setNeedMenubar] = useState(false);
 
   useEffect(()=>{
-    axios
-    .get(`/app/users/students`)
-    .then(res=>console.log(res))
-    .catch(err=>console.log(err))
-}, [])
+    axios.get('/app/users/auth')
+    .then(response=>{
+      const {data:{isAuth}} = response
+      if(isAuth) {
+        setIsLoggedIn(true)
+      } else{
+        setIsLoggedIn(false)
+      }
+    })
+  }, [])
 
   useEffect(()=>{
     if(!document.location.href.includes('lab')){
