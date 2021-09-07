@@ -6,19 +6,18 @@ import './RegisterPage.css'
 
 const RegisterForm = ()=>{
 
-    
 
   const [Name, setName] = useState("");
-  const [StudentNum, setStudentNum] = useState("");
+  const [UserNum, setUserNum] = useState("");
   const [Password, setPassword] = useState("");
   const [ConfirmPassword, setConfirmPassword] = useState("");
   const [Email, setEmail] = useState("");
   const [Major, setMajor] = useState("");
-  const [PhoneNumber, setPhoneNumber] = useState("");
+  const [PhoneNum, setPhoneNum] = useState("");
 
 
-  const onStudentNumHandler = (event) => {
-    setStudentNum(event.currentTarget.value);
+  const onUserNumHandler = (event) => {
+    setUserNum(event.currentTarget.value);
   }
   
   const onPasswordHandler = (event) => {
@@ -38,8 +37,8 @@ const RegisterForm = ()=>{
   const onEmailHandler = (event) => {
     setEmail(event.currentTarget.value);
   }
-  const onPhoneNumberHandler = (event) => {
-    setPhoneNumber(event.currentTarget.value);
+  const onPhoneNumHandler = (event) => {
+    setPhoneNum(event.currentTarget.value);
   }
   
   const onSubmitHandler = (event) =>{
@@ -48,9 +47,9 @@ const RegisterForm = ()=>{
     let userBody = {
       email: Email,
       name: Name,
-      userNum: StudentNum,
+      userNum: UserNum,
       major: Major,
-      phoneNumber:PhoneNumber,
+      phoneNum:PhoneNum,
       password: Password,
       job:0
     }
@@ -102,11 +101,11 @@ const RegisterForm = ()=>{
           <div className="form-group" id="id-form">    
             <label for="uid">학번</label>
             <input className="form-control" name="uid" type="text" 
-            value={StudentNum} onChange={onStudentNumHandler} required/>
+            value={UserNum} onChange={onUserNumHandler} required/>
           </div>
           <div className="form-group">    
             <label for="pnum">핸드폰 번호</label>
-            <input className="form-control" name="pnum" maxlength='11' value={PhoneNumber} onChange={onPhoneNumberHandler} required/>
+            <input className="form-control" name="pnum" maxlength='11' value={PhoneNum} onChange={onPhoneNumHandler} required/>
             <span>'-' 없이 입력</span>
           </div>
           <div>

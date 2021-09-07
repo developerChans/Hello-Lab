@@ -1,22 +1,57 @@
-const MyPageLab = () =>{
+import axios from 'axios'
+import { actionCreators } from "_actions/lab_action";
+import {connect} from 'react-redux';
 
-    const [lab, setLab] = useState();
+const MyPageLab = ({data, replaceLab, lab}) =>{
+
+    const onDashboardHandler = (section) => {
+        
+        // 실제 동작 시 lab 페이지로 정보 넘겨줘야 함
+        // lab 페이지는 정보 받아서 해당 lab 페이지 출력해야 함
+        axios
+        .get(`/app/lab/${section.id}`)
+        .then((response) => {
+            console.log(response)
+            const {name, pname, professorId} = response.data[0]
+            const newLab = {
+                name: name, 
+                pname:pname, 
+                id:professorId,
+                category: "main",
+                tab: "info"
+            };
+            replaceLab(newLab);
+            const {lab: {
+                id
+              }} = data;
+              
+            window.location.href=`/lab/${id}`;
+        });
+    }
 
 
-    useEffect(()=>{
-        axios.get('/app/mypage')
-        .then(response=>{
-            const {id, name, pname} = response.data[0];
-            setLab({
-                id, name, pname
-            })
-        })
-    }, [])
-    
     return (
-    <div>
-
-    </div>);
+    <>
+    {lab && lab.map((section) => (
+    <li key={section.id}>
+        <div type="button" onClick={() => onDashboardHandler(section)} className="dashboard_card">
+            <img className="lab_img" src={section.imgPath}/>
+            <p className="lab_name">{section.name} 연구실</p>
+            <p className="prof">{section.pname} 교수</p>
+        </div>
+    </li>  
+    ))}
+    </>);
 }
 
-export default MyPageLab;
+const mapStateToProps = (state)=>{
+    return{data: state}
+}
+const mapDispatchToProps = (dispatch) =>{
+    return {
+      replaceLab: (lab) => dispatch(actionCreators.replaceLab(lab))
+    }
+  }
+  
+  export default connect(mapStateToProps, mapDispatchToProps) (MyPageLab);
+  

@@ -10,11 +10,24 @@ import { connect } from "react-redux";
 
 function LabPage({data}) {
   const history = useHistory();
+  const [isProfessor, setIsProfessor] = useState();
 
   const {lab: {
     id, category, tab
   }} = data;
   
+  useEffect(()=>{
+    axios.get('/app/users/auth')
+    .then(response=>{
+      const {data:{job}} = response
+      if(job){
+        setIsProfessor(true)
+      }else{
+        setIsProfessor(false)
+      }
+    })
+  }, [])
+
   useEffect(()=>{
     history.push({
       pathname: `/lab/${id}/${category}/${tab}`
@@ -24,8 +37,8 @@ function LabPage({data}) {
   return (
     <div>
       <LabTemplate />
-      <Route path="/lab/:id/main" component={LabMainPage}/>
-      <Route path="/lab/:id/research" component={LabResearchPage}/>
+      <Route path="/lab/:id/main"><LabMainPage isProfessor={isProfessor}/></Route>
+      <Route path="/lab/:id/research"><LabResearchPage isProfessor={isProfessor}/></Route>
     </div>
   );
 }
