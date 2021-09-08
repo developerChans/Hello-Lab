@@ -5,39 +5,45 @@ const regexEmail = require("regex-email");
 const baseResponse = require("../../../config/baseResponseStatus");
 const { response, errResponse } = require("../../../config/response");
 const secret_config = require("../../../config/secret");
+const jwt = require("jsonwebtoken");
 
 exports.postUsers = async function (req, res) {
   const { email, password, name, userNum, major, phoneNumber, imageUrl, job } =
     req.body;
-  if (!email) return res.send(response(baseResponse.SIGNUP_EMAIL_EMPTY));
+  if (!email)
+    return res.status(400).send(response(baseResponse.SIGNUP_EMAIL_EMPTY));
 
   // 이메일 중복 확인
   const emailRows = await userProvider.userEmailCheck(email);
 
   if (emailRows !== undefined)
-    return res.send(errResponse(baseResponse.SIGNUP_REDUNDANT_EMAIL));
+    return res
+      .status(204)
+      .send(errResponse(baseResponse.SIGNUP_REDUNDANT_EMAIL));
 
   // 이메일 길이 체크
   if (email.length > 30)
-    return res.send(response(baseResponse.SIGNUP_EMAIL_LENGTH));
+    return res.status(400).send(response(baseResponse.SIGNUP_EMAIL_LENGTH));
 
   // 형식 체크 (by 정규표현식)
   if (!regexEmail.test(email))
-    return res.send(response(baseResponse.SIGNUP_EMAIL_ERROR_TYPE));
+    return res.status(400).send(response(baseResponse.SIGNUP_EMAIL_ERROR_TYPE));
 
   // 이름 빈 값 체크
-  if (!name) return res.send(response(baseResponse.SIGNUP_NAME_EMPTY));
+  if (!name)
+    return res.status(400).send(response(baseResponse.SIGNUP_NAME_EMPTY));
 
   // 이름 길이 체크
   if (name.length > 30)
-    return res.send(response(baseResponse.SIGNUP_NAME_LENGTH));
+    return res.status(400).send(response(baseResponse.SIGNUP_NAME_LENGTH));
 
   // 비밀번호 빈 값 체크
-  if (!password) return res.send(response(baseResponse.SIGNUP_PASSWORD_EMPTY));
+  if (!password)
+    return res.status(400).send(response(baseResponse.SIGNUP_PASSWORD_EMPTY));
 
   // 비밀번호 길이 체크
   if (password.length > 20 || password.length < 6)
-    return res.send(response(baseResponse.SIGNUP_PASSWORD_LENGTH));
+    return res.status(400).send(response(baseResponse.SIGNUP_PASSWORD_LENGTH));
 
   const signUpResponse = await userService.createUser(
     email,
@@ -50,12 +56,12 @@ exports.postUsers = async function (req, res) {
     job
   );
 
-  return res.send(signUpResponse);
+  return res.status(201).send(signUpResponse);
 };
 
 exports.getUsers = async function (req, res) {
   const userList = await userProvider.retrieveUserList();
-  return res.send(userList);
+  return res.status(200).send(userList);
 };
 /*
 exports.postProfessors = async function (req, res) {
@@ -151,10 +157,11 @@ exports.login = async function (req, res) {
   const signInResponse = await userService.postUserSignIn(email, password);
   return signInResponse.isSuccess
     ? res
+        .status(200)
         .cookie("access", signInResponse.result.accessJwt)
         .cookie("refresh", signInResponse.result.refreshJwt)
         .send(signInResponse)
-    : res.send(signInResponse);
+    : res.status(203).send(signInResponse);
 };
 /*
 exports.professorLogin = async function (req, res) {
@@ -169,19 +176,17 @@ exports.professorLogin = async function (req, res) {
     : res.send(signInResponse);
 };
 */
-exports.userWithdraw = async function (req, res) {
+exports.Withdraw = async function (req, res) {
   if (req.cookies.access === undefined)
-    res.send(errResponse(baseResponse.TOKEN_ACCESS_EMPTY));
+    res.status(401).send(errResponse(baseResponse.TOKEN_ACCESS_EMPTY));
+  const userId = req.userId;
+  const accessToken = req.cookies.access;
 
-  const userIdFromJWT = req.verifiedToken.userId;
-  const userId = req.params.userId;
-  const accessToken = verifyToken(req.cookies.access);
   const refreshToken = await userProvider.getTokenFromUser(userId);
-
   if (!accessToken) {
     if (!refreshToken) {
       //둘 다 없을 때
-      res.send(errResponse(baseResponse.TOKEN_EXPIRED_ALL));
+      res.status(401).send(errResponse(baseResponse.TOKEN_EXPIRED_ALL));
     } else {
       //접근, 갱신 토큰 모두 만료
       const newAccessToken = jwt.sign(
@@ -217,12 +222,11 @@ exports.userWithdraw = async function (req, res) {
     }
   }
 
-  if (!userId) return res.send(errResponse(baseResponse.USER_USERID_EMPTY));
-  if (userIdFromJWT != userId) {
-    res.send(errResponse(baseResponse.USER_ID_NOT_MATCH));
-  } else {
+  if (!userId)
+    return res.status(400).send(errResponse(baseResponse.USER_USERID_EMPTY));
+  else {
     const withdrawUser = await userService.withdrawUser(userId);
-    return res.send(response(baseResponse.SUCCESS, withdrawUser));
+    return res.status(200).send(response(withdrawUser));
   }
 };
 // const encriptPwd = function (plainPwd) {
