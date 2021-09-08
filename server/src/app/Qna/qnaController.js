@@ -15,7 +15,7 @@ exports.createQna = async (req, res) => {
   const createQnaInfo = [content, userId, labId];
   try {
     const result = await service.createQna(createQnaInfo);
-    errorCheck(reuslt);
+    errorCheck(result);
     return result
       ? res.status(201).json({ success: true })
       : res.status(400).json({ success: false });

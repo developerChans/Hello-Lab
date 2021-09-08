@@ -3,9 +3,10 @@ INSERT INTO LabQna(content, userId, labId)
 VALUES(?, ?, ?)`;
 
 const selectQnaQuery = `
-SELECT q.*, u.name 
+SELECT q.id, q.createdAt, q.updatedAt, q.content, u.name 
 FROM LabQna q JOIN User u on u.id = q.userId 
-WHERE q.labId = ? AND q.status = 0 AND q.parentId is NULL`;
+WHERE q.labId = ? AND q.status = 0 AND q.parentId is NULL
+ORDER BY q.createdAt desc`;
 
 const updateQnaQuery = `
 UPDATE LabQna 
