@@ -3,6 +3,7 @@ import imgPath from '../views/default.png';
 
 import './MenuBar.css';
 import 'bootstrap/dist/css/bootstrap.css';
+import axios from 'axios';
 
 const profile = {img: imgPath};
 
@@ -23,6 +24,10 @@ const ProfileBtn = () =>{
     }
   }
 
+  const onSignoutClick = ()=>{
+    axios.post('/app/logout')
+  }
+
     return (
         <div id="dropdown-profile">
         <button id="profile_button" className="border border-white rounded-circle"
@@ -32,7 +37,7 @@ const ProfileBtn = () =>{
         <div ref={dropdown} className="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <a className="dropdown-item" href="/mypage">Dashboard</a>
           <a className="dropdown-item" href="/home">Another action</a>
-          <a className="dropdown-item" href="/">Sign out</a>
+          <a className="dropdown-item" href="/" onClick={onSignoutClick}>Sign out</a>
         </div>
       </div>
     );

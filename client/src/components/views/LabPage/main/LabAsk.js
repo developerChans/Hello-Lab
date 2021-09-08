@@ -1,30 +1,7 @@
 import { useState, useEffect } from "react";
+import axios from 'axios'
 
-const asks = [
-  {
-    id: 1,
-    writer: "김채은",
-    content: "안녕",
-    image: "https://images.squarespace-cdn.com/content/v1/5cc3d1b051f4d40415789cc2/1597297842330-JTESQEZNPMY9Y5EBSA0U/david-tennant-doctor-who.jpg?format=1000w",
-    date: "2021-08-21 21:35",
-  },  
-  {
-    id: 2,
-    writer: "김지민",
-    content: "질문",
-    image: "",
-    date: "2021-08-21 21:50",
-
-  },
-  {
-    id: 3,
-    writer: "박찬진",
-    content: "hello world",
-    image: "",
-    date: "2021-08-22 21:54",
-
-  }
-]
+import { connect } from "react-redux";
 
 const comments = [
   {
@@ -53,16 +30,25 @@ const comments = [
   }
 ]
 
-const LabAsk = () =>{
+const LabAsk = ({data}) =>{
   
   const [ask, setAsk] = useState();
   const [attachment, setAttachment] = useState();
   const [isWriter, setIsWriter] = useState(true);
+  const [asks, setAsks] = useState();
+  const [answers, setAnswers] = useState();
+
+
+  useEffect(()=>{
+    axios.get(`/app/qna/${data.lab.id}`)
+    .then(response => {
+      setAsks(response.data)
+    })
+  }, [])
 
   const onTextChange = (event) =>{
     const {target: {value}} = event;
     setAsk(value);
-    console.log(ask);
   }
 
   const onFileChange = (event)=>{
@@ -84,6 +70,15 @@ const LabAsk = () =>{
   const onSubmit = (event)=>{
     event.preventDefault();
     // 작성자, 내용, 작성일시, imageUrl 서버로 보내기
+    axios.post(`/app/qna/${data.lab.id}`, {content: ask})
+    window.location.reload();
+  }
+
+  const onAnswerClick = (askId)=>{
+    axios.get(`/app/qna/${data.lab.id}/${askId}`)
+    .then(response=>{
+      setAnswers(response.data)
+    })
   }
 
   return (
@@ -101,7 +96,7 @@ const LabAsk = () =>{
       </>}
 
       <div>
-          {asks.map((ask)=>(
+          {asks && asks.map((ask)=>(
             <div key={ask.id}>
               <div>{ask.writer}</div>
               <div>{ask.content}</div>
@@ -110,17 +105,18 @@ const LabAsk = () =>{
               {isWriter &&<>
               <button>수정</button>
               <button>삭제</button>
+              <button onClick={()=>onAnswerClick(ask.id)}>답글보기</button>
               </>}
               <div>
               <>
-              {comments.map((comment)=>(
-                <div class={`comment-${ask.id}`} key={comment.id}>
-                {ask.id===comment.parentId && 
+              {answers && answers.map((answer)=>(
+                <div class={`answer-${ask.id}`} key={answer.id}>
+                {ask.id===answer.parentId && 
                   <>
-                  <div>{comment.writer}</div>
-                  <div>{comment.content}</div>
-                  {comment.image && <img src={comment.image}/>}
-                  <div>{comment.date}</div>
+                  <div>{answer.writer}</div>
+                  <div>{answer.content}</div>
+                  {answer.image && <img src={answer.image}/>}
+                  <div>{answer.date}</div>
                   {isWriter &&<>
                   <button>수정</button>
                   <button>삭제</button>
@@ -140,4 +136,9 @@ const LabAsk = () =>{
     </div>
   );
 }
-export default LabAsk;
+
+const mapStateToProps = (state)=>{
+  return {data: state};
+}
+
+export default connect(mapStateToProps)(LabAsk);

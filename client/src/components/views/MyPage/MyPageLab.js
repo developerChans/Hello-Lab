@@ -12,19 +12,15 @@ const MyPageLab = ({data, replaceLab, lab}) =>{
         .get(`/app/lab/${section.id}`)
         .then((response) => {
             console.log(response)
-            const {name, pname, professorId} = response.data[0]
+            const {name, pname, id} = response.data[0]
             const newLab = {
                 name: name, 
                 pname:pname, 
-                id:professorId,
+                id:id,
                 category: "main",
                 tab: "info"
             };
             replaceLab(newLab);
-            const {lab: {
-                id
-              }} = data;
-              
             window.location.href=`/lab/${id}`;
         });
     }
