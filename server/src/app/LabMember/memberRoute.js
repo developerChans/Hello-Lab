@@ -1,6 +1,6 @@
 module.exports = function (app) {
   const member = require("./memberController");
 
-   //해당 연구실 공지사항 가져오는 api
+   //연구실 멤버목록 조회 API
   app.get("/app/lab/:labId/member", member.getAllMember);
 };

@@ -10,7 +10,7 @@ async function getAllMember(con, labId) {
   const getAllMemberQuery = `
     select u.id, u.major, u.name, u.imageURL
     from Lab l
-           join StudentLab sl on sl.labId = l.idn
+           join StudentLab sl on sl.labId = l.id
            join User u on sl.studentId = u.id
     where l.id = ${labId}
     and u.status = 0

@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4888be44-ae04-4dc1-8e37-cbf546b0fea2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/config/express.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/config/express.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/app/LabMember/memberDao.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/app/LabMember/memberDao.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/app/LabMember/memberRoute.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/app/LabMember/memberRoute.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,13 +25,29 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../mangoPlate_test_Server_Mango" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/server/src/app/LabIntroduction" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\김재원\Desktop\지민\DK-Lab\server\src\app\LabIntroduction" />
       <recent name="C:\Users\김재원\Desktop\지민\DK-Lab\server\src\app\LabMember" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -45,7 +62,7 @@
       <workItem from="1631019261583" duration="148000" />
       <workItem from="1631019452961" duration="27000" />
       <workItem from="1631019496036" duration="5584000" />
-      <workItem from="1631075349953" duration="4051000" />
+      <workItem from="1631075349953" duration="13251000" />
     </task>
     <servers />
   </component>
