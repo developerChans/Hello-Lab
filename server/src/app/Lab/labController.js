@@ -47,8 +47,8 @@ exports.updateLab = async (req, res) => {
       .status(400)
       .send("요청하신 id에 해당하는 Lab이 존재하지 않습니다.");
   }
-  const { name, professorId, associateProfessorId } = req.body;
-  const updateInfo = [name, professorId, associateProfessorId, labId];
+  const { name, associateProfessorId } = req.body;
+  const updateInfo = [name, associateProfessorId, labId];
   try {
     const result = await labService.updateLab(updateInfo);
     result
