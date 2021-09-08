@@ -11,15 +11,29 @@ import MyPageLab from './MyPageLab'
 function MyPage({data, replaceLab}) {
     
     const [lab, setLab] = useState();
+    const [name, setName] = useState();
+    const [userNum, setUserNum] = useState();
+    const [major, setMajor] = useState();
+    const [job, setJob] = useState();
 
+    useEffect(()=>{
+        axios.get('/app/users/auth')
+        .then(response=>{
+            const {data:{name, userNum, major, job}} = response
+            setName(name)
+            setUserNum(userNum)
+            setMajor(major)
+            setJob(job)
+        })
+    }, [])
 
     useEffect(()=>{
         axios.get('/app/mypage')
         .then(response=>{
             const {id, name, pname} = response.data[0];
-            setLab({
+            setLab([{
                 id, name, pname
-            })
+            }])
         })
     }, [])
 
@@ -29,9 +43,9 @@ function MyPage({data, replaceLab}) {
         <div id="container">
             <div id="profile">
                 <img src=""/>
-                <span>Name</span>
-                <span>Student Number</span>
-                <span>Email</span>
+                <span>Name:{name}</span>
+                <span>user number: {userNum}</span>
+                <span>major: {major}</span>
             </div>
             <div id="my_lab">
                 <h2><span>내 연구실</span></h2>

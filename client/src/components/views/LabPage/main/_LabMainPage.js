@@ -6,7 +6,7 @@ import LabCal from 'components/views/LabPage/main/LabCalendar';
 import LabAsk from 'components/views/LabPage/main/LabAsk';
 import LabMember from 'components/views/LabPage/main/LabMember';
 
-const LabMainPage = () =>{
+const LabMainPage = ({isProfessor}) =>{
 
     return (
     <div>

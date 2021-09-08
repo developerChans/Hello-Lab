@@ -49,7 +49,7 @@ const RegisterForm = ()=>{
       name: Name,
       userNum: UserNum,
       major: Major,
-      phoneNum:PhoneNum,
+      phoneNumber:PhoneNum,
       password: Password,
       job:0
     }
