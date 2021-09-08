@@ -240,6 +240,28 @@ exports.userWithdraw = async function (req, res) {
 //   });
 // };
 
+//최승용 코드
+exports.logout = async (req, res) => {
+  const userId = req.userId;
+
+  try {
+    const result = await userService.logout(userId);
+    if (result === undefined) {
+      throw Error("최상단 에러 확인");
+    }
+    return result
+      ? res
+          .status(200)
+          .cookie("access", null)
+          .cookie("refresh", null)
+          .json({ success: true, message: "로그아웃 성공" })
+      : res.status(400).json({ success: false, message: "로그아웃 실패" });
+  } catch (e) {
+    console.log(`Routing Error \n ${e}`);
+    return res.status(500).send("서버 에러 발생 ");
+  }
+};
+
 // 최승용 코드
 exports.userAuth = async (req, res) => {
   const userId = req.userId;
@@ -248,7 +270,6 @@ exports.userAuth = async (req, res) => {
     if (result === undefined) {
       throw Error("최상위 에러 확인");
     }
-    console.log(result);
     return result
       ? res.status(200).json({
           isAuth: true,
@@ -264,7 +285,7 @@ exports.userAuth = async (req, res) => {
       : res.status(400).json({ success: false });
   } catch (e) {
     console.log(`Routing error \n${e}`);
-    res.status(500).send("서버 오류 발생");
+    return res.status(500).send("서버 오류 발생");
   }
 };
 

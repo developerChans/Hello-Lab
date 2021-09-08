@@ -15,6 +15,9 @@ module.exports = function (app) {
 
   //탈퇴
 
+  //로그아웃
+  app.post("/app/logout", userAuth, user.logout);
+
   //유저 인증
   app.get("/app/users/auth", userAuth, user.userAuth);
 };
