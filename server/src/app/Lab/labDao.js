@@ -12,18 +12,7 @@ async function insertLabInfo(con, createLabEntity) {
   }
 }
 
-async function getOneLab(con, labId) {
-  const getOneLabQuery = `SELECT l.*, p.name as "pname" from Lab l join professor p on p.id = l.professorId where l.id = ${labId}`;
-  try {
-    await con.beginTransaction();
-    const row = await con.query(getOneLabQuery);
-    await con.commit();
-    return row[0];
-  } catch (e) {
-    await con.rollback();
-    console.log(`query Error \n ${e}`);
-  }
-}
+const getOneLabQuery = `SELECT l.*, p.name as "pname" from Lab l join User p on p.id = l.professorId where l.id = ?`;
 
 async function updateLabInfo(con, updateInfo) {
   const updateLabQuery = `UPDATE Lab SET name = ?, professorId = ?, associateProfessorId = ? WHERE id = ?`;
@@ -60,7 +49,7 @@ const insertStudentLabQeury = `INSERT INTO StudentLab(studentId, labId) VALUES(?
 
 module.exports = {
   insertLabInfo,
-  getOneLab,
+  getOneLabQuery,
   updateLabInfo,
   deleteLab,
   joinLabRequestQuery,
