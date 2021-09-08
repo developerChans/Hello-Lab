@@ -15,7 +15,7 @@ async function insertLabInfo(con, createLabEntity) {
 const getOneLabQuery = `SELECT l.*, p.name as "pname" from Lab l join User p on p.id = l.professorId where l.id = ?`;
 
 async function updateLabInfo(con, updateInfo) {
-  const updateLabQuery = `UPDATE Lab SET name = ?, professorId = ?, associateProfessorId = ? WHERE id = ?`;
+  const updateLabQuery = `UPDATE Lab SET name = ?, associateProfessorId = ? WHERE id = ?`;
   try {
     await con.beginTransaction();
     const row = await con.query(updateLabQuery, updateInfo);
