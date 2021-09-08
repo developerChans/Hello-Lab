@@ -3,39 +3,15 @@ import axios from 'axios'
 
 import { connect } from "react-redux";
 
-const comments = [
-  {
-    id: 1,
-    parentId: 1,
-    writer: "김채은",
-    content: "답글이다",
-    image: "",
-    date: "2021-08-21 21:35",
-  },  
-  {
-    id:2, 
-    parentId: 1,
-    writer: "김지민",
-    content: "답글",
-    image: "",
-    date: "2021-08-21 21:50",
-  },
-  {
-    id:3,
-    parentId: 2,
-    writer: "박찬진",
-    content: "답글2",
-    image: "",
-    date: "2021-08-22 21:54",
-  }
-]
-
 const LabAsk = ({data}) =>{
   
   const [ask, setAsk] = useState();
-  const [attachment, setAttachment] = useState();
+  const [askAttachment, setAskAttachment] = useState();
+  const [answerAttachment, setAnswerAttachment] = useState();
+
   const [isWriter, setIsWriter] = useState(true);
   const [asks, setAsks] = useState();
+  const [answer, setAnswer] = useState();
   const [answers, setAnswers] = useState();
 
 
@@ -46,9 +22,14 @@ const LabAsk = ({data}) =>{
     })
   }, [])
 
-  const onTextChange = (event) =>{
+  const onAskChange = (event) =>{
+    console.log(event)
     const {target: {value}} = event;
     setAsk(value);
+  }
+  const onAnswerChange = (event)=>{
+    const {target: {value}} = event;
+    setAnswer(value);
   }
 
   const onFileChange = (event)=>{
@@ -57,20 +38,43 @@ const LabAsk = ({data}) =>{
     const theFile = files[0];
     reader.onloadend = (finished)=>{
       const {currentTarget:{result}} = finished;
-      setAttachment(result);
+      setAskAttachment(result);
     }
     reader.readAsDataURL(theFile);
   }
 
   const onAttachment = () =>{
-    setAttachment();
+    setAskAttachment();
+    document.querySelector("#input-image").value=''
+  }
+
+  const onAnsFileChange = (event)=>{
+    const { target: {files}} = event;
+    const reader = new FileReader();
+    const theFile = files[0];
+    reader.onloadend = (finished)=>{
+      const {currentTarget:{result}} = finished;
+      setAnswerAttachment(result);
+    }
+    reader.readAsDataURL(theFile);
+  }
+
+  const onAnsAttachment = () =>{
+    setAnswerAttachment();
     document.querySelector("#input-image").value=''
   }
     
-  const onSubmit = (event)=>{
+    
+  const onAskSubmit = (event)=>{
     event.preventDefault();
     // 작성자, 내용, 작성일시, imageUrl 서버로 보내기
     axios.post(`/app/qna/${data.lab.id}`, {content: ask})
+    window.location.reload();
+  }
+
+  const onAnswerSubmit = (event, askId)=>{
+    event.preventDefault();
+    axios.post(`/app/qna/${data.lab.id}/${askId}`, {content: answer})
     window.location.reload();
   }
 
@@ -79,19 +83,21 @@ const LabAsk = ({data}) =>{
     .then(response=>{
       setAnswers(response.data)
     })
+    const answerBtn = document.querySelector(`#answer-${askId}`)
+    answerBtn.classList.add("hidden")
   }
 
   return (
     <div style={{"position":"absolute", "top":"100px", "left":"200px"}}>
-      <form onSubmit={onSubmit}>
-        <input type="text" placeholder="내용을 입력해주세요." onChange={onTextChange} required/>
+      <form onSubmit={onAskSubmit}>
+        <input type="text" placeholder="내용을 입력해주세요." onChange={onAskChange} required/>
         <input id="input-image" type="file" accept="image/*" onChange={onFileChange}/>
         <button type="submit">등록</button>
       </form>
-
-      {attachment && 
+                                                                                    
+      {askAttachment && 
       <>
-        <img src={attachment} width="100px" height="100px"/>
+        <img src={askAttachment} width="100px" height="100px"/>
         <button type="button" onClick={onAttachment}>X</button>
       </>}
 
@@ -105,7 +111,18 @@ const LabAsk = ({data}) =>{
               {isWriter &&<>
               <button>수정</button>
               <button>삭제</button>
-              <button onClick={()=>onAnswerClick(ask.id)}>답글보기</button>
+              </>}
+              <button id={`answer-${ask.id}`} onClick={()=>onAnswerClick(ask.id)}>답글보기</button>
+              
+                <form onSubmit={(event)=>onAnswerSubmit(event, ask.id)}>
+                <input type="text" placeholder="내용을 입력해주세요." onChange={onAnswerChange} required/>
+                <input id="input-image" type="file" accept="image/*" onChange={onAnsFileChange}/>
+                <button type="submit">등록</button>
+              </form>
+              {answerAttachment && 
+              <>
+                <img src={answerAttachment} width="100px" height="100px"/>
+                <button type="button" onClick={onAnsAttachment}>X</button>
               </>}
               <div>
               <>
@@ -126,8 +143,6 @@ const LabAsk = ({data}) =>{
                 </div>
               ))}
               </>
-
-              
               </div>
             </div>
           ))}
