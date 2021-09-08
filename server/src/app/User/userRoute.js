@@ -14,6 +14,7 @@ module.exports = function (app) {
   app.post("/app/login", user.login);
 
   //탈퇴
+  app.post("/app/users/withdraw", userAuth, user.Withdraw);
 
   //로그아웃
   app.post("/app/logout", userAuth, user.logout);
