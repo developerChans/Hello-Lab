@@ -115,6 +115,8 @@ FROM User
 WHERE id = ? AND status = 0
 `;
 
+const clearTokenQuery = `UPDATE User set refreshToken = NULL where id = ?`;
+
 module.exports = {
   insertUserInfo,
   selectUser,
@@ -126,4 +128,5 @@ module.exports = {
   withdrawUserId,
   getTokenFromUser,
   getUserQuery,
+  clearTokenQuery,
 };
