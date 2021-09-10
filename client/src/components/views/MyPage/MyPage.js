@@ -1,15 +1,12 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useHistory, withRouter } from 'react-router-dom';
 import './MyPage.css';
 import '../views.css';
-import { actionCreators } from "_actions/lab_action";
-import {connect} from 'react-redux';
-
 import MyPageLab from './MyPageLab'
+import CreateLab from './CreateLab'
 
-function MyPage({data, replaceLab}) {
-    
+function MyPage() {
+
     const [lab, setLab] = useState();
     const [name, setName] = useState();
     const [userNum, setUserNum] = useState();
@@ -37,7 +34,6 @@ function MyPage({data, replaceLab}) {
         })
     }, [])
 
-
   return (
     <div className="wrap">
         <div id="container">
@@ -49,8 +45,9 @@ function MyPage({data, replaceLab}) {
             </div>
             <div id="my_lab">
                 <h2><span>내 연구실</span></h2>
+                <CreateLab job={job}/>
                 <ul id="lab_list">
-                    <MyPageLab lab={lab}/>
+                    <MyPageLab job={job} lab={lab}/>
                 </ul>
             </div>
         </div>
@@ -59,16 +56,8 @@ function MyPage({data, replaceLab}) {
   );
 }
 
-const mapStateToProps = (state)=>{
-    return{data: state}
-}
 
-const mapDispatchToProps = (dispatch) =>{
-    return {
-      replaceLab: (lab) => dispatch(actionCreators.replaceLab(lab))
-    }
-  }
   
-  export default connect(mapStateToProps, mapDispatchToProps) (MyPage);
+export default MyPage;
   
   
