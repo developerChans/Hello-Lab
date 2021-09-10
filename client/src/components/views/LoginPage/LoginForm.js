@@ -24,30 +24,17 @@ const LoginForm = ({auth}) =>{
       email: Email,
       password: Password
     }
-    // server 연결 시 userBody fetch. 현재는 state 확인 용으로 console log
-    console.log(userBody);
   
-    if(auth==="student"){
-        axios.post('/app/login', userBody)
-        .then(response=>{
-        if(response.data.isSuccess){
-            window.location.replace('/');
-        }else{
-            alert(response.data.message);
-        }
-        })
-        .catch(err=>console.log(err))
-    }else if(auth==="professor"){
-        axios.post('/app/login/professors', userBody)
-        .then(response=>{
-        if(response.data.isSuccess){
-            window.location.replace('/');
-        }else{
-            alert(response.data.message);
-        }
-        })
-        .catch(err=>console.log(err))
-    }
+
+  axios.post('/app/login', userBody)
+  .then(response=>{
+  if(response.data.isSuccess){
+      window.location.replace('/');
+  }else{
+      alert(response.data.message);
+  }
+  })
+  .catch(err=>console.log(err))
   }
     return (
     
