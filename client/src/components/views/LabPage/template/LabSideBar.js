@@ -75,7 +75,7 @@ const LabSideBar = ({data, updateCategory, updateTab}) => {
         <div id="side-dropdown" ref={dropdown} className="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <a className="dropdown-item" href="/mypage">Dashboard</a>
           <a className="dropdown-item" href="#">Something else</a>
-          <a className="dropdown-item" href="/home">Sign out</a>
+          <a className="dropdown-item" href="/">Sign out</a>
         </div>
       </nav>
     </div>

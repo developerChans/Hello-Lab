@@ -37,8 +37,8 @@ function LabPage({data}) {
   return (
     <div>
       <LabTemplate />
-      <Route path="/lab/:id/main"><LabMainPage isProfessor={isProfessor}/></Route>
-      <Route path="/lab/:id/research"><LabResearchPage isProfessor={isProfessor}/></Route>
+      <Route path="/lab/:id/main"><LabMainPage data={data} isProfessor={isProfessor}/></Route>
+      <Route path="/lab/:id/research"><LabResearchPage data={data} isProfessor={isProfessor}/></Route>
     </div>
   );
 }

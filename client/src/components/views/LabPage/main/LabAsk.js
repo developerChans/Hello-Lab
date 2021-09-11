@@ -3,12 +3,10 @@ import axios from 'axios'
 
 import { connect } from "react-redux";
 
-const LabAsk = ({data}) =>{
+const LabAsk = ({lab}) =>{
   
   const [ask, setAsk] = useState();
   const [askAttachment, setAskAttachment] = useState();
-  const [answerAttachment, setAnswerAttachment] = useState();
-
   const [isWriter, setIsWriter] = useState(true);
   const [asks, setAsks] = useState();
   const [answer, setAnswer] = useState();
@@ -16,7 +14,7 @@ const LabAsk = ({data}) =>{
 
 
   useEffect(()=>{
-    axios.get(`/app/qna/${data.lab.id}`)
+    axios.get(`/app/qna/${lab.id}`)
     .then(response => {
       setAsks(response.data)
     })
@@ -48,38 +46,22 @@ const LabAsk = ({data}) =>{
     document.querySelector("#input-image").value=''
   }
 
-  const onAnsFileChange = (event)=>{
-    const { target: {files}} = event;
-    const reader = new FileReader();
-    const theFile = files[0];
-    reader.onloadend = (finished)=>{
-      const {currentTarget:{result}} = finished;
-      setAnswerAttachment(result);
-    }
-    reader.readAsDataURL(theFile);
-  }
-
-  const onAnsAttachment = () =>{
-    setAnswerAttachment();
-    document.querySelector("#input-image").value=''
-  }
-    
     
   const onAskSubmit = (event)=>{
     event.preventDefault();
     // 작성자, 내용, 작성일시, imageUrl 서버로 보내기
-    axios.post(`/app/qna/${data.lab.id}`, {content: ask})
+    axios.post(`/app/qna/${lab.id}`, {content: ask})
     window.location.reload();
   }
 
   const onAnswerSubmit = (event, askId)=>{
     event.preventDefault();
-    axios.post(`/app/qna/${data.lab.id}/${askId}`, {content: answer})
+    axios.post(`/app/qna/${lab.id}/${askId}`, {content: answer})
     window.location.reload();
   }
 
   const onAnswerClick = (askId)=>{
-    axios.get(`/app/qna/${data.lab.id}/${askId}`)
+    axios.get(`/app/qna/${lab.id}/${askId}`)
     .then(response=>{
       setAnswers(response.data)
     })
@@ -113,17 +95,10 @@ const LabAsk = ({data}) =>{
               <button>삭제</button>
               </>}
               <button id={`answer-${ask.id}`} onClick={()=>onAnswerClick(ask.id)}>답글보기</button>
-              
                 <form onSubmit={(event)=>onAnswerSubmit(event, ask.id)}>
                 <input type="text" placeholder="내용을 입력해주세요." onChange={onAnswerChange} required/>
-                <input id="input-image" type="file" accept="image/*" onChange={onAnsFileChange}/>
                 <button type="submit">등록</button>
               </form>
-              {answerAttachment && 
-              <>
-                <img src={answerAttachment} width="100px" height="100px"/>
-                <button type="button" onClick={onAnsAttachment}>X</button>
-              </>}
               <div>
               <>
               {answers && answers.map((answer)=>(

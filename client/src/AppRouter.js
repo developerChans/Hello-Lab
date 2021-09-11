@@ -10,7 +10,7 @@ import OpenlabPage from "components/views/OpenlabPage/OpenlabPage";
 import MenuBar from "components/MenuBar/MenuBar";
 import ExamplePage from "components/views/ExamplePage/ExamplePage";
 
-const AppRouter = ({isLoggedIn, isProfessor, needMenubar}) =>{
+const AppRouter = ({isLoggedIn, needMenubar}) =>{
 
     return(
     <Router>
@@ -22,7 +22,7 @@ const AppRouter = ({isLoggedIn, isProfessor, needMenubar}) =>{
           <Route exact path="/login">{isLoggedIn ? <LandingPage/>:<LoginPage/>}</Route>
           <Route exact path="/register">{isLoggedIn ? <LandingPage/>:<RegisterPage/>}</Route>
           <Route exact path="/mypage">{isLoggedIn ? <MyPage/>:<LoginPage/>}</Route>
-          <Route path="/lab"><LabPage isProfessor={isProfessor}/></Route>
+          <Route path="/lab"><LabPage/></Route>
           <Route exact path="/example"><ExamplePage/></Route>
         </Switch>
     </Router>

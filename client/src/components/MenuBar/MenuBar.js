@@ -35,7 +35,7 @@ const MenuBar = ({isLoggedIn}) => {
           <li className="nav-item">
             <a className="nav-link" target='_blank' href={RISS_URL}>
               RISS
-            <BiLinkExternal  className="link-icon" />
+            <BiLinkExternal className="link-icon" />
             </a>
           </li>
         </ul>

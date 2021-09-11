@@ -11,10 +11,10 @@ import tableMergedCell from '@toast-ui/editor-plugin-table-merged-cell';
 import uml from '@toast-ui/editor-plugin-uml';
 
 import {useRef, useState, useEffect} from 'react'
-
+import axios from 'axios'
 import './style/markdown.css'
 
-export default function() {
+const LabInfo = ({data}) => {
     const text = useRef();
     const [info, setInfo] = useState();
     const [editing, setEditing] = useState(false);
@@ -22,7 +22,9 @@ export default function() {
     const onSubmit = () =>{
         const editorInstance = text.current.getInstance();
         const content = editorInstance.getMarkdown();
-        // content 데이터 보내기
+        console.log(content)
+        axios.post(`/app/lab/${data.lab.id}/introduction`, {content:content})
+
         setEditing(prev => !prev);
     }
     const toggleEditing = ()=>{
@@ -30,7 +32,8 @@ export default function() {
     }
 
     useEffect(()=>{
-        // Info 데이터 불러오기
+        axios.get(`/app/lab/${data.lab.id}/introduction`)
+        .then(response => console.log(response))
         setInfo("어쩌고")
         console.log(info);
     }, [])
@@ -53,3 +56,7 @@ export default function() {
         </div>
     );
 }
+
+export default LabInfo;
+  
+  

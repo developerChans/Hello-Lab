@@ -14,7 +14,7 @@ const RegisterForm = ()=>{
   const [Email, setEmail] = useState("");
   const [Major, setMajor] = useState("");
   const [PhoneNum, setPhoneNum] = useState("");
-
+  const [Job, setJob] = useState();
 
   const onUserNumHandler = (event) => {
     setUserNum(event.currentTarget.value);
@@ -40,6 +40,10 @@ const RegisterForm = ()=>{
   const onPhoneNumHandler = (event) => {
     setPhoneNum(event.currentTarget.value);
   }
+
+  const onUserHandler = (event) =>{
+    setJob(parseInt(event.target.value));
+  }
   
   const onSubmitHandler = (event) =>{
     event.preventDefault();
@@ -51,7 +55,7 @@ const RegisterForm = ()=>{
       major: Major,
       phoneNumber:PhoneNum,
       password: Password,
-      job:0
+      job: Job
     }
     // server 연결 시 userBody fetch. 현재는 state 확인 용으로 console log
 
@@ -76,6 +80,19 @@ const RegisterForm = ()=>{
         <div id="register-form-box">
 
         <form id="register-form" onSubmit={onSubmitHandler}>
+          <div className="form-group">    
+            <label for="job">사용자</label>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="radio" className="form-check-input" onChange={onUserHandler} value={0} name="optradio"/>학생
+              </label>
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="radio" className="form-check-input" onChange={onUserHandler} value={1} name="optradio"/>교수
+              </label>
+            </div>
+          </div>
           <div className="form-group">
             <label for="name">이름</label>
             <input className="form-control" name="name" type="text" value={Name} onChange={onNameHandler} required/>
@@ -108,6 +125,7 @@ const RegisterForm = ()=>{
             <input className="form-control" name="pnum" maxlength='11' value={PhoneNum} onChange={onPhoneNumHandler} required/>
             <span>'-' 없이 입력</span>
           </div>
+
           <div>
           </div>
           <button id="join-btn" type="submit" className="btn btn-primary">Join</button>

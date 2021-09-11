@@ -2,7 +2,7 @@ import axios from 'axios'
 import { actionCreators } from "_actions/lab_action";
 import {connect} from 'react-redux';
 
-const MyPageLab = ({data, replaceLab, lab}) =>{
+const MyPageLab = ({job, replaceLab, lab}) =>{
 
     const onDashboardHandler = (section) => {
         
@@ -35,6 +35,7 @@ const MyPageLab = ({data, replaceLab, lab}) =>{
             <p className="lab_name">{section.name} 연구실</p>
             <p className="prof">{section.pname} 교수</p>
         </div>
+        {job && <button>연구실 편집</button>}
     </li>  
     ))}
     </>);

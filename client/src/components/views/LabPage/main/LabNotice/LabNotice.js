@@ -5,12 +5,11 @@ import {Route} from 'react-router-dom'
 import LabNoticeDetail from './LabNoticeDetail'
 import LabNoticeForm from './LabNoticeForm'
 
-import './style/notice.css'
+import '../style/notice.css'
 
 import {useState, useEffect} from 'react';
 import axios from 'axios';
 import LabNoticeList from "./LabNoticeList";
-import LabNoticeForm from "./LabNoticeForm";
 
 const LabNotice = ({data, isProfessor}) =>{
 
@@ -30,16 +29,7 @@ const LabNotice = ({data, isProfessor}) =>{
     }, [])
 
 
-    const onClick = () =>{
-        // 데이터 보내기
-        const noticeBody = {
-            title,
-            content,
-            labId: id
-        }
-        axios.post(`/app/lab/${id}/notices`, noticeBody)
-        .then(response => console.log(response))
-    }
+
 
     const onToggleWriting = ()=>{
         setToggleWriting(prev=>!prev);
@@ -49,8 +39,7 @@ const LabNotice = ({data, isProfessor}) =>{
         <div>
             {isProfessor && toggleWriting? 
             <>
-            <LabNoticeForm/>
-            <button onClick={onClick} className="submit-button">저장</button>
+            <LabNoticeForm id={id}/>
             <button onClick={onToggleWriting}>취소</button>
             </>:
             <>
@@ -67,8 +56,5 @@ const LabNotice = ({data, isProfessor}) =>{
     );
 }
 
-const mapStateToProps = (state)=>{
-    return {data: state};
-  }
   
-export default connect(mapStateToProps)(LabNotice);
+export default LabNotice;
