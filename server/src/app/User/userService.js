@@ -137,7 +137,6 @@ exports.logout = async (userId) => {
     await con.beginTransaction();
     const low = await con.query(query, userId);
     await con.commit();
-    console.log(low[0]);
     return low[0];
   } catch (e) {
     await con.rollback();
