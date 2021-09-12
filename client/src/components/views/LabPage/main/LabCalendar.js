@@ -10,8 +10,9 @@ import "tui-time-picker/dist/tui-time-picker.css";
 
 import './style/calendar.css'
 
-import React, { useCallback, useRef } from 'react'
+import React, { useState, useCallback, useRef } from 'react'
 
+import ReactColorPicker from '@super-effective/react-color-picker';
 
 const start = new Date();
 const end = new Date(new Date().setHours(start.getHours() + 1));
@@ -58,7 +59,7 @@ const calendars = [
   }
 ];
 
-function LabCalendar() {
+function LabCalendar({job}) {
     const calendarRef = useRef();
 
     const calendarInstance = calendarRef.current;
@@ -148,12 +149,27 @@ function LabCalendar() {
           return _getTimeTemplate(schedule, false);
         }
       };
-    
+      const [color, setColor] = useState('#3cd6bf');
+      const [calendarName, setCalendarName] = useState();
+
+      const onColorChange = (updatedColor) => {
+        setColor(updatedColor);
+      };
+      const onNameChange = (event) =>{
+        const {target:{value}} = event;
+        setCalendarName(value)
+      }
 
     return (
         <div>
           <button>New Calendar</button>
-            <TUICalendar
+          <form>
+            <label for="name">이름</label>
+            <input name="name" type="text" onChange={onNameChange}/>
+            <label>색상</label>
+            <ReactColorPicker color={color} onChange={onColorChange}/>
+          </form> 
+          <TUICalendar
             ref={calendarRef}
             usageStatistics={false}
             view="month"
@@ -166,7 +182,7 @@ function LabCalendar() {
             onBeforeCreateSchedule={onBeforeCreateSchedule}
             onBeforeDeleteSchedule={onBeforeDeleteSchedule}
             onBeforeUpdateSchedule={onBeforeUpdateSchedule}    
-            />
+          />
 
         </div>
     );

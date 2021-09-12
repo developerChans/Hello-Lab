@@ -46,7 +46,7 @@ function MyPage() {
             </div>
             <div id="my_lab">
                 <h2><span>내 연구실</span></h2>
-                <CreateLab job={job}/>
+                {job && <CreateLab/>}
                 <ul id="lab_list">
                     <MyPageLab job={job} lab={lab}/>
                 </ul>

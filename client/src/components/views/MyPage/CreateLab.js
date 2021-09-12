@@ -24,7 +24,7 @@ const CreateLab = ({job})=>{
     }
     return(
         <>
-        {job && <button type="button" onClick={onOpenModal}>연구실 생성</button>}
+        <button type="button" onClick={onOpenModal}>연구실 생성</button>
         {openModal && 
         <div>
             <div>
