@@ -1,7 +1,6 @@
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor } from '@toast-ui/react-editor';
-import '@toast-ui/editor/dist/toastui-editor-viewer.css';
-import { Viewer } from '@toast-ui/react-editor';
+
 
 import chart from '@toast-ui/editor-plugin-chart';
 import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
@@ -13,6 +12,8 @@ import uml from '@toast-ui/editor-plugin-uml';
 import {useRef, useState, useEffect} from 'react'
 import axios from 'axios'
 import './style/markdown.css'
+
+import LabInfoViewer from './LabInfoViewer';
 
 const LabInfo = ({data}) => {
     const text = useRef();
@@ -49,10 +50,9 @@ const LabInfo = ({data}) => {
                 ref={text}
             />
             <button className="md-save" onClick={onSubmit}>저장</button></>:
-            <><button className="md-edit" onClick={toggleEditing}>수정</button>
-            {<Viewer
-              initialValue={info}
-      	    />}
+            <>
+            <button className="md-edit" onClick={toggleEditing}>수정</button>
+            <LabInfoViewer info={info}/>
             </>}
         </div>
     );

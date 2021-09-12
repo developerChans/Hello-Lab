@@ -1,5 +1,14 @@
-<><button className="md-edit" onClick={toggleEditing}>수정</button>
-            <Viewer
-              initialValue={info}
-      	    />
-            </>
+import '@toast-ui/editor/dist/toastui-editor-viewer.css';
+import { Viewer } from '@toast-ui/react-editor';
+
+const LabInfoViewer = ({info}) =>{
+  return (
+  <>
+    <Viewer
+      initialValue={info}
+    />
+  </>
+  );
+}
+
+export default LabInfoViewer;
