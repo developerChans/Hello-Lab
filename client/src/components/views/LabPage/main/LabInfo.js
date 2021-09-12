@@ -19,6 +19,14 @@ const LabInfo = ({data}) => {
     const [info, setInfo] = useState();
     const [editing, setEditing] = useState(false);
 
+    useEffect(()=>{
+        axios.get(`/app/lab/${data.lab.id}/introduction`)
+        .then(response => {
+            const {content} = response.data[0]
+            setInfo(content)
+        })
+    }, [])
+
     const onSubmit = () =>{
         const editorInstance = text.current.getInstance();
         const content = editorInstance.getMarkdown();
@@ -31,27 +39,20 @@ const LabInfo = ({data}) => {
         setEditing(prev => !prev);
     }
 
-    useEffect(()=>{
-        axios.get(`/app/lab/${data.lab.id}/introduction`)
-        .then(response => console.log(response))
-        setInfo("어쩌고")
-        console.log(info);
-    }, [])
-    
     return(
         <div>
             {editing? <>
             <Editor
-                initialValue="불러온 info 데이터"
+                initialValue={info}
                 usageStatistics={false}
                 plugins={[chart, codeSyntaxHighlight, colorSyntax, tableMergedCell, uml]}
                 ref={text}
             />
             <button className="md-save" onClick={onSubmit}>저장</button></>:
             <><button className="md-edit" onClick={toggleEditing}>수정</button>
-            <Viewer
-              initialValue="{info}"
-      	    />
+            {<Viewer
+              initialValue={info}
+      	    />}
             </>}
         </div>
     );
