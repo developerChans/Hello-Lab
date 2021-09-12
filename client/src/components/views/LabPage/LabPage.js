@@ -10,7 +10,7 @@ import { connect } from "react-redux";
 
 function LabPage({data}) {
   const history = useHistory();
-  const [isProfessor, setIsProfessor] = useState();
+  const [job, setJob] = useState();
 
   const {lab: {
     id, category, tab
@@ -20,11 +20,7 @@ function LabPage({data}) {
     axios.get('/app/users/auth')
     .then(response=>{
       const {data:{job}} = response
-      if(job){
-        setIsProfessor(true)
-      }else{
-        setIsProfessor(false)
-      }
+      setJob(job)
     })
   }, [])
 
@@ -37,8 +33,8 @@ function LabPage({data}) {
   return (
     <div>
       <LabTemplate />
-      <Route path="/lab/:id/main"><LabMainPage data={data} isProfessor={isProfessor}/></Route>
-      <Route path="/lab/:id/research"><LabResearchPage data={data} isProfessor={isProfessor}/></Route>
+      <Route path="/lab/:id/main"><LabMainPage data={data} job={job}/></Route>
+      <Route path="/lab/:id/research"><LabResearchPage data={data} job={job}/></Route>
     </div>
   );
 }
