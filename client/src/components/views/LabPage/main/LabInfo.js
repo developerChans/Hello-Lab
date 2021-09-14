@@ -15,7 +15,6 @@ import {useRef, useState, useEffect} from 'react'
 import axios from 'axios'
 import './style/markdown.css'
 
-import LabInfoViewer from './LabInfoViewer';
 
 const LabInfo = ({data}) => {
     const text = useRef();
