@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import axios from 'axios'
 
 import { connect } from "react-redux";
-
-const LabAsk = ({lab}) =>{
+import Ask from './Ask'
+const LabAsk = ({data}) =>{
   
   const [ask, setAsk] = useState();
   const [askAttachment, setAskAttachment] = useState();
@@ -12,6 +12,8 @@ const LabAsk = ({lab}) =>{
   const [answer, setAnswer] = useState();
   const [answers, setAnswers] = useState();
 
+
+  const {lab} = data
 
   useEffect(()=>{
     axios.get(`/app/qna/${lab.id}`)
@@ -69,6 +71,10 @@ const LabAsk = ({lab}) =>{
     answerBtn.classList.add("hidden")
   }
 
+  const toggleEditing = () =>{
+
+  }
+
   return (
     <div style={{"position":"absolute", "top":"100px", "left":"200px"}}>
       <form onSubmit={onAskSubmit}>
@@ -86,14 +92,7 @@ const LabAsk = ({lab}) =>{
       <div>
           {asks && asks.map((ask)=>(
             <div key={ask.id}>
-              <div>{ask.writer}</div>
-              <div>{ask.content}</div>
-              {ask.image && <img src={ask.image} width="50px" height="50px"/>}
-              <div>{ask.date}</div>
-              {isWriter &&<>
-              <button>수정</button>
-              <button>삭제</button>
-              </>}
+              <Ask isWriter={isWriter} lab={lab} ask={ask}/>
               <button id={`answer-${ask.id}`} onClick={()=>onAnswerClick(ask.id)}>답글보기</button>
                 <form onSubmit={(event)=>onAnswerSubmit(event, ask.id)}>
                 <input type="text" placeholder="내용을 입력해주세요." onChange={onAnswerChange} required/>
