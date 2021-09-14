@@ -11,9 +11,9 @@ const scheduleDao = require("./scheduleDao");
 // const crypto = require("crypto");
 const {connect} = require("http2");
 
-exports.createSchedule = async function (date, content, labIdx) {
+exports.createSchedule = async function (startDate, content, labId, finishDate, calendarTopicId, location) {
     //try {
-        const insertScheduleParams = [date, content, labIdx];
+        const insertScheduleParams = [startDate, content, labId, finishDate, calendarTopicId, location];
         const connection = await pool.getConnection(async(conn) => conn);
         const scheduleResult = await scheduleDao.createSchedule(connection, insertScheduleParams);
         console.log(`추가된 내용 : ${scheduleResult[0].insertId}`);
@@ -24,10 +24,10 @@ exports.createSchedule = async function (date, content, labIdx) {
     //}   //catch(console.error();)
 };
 
-exports.updateScheduleStatus = async function (status, LabScheduleIdx) {
+exports.updateScheduleStatus = async function (labScheduleIdx, labIdx) {
     try {
         const connection = await pool.getConnection(async (conn) => conn);
-        const updateScheduleStatusResult = await scheduleDao.updateScheduleStatus(connection, status, LabScheduleIdx);
+        const updateScheduleStatusResult = await scheduleDao.updateScheduleStatus(connection, labScheduleIdx, labIdx);
         connection.release();
         //logger.SUCCESS(`해당 일정이 삭제되었습니다.\n`)
 
@@ -39,14 +39,14 @@ exports.updateScheduleStatus = async function (status, LabScheduleIdx) {
     }
 };
 
-exports.changeSchedule = async function (date, content, LabScheduleIdx) {
+exports.changeSchedule = async function (startDate, content, finishDate, calendarTopicId, location, labScheduleIdx, labIdx) {
     try {
         const connection = await pool.getConnection(async(conn) => conn);
-        const changeScheduleResult = await scheduleDao.changeSchedule(connection, date, content, LabScheduleIdx);
+        const changeScheduleResult = await scheduleDao.changeSchedule(connection, startDate, content, finishDate, calendarTopicId, location, labScheduleIdx, labIdx);
 
         return response(baseResponse.SUCCESS);
         
     } catch(err) {
         return errResponse(baseResponse.DB_ERROR);
     }
-}
+};
