@@ -55,18 +55,19 @@ exports.postUserSignIn = async function (email, password) {
   const connection = await pool.getConnection(async (conn) => await conn);
   try {
     // 이메일 여부 확인
+
     const emailRows = await userProvider.userEmailCheck(email);
     if (emailRows.email.length < 1)
       return errResponse(baseResponse.SIGNIN_EMAIL_EMPTY);
     const selectEmail = emailRows.email;
     const hashedPassword = await userProvider.selectUserPassword(selectEmail);
     const check = await bcrypt.compare(password, hashedPassword.password);
+
     if (!check) {
       return errResponse(baseResponse.SIGNIN_PASSWORD_WRONG);
     }
     // 계정 상태 확인
     const userInfoRows = await userProvider.userAccountCheck(email);
-
     if (userInfoRows[0].status === 1) {
       return errResponse(conbaseResponse.SIGNIN_WITHDRAWAL_ACCOUNT);
     }
@@ -99,7 +100,6 @@ exports.postUserSignIn = async function (email, password) {
     return response(baseResponse.SUCCESS, {
       userId: userInfoRows[0].id,
       accessJwt: accessToken,
-      refreshJwt: refreshToken,
     });
   } catch (err) {
     await connection.rollback();

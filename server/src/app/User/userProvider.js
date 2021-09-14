@@ -89,7 +89,7 @@ exports.getTokenFromUser = async function (userId) {
     await connection.beginTransaction();
     const Result = await userDao.getTokenFromUser(connection, userId);
     await connection.commit();
-    return Result.refreshToken;
+    return Result;
   } catch (e) {
     await connection.rollback();
   } finally {
