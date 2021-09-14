@@ -11,7 +11,7 @@ async function callSchedules(connection, userIdx) {
         where SL.userId = ? group by LS.id;`;
     const [scheduleRows] = await connection.query(callScheduleListQuery, userIdx);
     return scheduleRows;
-} // 수정완료
+}
 
 // 연구실 스케줄 조회 (연구실 기준)
 async function callSchedulesEachLab(connection, labIdx) {
