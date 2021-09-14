@@ -1,5 +1,7 @@
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor } from '@toast-ui/react-editor';
+import '@toast-ui/editor/dist/toastui-editor-viewer.css';
+import { Viewer } from '@toast-ui/react-editor';
 
 
 import chart from '@toast-ui/editor-plugin-chart';
@@ -57,7 +59,7 @@ const LabInfo = ({data}) => {
             <button className="md-save" onClick={onSubmit}>저장</button></>:
             <>
             <button className="md-edit" onClick={toggleEditing}>수정</button>
-            {info && <LabInfoViewer info={info}/>}
+            {info && <Viewer initialValue={info} />}
             </>}
         </div>
     );
