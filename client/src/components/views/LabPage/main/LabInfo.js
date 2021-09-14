@@ -19,12 +19,16 @@ const LabInfo = ({data}) => {
     const text = useRef();
     const [info, setInfo] = useState();
     const [editing, setEditing] = useState(false);
+    const [load, setLoad] = useState(false)
 
     useEffect(()=>{
         axios.get(`/app/lab/${data.lab.id}/introduction`)
         .then(response => {
-            const {content} = response.data[0]
-            setInfo(content)
+            if(response.data[0]){
+                console.log(response)
+                const {content} = response.data[0]
+                setInfo(content)
+            }
         })
     }, [])
 
@@ -35,6 +39,7 @@ const LabInfo = ({data}) => {
         axios.post(`/app/lab/${data.lab.id}/introduction`, {content:content})
 
         setEditing(prev => !prev);
+        window.location.reload()
     }
     const toggleEditing = ()=>{
         setEditing(prev => !prev);
@@ -52,7 +57,7 @@ const LabInfo = ({data}) => {
             <button className="md-save" onClick={onSubmit}>저장</button></>:
             <>
             <button className="md-edit" onClick={toggleEditing}>수정</button>
-            <LabInfoViewer info={info}/>
+            {info && <LabInfoViewer info={info}/>}
             </>}
         </div>
     );
