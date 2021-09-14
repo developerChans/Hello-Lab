@@ -1,10 +1,20 @@
-const jwt = require('jsonwebtoken');
-const secret_config = require('./secret');
-const { response } = require("./response")
-const { errResponse } = require("./response")
+const jwt = require("jsonwebtoken");
+const secret_config = require("./secret");
+const { response } = require("./response");
+const { errResponse } = require("./response");
 const baseResponse = require("./baseResponseStatus");
 
+module.exports = {
+  verifyToken(token) {
+    try {
+      return jwt.verify(token, secret_config.jwtsecret);
+    } catch (e) {
+      return null;
+    }
+  },
+};
 
+/*
 const jwtMiddleware = (req, res, next) => {
     // read the token from header or url
     const token = req.headers['x-access-token'] || req.query.token;
@@ -35,4 +45,4 @@ const jwtMiddleware = (req, res, next) => {
     }).catch(onError)
 };
 
-module.exports = jwtMiddleware;
+module.exports = jwtMiddleware;*/

@@ -91,12 +91,12 @@ async function inputTokenUser(connection, rtoken, id) {
 // 해당 id의 회원 refresh 토큰 get
 async function getTokenFromUser(connection, userId) {
   const withdrawUserIdQuery = `
-        select refreshToken
+        select refreshToken, job
         from User
         where id = ?;
         `;
   const [userRow] = await connection.query(withdrawUserIdQuery, userId);
-  return userRow;
+  return userRow[0];
 }
 
 // 해당 id의 회원 탈퇴
