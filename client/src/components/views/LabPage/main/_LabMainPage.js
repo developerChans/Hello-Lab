@@ -3,7 +3,7 @@ import {useState, useEffect} from 'react';
 import LabInfo from 'components/views/LabPage/main/LabInfo';
 import LabNotice from 'components/views/LabPage/main/LabNotice/LabNotice';
 import LabCal from 'components/views/LabPage/main/LabCalendar';
-import LabAsk from 'components/views/LabPage/main/LabAsk';
+import LabAsk from 'components/views/LabPage/main/LabAsk/LabAsk';
 import LabMember from 'components/views/LabPage/main/LabMember';
 
 const LabMainPage = ({data, job}) =>{
