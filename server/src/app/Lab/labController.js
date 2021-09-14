@@ -12,9 +12,8 @@ exports.createLab = async (req, res) => {
   }
   const professorId = req.userId;
   const createLabEntity = [name, professorId, associateProfessorId];
-
   try {
-    const result = await labService.createLab(createLabEntity);
+    const result = await labService.createLab(createLabEntity, professorId);
     return result
       ? res
           .status(201)

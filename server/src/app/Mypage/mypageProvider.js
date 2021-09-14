@@ -1,5 +1,6 @@
 const mypageDao = require("./mypageDao");
 const { pool } = require("../../../config/db");
+
 exports.getStudentLab = async (userId) => {
   const con = await pool.getConnection(async (conn) => conn);
   const query = mypageDao.selectStudentLabQuery;
