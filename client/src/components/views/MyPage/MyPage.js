@@ -28,10 +28,13 @@ function MyPage() {
         axios.get('/app/mypage')
         .then(response=>{
             console.log(response)
-            const {id, name, pname} = response.data[0];
-            setLab([{
-                id, name, pname
-            }])
+            if(response.data[0]){
+                const {id, name, pname} = response.data[0];
+                setLab([{
+                    id, name, pname
+                }])
+
+            }
         })
     }, [])
 
