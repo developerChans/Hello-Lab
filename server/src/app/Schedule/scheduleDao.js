@@ -1,9 +1,9 @@
 // 모든 스케줄 조회 (사람 기준)
 async function callSchedules(connection, userIdx) {
     const callScheduleListQuery = `
-    select LS.id as 스케줄인덱스, LS.startDate as 일정시작날짜, LS.finishDate as 일정종료날짜, LS.content as 일정내용, LS.location as 일정장소,
-    CT.id as 주제인덱스, CT.topic as 주제이름, CT.color as 색깔,
-    L.id as 연구실id, L.name as 연구실이름, LS.status as 삭제여부
+    select LS.id as labScheduleId, LS.startDate as startDate, LS.finishDate as finishDate, LS.content as content, LS.location as location,
+    CT.id as calendarTopicId, CT.topic as topic, CT.color as color,
+    L.id as labId, L.name as labName, LS.status as status
         from LabSchedule LS
             join Lab L on LS.labId = L.id
             join UserLab SL on L.id = SL.labId
@@ -16,9 +16,9 @@ async function callSchedules(connection, userIdx) {
 // 연구실 스케줄 조회 (연구실 기준)
 async function callSchedulesEachLab(connection, labIdx) {
     const callScheduleEachLabListQuery = `
-    select LS.id as 스케줄인덱스, LS.startDate as 일정시작날짜, LS.finishDate as 일정종료날짜, LS.content as 일정내용, LS.location as 일정장소,
-    CT.id as 주제인덱스, CT.topic as 주제이름, CT.color as 색깔,
-    L.id as 연구실id, L.name as 연구실이름, LS.status as 삭제여부
+    select LS.id as labScheduleId, LS.startDate as startDate, LS.finishDate as finishDate, LS.content as content, LS.location as location,
+    CT.id as calendarTopicId, CT.topic as topic, CT.color as color,
+    L.id as labId, L.name as labName, LS.status as status
         from LabSchedule LS
             join Lab L on LS.labId = L.id
             join CalendarTopic CT on LS.calendarTopicId = CT.id
