@@ -1,5 +1,5 @@
 async function insertNoticeInfo(con, createNoticeEntity) {
-  const insertNoticeInfoQeury = `INSERT INTO LabNotice(title, content, labId) VALUES(?, ?, ?)`;
+  const insertNoticeInfoQeury = `INSERT INTO LabNotice(title, content, labId, userId) VALUES(?, ?, ?, ?)`;
   try {
     await con.beginTransaction();
     const row = await con.query(insertNoticeInfoQeury, createNoticeEntity);
