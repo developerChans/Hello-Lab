@@ -1,5 +1,6 @@
 const mypageDao = require("./mypageDao");
 const { pool } = require("../../../config/db");
+
 exports.getStudentLab = async (userId) => {
   const con = await pool.getConnection(async (conn) => conn);
   const query = mypageDao.selectStudentLabQuery;
@@ -7,7 +8,6 @@ exports.getStudentLab = async (userId) => {
     await con.beginTransaction();
     const row = await con.query(query, userId);
     await con.commit();
-    console.log(row[0]);
     return row[0];
   } catch (e) {
     await con.rollback();

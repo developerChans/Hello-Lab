@@ -41,7 +41,6 @@ exports.deleteQna = async (deleteQnaInfo) => {
     await con.beginTransaction();
     const row = await con.query(query, deleteQnaInfo);
     await con.commit();
-    console.log(row[0]);
     return row[0].affectedRows;
   } catch (e) {
     await con.rollback();

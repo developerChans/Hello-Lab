@@ -5,7 +5,6 @@ const professorAuth = (req, res, next) => {
   const token = req.cookies.access;
   try {
     const check = jwt.verify(token, secret_config.jwtsecret);
-    console.log(check);
     if (check.sub !== "professor") {
       throw Error("No Professor LogIn");
     }

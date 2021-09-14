@@ -1,16 +1,5 @@
-async function insertLabInfo(con, createLabEntity) {
-  const InsertLabInfoQuery = `INSERT INTO Lab(name, professorId, associateProfessorId) VALUES( ?, ?, ?);`;
-  try {
-    await con.beginTransaction();
-    const row = await con.query(InsertLabInfoQuery, createLabEntity);
-    await con.commit();
-    return row;
-  } catch (e) {
-    await con.rollback();
-    console.log(`query Error \n ${e}`);
-    return false;
-  }
-}
+const InsertLabInfoQuery = `INSERT INTO Lab(name, professorId, associateProfessorId) VALUES( ?, ?, ?);`;
+const insertUserLabProfessorQuery = `INSERT INTO UserLab(userId, labId) VALUES(?,?);`;
 
 const getOneLabQuery = `SELECT l.*, p.name as "pname" from Lab l join User p on p.id = l.professorId where l.id = ?`;
 
@@ -45,11 +34,12 @@ async function deleteLab(con, labId) {
 const joinLabRequestQuery = `INSERT INTO LabJoinRequest(userId, labId) VALUES(?, ?)`;
 const updateJoinLabQuery = `UPDATE LabJoinRequest SET status = 1 WHERE Id = ?`;
 const getNotieOfRequest = `SELECT r.userId, r.labId FROM LabJoinRequest r WHERE id = ?`;
-const insertStudentLabQeury = `INSERT INTO StudentLab(studentId, labId) VALUES(?, ?) `;
+const insertStudentLabQeury = `INSERT INTO UserLab(userId, labId) VALUES(?, ?) `;
 
 module.exports = {
-  insertLabInfo,
+  InsertLabInfoQuery,
   getOneLabQuery,
+  insertUserLabProfessorQuery,
   updateLabInfo,
   deleteLab,
   joinLabRequestQuery,

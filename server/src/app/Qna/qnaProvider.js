@@ -24,7 +24,6 @@ exports.getQnaReply = async (getQnaReplyInfo) => {
     await con.beginTransaction();
     const row = await con.query(query, getQnaReplyInfo);
     await con.commit();
-    console.log(row[0]);
     return row[0];
   } catch (e) {
     await con.rollback();
