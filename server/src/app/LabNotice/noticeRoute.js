@@ -1,8 +1,10 @@
+const { professorAuth } = require("../../middleware/professorAuth");
+
 module.exports = function (app) {
   const controller = require("./noticeController");
 
   //해당 연구실 공지사항 생성 api
-  app.post("/app/lab/:labId/notices", controller.createNotice);
+  app.post("/app/lab/:labId/notices", professorAuth, controller.createNotice);
 
   //해당 연구실 공지사항 가져오는 api
   app.get("/app/lab/:labId/notices", controller.getAllNotice);

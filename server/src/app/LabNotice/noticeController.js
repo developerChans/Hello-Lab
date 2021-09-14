@@ -4,6 +4,8 @@ const noticeProvider = require("./noticeProvider");
 exports.createNotice = async (req, res) => {
   const { title, content } = req.body;
   const labId = req.params.labId;
+  const userId = req.userId;
+
   if (!title || !content) {
     return res.status(400).json({
       success: false,
@@ -11,7 +13,7 @@ exports.createNotice = async (req, res) => {
     });
   }
 
-  const createNoticeEntity = [title, content, labId];
+  const createNoticeEntity = [title, content, labId, userId];
 
   try {
     const result = await noticeService.createNotice(createNoticeEntity);
