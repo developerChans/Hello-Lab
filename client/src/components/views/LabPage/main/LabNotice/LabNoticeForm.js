@@ -28,19 +28,21 @@ const LabNoticeForm = ({id}) =>{
         .then(response => console.log(response))
     }
 
-    return(
-        <div className="form-wrapper">
-            <input className="title-input" 
+    return(<>
+        <input className="title-input" 
             type="text" 
             placeholder="제목"
             onChange={onTitleChange}
+            value={title}
+            required
             />
+        <div className="form-wrapper">  
             <CKEditor
             editor={ClassicEditor}
             onChange={(event, editor)=>onContentChange(event, editor)}
             />
             <button onClick={onClick} className="submit-button">저장</button>
-        </div>)
+        </div></>)
 }
 
 export default LabNoticeForm;
