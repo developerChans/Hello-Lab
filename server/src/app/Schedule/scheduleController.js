@@ -111,12 +111,9 @@ exports.getSchedulesEachLab = async function(req, res) {
     /**
      * Path Variable : labIdx
      */
-    console.log(1);
-    const labIdx = req.params.labIdx;
-    console.log(1);
 
+    const labIdx = req.params.labIdx;
     if(!labIdx) return res.send(errResponse(baseResponse.USER_USERID_EMPTY));
-    console.log(1);
 
     const scheduleListEachLabResult = await scheduleProvider.getScheduleListEachLab(labIdx);
     return res.send(response(baseResponse.SUCCESS, scheduleListEachLabResult));

@@ -1,7 +1,6 @@
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor } from '@toast-ui/react-editor';
-import '@toast-ui/editor/dist/toastui-editor-viewer.css';
-import { Viewer } from '@toast-ui/react-editor';
+
 
 import chart from '@toast-ui/editor-plugin-chart';
 import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
@@ -14,10 +13,20 @@ import {useRef, useState, useEffect} from 'react'
 import axios from 'axios'
 import './style/markdown.css'
 
+import LabInfoViewer from './LabInfoViewer';
+
 const LabInfo = ({data}) => {
     const text = useRef();
     const [info, setInfo] = useState();
     const [editing, setEditing] = useState(false);
+
+    useEffect(()=>{
+        axios.get(`/app/lab/${data.lab.id}/introduction`)
+        .then(response => {
+            const {content} = response.data[0]
+            setInfo(content)
+        })
+    }, [])
 
     const onSubmit = () =>{
         const editorInstance = text.current.getInstance();
@@ -31,27 +40,19 @@ const LabInfo = ({data}) => {
         setEditing(prev => !prev);
     }
 
-    useEffect(()=>{
-        axios.get(`/app/lab/${data.lab.id}/introduction`)
-        .then(response => console.log(response))
-        setInfo("어쩌고")
-        console.log(info);
-    }, [])
-    
     return(
         <div>
             {editing? <>
             <Editor
-                initialValue="불러온 info 데이터"
+                initialValue={info}
                 usageStatistics={false}
                 plugins={[chart, codeSyntaxHighlight, colorSyntax, tableMergedCell, uml]}
                 ref={text}
             />
             <button className="md-save" onClick={onSubmit}>저장</button></>:
-            <><button className="md-edit" onClick={toggleEditing}>수정</button>
-            <Viewer
-              initialValue="{info}"
-      	    />
+            <>
+            <button className="md-edit" onClick={toggleEditing}>수정</button>
+            <LabInfoViewer info={info}/>
             </>}
         </div>
     );

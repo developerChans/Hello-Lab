@@ -6,13 +6,13 @@ import LabCal from 'components/views/LabPage/main/LabCalendar';
 import LabAsk from 'components/views/LabPage/main/LabAsk';
 import LabMember from 'components/views/LabPage/main/LabMember';
 
-const LabMainPage = ({data, isProfessor}) =>{
+const LabMainPage = ({data, job}) =>{
 
     return (
     <div>
-        <Route path="/lab/:id/main/info"><LabInfo data={data}/></Route>
-        <Route path="/lab/:id/main/notice"><LabNotice data={data}/></Route>
-        <Route path="/lab/:id/main/calendar"><LabCal data={data}/></Route>
+        <Route path="/lab/:id/main/info"><LabInfo job={job} data={data}/></Route>
+        <Route path="/lab/:id/main/notice"><LabNotice job={job} data={data}/></Route>
+        <Route path="/lab/:id/main/calendar"><LabCal job={job} data={data}/></Route>
         <Route path="/lab/:id/main/ask"><LabAsk data={data}/></Route>
         <Route path="/lab/:id/main/member"><LabMember data={data}/></Route>
     </div>);
