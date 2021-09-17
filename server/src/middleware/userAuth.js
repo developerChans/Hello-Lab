@@ -43,7 +43,7 @@ module.exports = {
             },
             secret_config.jwtsecret,
             {
-              expiresIn: "1h",
+              expiresIn: "12h",
               subject: "User",
             }
           );
