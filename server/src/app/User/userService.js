@@ -69,7 +69,7 @@ exports.postUserSignIn = async function (email, password) {
     // 계정 상태 확인
     const userInfoRows = await userProvider.userAccountCheck(email);
     if (userInfoRows[0].status === 1) {
-      return errResponse(conbaseResponse.SIGNIN_WITHDRAWAL_ACCOUNT);
+      return errResponse(baseResponse.SIGNIN_WITHDRAWAL_ACCOUNT);
     }
     //토큰 생성 Service
     const refreshToken = jwt.sign(

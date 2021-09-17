@@ -15,8 +15,8 @@ module.exports = {
       req.userId = userId;
       if (accessToken === null) {
         if (refreshToken === null) {
-          //둘 다 만료
-          throw Error("API 사용 권한 없습니다.");
+          //토큰 모두 없음
+          console.log(`토큰모두없음`);
         } else {
           //accessToken만 만료
           console.log(`accessToken재발급`);

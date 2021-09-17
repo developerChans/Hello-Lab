@@ -77,7 +77,7 @@ exports.login = async function (req, res) {
     : res.status(203).send(signInResponse);
 };
 exports.withdraw = async function (req, res) {
-  const userId = req.params.userId;
+  const userId = req.userId;
   if (!userId)
     return res.status(400).send(errResponse(baseResponse.USER_USERID_EMPTY));
   else {
@@ -99,7 +99,7 @@ exports.logout = async (req, res) => {
       ? res
           .status(200)
           .cookie("access", null)
-          .cookie("refresh", null)
+          .cookie("userId", null)
           .json({ success: true, message: "로그아웃 성공" })
       : res.status(400).json({ success: false, message: "로그아웃 실패" });
   } catch (e) {
@@ -110,9 +110,10 @@ exports.logout = async (req, res) => {
 
 // 최승용 코드
 exports.userAuth = async (req, res) => {
-  const userId = req.userId;
+  const userId = req.cookies.userId;
   try {
     const result = await userProvider.getUser(userId);
+    console.log(`result:`, result);
     if (result === undefined) {
       throw Error("최상위 에러 확인");
     }
@@ -125,7 +126,7 @@ exports.userAuth = async (req, res) => {
           email: result[0].email,
           major: result[0].major,
           phoneNum: result[0].phoneNum,
-          imageUrl: result[0].imageUrl,
+          imageUrl: result[0].imageURL,
           job: result[0].job,
         })
       : res.status(400).json({ success: false });

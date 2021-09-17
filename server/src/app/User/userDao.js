@@ -109,12 +109,6 @@ async function withdrawUserId(connection, userId) {
   return userRow;
 }
 
-const getUserQuery = `
-SELECT *
-FROM User
-WHERE id = ? and status = 0;
-`;
-
 const clearTokenQuery = `UPDATE User set refreshToken = NULL where id = ?`;
 
 module.exports = {
@@ -127,6 +121,5 @@ module.exports = {
   inputTokenUser,
   withdrawUserId,
   getTokenFromUser,
-  getUserQuery,
   clearTokenQuery,
 };
