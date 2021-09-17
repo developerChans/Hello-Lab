@@ -26,7 +26,7 @@ module.exports = {
             },
             secret_config.jwtsecret,
             {
-              expiresIn: "30s",
+              expiresIn: "1h",
               subject: job ? "professor" : "student",
             }
           );
@@ -43,7 +43,7 @@ module.exports = {
             },
             secret_config.jwtsecret,
             {
-              expiresIn: "30s",
+              expiresIn: "1h",
               subject: "User",
             }
           );
