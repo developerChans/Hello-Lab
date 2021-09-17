@@ -14,13 +14,13 @@ module.exports = function (app) {
   app.post("/app/login", user.login);
 
   //탈퇴
-  app.post("/app/users/withdraw/:userId", userAuth, user.withdraw);
+  app.post("/app/users/withdraw", userAuth, user.withdraw);
 
   //로그아웃
   app.post("/app/logout", userAuth, user.logout);
 
   //유저 인증
-  app.get("/app/users/auth", userAuth, user.userAuth);
+  app.get("/app/users/auth", userAuth);
 
   app.get("/test/test", userAuth, user.check);
 };

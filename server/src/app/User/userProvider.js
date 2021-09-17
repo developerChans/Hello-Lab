@@ -97,13 +97,19 @@ exports.getTokenFromUser = async function (userId) {
   }
 };
 
-exports.getUser = async (userId) => {
+exports.getUser = async function (userId) {
   const con = await pool.getConnection(async (conn) => conn);
-  const query = userDao.getUserQuery;
+  const getUserQuery = `
+select id, status
+from User
+where id=? and status = 0;
+`;
   try {
+    console.log(`userId:`, userId);
     await con.beginTransaction();
-    const row = await con.query(query, userId);
+    const [row] = await con.query(getUserQuery, userId);
     await con.commit();
+    console.log(`여기?`, row[0]);
     return row[0];
   } catch (e) {
     await con.rollback();
