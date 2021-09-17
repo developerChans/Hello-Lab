@@ -76,7 +76,7 @@ exports.postUserSignIn = async function (email, password) {
       {}, //payload
       secret_config.jwtsecret, //secret key
       {
-        expiresIn: "10s",
+        expiresIn: "12h",
         subject: "User",
       }
     );
