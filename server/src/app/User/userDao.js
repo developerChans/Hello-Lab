@@ -85,7 +85,7 @@ async function inputTokenUser(connection, rtoken, id) {
     id,
   ]);
 
-  return inputTokenUserRow;
+  return inputTokenUserRow[0];
 }
 
 // 해당 id의 회원 refresh 토큰 get
@@ -112,7 +112,7 @@ async function withdrawUserId(connection, userId) {
 const getUserQuery = `
 SELECT *
 FROM User
-WHERE id = ? AND status = 0
+WHERE id = ? and status = 0;
 `;
 
 const clearTokenQuery = `UPDATE User set refreshToken = NULL where id = ?`;

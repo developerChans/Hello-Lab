@@ -21,4 +21,6 @@ module.exports = function (app) {
 
   //유저 인증
   app.get("/app/users/auth", userAuth, user.userAuth);
+
+  app.get("/test/test", userAuth, user.check);
 };

@@ -76,7 +76,7 @@ exports.postUserSignIn = async function (email, password) {
       {}, //payload
       secret_config.jwtsecret, //secret key
       {
-        expiresIn: "14d",
+        expiresIn: "10s",
         subject: "User",
       }
     );
@@ -114,6 +114,29 @@ exports.postUserSignIn = async function (email, password) {
   }
 };
 
+exports.updateToken = async function (userId, refreshToken) {
+  const connection = await pool.getConnection(async (conn) => await conn);
+  try {
+    await connection.beginTransaction();
+    const inputToken = await userDao.inputTokenUser(
+      connection,
+      refreshToken,
+      userId
+    );
+    await connection.commit();
+    return;
+  } catch (err) {
+    await connection.rollback();
+    console.log(
+      `App - updateToken Service error\n: ${err.message} \n${JSON.stringify(
+        err
+      )}`
+    );
+    return errResponse(baseResponse.DB_ERROR);
+  } finally {
+    connection.release();
+  }
+};
 exports.withdrawUser = async function (userId) {
   const connection = await pool.getConnection(async (conn) => conn);
   try {

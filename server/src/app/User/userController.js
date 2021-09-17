@@ -135,4 +135,8 @@ exports.userAuth = async (req, res) => {
   }
 };
 
+exports.check = (req, res) => {
+  res.send("hi");
+};
+
 exports.user = new Array();

@@ -1,13 +1,11 @@
 const mysql = require("mysql2/promise");
 const pool = mysql.createPool({
-  host: "dkkdb.cojnoghuurl7.ap-northeast-2.rds.amazonaws.com",
-  user: "admin",
+  host: "dankkuko.ckyfxxqvophj.ap-northeast-2.rds.amazonaws.com",
+  user: "DKKmanager",
   port: "3306",
-  password: "dankkuko1!",
-  database: "dkkDB",
-  multipleStatements: true,
+  password: "eksRnzh12!",
+  database: "HelloLab",
 });
-
 module.exports = {
   pool: pool,
 };
