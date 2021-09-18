@@ -1,5 +1,6 @@
 const { professorAuth } = require("../../middleware/professorAuth");
 const { userAuth } = require("../../middleware/userAuth");
+const Joi = require("joi");
 
 module.exports = function (app) {
   const controller = require("./qnaController");
@@ -21,8 +22,4 @@ module.exports = function (app) {
 
   // 질문 대댓글 불러오는 api
   app.get("/app/qna/:labId/:qnaId", controller.getQnaReply);
-
-  app.get("/test", professorAuth, (req, res) => {
-    res.send("통과");
-  });
 };
