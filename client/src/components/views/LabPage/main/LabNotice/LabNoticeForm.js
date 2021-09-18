@@ -26,6 +26,7 @@ const LabNoticeForm = ({id}) =>{
         }
         axios.post(`/app/lab/${id}/notices`, noticeBody)
         .then(response => console.log(response))
+        window.location.reload()
     }
 
     return(<>

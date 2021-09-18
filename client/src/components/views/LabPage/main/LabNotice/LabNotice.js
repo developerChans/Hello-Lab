@@ -40,7 +40,7 @@ const LabNotice = ({job, data}) =>{
             <div>
             <button style={{"position":"absolute", "left":"200px"}} onClick={onToggleWriting}>글쓰기</button>
             </div>}
-            <div>
+            <div style={{"position":"absolute", "left":"200px"}}>
                 <ul className="notice-list">
                 <LabNoticeList labId={id} list={list}/>
                 </ul>
