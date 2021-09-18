@@ -113,7 +113,7 @@ exports.userAuth = async (req, res) => {
   const userId = req.cookies.userId;
   try {
     const result = await userProvider.getUser(userId);
-    console.log(`result:`, result);
+    // console.log(result);
     if (result === undefined) {
       throw Error("최상위 에러 확인");
     }
