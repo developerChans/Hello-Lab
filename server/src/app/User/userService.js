@@ -76,7 +76,7 @@ exports.postUserSignIn = async function (email, password) {
       {}, //payload
       secret_config.jwtsecret, //secret key
       {
-        expiresIn: "12h",
+        expiresIn: "24h",
         subject: "User",
       }
     );
@@ -93,9 +93,9 @@ exports.postUserSignIn = async function (email, password) {
       }, // 토큰의 내용(payload)
       secret_config.jwtsecret, // 비밀키
       {
-        expiresIn: "1h",
+        expiresIn: "15m",
         subject: userInfoRows[0].job ? "professor" : "student",
-      } // 유효 기간 1시간
+      } // 유효 기간 15분
     );
     return response(baseResponse.SUCCESS, {
       userId: userInfoRows[0].id,

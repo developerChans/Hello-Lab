@@ -7,9 +7,11 @@ module.exports = {
   async userAuth(req, res, next) {
     try {
       const accessToken = await verifyToken(req.cookies.access);
+      console.log(accessToken);
       const userId = req.cookies.userId;
       const retrieveFromUser = await userProvider.getTokenFromUser(userId);
       const getRefreshToken = retrieveFromUser.refreshToken;
+
       const refreshToken = verifyToken(getRefreshToken);
       const job = retrieveFromUser.job;
       req.userId = userId;
@@ -17,6 +19,7 @@ module.exports = {
         if (refreshToken === null) {
           //토큰 모두 없음
           console.log(`토큰모두없음`);
+          throw Error();
         } else {
           //accessToken만 만료
           console.log(`accessToken재발급`);
@@ -26,7 +29,7 @@ module.exports = {
             },
             secret_config.jwtsecret,
             {
-              expiresIn: "1h",
+              expiresIn: "15m",
               subject: job ? "professor" : "student",
             }
           );
@@ -43,12 +46,12 @@ module.exports = {
             },
             secret_config.jwtsecret,
             {
-              expiresIn: "12h",
+              expiresIn: "24h",
               subject: "User",
             }
           );
           userService.updateToken(userId, newRefreshToken);
-          req.cookies.userId = newRefreshToken.id;
+          res.cookie("userId", userId);
         }
       }
     } catch (e) {
