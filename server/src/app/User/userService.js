@@ -55,27 +55,28 @@ exports.postUserSignIn = async function (email, password) {
   const connection = await pool.getConnection(async (conn) => await conn);
   try {
     // 이메일 여부 확인
+
     const emailRows = await userProvider.userEmailCheck(email);
     if (emailRows.email.length < 1)
       return errResponse(baseResponse.SIGNIN_EMAIL_EMPTY);
     const selectEmail = emailRows.email;
     const hashedPassword = await userProvider.selectUserPassword(selectEmail);
     const check = await bcrypt.compare(password, hashedPassword.password);
+
     if (!check) {
       return errResponse(baseResponse.SIGNIN_PASSWORD_WRONG);
     }
     // 계정 상태 확인
     const userInfoRows = await userProvider.userAccountCheck(email);
-
     if (userInfoRows[0].status === 1) {
-      return errResponse(conbaseResponse.SIGNIN_WITHDRAWAL_ACCOUNT);
+      return errResponse(baseResponse.SIGNIN_WITHDRAWAL_ACCOUNT);
     }
     //토큰 생성 Service
     const refreshToken = jwt.sign(
       {}, //payload
       secret_config.jwtsecret, //secret key
       {
-        expiresIn: "14d",
+        expiresIn: "12h",
         subject: "User",
       }
     );
@@ -99,7 +100,6 @@ exports.postUserSignIn = async function (email, password) {
     return response(baseResponse.SUCCESS, {
       userId: userInfoRows[0].id,
       accessJwt: accessToken,
-      refreshJwt: refreshToken,
     });
   } catch (err) {
     await connection.rollback();
@@ -114,6 +114,29 @@ exports.postUserSignIn = async function (email, password) {
   }
 };
 
+exports.updateToken = async function (userId, refreshToken) {
+  const connection = await pool.getConnection(async (conn) => await conn);
+  try {
+    await connection.beginTransaction();
+    const inputToken = await userDao.inputTokenUser(
+      connection,
+      refreshToken,
+      userId
+    );
+    await connection.commit();
+    return;
+  } catch (err) {
+    await connection.rollback();
+    console.log(
+      `App - updateToken Service error\n: ${err.message} \n${JSON.stringify(
+        err
+      )}`
+    );
+    return errResponse(baseResponse.DB_ERROR);
+  } finally {
+    connection.release();
+  }
+};
 exports.withdrawUser = async function (userId) {
   const connection = await pool.getConnection(async (conn) => conn);
   try {
