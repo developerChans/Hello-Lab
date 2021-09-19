@@ -1,7 +1,7 @@
 const labProvider = require("./labProvider");
 const labService = require("./labService");
 const userProvider = require("../User/userProvider");
-const labJoi = require("../../joi/LabJoi");
+const labJoi = require("./labJoi");
 
 exports.createLab = async (req, res) => {
   try {
