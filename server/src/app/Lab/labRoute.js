@@ -25,4 +25,9 @@ module.exports = function (app) {
     professorAuth,
     controller.updateJoinLab
   );
+
+  // test
+  app.get("/test", studentAuth, (req, res) => {
+    return res.send("통과");
+  });
 };
