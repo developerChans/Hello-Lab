@@ -2,9 +2,21 @@ const express = require("express");
 const compression = require("compression");
 const methodOverride = require("method-override");
 const cookieParser = require("cookie-parser");
+const path = require("path");
 
 var cors = require("cors");
 module.exports = function () {
+  require("dotenv").config({
+    path: path.resolve(
+      process.cwd(),
+      process.env.NODE_ENV === "production"
+        ? ".env"
+        : process.env.NODE_ENV === "development"
+        ? ".env.dev"
+        : " "
+    ),
+  });
+
   const app = express();
 
   app.use(compression());
