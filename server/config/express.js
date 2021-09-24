@@ -13,7 +13,9 @@ module.exports = function () {
         ? ".env"
         : process.env.NODE_ENV === "development"
         ? ".env.dev"
-        : " "
+        : process.env.NODE_ENV === "local"
+        ? ".env.local"
+        : "undefined"
     ),
   });
 
