@@ -6,13 +6,16 @@ const userService = require("../app/User/userService");
 module.exports = {
   async userAuth(req, res, next) {
     try {
+      console.log(`userId:`, req.cookies.userId);
+      console.log(`access:`, req.cookies.access);
       const accessToken = await verifyToken(req.cookies.access);
-      console.log(accessToken);
       const userId = req.cookies.userId;
       const retrieveFromUser = await userProvider.getTokenFromUser(userId);
       const getRefreshToken = retrieveFromUser.refreshToken;
-
       const refreshToken = verifyToken(getRefreshToken);
+      console.log(`accessToken:`, accessToken);
+      console.log(`refreshToken:`, refreshToken);
+
       const job = retrieveFromUser.job;
       req.userId = userId;
       if (accessToken === null) {
@@ -34,7 +37,6 @@ module.exports = {
             }
           );
           res.cookie("access", newAccessToken);
-          req.cookies.access = newAccessToken;
         }
       } else {
         //access token 존재, refresh token 만료
@@ -57,7 +59,6 @@ module.exports = {
     } catch (e) {
       res.status(401).json({ isAuth: false, message: "유효하지 않은 토큰" });
       next(e);
-      console.log(`error occured: ${e}`);
     } finally {
       next();
     }

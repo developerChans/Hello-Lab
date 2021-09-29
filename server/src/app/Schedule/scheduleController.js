@@ -1,4 +1,3 @@
-// const jwtMiddleware = require("../../../config/jwtMiddleware");
 const scheduleProvider = require("../../app/Schedule/scheduleProvider");
 const scheduleService = require("../../app/Schedule/scheduleService");
 const baseResponse = require("../../../config/baseResponseStatus");
@@ -11,7 +10,7 @@ const { checkUpdateRights } = require("./scheduleDao");
 /**
  * schedule API NO. 1
  * API NAME : 스케줄 생성 API
- * [GET] /app/schedules
+ * [POST] /app/schedules
  */
 exports.createSchedule = async function(req, res) {
     /**
