@@ -9,3 +9,5 @@ secret.js
 log
 
 database
+
+.env.local

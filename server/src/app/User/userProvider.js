@@ -106,7 +106,6 @@ where id=? and status = 0;
 `;
   try {
     await con.beginTransaction();
-    console.log(userId);
     const row = await con.query(getUserQuery, userId);
     await con.commit();
     return row[0];
