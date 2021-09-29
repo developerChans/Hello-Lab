@@ -98,8 +98,8 @@ exports.logout = async (req, res) => {
     return result
       ? res
           .status(200)
-          .cookie("access", null)
-          .cookie("userId", null)
+          .cookie("access", "", { maxAge: 0 })
+          .cookie("userId", "", { maxAge: 0 })
           .json({ success: true, message: "로그아웃 성공" })
       : res.status(400).json({ success: false, message: "로그아웃 실패" });
   } catch (e) {
