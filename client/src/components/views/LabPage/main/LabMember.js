@@ -1,10 +1,19 @@
-import { withRouter } from 'react-router-dom';
-import LabPage from '../LabPage';
+import axios from 'axios'
+import {useEffect} from 'react'
+const LabMember = ({data}) =>{
 
-const LabSession = () =>{
+    useEffect(()=>{
+        axios.get(`/app/lab/${data.lab.id}/member`)
+        .then(response => {
+            if(response.data[0]){
+                console.log(response)
+            }
+        })
+    }, [])
     return (
         <div>
+
         </div>
     );
 }
-export default withRouter(LabSession);
+export default LabMember;
