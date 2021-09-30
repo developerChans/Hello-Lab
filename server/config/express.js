@@ -45,6 +45,7 @@ module.exports = function () {
   require("../src/app/Qna/qnaRoute")(app);
   require("../src/app/LabMember/memberRoute")(app);
   require("../src/app/LabIntroduction/introductionRoute")(app);
+  require("../src/app/Process/processRoute")(app);
 
   return app;
 };

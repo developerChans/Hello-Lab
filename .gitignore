@@ -1,5 +1,6 @@
 node_modules
 
+.env.local
 
 db.js
 
@@ -9,3 +10,5 @@ secret.js
 log
 
 database
+
+.env.local
