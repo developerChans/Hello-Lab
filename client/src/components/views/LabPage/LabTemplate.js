@@ -2,13 +2,13 @@ import LabBar from "./template/LabBar";
 import LabHeader from "./template/LabHeader";
 import LabSideBar from "./template/LabSideBar";
 
-const LabTemplate = () =>{
+const LabTemplate = ({data}) =>{
     
     return (
         <div>
             <LabSideBar/>
             <LabHeader/>
-            <LabBar/>      
+            {data.lab.tab && <LabBar/>}      
         </div>
     );
 }

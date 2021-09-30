@@ -35,6 +35,11 @@ const LabSideBar = ({data, updateCategory, updateTab}) => {
     updateTab("outline");
   }
 
+  const onCalendarClick = () => {
+    updateCategory("calendar")
+    updateTab("")
+  }
+
   const profileClick = () =>{
     if(dropdown.current){
       if(!drop){
@@ -65,10 +70,10 @@ const LabSideBar = ({data, updateCategory, updateTab}) => {
               <HiOutlineDocumentSearch className="research-link labs-icon"/>
             </div>
           </li>
-          <li className="nav-item sidebar-item">
-            <a className="nav-link" href="#">
+          <li type="button" className="nav-item sidebar-item" onClick={onCalendarClick}>
+            <div className="calendar-link nav-link">
               <IoIosCalendar className="labs-icon"/>
-            </a>
+            </div>
           </li>
         </ul>
         <FaUserCircle type="button" id="profile_icon" onClick={profileClick}/>
