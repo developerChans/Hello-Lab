@@ -3,8 +3,6 @@ import {useState} from 'react'
 
 const Answer = ({ask, answer, lab, isWriter}) =>{
 
-
-
     const [editing, setEditing] = useState(false)
     const [editedAnswer, setEditedAnswer] = useState()
 
@@ -31,7 +29,7 @@ const Answer = ({ask, answer, lab, isWriter}) =>{
         }
     }
     return (<>
-        {ask.id===answer.parentId &&<>
+        {(answer.parentId && ask.id===answer.parentId) &&<>
             <div>{answer.writer}</div>
             <div>{answer.content}</div>
             {answer.image && <img src={answer.image}/>}

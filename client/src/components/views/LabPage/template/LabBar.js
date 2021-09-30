@@ -18,18 +18,12 @@ const mainInfo =[
     },
     {
       id: 3,
-      tab: "일정",
-      route: "calendar"
-
-    },
-    {
-      id: 4,
       tab: "질문",
       route: "ask"
 
     },
     {
-      id: 5,
+      id: 4,
       tab: "멤버",
       route: "member"
 
