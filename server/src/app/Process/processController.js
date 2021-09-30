@@ -23,3 +23,58 @@ exports.getProcessList = async function(req, res) {
     return res.send(response(baseResponse.SUCCESS, processListResult));
 
 };
+
+/**
+ * process API NO. 2
+ * API NAME : 프로세스 컨텐트 및 참조 조회(완료기준) API
+ * [GET] /app/processes/completed/:processIdx
+ */
+
+exports.getCompletedProcess = async function(req, res) {
+    /**
+     * Path Variable : processIdx
+     */
+
+    const processIdx = req.params.processIdx;
+
+    const completedProcessResult = await processProvider.getCompletedProcess(processIdx);
+    return res.send(response(baseResponse.SUCCESS, completedProcessResult));
+};
+
+/**
+ * process API NO. 3
+ * API NAME : 프로세스 컨텐트 및 참조 조회(진행기준) API
+ * [GET] /app/processes/onGoing/:processIdx
+ */
+
+ exports.getOnGoingdProcess = async function(req, res) {
+    /**
+     * Path Variable : processIdx
+     */
+
+    const processIdx = req.params.processIdx;
+
+    const onGoingProcessResult = await processProvider.getOnGoingProcess(processIdx);
+    return res.send(response(baseResponse.SUCCESS, onGoingProcessResult));
+};
+
+/**
+ * process API NO. 4
+ * API NAME : 프로세스 컨텐트 및 참조 조회(미래기준) API
+ * [GET] /app/processes/expected/:processIdx
+ */
+
+ exports.getExpectedProcess = async function(req, res) {
+    /**
+     * Path Variable : processIdx
+     */
+
+    const processIdx = req.params.processIdx;
+
+    const expectedProcessResult = await processProvider.getExpectedProcess(processIdx);
+    return res.send(response(baseResponse.SUCCESS, expectedProcessResult));
+};
+
+/**
+ * 
+ */
