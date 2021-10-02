@@ -13,6 +13,9 @@ module.exports = function(app) {
     //4. 프로세스 컨텐트 및 참조 조회(미래기준) API
     app.get('/app/processes/expected/:processIdx', process.getExpectedProcess);
 
+    //5. 프로세스 등록 API
+    app.post('/app/processes', process.postProcess);
+
 
     
 }

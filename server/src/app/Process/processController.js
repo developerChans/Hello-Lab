@@ -76,5 +76,20 @@ exports.getCompletedProcess = async function(req, res) {
 };
 
 /**
- * 
+ * process API NO.5
+ * API NAME : 프로세스 등록 API
+ * [POST] /app/processes
  */
+
+exports.postProcess = async function(req, res) {
+    /**
+     * Body : labId, title, userId, standardDate
+     */
+
+    const {labIdx, title, userId, standardDate} = req.body;
+    const postProcessResponse = await processService.postPrcoess(labIdx, title, userId, standardDate);
+    // const postProcessParams = req.body;
+    // const postProcessResponse = await processService.postPrcoess(postProcessParams);
+    
+    return res.send(postProcessResponse);
+};
