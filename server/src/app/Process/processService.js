@@ -8,8 +8,8 @@ const {errResponse} = require("../../../config/response");
 
 const {connect} = require("http2");
 
-exports.postPrcoess = async function(postProcessParams) {
-    const postProcessParams = [labId, title, userId, standardDate];
+exports.postPrcoess = async function(labIdx, title, userId, standardDate) {
+    const postProcessParams = [labIdx, title, userId, standardDate];
     const connection = await pool.getConnection(async(conn) => conn);
     const postProcessResult = await processDao.postProcess(connection, postProcessParams);
     console.log(`프로세스 추가`);
@@ -19,7 +19,7 @@ exports.postPrcoess = async function(postProcessParams) {
 };
 
 exports.postProcessContent = async function(postProcessContentParams) {
-    const postProcessContentParams =[];
+    postProcessContentParams =[processidx, content, importance, startdate, enddate, title];
     const connection = await pool.getConnection(async(conn) => conn);
     const postProcessContentResult = await processDao.postProcessContent(connection, postProcessContentParams);
     console.log(`프로세스 컨텐츠 추가`);
@@ -29,5 +29,75 @@ exports.postProcessContent = async function(postProcessContentParams) {
 };
 
 exports.postProcessTag = async function(postProcessTagParams) {
+    postProcessTagParams = [processContentIdx, userIdx];
+    const connection = await pool.getConnection(async(conn) => conn);
+    const postProcessTagResult = await processDao.postProcessTag(connection, postProcessTagParams);
+    console.log(`프로세스 태그 추가`);
+    connection.release();
 
+    return response(baseResponse.SUCCESS);
 };
+
+exports.patchProcess = async function(patchProcessParams, processIdx) {
+    try{
+        patchProcessParams = [title, standardDate];
+        const connection = await pool.getConnection(async(conn) => conn);
+        const patchProcessResult = await processDao.patchProcess(connection, patchProcessParams, processIdx);
+        logger.SUCCESS("프로세스 수정 완료");
+        connection.release();
+        return response(baseResponse.SUCCESS);
+    } catch(err) {
+        return errResponse(baseResponse.DB_ERROR);
+    }
+};
+
+exports.patchProcessContent = async function(patchProcessContentParams, processContentIdx) {
+    try {
+        patchProcessContentParams = [content, importance, startDate, endDAte, title];
+        const connection = await pool.getConnection(async(conn) => conn);
+        const patchProcessContentResult = await processDao.patchProcessContent(connection, patchProcessContentParams, processContentIdx);
+        logger.SUCCESS("프로세스 컨텐츠 수정 완료");
+        connection.release();
+        return response(baseResponse.SUCCESS);
+
+    } catch(err) {
+        return errResponse(baseResponse.DB_ERROR);
+    }
+}
+
+exports.deleteProcess = async function (processIdx) {
+    try {
+        const connection = await pool.getConnection(async(conn) => conn);
+        const deleteProcessResult = await processDao.deleteProcess(connection, processIdx);
+        connection.release();
+        logger.SUCCESS("해당 프로세스가 삭제되었습니다.");
+        return response(baseResponse.SUCCESS);
+    } catch(err) {
+        return errResponse(baseResponse.DB_ERROR);
+    }
+};
+
+exports.deleteProcessContent = async function (processContentIdx) {
+    try {
+        const connection = await pool.getConnection(async(conn) => conn);
+        const deleteProcessContentResult = await processDao.deleteProcessContent(connection, processContentIdx);
+        connection.release();
+        logger.SUCCESS("해당 프로세스가 삭제되었습니다.");
+        return response(baseResponse.SUCCESS);
+    } catch(err) {
+        return errResponse(baseResponse.DB_ERROR);
+    }
+};
+
+exports.deleteProcess = async function (processContentIdx) {
+    try {
+        const connection = await pool.getConnection(async(conn) => conn);
+        const deleteProcessTagResult = await processDao.deleteProcessTag(connection, processContentIdx);
+        connection.release();
+        logger.SUCCESS("해당 프로세스가 삭제되었습니다.");
+        return response(baseResponse.SUCCESS);
+    } catch(err) {
+        return errResponse(baseResponse.DB_ERROR);
+    }
+};
+
