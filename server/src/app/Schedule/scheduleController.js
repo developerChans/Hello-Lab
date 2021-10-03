@@ -17,15 +17,6 @@ exports.createSchedule = async function(req, res) {
      * Body : startDate, content, labId, finishDate, calendarTopicId, location (프론트에서 넘겨줘야함)
      */
     const {startDate, content, labId, finishDate, calendarTopicId, location} = req.body;
-    /*
-    if(!startDate)
-        return res.send(response(baseResponse.TOKEN_EMPTY)); // 일정 입력 안함 오류
-    if(!content)
-        return res.send(response(baseResponse.TOKEN_EMPTY)); // 일정 내용 입력 안함 오류
-    if(!labIdx)
-        return res.send(response(baseResponse.TOKEN_EMPTY)); // 연구실 아이디 입력 안된 오류
-    // 날짜내용이 맞는지 확인해야함 일정내용 길이 조절도 필요하다면 해야함
-    */
 
     const createScheduleResponse = await scheduleService.createSchedule(
         startDate, content, labId, finishDate, calendarTopicId, location

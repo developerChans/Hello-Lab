@@ -8,7 +8,7 @@ async function callSchedules(connection, userIdx) {
             join Lab L on LS.labId = L.id
             join UserLab SL on L.id = SL.labId
             join CalendarTopic CT on LS.CalendarTopicId = CT.id
-        where SL.userId = ? group by LS.id;`;
+        where SL.userId = ? and LS.status = 0 group by LS.id;`;
     const [scheduleRows] = await connection.query(callScheduleListQuery, userIdx);
     return scheduleRows;
 }
@@ -22,7 +22,7 @@ async function callSchedulesEachLab(connection, labIdx) {
         from LabSchedule LS
             join Lab L on LS.labId = L.id
             join CalendarTopic CT on LS.calendarTopicId = CT.id
-        where L.id = ? group by LS.id;`;
+        where L.id = ? and LS.status = 0 group by LS.id;`;
     const [scheduleEachLabRows] = await connection.query(callScheduleEachLabListQuery, labIdx);
     return scheduleEachLabRows;
 }
@@ -62,17 +62,5 @@ module.exports = {
     callSchedulesEachLab,
     createSchedule,
     updateScheduleStatus,
-//    checkUpdateRights,
     changeSchedule
 };
-/*
-// 연구실 Id 입력시 교수이거나 조교인지 체크
-async function checkUpdateRights(connection, labIdx) {
-    const checkUpdateRightsQuery = `
-        select professorId, associateProfessorId
-        from Lab
-        where id = ?`;
-    const [checkUpdateRightsRow] = await connection.query(checkUpdateRightsQuery, labIdx);
-    return checkUpdateRightsRow;
-}
-*/
