@@ -14,7 +14,7 @@ async function getProcessList(connection, labIdx) {
 
 async function getCompletedProcess(connection, processIdx) {
     const getCompletedProcessQuery =`
-    select P.id, P.title, PC.id, PC.content, PC.importance,
+    select PC.id, P.title, PC.id, PC.content, PC.importance, PC.startDate, PC.endDate,
     group_concat((select U.name from User U where U.id = PT.userId)) as names
         from Process P
             join ProcessContent PC on PC.processId = P.id
@@ -30,7 +30,7 @@ async function getCompletedProcess(connection, processIdx) {
 
 async function getOnGoingProcess(connection, processIdx) {
     const getOnGoingProcessQuery =`
-    select P.id, P.title, PC.id, PC.content, PC.importance,
+    select PC.id, P.title, PC.id, PC.content, PC.importance, PC.startDate, PC.endDate,
     group_concat((select U.name from User U where U.id = PT.userId)) as names
         from Process P
             join ProcessContent PC on PC.processId = P.id
@@ -46,7 +46,7 @@ async function getOnGoingProcess(connection, processIdx) {
 
 async function getExpectedProcess(connection, processIdx) {
     const getExpectedProcessQuery =`
-    select P.id, P.title, PC.id, PC.content, PC.importance,
+    select PC.id, P.title, PC.id, PC.content, PC.importance, PC.startDate, PC.endDate,
     group_concat((select U.name from User U where U.id = PT.userId)) as names
         from Process P
             join ProcessContent PC on PC.processId = P.id

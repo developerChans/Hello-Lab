@@ -8,8 +8,8 @@ const {errResponse} = require("../../../config/response");
 
 const {connect} = require("http2");
 
-exports.postPrcoess = async function(labIdx, title, userId, standardDate) {
-    const postProcessParams = [labIdx, title, userId, standardDate];
+exports.postPrcoess = async function(labIdx, title, userIdx, standardDate) {
+    const postProcessParams = [labIdx, title, userIdx, standardDate];
     const connection = await pool.getConnection(async(conn) => conn);
     const postProcessResult = await processDao.postProcess(connection, postProcessParams);
     console.log(`프로세스 추가`);
