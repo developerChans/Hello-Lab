@@ -86,8 +86,8 @@ exports.postProcess = async function(req, res) {
      * Body : labId, title, userId, standardDate
      */
 
-    const {labIdx, title, userId, standardDate} = req.body;
-    const postProcessResponse = await processService.postPrcoess(labIdx, title, userId, standardDate);
+    const {labIdx, title, userIdx, standardDate} = req.body;
+    const postProcessResponse = await processService.postPrcoess(labIdx, title, userIdx, standardDate);
     // const postProcessParams = req.body;
     // const postProcessResponse = await processService.postPrcoess(postProcessParams);
     
