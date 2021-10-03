@@ -16,6 +16,27 @@ module.exports = function(app) {
     //5. 프로세스 등록 API
     app.post('/app/processes', process.postProcess);
 
+    //6. process content 등록 API
+    app.post('/app/processes/contents', process.postProcessContent);
+
+    //7. process Tag 등록 API
+    app.post('/app/processes/tags', process.postProcessTag);
+
+    //8. process 수정 API
+    app.patch('/app/processes/patch/:processIdx', process.patchProcess);
+
+    //9. process content 수정 API
+    app.patch('/app/processes/contents/:processContentIdx', process.patchProcessContent);
+
+    //10. process Tag 삭제 API
+    app.delete('/app/processes/delete/tags/:processContentIdx', process.deleteProcessTag);
+
+    //11. process 삭제 API
+    app.patch('/app/processes/delete/process/:processIdx', process.deleteProcess);
+
+    //12. process content 삭제 API
+    app.patch('/app/processes/delete/content/:processContentIdx', process.deleteProcessContent);
+
 
     
 }
