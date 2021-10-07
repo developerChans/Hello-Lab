@@ -14,7 +14,7 @@ async function getProcessList(connection, labIdx) {
 
 async function getCompletedProcess(connection, processIdx) {
     const getCompletedProcessQuery =`
-    select P.id, P.title, PC.id, PC.content, PC.importance,
+    select PC.id, P.title, PC.id, PC.content, PC.importance, PC.startDate, PC.endDate,
     group_concat((select U.name from User U where U.id = PT.userId)) as names
         from Process P
             join ProcessContent PC on PC.processId = P.id
@@ -30,7 +30,7 @@ async function getCompletedProcess(connection, processIdx) {
 
 async function getOnGoingProcess(connection, processIdx) {
     const getOnGoingProcessQuery =`
-    select P.id, P.title, PC.id, PC.content, PC.importance,
+    select PC.id, P.title, PC.id, PC.content, PC.importance, PC.startDate, PC.endDate,
     group_concat((select U.name from User U where U.id = PT.userId)) as names
         from Process P
             join ProcessContent PC on PC.processId = P.id
@@ -46,7 +46,7 @@ async function getOnGoingProcess(connection, processIdx) {
 
 async function getExpectedProcess(connection, processIdx) {
     const getExpectedProcessQuery =`
-    select P.id, P.title, PC.id, PC.content, PC.importance,
+    select PC.id, P.title, PC.id, PC.content, PC.importance, PC.startDate, PC.endDate,
     group_concat((select U.name from User U where U.id = PT.userId)) as names
         from Process P
             join ProcessContent PC on PC.processId = P.id
@@ -73,7 +73,7 @@ async function postProcess(connection, postProcessParams) {
 
 async function postProcessContent(connection, postProcessContentParams) {
     const postProcessContentQuery = `
-    insert into ProcessContent (processid, content, importance, startdate, enddate, title)
+    insert into ProcessContent (processId, content, importance, startdate, enddate, title)
     VALUES (?,?,?,?,?,?);`;
 
     const postProcessContentRow = await connection.query(postProcessContentQuery, postProcessContentParams);
@@ -120,30 +120,30 @@ async function deleteProcessContent(connection, processContentIdx) {
 async function deleteProcessTag(connection, processContentIdx) {
     const deleteProcessTagQuery = `
     delete from ProcessTag where processContentId = ?; `;
-
+    
     const deleteProcessTagRow = await connection.query(deleteProcessTagQuery, processContentIdx);
     return deleteProcessTagRow;
 }
 
 // 프로세스 수정
 
-async function patchProcess(connection, patchProcessParams , processIdx) {
+async function patchProcess(connection, patchProcessParams) {
     const patchProcessQuery = `
     update Process P
     set P.title = ?, P.standardDate = ?
     where P.id = ?;`;
-    const patchProcessRow = await connection.query(patchProcessQuery, [patchProcessParams, processIdx]);
+    const patchProcessRow = await connection.query(patchProcessQuery, patchProcessParams);
     return patchProcessRow[0];
 }
 
 // 프로세스 content 수정
 
-async function patchProcessContent(connection, patchProcessContentParams, processContentIdx) {
+async function patchProcessContent(connection, patchProcessContentParams) {
     const patchProcessContentQuery = `
     update ProcessContent PC
     set PC.content = ? , PC.importance = ?, PC.startDate = ?, PC.endDate = ?, PC.title = ?
     where PC.id = ?;`;
-    const patchProcessContentRow = await connection.query(patchProcessContentQuery,[patchProcessContentParams, processContentIdx]);
+    const patchProcessContentRow = await connection.query(patchProcessContentQuery,patchProcessContentParams);
     return patchProcessContentRow[0];
 }
 
