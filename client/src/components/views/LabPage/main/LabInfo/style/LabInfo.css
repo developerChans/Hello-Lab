@@ -1,0 +1,21 @@
+#info-headline{
+
+    position: fixed;
+    width: 850px;
+    height: 50px;
+    left: 300px;
+    top: 190px;
+    background: #ECECEC;
+    border-radius: 10px;
+    z-index: 100;
+}
+
+#info-headline-txt{
+    font-family: NanumGothic;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 49px;
+    color: #000000;
+    padding-left: 22px;
+}
