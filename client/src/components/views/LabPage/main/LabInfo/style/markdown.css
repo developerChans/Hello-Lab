@@ -1,0 +1,55 @@
+.toastui-editor-defaultUI{
+    position: absolute;
+    width: 800px;
+    height: 500px;
+    left: 325px !important;
+    top: 261px !important;
+}
+
+.toastui-editor-contents{
+    position: absolute;
+    width: 800px;
+    height: 500px;
+    left: 20px !important;
+    top: 85px !important;
+}
+
+.info-md-save{
+    position: absolute;
+    width: 85px;
+    height: 45px;
+    left: 1040px;
+    top: 775px;
+    background: #FFFFFF;
+    border: 1px solid #9B9B9B;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+
+.info-md-cancel{
+    position: absolute;
+    width: 85px;
+    height: 45px;
+    left: 940px;
+    top: 775px;
+    background: #FFFFFF;
+    border: 1px solid #9B9B9B;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+.info-md-edit{
+    position: absolute;
+    width: 47px;
+    height: 25px;
+    left: 768px;
+    top: 12px;
+    border: none;
+    color: #565656;
+    background-color: transparent !important;
+}
+
+.info-md-edit:hover{
+    color: black
+}
