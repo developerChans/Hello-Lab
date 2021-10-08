@@ -7,6 +7,7 @@ const LabNoticeList = ({labId, list})=>{
         console.log(section)
         history.push(`/lab/${labId}/main/notice/${section.id}`)
     }
+    console.log(list)
     return (
         <>
         {list && list.map((section)=>(

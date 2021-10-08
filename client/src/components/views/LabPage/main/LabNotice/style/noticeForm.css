@@ -1,0 +1,40 @@
+  
+  .ck.ck-editor__editable:not(.ck-editor__nested-editable) {
+    min-height: 500px;
+  }
+
+.ck-editor{
+    position: absolute !important;
+    width: 800px !important;
+    height: 500px !important;
+    min-height: 500px;
+    left: 325px !important;
+    top: 328px !important;
+  }
+
+  
+  .notice-title-input {
+    position: absolute;
+    width: 800px;
+    height: 40px;
+    margin: 10px;
+    left: 315px;
+    top: 260px;
+    border:1px #9B9B9B;
+    border-style: solid;
+    border-radius: 3px;
+    padding: 10px;
+  }
+  
+  .notice-submit-btn {
+    position: absolute;
+    width: 74px;
+    height: 40px;
+    left: 1052px;
+    top: 881px;
+    background: #FFFFFF;
+    border: 1px solid #9B9B9B;
+    box-sizing: border-box;
+    border-radius: 10px;
+    font-size: 14px;
+  }
