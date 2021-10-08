@@ -14,13 +14,13 @@ import uml from '@toast-ui/editor-plugin-uml';
 import {useRef, useState, useEffect} from 'react'
 import axios from 'axios'
 import './style/markdown.css'
+import './style/LabInfo.css'
 
 
 const LabInfo = ({data}) => {
     const text = useRef();
     const [info, setInfo] = useState();
     const [editing, setEditing] = useState(false);
-    const [load, setLoad] = useState(false)
 
     useEffect(()=>{
         axios.get(`/app/lab/${data.lab.id}/introduction`)
@@ -33,33 +33,53 @@ const LabInfo = ({data}) => {
         })
     }, [])
 
-    const onSubmit = () =>{
+    const onSubmit = (event) =>{
+        event.preventDefault()
+
         const editorInstance = text.current.getInstance();
         const content = editorInstance.getMarkdown();
-        console.log(content)
+        
         axios.post(`/app/lab/${data.lab.id}/introduction`, {content:content})
 
-        setEditing(prev => !prev);
+        toggleEditing()
         window.location.reload()
     }
+
+
     const toggleEditing = ()=>{
         setEditing(prev => !prev);
     }
 
     return(
         <div>
-            {editing? <>
+            <div style={{
+                    'position': 'fixed',
+                    'width': '850px',
+                    'height': '100px',
+                    'left': '300px',
+                    'top': '149px',
+                    'background':'white',
+                    'zIndex':'9'
+            }}>
+                <div id="info-headline">
+                    <h3 id="info-headline-txt">연구실 소개</h3>
+                    {!editing && <>
+                <button className="info-md-edit" onClick={toggleEditing}>수정</button>
+                {info && <Viewer initialValue={info} />}
+                </>}
+                </div>
+            </div>
+            {editing &&<>
             <Editor
                 initialValue={info}
                 usageStatistics={false}
                 plugins={[chart, codeSyntaxHighlight, colorSyntax, tableMergedCell, uml]}
                 ref={text}
             />
-            <button className="md-save" onClick={onSubmit}>저장</button></>:
-            <>
-            <button className="md-edit" onClick={toggleEditing}>수정</button>
-            {info && <Viewer initialValue={info} />}
-            </>}
+            <button className="info-md-save" onClick={onSubmit}>저장</button>
+            <button className="info-md-cancel" onClick={toggleEditing}>취소</button>
+            </>
+            }
         </div>
     );
 }
