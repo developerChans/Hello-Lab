@@ -58,7 +58,6 @@ const LabNotice = ({job, data}) =>{
                 <LabNoticeList labId={id} list={list}/>
                 </ul>
             </div>
-        <Route path='/lab/:id/main/notice/:id'><LabNoticeDetail labId={id}/></Route>
 
         </div>
     );
