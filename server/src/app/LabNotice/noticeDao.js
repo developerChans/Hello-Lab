@@ -73,80 +73,24 @@ async function deleteNotice(con, deleteNoticeInfo) {
   }
 }
 
-async function insertComment(con, insertCommentInfo) {
-  const insertCommentQuery = `INSERT INTO LabNoticeComment(noticeId, content) VALUES(?,?) `;
-  try {
-    await con.beginTransaction();
-    const row = await con.query(insertCommentQuery, insertCommentInfo);
-    await con.commit();
-    return row[0];
-  } catch (e) {
-    await con.rollback();
-    con.release();
-    console.log(`query error \n ${e}`);
-    return false;
-  }
-}
+const insertCommentQuery = `
+INSERT INTO LabNoticeComment(noticeId, content, userId) VALUES (?,?,?)
+`;
 
-async function getComment(con, noticeId) {
-  const getCommentQuery = `SELECT * FROM LabNoticeComment WHERE noticeId = ${noticeId} AND parentCommentId <=> null order by createAt asc`;
-  try {
-    await con.beginTransaction();
-    const row = await con.query(getCommentQuery);
-    await con.commit();
-    return row[0];
-  } catch (e) {
-    await con.rollback();
-    con.release();
-    console.log(`query error \n ${e}`);
-  }
-}
-async function updateComment(con, updateCommentInfo) {
-  const updateCommentQuery = `UPDATE LabNoticeComment SET content = ? WHERE noticeId = ? AND  id = ?`;
-  try {
-    await con.beginTransaction();
-    const row = await con.query(updateCommentQuery, updateCommentInfo);
-    await con.commit();
-    return row[0].affectedRows;
-  } catch (e) {
-    await con.rollback();
-    con.release();
-    console.log(`query error \n ${e}`);
-    return false;
-  }
-}
+const getCommentQuery = `SELECT * FROM LabNoticeComment WHERE noticeId = ? AND parentCommentId <=> null order by createdAt asc`;
 
-async function deleteComment(con, commentId) {
-  const deleteCommentQuery = `DELETE FROM LabNoticeComment WHERE id = ${commentId}`;
-  try {
-    await con.beginTransaction();
-    const row = await con.query(deleteCommentQuery);
-    await con.commit();
-    con.release();
-    return row[0].affectedRows;
-  } catch (e) {
-    await con.rollback();
-    con.release();
-    console.log(`query error \n ${e}`);
-  }
-}
+const updateCommentQuery = `UPDATE LabNoticeComment SET content = ? WHERE noticeId = ? AND  id = ?`;
 
-async function insertReply(con, createReplyInfo) {
-  const insertReplyQuery = `INSERT INTO LabNoticeComment(content, parentCommentId, noticeId) VALUES(?, ?, ?)`;
-  try {
-    await con.beginTransaction();
-    const row = await con.query(insertReplyQuery, createReplyInfo);
-    await con.commit();
-    con.release();
-    return row[0];
-  } catch (e) {
-    await con.rollback();
-    con.release();
-    console.log(`query error \n ${e}`);
-  }
-}
+const deleteCommentQuery = `DELETE FROM LabNoticeComment WHERE id = ?`;
+
+const insertReplyQuery = `INSERT INTO LabNoticeComment(content, parentCommentId, noticeId, userId) VALUES(?, ?, ?, ?)`;
 
 const getReplyQuery = `SELECT * FROM LabNoticeComment WHERE parentCommentId = ? ORDER BY createAt asc`;
+const getACommentById = `
+SELECT userId
+FROM LabNoticeComment 
+WHERE id = ?
+`;
 
 module.exports = {
   insertNoticeInfo,
@@ -154,10 +98,11 @@ module.exports = {
   getOneNotice,
   updateNotice,
   deleteNotice,
-  insertComment,
-  getComment,
-  updateComment,
-  deleteComment,
-  insertReply,
+  updateCommentQuery,
+  deleteCommentQuery,
+  insertReplyQuery,
   getReplyQuery,
+  insertCommentQuery,
+  getCommentQuery,
+  getACommentById,
 };

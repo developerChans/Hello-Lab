@@ -6,15 +6,15 @@ const userService = require("../app/User/userService");
 module.exports = {
   async userAuth(req, res, next) {
     try {
-      console.log(`userId:`, req.cookies.userId);
-      console.log(`access:`, req.cookies.access);
+      // console.log(`userId:`, req.cookies.userId);
+      // console.log(`access:`, req.cookies.access);
       const accessToken = await verifyToken(req.cookies.access);
       const userId = req.cookies.userId;
       const retrieveFromUser = await userProvider.getTokenFromUser(userId);
       const getRefreshToken = retrieveFromUser.refreshToken;
       const refreshToken = verifyToken(getRefreshToken);
-      console.log(`accessToken:`, accessToken);
-      console.log(`refreshToken:`, refreshToken);
+      // console.log(`accessToken:`, accessToken);
+      // console.log(`refreshToken:`, refreshToken);
 
       const job = retrieveFromUser.job;
       req.userId = userId;
