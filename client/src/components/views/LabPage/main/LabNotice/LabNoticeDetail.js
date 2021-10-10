@@ -1,18 +1,29 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+import LabNoticeEdit from 'components/views/LabPage/main/LabNotice/LabNoticeEdit'
+
 import './style/noticeDetail.css'
+import LabNoticeComments from "./LabNoticeComments";
 const LabNoticeDetail = ({labId}) =>{
     // 댓글 만들자
 
     const [title, setTitle] = useState();
     const [date, setDate] = useState();
     const [content, setContent] = useState();
+    const [job, setJob] = useState()
 
     const [editing, setEditing] = useState(false);
 
     const noticeId = window.location.pathname.split('/')[5]
 
+    useEffect(()=>{
+        axios.get(`/app/users/auth`)
+        .then(response=>{
+            const {data: {job}} = response
+            setJob(job)
+        })
+    }, [])
 
     useEffect(()=>{
         axios.get(`/app/lab/${labId}/notices/${noticeId}`)
@@ -42,7 +53,7 @@ const LabNoticeDetail = ({labId}) =>{
     return(
         
     <div>
-        {editing ? (<></>):(<>
+        {job && editing ? (<><LabNoticeEdit labId={labId} noticeId={noticeId} prevTitle={title} prevContent={content}/></>):(<>
         <div className="notice-detail-header">
         <div className="notice-detail-title">
             <span>{title}</span>
@@ -51,9 +62,11 @@ const LabNoticeDetail = ({labId}) =>{
         </div>
         <div className="notice-detail-content">
             <div style={{'paddingBottom':'50px'}} dangerouslySetInnerHTML={ {__html: content} }></div>
+            {job && <>
             <button className="notice-detail-edit" onClick={onEditClick}>수정</button>
-            <button className="notice-detail-delete" onClick={onDeleteClick}>삭제</button>
+            <button className="notice-detail-delete" onClick={onDeleteClick}>삭제</button></>}
         </div>
+        <LabNoticeComments labId={labId} noticeId={noticeId}/>
         </>)}
     </div>);
 }
