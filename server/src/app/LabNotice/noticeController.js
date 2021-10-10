@@ -106,6 +106,7 @@ exports.deleteNotice = async (req, res) => {
 exports.createComment = async (req, res) => {
   const noticeId = req.params.noticeId;
   const content = req.body.content;
+  const userId = req.userId;
 
   if (!content) {
     res.status(400).json({
@@ -114,7 +115,7 @@ exports.createComment = async (req, res) => {
     });
   }
 
-  const createCommentInfo = [noticeId, content];
+  const createCommentInfo = [noticeId, content, userId];
   try {
     const result = await noticeService.createComment(createCommentInfo);
     result
@@ -125,7 +126,7 @@ exports.createComment = async (req, res) => {
         });
   } catch (e) {
     console.log(`Routing Error \n ${e}`);
-    res.status(500);
+    return res.status(500);
   }
 };
 
@@ -134,13 +135,11 @@ exports.getComment = async (req, res) => {
 
   try {
     const result = await noticeProvider.getComment(noticeId);
-    if (result === undefined) {
-      throw Error("최상단 오류를 확인하세요");
-    }
+    console.log(result);
     return res.status(200).send(result);
   } catch (e) {
     console.log(`Routing Error \n ${e}`);
-    res.status(500).json(`${JSON.stringify(e)}`);
+    return res.status(500).json(`${JSON.stringify(e)}`);
   }
 };
 
@@ -148,6 +147,7 @@ exports.updateComment = async (req, res) => {
   const noticeId = req.params.noticeId;
   const commentId = req.params.commentId;
   const content = req.body.content;
+  const userId = req.userId;
   if (!content) {
     res.status(400).json({
       success: false,
@@ -157,7 +157,12 @@ exports.updateComment = async (req, res) => {
 
   const updateCommentInfo = [content, noticeId, commentId];
   try {
-    const result = await noticeService.updateComment(updateCommentInfo);
+    const result = await noticeService.updateComment(updateCommentInfo, userId);
+    if (result === "No User") {
+      return res
+        .status(404)
+        .json({ success: false, message: "작성자만 수정 가능합니다." });
+    }
     return result
       ? res
           .status(201)
@@ -174,11 +179,13 @@ exports.updateComment = async (req, res) => {
 
 exports.deleteComment = async (req, res) => {
   const commentId = req.params.commentId;
-
+  const userId = req.userId;
   try {
-    const result = await noticeService.deleteComment(commentId);
-    if (result === undefined) {
-      throw Error("최상단 에러를 확인하시오");
+    const result = await noticeService.deleteComment(commentId, userId);
+    if (result === "No User") {
+      return res
+        .status(404)
+        .json({ success: false, message: "작성자만 삭제 가능합니다." });
     }
     return result
       ? res
@@ -198,6 +205,7 @@ exports.createReply = async (req, res) => {
   const noticeId = req.params.noticeId;
   const commentId = req.params.commentId;
   const content = req.body.content;
+  const userId = req.userId;
 
   if (!content) {
     res.status(400).json({
@@ -206,7 +214,7 @@ exports.createReply = async (req, res) => {
     });
   }
 
-  const createReplyInfo = [content, commentId, noticeId];
+  const createReplyInfo = [content, commentId, noticeId, userId];
   try {
     const result = await noticeService.createReply(createReplyInfo);
     if (result === undefined) {
