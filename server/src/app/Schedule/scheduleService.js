@@ -11,16 +11,43 @@ const {errResponse} = require("../../../config/response");
 const {connect} = require("http2");
 
 exports.createSchedule = async function (startDate, content, labId, finishDate, calendarTopicId, location) {
-    //try {
+    const connection = await pool.getConnection(async(conn) => conn);
+    try {
+
+        if(startDate == NULL) {
+            return errResponse(baseResponse.SCHEDULE_DATE_EMPTY);
+        }
+
+        if(finishDate == NULL) {
+            return errResponse(baseResponse.SCHEDULE_DATE_EMPTY);
+        }
+
+        if(content.length < 1) {
+            return errResponse(baseResponse.SCHEDULE_CONTENT_EMPTY)
+        }
+
+        if(calendarTopicId == NULL) {
+            return errResponse(baseResponse.SCHEDULE_TOPIC_EMPTY)
+        }
+
         const insertScheduleParams = [startDate, content, labId, finishDate, calendarTopicId, location];
-        const connection = await pool.getConnection(async(conn) => conn);
         const scheduleResult = await scheduleDao.createSchedule(connection, insertScheduleParams);
         console.log(`추가된 내용 : ${scheduleResult[0].insertId}`);
-        connection.release();
-
+        
+        await connection.commit();
         return response(baseResponse.SUCCESS);
 
-    //}   //catch(console.error();)
+    }   catch(err) {
+        await connection.rollback();
+        console.log(
+            `App - postSchedule Service error\n: ${err.message} \n${JSON.stringify(
+              err
+            )}`
+          );
+        return errResponse(baseResponse.DB_ERROR);
+    } finally {
+        connection.release();
+    }
 };
 
 exports.updateScheduleStatus = async function (labScheduleIdx, labIdx) {
@@ -39,13 +66,38 @@ exports.updateScheduleStatus = async function (labScheduleIdx, labIdx) {
 };
 
 exports.changeSchedule = async function (startDate, content, finishDate, calendarTopicId, location, labScheduleIdx, labIdx) {
+    const connection = await pool.getConnection(async(conn) => conn);
     try {
-        const connection = await pool.getConnection(async(conn) => conn);
-        const changeScheduleResult = await scheduleDao.changeSchedule(connection, startDate, content, finishDate, calendarTopicId, location, labScheduleIdx, labIdx);
 
+        if(startDate == NULL) {
+            return errResponse(baseResponse.SCHEDULE_DATE_EMPTY);
+        }
+
+        if(finishDate == NULL) {
+            return errResponse(baseResponse.SCHEDULE_DATE_EMPTY);
+        }
+
+        if(content.length < 1) {
+            return errResponse(baseResponse.SCHEDULE_CONTENT_EMPTY)
+        }
+
+        if(calendarTopicId == NULL) {
+            return errResponse(baseResponse.SCHEDULE_TOPIC_EMPTY)
+        }
+
+        const changeScheduleResult = await scheduleDao.changeSchedule(connection, startDate, content, finishDate, calendarTopicId, location, labScheduleIdx, labIdx);
+        await connection.commit();
         return response(baseResponse.SUCCESS);
         
     } catch(err) {
+        await connection.rollback();
+        console.log(
+            `App - changeSchedule Service error\n: ${err.message} \n${JSON.stringify(
+              err
+            )}`
+          );
         return errResponse(baseResponse.DB_ERROR);
+    } finally {
+        connection.release();
     }
 };
