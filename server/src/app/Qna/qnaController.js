@@ -42,6 +42,15 @@ exports.updateQna = async (req, res) => {
   const labId = req.params.labId;
   const qnaId = req.params.qnaId;
   const content = req.body.content;
+  const userId = req.userId;
+
+  const userCheck = await provider.userCheck(qnaId);
+  if (userId != userCheck) {
+    return res
+      .status(404)
+      .json({ success: false, message: "작성자만 수정 가능합니다." });
+  }
+
   if (!content) {
     return res
       .status(400)
@@ -63,12 +72,18 @@ exports.updateQna = async (req, res) => {
   }
 };
 
-// 삭제 권한 생각
-// 작성자만 삭제 -> userAuth 건후 req.userId로 확인으로 구현 가능
 exports.deleteQna = async (req, res) => {
   const labId = req.params.labId;
   const qnaId = req.params.qnaId;
   const deleteInfo = [qnaId, labId];
+  const userId = req.userId;
+
+  const userCheck = await provider.userCheck(qnaId);
+  if (userId != userCheck) {
+    return res
+      .status(404)
+      .json({ success: false, message: "작성자만 삭제 가능합니다." });
+  }
 
   try {
     const result = await service.deleteQna(deleteInfo);
@@ -117,7 +132,6 @@ exports.getQnaReply = async (req, res) => {
   const labId = req.params.labId;
   const qnaId = req.params.qnaId;
   const getQnaReplyInfo = [qnaId, labId];
-  console.log(getQnaReplyInfo);
   try {
     const result = await provider.getQnaReply(getQnaReplyInfo);
     errorCheck(result);

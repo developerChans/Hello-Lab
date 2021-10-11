@@ -12,10 +12,10 @@ module.exports = function (app) {
   app.get("/app/qna/:labId", controller.getQna);
 
   // 질문 수정 api
-  app.patch("/app/qna/:labId/:qnaId", controller.updateQna);
+  app.patch("/app/qna/:labId/:qnaId", userAuth, controller.updateQna);
 
   // 질문 삭제 api
-  app.delete("/app/qna/:labId/:qnaId", controller.deleteQna);
+  app.delete("/app/qna/:labId/:qnaId", userAuth, controller.deleteQna);
 
   // 질문 대댓글 생성 api
   app.post("/app/qna/:labId/:qnaId", userAuth, controller.createQnaReply);

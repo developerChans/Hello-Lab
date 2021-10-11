@@ -150,7 +150,6 @@ exports.getComment = async (req, res) => {
 
   try {
     const result = await noticeProvider.getComment(noticeId);
-    console.log(result);
     return res.status(200).send(result);
   } catch (e) {
     console.log(`Routing Error \n ${e}`);
