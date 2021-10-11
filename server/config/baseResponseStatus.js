@@ -125,6 +125,42 @@ module.exports = {
     message: "이름은 30자리 미만으로 입력해주세요.",
   },
 
+  PROCESS_TITLE_EMPTY: {
+    isSuccess: false,
+    code: 2021,
+    message: "제목을 입력 해주세요.",
+  },
+
+  PROCESS_DATE_EMPTY: {
+    isSuccess: false,
+    code: 2022,
+    message: "날짜를 입력 해주세요.",
+  },
+
+  PROCESS_CONTENT_EMPTY: {
+    isSuccess: false,
+    code: 2023,
+    message: "내용를 입력 해주세요.",
+  },
+
+  SCHEDULE_CONTENT_EMPTY: {
+    isSuccess: false,
+    code: 2024,
+    message: "날짜를 입력 해주세요.",
+  },
+
+  SCHEDULE_DATE_EMPTY: {
+    isSuccess: false,
+    code: 2025,
+    message: "날짜를 입력 해주세요.",
+  },
+
+  SCHEDULE_TOPIC_EMPTY: {
+    isSuccess: false,
+    code: 2026,
+    message: "주제를 입력 해주세요.",
+  },
+
   // Response error
   SIGNUP_REDUNDANT_EMAIL: {
     isSuccess: false,

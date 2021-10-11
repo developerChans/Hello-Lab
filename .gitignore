@@ -9,6 +9,6 @@ secret.js
 
 log
 
-database
+database.js
 
 .env.local
