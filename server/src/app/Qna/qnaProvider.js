@@ -32,3 +32,17 @@ exports.getQnaReply = async (getQnaReplyInfo) => {
     con.release();
   }
 };
+
+exports.userCheck = async (qnaId) => {
+  const con = await pool.getConnection(async (conn) => conn);
+  const query = dao.getUserIdById;
+
+  try {
+    const row = await con.query(query, qnaId);
+    return row[0][0].userId;
+  } catch (e) {
+    console.log("");
+  } finally {
+    con.release();
+  }
+};

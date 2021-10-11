@@ -1,15 +1,20 @@
 const noticeService = require("./noticeService");
 const noticeProvider = require("./noticeProvider");
+const joi = require("./noticeJoi");
+const { emit } = require("nodemon");
 
 exports.createNotice = async (req, res) => {
   const { title, content } = req.body;
   const labId = req.params.labId;
   const userId = req.userId;
+  const schema = joi.createNoticeJoi;
 
-  if (!title || !content) {
-    return res.status(400).json({
+  try {
+    await schema.validateAsync(req.body);
+  } catch (e) {
+    return res.status(404).json({
       success: false,
-      message: "제목(title)과 내용(content)는 필수 값 입니다.",
+      message: e.message,
     });
   }
 
@@ -22,6 +27,7 @@ exports.createNotice = async (req, res) => {
       : res.json({ success: false, message: "생성 실패" });
   } catch (e) {
     console.log(`Routing Error \n ${e}`);
+    return res.status(500);
   }
 };
 
@@ -29,9 +35,10 @@ exports.getAllNotice = async (req, res) => {
   const labId = req.params.labId;
   try {
     const result = await noticeProvider.getAllNotice(labId);
-    return res.send(result);
+    return res.status(200).send(result);
   } catch (e) {
     console.log(`Routing Error\n ${e}`);
+    return res.status(500);
   }
 };
 
@@ -61,6 +68,13 @@ exports.updateNotice = async (req, res) => {
       success: false,
       message: "해당 noticeId를 가진 공지가 존재하지 않습니다.",
     });
+  }
+
+  const schema = joi.updateNoticeJoi;
+  try {
+    await schema.validateAsync(req.body);
+  } catch (e) {
+    return res.status(400).json({ success: false, message: e.message });
   }
 
   const { title, content } = req.body;
@@ -108,6 +122,7 @@ exports.createComment = async (req, res) => {
   const content = req.body.content;
   const userId = req.userId;
 
+  // 한가지기 때문에 joi 처리 x
   if (!content) {
     res.status(400).json({
       success: false,
@@ -135,7 +150,6 @@ exports.getComment = async (req, res) => {
 
   try {
     const result = await noticeProvider.getComment(noticeId);
-    console.log(result);
     return res.status(200).send(result);
   } catch (e) {
     console.log(`Routing Error \n ${e}`);

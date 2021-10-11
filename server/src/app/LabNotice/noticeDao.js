@@ -14,7 +14,7 @@ async function insertNoticeInfo(con, createNoticeEntity) {
 }
 
 async function getAllNotice(con, labId) {
-  const getAllNoticeQuery = `SELECT title,id, createdAt FROM LabNotice WHERE labId = ${labId}`;
+  const getAllNoticeQuery = `SELECT title,id, createdAt FROM LabNotice WHERE labId = ${labId} AND status = 0`;
   try {
     await con.beginTransaction();
     const row = await con.query(getAllNoticeQuery);
@@ -77,7 +77,11 @@ const insertCommentQuery = `
 INSERT INTO LabNoticeComment(noticeId, content, userId) VALUES (?,?,?)
 `;
 
-const getCommentQuery = `SELECT * FROM LabNoticeComment WHERE noticeId = ? AND parentCommentId <=> null order by createdAt asc`;
+const getCommentQuery = `
+SELECT l.id, l.content, l.createdAt, l.updatedAt, u.name 
+FROM LabNoticeComment l join User u On l.userId = u.id 
+WHERE noticeId = ? AND parentCommentId 
+<=> null order by createdAt asc`;
 
 const updateCommentQuery = `UPDATE LabNoticeComment SET content = ? WHERE noticeId = ? AND  id = ?`;
 
@@ -85,7 +89,12 @@ const deleteCommentQuery = `DELETE FROM LabNoticeComment WHERE id = ?`;
 
 const insertReplyQuery = `INSERT INTO LabNoticeComment(content, parentCommentId, noticeId, userId) VALUES(?, ?, ?, ?)`;
 
-const getReplyQuery = `SELECT * FROM LabNoticeComment WHERE parentCommentId = ? ORDER BY createAt asc`;
+const getReplyQuery = `
+SELECT l.id,l.content, l.createdAt, l.updatedAt, u.name
+FROM LabNoticeComment l join User u ON l.userId = u.id
+WHERE parentCommentId = ? 
+ORDER BY l.createdAt asc`;
+
 const getACommentById = `
 SELECT userId
 FROM LabNoticeComment 

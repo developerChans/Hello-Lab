@@ -30,6 +30,12 @@ SELECT q.*, u.name
 FROM LabQna q JOIN User u ON u.id = q.userId
 WHERE q.parentId = ? AND q.labId = ? AND q.status = 0
 `;
+
+const getUserIdById = `
+SELECT userId 
+FROM LabQna
+WHERE id = ?
+`;
 module.exports = {
   insertQnaQuery,
   selectQnaQuery,
@@ -37,4 +43,5 @@ module.exports = {
   deleteQnaQuery,
   insertQnaReplyQuery,
   selectQnaReplyQuery,
+  getUserIdById,
 };
