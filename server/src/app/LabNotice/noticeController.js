@@ -1,15 +1,20 @@
 const noticeService = require("./noticeService");
 const noticeProvider = require("./noticeProvider");
+const joi = require("./noticeJoi");
+const { emit } = require("nodemon");
 
 exports.createNotice = async (req, res) => {
   const { title, content } = req.body;
   const labId = req.params.labId;
   const userId = req.userId;
+  const schema = joi.createNoticeJoi;
 
-  if (!title || !content) {
-    return res.status(400).json({
+  try {
+    await schema.validateAsync(req.body);
+  } catch (e) {
+    return res.status(404).json({
       success: false,
-      message: "제목(title)과 내용(content)는 필수 값 입니다.",
+      message: e.message,
     });
   }
 
@@ -22,6 +27,7 @@ exports.createNotice = async (req, res) => {
       : res.json({ success: false, message: "생성 실패" });
   } catch (e) {
     console.log(`Routing Error \n ${e}`);
+    return res.status(500);
   }
 };
 
@@ -29,9 +35,10 @@ exports.getAllNotice = async (req, res) => {
   const labId = req.params.labId;
   try {
     const result = await noticeProvider.getAllNotice(labId);
-    return res.send(result);
+    return res.status(200).send(result);
   } catch (e) {
     console.log(`Routing Error\n ${e}`);
+    return res.status(500);
   }
 };
 
@@ -61,6 +68,13 @@ exports.updateNotice = async (req, res) => {
       success: false,
       message: "해당 noticeId를 가진 공지가 존재하지 않습니다.",
     });
+  }
+
+  const schema = joi.updateNoticeJoi;
+  try {
+    await schema.validateAsync(req.body);
+  } catch (e) {
+    return res.status(400).json({ success: false, message: e.message });
   }
 
   const { title, content } = req.body;
@@ -106,7 +120,9 @@ exports.deleteNotice = async (req, res) => {
 exports.createComment = async (req, res) => {
   const noticeId = req.params.noticeId;
   const content = req.body.content;
+  const userId = req.userId;
 
+  // 한가지기 때문에 joi 처리 x
   if (!content) {
     res.status(400).json({
       success: false,
@@ -114,7 +130,7 @@ exports.createComment = async (req, res) => {
     });
   }
 
-  const createCommentInfo = [noticeId, content];
+  const createCommentInfo = [noticeId, content, userId];
   try {
     const result = await noticeService.createComment(createCommentInfo);
     result
@@ -125,7 +141,7 @@ exports.createComment = async (req, res) => {
         });
   } catch (e) {
     console.log(`Routing Error \n ${e}`);
-    res.status(500);
+    return res.status(500);
   }
 };
 
@@ -134,13 +150,10 @@ exports.getComment = async (req, res) => {
 
   try {
     const result = await noticeProvider.getComment(noticeId);
-    if (result === undefined) {
-      throw Error("최상단 오류를 확인하세요");
-    }
     return res.status(200).send(result);
   } catch (e) {
     console.log(`Routing Error \n ${e}`);
-    res.status(500).json(`${JSON.stringify(e)}`);
+    return res.status(500).json(`${JSON.stringify(e)}`);
   }
 };
 
@@ -148,6 +161,7 @@ exports.updateComment = async (req, res) => {
   const noticeId = req.params.noticeId;
   const commentId = req.params.commentId;
   const content = req.body.content;
+  const userId = req.userId;
   if (!content) {
     res.status(400).json({
       success: false,
@@ -157,7 +171,12 @@ exports.updateComment = async (req, res) => {
 
   const updateCommentInfo = [content, noticeId, commentId];
   try {
-    const result = await noticeService.updateComment(updateCommentInfo);
+    const result = await noticeService.updateComment(updateCommentInfo, userId);
+    if (result === "No User") {
+      return res
+        .status(404)
+        .json({ success: false, message: "작성자만 수정 가능합니다." });
+    }
     return result
       ? res
           .status(201)
@@ -174,11 +193,13 @@ exports.updateComment = async (req, res) => {
 
 exports.deleteComment = async (req, res) => {
   const commentId = req.params.commentId;
-
+  const userId = req.userId;
   try {
-    const result = await noticeService.deleteComment(commentId);
-    if (result === undefined) {
-      throw Error("최상단 에러를 확인하시오");
+    const result = await noticeService.deleteComment(commentId, userId);
+    if (result === "No User") {
+      return res
+        .status(404)
+        .json({ success: false, message: "작성자만 삭제 가능합니다." });
     }
     return result
       ? res
@@ -198,6 +219,7 @@ exports.createReply = async (req, res) => {
   const noticeId = req.params.noticeId;
   const commentId = req.params.commentId;
   const content = req.body.content;
+  const userId = req.userId;
 
   if (!content) {
     res.status(400).json({
@@ -206,7 +228,7 @@ exports.createReply = async (req, res) => {
     });
   }
 
-  const createReplyInfo = [content, commentId, noticeId];
+  const createReplyInfo = [content, commentId, noticeId, userId];
   try {
     const result = await noticeService.createReply(createReplyInfo);
     if (result === undefined) {
