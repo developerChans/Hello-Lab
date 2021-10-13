@@ -9,8 +9,8 @@ import { FaUserCircle } from "react-icons/fa";
 import {IoIosApps, IoIosCalendar} from "react-icons/io";
 import { HiOutlineDocumentSearch } from 'react-icons/hi';
 
-import LabMainPage from 'components/views/LabPage/main/_LabMainPage';
-import LabResearchPage from 'components/views/LabPage/research/_LabResearchPage';
+import LabMainPage from 'pages/LabPage/main/_LabMainPage';
+import LabResearchPage from 'pages/LabPage/research/_LabResearchPage';
 import {Route, useHistory} from 'react-router-dom';
 
 import { connect } from 'react-redux';

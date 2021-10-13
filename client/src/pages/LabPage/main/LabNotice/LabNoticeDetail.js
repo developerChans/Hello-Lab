@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-import LabNoticeEdit from 'components/views/LabPage/main/LabNotice/LabNoticeEdit'
+import LabNoticeEdit from 'pages/LabPage/main/LabNotice/LabNoticeEdit'
 
 import './style/noticeDetail.css'
 import LabNoticeComments from "./LabNoticeComments";

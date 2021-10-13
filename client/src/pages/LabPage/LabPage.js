@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Route, useLocation, useHistory } from "react-router-dom";
 import "../views.css";
-import LabTemplate from 'components/views/LabPage/LabTemplate';
-import LabMainPage from "components/views/LabPage/main/_LabMainPage";
-import LabResearchPage from "components/views/LabPage/research/_LabResearchPage";
-import LabCalendar from "components/views/LabPage/LabCalendar";
+import LabTemplate from 'pages/LabPage/LabTemplate';
+import LabMainPage from "pages/LabPage/main/_LabMainPage";
+import LabResearchPage from "pages/LabPage/research/_LabResearchPage";
+import LabCalendar from "pages/LabPage/LabCalendar";
 import { connect } from "react-redux";
 
 

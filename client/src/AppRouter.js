@@ -1,13 +1,13 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import LandingPage from 'components/views/LandingPage/LandingPage';
-import LoginPage from 'components/views/LoginPage/LoginPage';
-import RegisterPage from 'components/views/RegisterPage/RegisterPage';
+import LoginPage from 'pages/Users/LoginPage/LoginPage';
+import RegisterPage from 'pages/Users/RegisterPage/RegisterPage';
 import RecruitmentPage from 'components/views/RecruitmentPage/RecruitmentPage';
-import MyPage from "components/views/MyPage/MyPage";
-import LabPage from "components/views/LabPage/LabPage";
-import OpenlabPage from "components/views/OpenlabPage/OpenlabPage";
+import MyPage from "pages/Users/MyPage/MyPage";
+import LabPage from "pages/LabPage/LabPage";
+import OpenlabPage from "pages/OpenlabPage/OpenlabPage";
 
-import MenuBar from "components/MenuBar/MenuBar";
+import MenuBar from "pages/Bars/MenuBar/MenuBar";
 import ExamplePage from "components/views/ExamplePage/ExamplePage";
 
 const AppRouter = ({isLoggedIn, needMenubar}) =>{
