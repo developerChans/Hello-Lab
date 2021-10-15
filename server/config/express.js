@@ -46,6 +46,7 @@ module.exports = function () {
   require("../src/app/LabMember/memberRoute")(app);
   require("../src/app/LabIntroduction/introductionRoute")(app);
   require("../src/app/Process/processRoute")(app);
+  require("../src/app/Research/researchRoute")(app);
 
   return app;
 };
