@@ -1,11 +1,11 @@
 import {Route} from 'react-router-dom';
 import {useState, useEffect} from 'react';
-import LabInfo from 'components/views/LabPage/main/LabInfo/LabInfo';
-import LabNotice from 'components/views/LabPage/main/LabNotice/LabNotice';
-import LabCal from 'components/views/LabPage/LabCalendar';
-import LabAsk from 'components/views/LabPage/main/LabAsk/LabAsk';
-import LabMember from 'components/views/LabPage/main/LabMember';
-import LabNoticeDetail from 'components/views/LabPage/main/LabNotice/LabNoticeDetail';
+import LabInfo from 'pages/LabPage/main/LabInfo/LabInfo';
+import LabNotice from 'pages/LabPage/main/LabNotice/LabNotice';
+import LabCal from 'pages/LabPage/LabCalendar';
+import LabAsk from 'pages/LabPage/main/LabAsk/LabAsk';
+import LabMember from 'pages/LabPage/main/LabMember';
+import LabNoticeDetail from 'pages/LabPage/main/LabNotice/LabNoticeDetail';
 
 const LabMainPage = ({data, job}) =>{
 

@@ -1,6 +1,6 @@
-import LabBar from "./template/LabBar";
-import LabHeader from "./template/LabHeader";
-import LabSideBar from "./template/LabSideBar";
+import LabBar from "../Bars/Labtemplate/LabBar";
+import LabHeader from "../Bars/Labtemplate/LabHeader";
+import LabSideBar from "../Bars/Labtemplate/LabSideBar";
 
 const LabTemplate = ({data}) =>{
     

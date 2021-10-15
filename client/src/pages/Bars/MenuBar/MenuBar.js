@@ -3,8 +3,8 @@ import {BiLinkExternal} from 'react-icons/bi';
 
 import './MenuBar.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import ProfileBtn from 'components/MenuBar/ProfileBtn'
-import SignBtn from 'components/MenuBar/SignBtn';
+import ProfileBtn from 'pages/Bars/MenuBar/ProfileBtn'
+import SignBtn from 'pages/Bars/MenuBar/SignBtn';
 // auth에 따라 보이기 안보이기 구현
 
 const user_univ = "https://www.dankook.ac.kr/web/kor";
