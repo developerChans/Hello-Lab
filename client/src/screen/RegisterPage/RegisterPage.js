@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
-import '../../views.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import './RegisterPage.css'
+import 'screen/RegisterPage/styles/RegisterPage.css'
 import RegisterForm from './RegisterForm'
 
 function RegisterPage() {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios'
 
-import './LoginPage.css';
+import 'screen/LoginPage/styles/LoginPage.css';
 import 'bootstrap/dist/css/bootstrap.css';
 
 const LoginForm = ({auth}) =>{

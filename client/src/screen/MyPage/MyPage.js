@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import './MyPage.css';
-import '../../views.css';
-import MyPageLab from './MyPageLab'
-import CreateLab from './CreateLab'
+import 'screen/MyPage/styles/MyPage.css';
+import MyPageLab from './components/MyPageLab'
+import CreateLab from './components/CreateLab'
 
 function MyPage() {
 

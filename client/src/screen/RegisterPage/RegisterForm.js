@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.css';
-import './RegisterPage.css'
+import 'screen/RegisterPage/styles/RegisterPage.css'
 
 
 const RegisterForm = ()=>{

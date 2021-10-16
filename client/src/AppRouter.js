@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import LoginPage from 'pages/Users/LoginPage/LoginPage';
-import RegisterPage from 'pages/Users/RegisterPage/RegisterPage';
-import MyPage from "pages/Users/MyPage/MyPage";
+import LoginPage from 'screen/LoginPage/LoginPage';
+import RegisterPage from 'screen/RegisterPage/RegisterPage';
+import MyPage from "screen/MyPage/MyPage";
 import LabPage from "pages/LabPage/LabPage";
-import OpenlabPage from "pages/OpenlabPage/OpenlabPage";
+import OpenlabPage from "screen/OpenlabPage/OpenlabPage";
 
 import MenuBar from "pages/Bars/MenuBar/MenuBar";
 
