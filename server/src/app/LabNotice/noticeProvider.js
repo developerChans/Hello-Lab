@@ -27,16 +27,15 @@ exports.getOneNotice = async (labId, noticeId) => {
 };
 
 exports.getComment = async (noticeId) => {
+  const con = await pool.getConnection(async (conn) => conn);
+  const query = noticeDao.getCommentQuery;
   try {
-    const con = await pool.getConnection(async (conn) => conn);
-    const result = await noticeDao.getComment(con, noticeId);
-    if (result === undefined) {
-      throw Error("최상단 오류를 확인하세요");
-    }
-    con.release();
-    return result;
+    const row = await con.query(query, noticeId);
+    return row[0];
   } catch (e) {
-    console.log(`DB connection Error \n ${e}`);
+    console.log(`Provider Error \n ${e}`);
+  } finally {
+    con.release();
   }
 };
 

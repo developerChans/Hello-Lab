@@ -1,14 +1,11 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import LandingPage from 'components/views/LandingPage/LandingPage';
-import LoginPage from 'components/views/LoginPage/LoginPage';
-import RegisterPage from 'components/views/RegisterPage/RegisterPage';
-import RecruitmentPage from 'components/views/RecruitmentPage/RecruitmentPage';
-import MyPage from "components/views/MyPage/MyPage";
-import LabPage from "components/views/LabPage/LabPage";
-import OpenlabPage from "components/views/OpenlabPage/OpenlabPage";
+import LoginPage from 'screen/LoginPage/LoginPage';
+import RegisterPage from 'screen/RegisterPage/RegisterPage';
+import MyPage from "screen/MyPage/MyPage";
+import LabPage from "pages/LabPage/LabPage";
+import OpenlabPage from "screen/OpenlabPage/OpenlabPage";
 
-import MenuBar from "components/MenuBar/MenuBar";
-import ExamplePage from "components/views/ExamplePage/ExamplePage";
+import MenuBar from "pages/Bars/MenuBar/MenuBar";
 
 const AppRouter = ({isLoggedIn, needMenubar}) =>{
 
@@ -16,14 +13,12 @@ const AppRouter = ({isLoggedIn, needMenubar}) =>{
     <Router>
         {needMenubar ? <MenuBar isLoggedIn={isLoggedIn}/>:<></>}
         <Switch>
-          <Route exact path="/" component={LandingPage}></Route>
+          <Route exact path="/" component={OpenlabPage} />
           <Route exact path="/open" component={OpenlabPage} />
-          <Route exact path="/recruitment" component={RecruitmentPage} />
-          <Route exact path="/login">{isLoggedIn ? <LandingPage/>:<LoginPage/>}</Route>
-          <Route exact path="/register">{isLoggedIn ? <LandingPage/>:<RegisterPage/>}</Route>
+          <Route exact path="/login">{isLoggedIn ? <OpenlabPage/>:<LoginPage/>}</Route>
+          <Route exact path="/register">{isLoggedIn ? <OpenlabPage/>:<RegisterPage/>}</Route>
           <Route exact path="/mypage">{isLoggedIn ? <MyPage/>:<LoginPage/>}</Route>
           <Route path="/lab"><LabPage/></Route>
-          <Route exact path="/example"><ExamplePage/></Route>
         </Switch>
     </Router>
     );

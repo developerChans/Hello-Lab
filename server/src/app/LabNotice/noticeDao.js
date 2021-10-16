@@ -14,7 +14,7 @@ async function insertNoticeInfo(con, createNoticeEntity) {
 }
 
 async function getAllNotice(con, labId) {
-  const getAllNoticeQuery = `SELECT title,id, createdAt FROM LabNotice WHERE labId = ${labId}`;
+  const getAllNoticeQuery = `SELECT title,id, createdAt FROM LabNotice WHERE labId = ${labId} AND status = 0`;
   try {
     await con.beginTransaction();
     const row = await con.query(getAllNoticeQuery);
@@ -73,80 +73,33 @@ async function deleteNotice(con, deleteNoticeInfo) {
   }
 }
 
-async function insertComment(con, insertCommentInfo) {
-  const insertCommentQuery = `INSERT INTO LabNoticeComment(noticeId, content) VALUES(?,?) `;
-  try {
-    await con.beginTransaction();
-    const row = await con.query(insertCommentQuery, insertCommentInfo);
-    await con.commit();
-    return row[0];
-  } catch (e) {
-    await con.rollback();
-    con.release();
-    console.log(`query error \n ${e}`);
-    return false;
-  }
-}
+const insertCommentQuery = `
+INSERT INTO LabNoticeComment(noticeId, content, userId) VALUES (?,?,?)
+`;
 
-async function getComment(con, noticeId) {
-  const getCommentQuery = `SELECT * FROM LabNoticeComment WHERE noticeId = ${noticeId} AND parentCommentId <=> null order by createAt asc`;
-  try {
-    await con.beginTransaction();
-    const row = await con.query(getCommentQuery);
-    await con.commit();
-    return row[0];
-  } catch (e) {
-    await con.rollback();
-    con.release();
-    console.log(`query error \n ${e}`);
-  }
-}
-async function updateComment(con, updateCommentInfo) {
-  const updateCommentQuery = `UPDATE LabNoticeComment SET content = ? WHERE noticeId = ? AND  id = ?`;
-  try {
-    await con.beginTransaction();
-    const row = await con.query(updateCommentQuery, updateCommentInfo);
-    await con.commit();
-    return row[0].affectedRows;
-  } catch (e) {
-    await con.rollback();
-    con.release();
-    console.log(`query error \n ${e}`);
-    return false;
-  }
-}
+const getCommentQuery = `
+SELECT l.id, l.content, l.createdAt, l.updatedAt, u.name 
+FROM LabNoticeComment l join User u On l.userId = u.id 
+WHERE noticeId = ? AND parentCommentId 
+<=> null order by createdAt asc`;
 
-async function deleteComment(con, commentId) {
-  const deleteCommentQuery = `DELETE FROM LabNoticeComment WHERE id = ${commentId}`;
-  try {
-    await con.beginTransaction();
-    const row = await con.query(deleteCommentQuery);
-    await con.commit();
-    con.release();
-    return row[0].affectedRows;
-  } catch (e) {
-    await con.rollback();
-    con.release();
-    console.log(`query error \n ${e}`);
-  }
-}
+const updateCommentQuery = `UPDATE LabNoticeComment SET content = ? WHERE noticeId = ? AND  id = ?`;
 
-async function insertReply(con, createReplyInfo) {
-  const insertReplyQuery = `INSERT INTO LabNoticeComment(content, parentCommentId, noticeId) VALUES(?, ?, ?)`;
-  try {
-    await con.beginTransaction();
-    const row = await con.query(insertReplyQuery, createReplyInfo);
-    await con.commit();
-    con.release();
-    return row[0];
-  } catch (e) {
-    await con.rollback();
-    con.release();
-    console.log(`query error \n ${e}`);
-  }
-}
+const deleteCommentQuery = `DELETE FROM LabNoticeComment WHERE id = ?`;
 
-const getReplyQuery = `SELECT * FROM LabNoticeComment WHERE parentCommentId = ? ORDER BY createAt asc`;
+const insertReplyQuery = `INSERT INTO LabNoticeComment(content, parentCommentId, noticeId, userId) VALUES(?, ?, ?, ?)`;
+
+const getReplyQuery = `
+SELECT l.id,l.content, l.createdAt, l.updatedAt, u.name
+FROM LabNoticeComment l join User u ON l.userId = u.id
+WHERE parentCommentId = ? 
+ORDER BY l.createdAt asc`;
+
+const getACommentById = `
+SELECT userId
+FROM LabNoticeComment 
+WHERE id = ?
+`;
 
 module.exports = {
   insertNoticeInfo,
@@ -154,10 +107,11 @@ module.exports = {
   getOneNotice,
   updateNotice,
   deleteNotice,
-  insertComment,
-  getComment,
-  updateComment,
-  deleteComment,
-  insertReply,
+  updateCommentQuery,
+  deleteCommentQuery,
+  insertReplyQuery,
   getReplyQuery,
+  insertCommentQuery,
+  getCommentQuery,
+  getACommentById,
 };

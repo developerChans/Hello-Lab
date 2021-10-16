@@ -6,26 +6,20 @@ const userService = require("../app/User/userService");
 module.exports = {
   async userAuth(req, res, next) {
     try {
-      console.log(`userId:`, req.cookies.userId);
-      console.log(`access:`, req.cookies.access);
       const accessToken = await verifyToken(req.cookies.access);
       const userId = req.cookies.userId;
       const retrieveFromUser = await userProvider.getTokenFromUser(userId);
       const getRefreshToken = retrieveFromUser.refreshToken;
       const refreshToken = verifyToken(getRefreshToken);
-      console.log(`accessToken:`, accessToken);
-      console.log(`refreshToken:`, refreshToken);
 
       const job = retrieveFromUser.job;
       req.userId = userId;
       if (accessToken === null) {
         if (refreshToken === null) {
           //토큰 모두 없음
-          console.log(`토큰모두없음`);
           throw Error();
         } else {
           //accessToken만 만료
-          console.log(`accessToken재발급`);
           const newAccessToken = jwt.sign(
             {
               id: userId,
@@ -41,7 +35,6 @@ module.exports = {
       } else {
         //access token 존재, refresh token 만료
         if (refreshToken === null) {
-          console.log(`refreshToken재발급`);
           const newRefreshToken = jwt.sign(
             {
               id: userId,

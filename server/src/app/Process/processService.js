@@ -9,26 +9,75 @@ const {errResponse} = require("../../../config/response");
 const {connect} = require("http2");
 
 exports.postPrcoess = async function(labIdx, title, userIdx, standardDate) {
-    const postProcessParams = [labIdx, title, userIdx, standardDate];
     const connection = await pool.getConnection(async(conn) => conn);
-    const postProcessResult = await processDao.postProcess(connection, postProcessParams);
-    console.log(`프로세스 추가`);
-    connection.release();
+    try{
+        if(title.length < 1) {
+            return errResponse(baseResponse.PROCESS_TITLE_EMPTY);
+        }
 
-    return response(baseResponse.SUCCESS);
+        if(standardDate == NULL) {
+            return errResponse(baseResponse.PROCESS_DATE_EMPTY);
+        }
+
+        const postProcessParams = [labIdx, title, userIdx, standardDate];
+        const postProcessResult = await processDao.postProcess(connection, postProcessParams);
+        console.log(`프로세스 추가`);
+        await connection.commit();
+        return response(baseResponse.SUCCESS);
+    } catch(err) {
+        await connection.rollback();
+        console.log(
+            `App - postProcess Service error\n: ${err.message} \n${JSON.stringify(
+              err
+            )}`
+          );
+        return errResponse(baseResponse.DB_ERROR);
+    } finally {
+        connection.release();
+    }    
 };
 
 exports.postProcessContent = async function(processidx, content, importance, startDate, endDate, title) {
-    const postProcessContentParams =[processidx, content, importance, startDate, endDate, title];
     const connection = await pool.getConnection(async(conn) => conn);
-    const postProcessContentResult = await processDao.postProcessContent(connection, postProcessContentParams);
-    console.log(`프로세스 컨텐츠 추가`);
-    connection.release();
+    try{
+        if(content.length < 1) {
+            return errResponse(baseResponse.PROCESS_CONTENT_EMPTY);
+        }
 
-    return response(baseResponse.SUCCESS);
+        if(startDate == NULL) {
+            return errResponse(baseResponse.PROCESS_DATE_EMPTY);
+        }
+
+        if(endDate == NULL) {
+            return errResponse(baseResponse.PROCESS_DATE_EMPTY);
+        }
+
+        if(title.length < 1) {
+            return errResponse(baseResponse.PROCESS_TITLE_EMPTY);
+        }
+
+        const postProcessContentParams =[processidx, content, importance, startDate, endDate, title];
+        const postProcessContentResult = await processDao.postProcessContent(connection, postProcessContentParams);
+        console.log(`프로세스 컨텐츠 추가`);
+
+        await connection.commit();
+        return response(baseResponse.SUCCESS);
+
+    } catch (err) {
+        await connection.rollback();
+        console.log(
+            `App - postProcessConetent Service error\n: ${err.message} \n${JSON.stringify(
+              err
+            )}`
+          );
+        return errResponse(baseResponse.DB_ERROR);
+    } finally {
+        connection.release();
+    }
 };
 
 exports.postProcessTag = async function(processContentIdx, userIdx) {
+
     const postProcessTagParams = [processContentIdx, userIdx];
     const connection = await pool.getConnection(async(conn) => conn);
     const postProcessTagResult = await processDao.postProcessTag(connection, postProcessTagParams);
@@ -39,31 +88,73 @@ exports.postProcessTag = async function(processContentIdx, userIdx) {
 };
 
 exports.patchProcess = async function(title, standardDate, processIdx) {
+    const connection = await pool.getConnection(async(conn) => conn);
     try{
+        
+        if(title.length < 1) {
+            return errResponse(baseResponse.PROCESS_TITLE_EMPTY);
+        }
+
+        if(standardDate == NULL) {
+            return errResponse(baseResponse.PROCESS_DATE_EMPTY);
+        }
+
         const patchProcessParams = [title, standardDate, processIdx];
-        const connection = await pool.getConnection(async(conn) => conn);
         const patchProcessResult = await processDao.patchProcess(connection, patchProcessParams);
         // logger.SUCCESS("프로세스 수정 완료");
         console.log("프로세스 수정 완료");
-        connection.release();
+        await connection.commit();
         return response(baseResponse.SUCCESS);
     } catch(err) {
+        await connection.rollback;
+        console.log(
+            `App - patchProcess Service error\n: ${err.message} \n${JSON.stringify(
+              err
+            )}`
+          );
         return errResponse(baseResponse.DB_ERROR);
+    } finally {
+        connection.release();
     }
 };
 
 exports.patchProcessContent = async function(content, importance, startDate, endDate, title, processContentIdx) {
+    const connection = await pool.getConnection(async(conn) => conn);
     try {
+        if(content.length < 1) {
+            return errResponse(baseResponse.PROCESS_CONTENT_EMPTY);
+        }
+
+        if(startDate == NULL) {
+            return errResponse(baseResponse.PROCESS_DATE_EMPTY);
+        }
+
+        if(endDate == NULL) {
+            return errResponse(baseResponse.PROCESS_DATE_EMPTY);
+        }
+
+        if(title.length < 1) {
+            return errResponse(baseResponse.PROCESS_TITLE_EMPTY);
+        }
+
         const patchProcessContentParams = [content, importance, startDate, endDate, title, processContentIdx];
-        const connection = await pool.getConnection(async(conn) => conn);
         const patchProcessContentResult = await processDao.patchProcessContent(connection, patchProcessContentParams);
         // logger.SUCCESS("프로세스 컨텐츠 수정 완료");
         console.log("프로세스 컨텐츠 수정 완료");
-        connection.release();
+
+        await connection.commit();
         return response(baseResponse.SUCCESS);
 
     } catch(err) {
+        await connection.rollback;
+        console.log(
+            `App - patchProcessContent Service error\n: ${err.message} \n${JSON.stringify(
+              err
+            )}`
+          );
         return errResponse(baseResponse.DB_ERROR);
+    } finally {
+        connection.release();
     }
 }
 

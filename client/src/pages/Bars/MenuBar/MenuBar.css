@@ -1,0 +1,78 @@
+.hidden{
+    display: none;
+}
+#menubar{
+    position: sticky;
+    box-shadow: 1px 1px 10px 1px rgb(196, 196, 196);
+    z-index: 5;
+    top: 0;
+    left: 0;
+    width: 100vw;
+}
+#logo{
+    width: 100px;
+}
+
+#page_title{
+    width: 100px;
+    font-size: 18pt;
+    font-weight: bold;
+}
+
+.nav-item{
+    padding-right: 10px;
+}
+#profile_button{
+    width: 40px;
+    height: 40px;
+    z-index: 10;
+    overflow: hidden;
+    position: absolute;
+    top: 20px;
+    right:25px;
+}
+#profile_img{
+    position: relative;
+    left: 50%;
+    bottom: 10%;
+    transform: translateX(-50%);
+    width: 47px;
+    object-fit: cover;
+}
+
+.dropdown-menu{
+    position: absolute;
+    right:25px;
+    top: 65px; 
+    font-size: 10pt !important;
+}
+.show{
+    
+    display: block !important;
+}
+
+.dropdown-item:active{
+    background-color:rgb(196, 196, 196) !important;
+    color: black;
+}
+
+#other-page{
+    position: absolute;
+    right: 30px;
+    color: rgb(110, 110, 110);
+    z-index: 10;
+}
+
+#sign-in{
+    padding-right: 20px;
+}
+#sign-in:hover{
+    color: black;
+}
+#join:hover{
+    color: black;
+}
+
+.link-icon{
+    padding-left: 5px;
+}
