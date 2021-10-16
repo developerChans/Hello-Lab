@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import '../views.css';
+import '../../views.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import './RegisterPage.css'
 import RegisterForm from './RegisterForm'

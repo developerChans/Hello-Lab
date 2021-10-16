@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import './MyPage.css';
-import '../views.css';
+import '../../views.css';
 import MyPageLab from './MyPageLab'
 import CreateLab from './CreateLab'
 
