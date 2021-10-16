@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import {useDispatch} from 'react-redux';
 import {loginUser} from '../../../_actions/user_action'
-import '../views.css';
+import '../../views.css';
 import './LoginPage.css';
 import 'bootstrap/dist/css/bootstrap.css';
 

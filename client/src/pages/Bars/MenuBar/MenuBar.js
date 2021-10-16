@@ -1,4 +1,4 @@
-import logo from '../views/hellolab.png';
+import logo from 'pages/hellolab.png';
 import {BiLinkExternal} from 'react-icons/bi';
 
 import './MenuBar.css';
