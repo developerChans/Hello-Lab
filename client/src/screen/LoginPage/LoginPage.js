@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import {useDispatch} from 'react-redux';
-import {loginUser} from '../../../_actions/user_action'
-import '../../views.css';
-import './LoginPage.css';
+import {loginUser} from '../../_actions/user_action'
+import 'screen/LoginPage/styles/LoginPage.css';
 import 'bootstrap/dist/css/bootstrap.css';
 
 
-import LoginForm from './LoginForm'
+import LoginForm from './components/LoginForm'
 
 function LoginPage(props) {
   
