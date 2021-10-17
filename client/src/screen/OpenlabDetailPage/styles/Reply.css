@@ -1,0 +1,16 @@
+.reply {
+  position: relative;
+  top: 10px;
+}
+.reply-name {
+  font-size: 20px;
+  font-weight: 500;
+}
+.reply-content {
+  position: relative;
+  font-size: 18px;
+  line-height: 25px;
+}
+.reply-date {
+  font-size: 13px;
+}
