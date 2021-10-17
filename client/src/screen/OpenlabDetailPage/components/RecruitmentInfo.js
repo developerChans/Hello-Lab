@@ -26,6 +26,11 @@ const RecruitmentInfo = () => {
         <p>- 한 가지 분야가 아닌 다양한 분야를 학습할 의지가 있는 학생</p>
         <p>- 성실하고 적극적인 태도로 자기주도 학습 및 협업할 수 있는 학생</p>
       </div>
+      <div className="btn-position">
+        <button className="transmission-input" onClick={console.log(`click!`)}>
+          지원
+        </button>
+      </div>
     </div>
   );
 };

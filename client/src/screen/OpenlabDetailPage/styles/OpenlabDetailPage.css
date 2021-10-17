@@ -1,6 +1,7 @@
 .openlabDetailPage {
-  width: 1440px;
-  min-height: 2400px;
+  position: absolute;
+  width: 1850px;
+  min-height: 3000px;
   display: flex;
   z-index: -1;
   justify-content: center;
