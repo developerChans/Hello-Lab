@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Nanum+Gothic|Nanum+Myeongjo&display=swap&subset=korean'); 
-body { font-family: 'Nanum Gothic', serif !important; }
+body { font-family: 'Nanum Gothic', serif !important; 
+    background-color: #F6F6F6;
+}
 /*
 .hidden{
     display: none;
