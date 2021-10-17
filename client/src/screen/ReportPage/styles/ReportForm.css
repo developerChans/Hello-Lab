@@ -1,0 +1,124 @@
+#body {
+  position: absolute;
+  width: 900px;
+  height: 388px;
+  left: 30px;
+  top: 115px;
+
+  background: #ffffff;
+  box-shadow: 0px 3px 4px 2px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+}
+
+#title {
+  position: absolute;
+  width: 46.65px;
+  height: 33.49px;
+  left: 30px;
+  top: 20px;
+
+  font-family: NanumGothic;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 24px;
+
+  color: #000000;
+}
+
+#reportLimit {
+  position: absolute;
+  width: 756px;
+  height: 44px;
+  left: 105px;
+  top: 20px;
+
+  font-family: NanumGothic;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 24px;
+
+  color: #000000;
+}
+
+#line {
+  position: absolute;
+  width: 854.01px;
+  height: 0px;
+  left: 20px;
+  top: 60px;
+
+  border: 1px solid #6a6a6a;
+}
+
+#report {
+  position: absolute;
+  width: 105px;
+  height: 34px;
+  left: 30px;
+  top: 100px;
+
+  font-family: NanumGothic;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 20px;
+
+  color: #000000;
+}
+
+#reportInput {
+  position: absolute;
+  width: 715.01px;
+  height: 88.62px;
+  left: 145px;
+  top: 90px;
+
+  background: #f2f2f2;
+  border-radius: 10px;
+}
+
+#discussion {
+  position: absolute;
+  width: 154px;
+  height: 36px;
+  left: 30px;
+  top: 215px;
+
+  font-family: NanumGothic;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 20px;
+
+  color: #000000;
+}
+
+#discussionInput {
+  position: absolute;
+  width: 715.01px;
+  height: 89.48px;
+  left: 145px;
+  top: 215px;
+
+  background: #f2f2f2;
+  border-radius: 10px;
+}
+
+#submit-Button {
+  position: absolute;
+  width: 109px;
+  height: 30px;
+  left: 765px;
+  top: 325px;
+
+  font-family: NanumGothic;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 18px;
+  text-align: center;
+
+  color: #4a4a4a;
+}
