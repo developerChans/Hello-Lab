@@ -2,7 +2,7 @@
     display: none;
 }
 #menubar{
-    position: sticky;
+    position: fixed;
     box-shadow: 1px 1px 10px 1px rgb(196, 196, 196);
     z-index: 5;
     top: 0;

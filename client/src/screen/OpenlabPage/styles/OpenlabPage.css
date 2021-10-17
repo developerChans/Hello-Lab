@@ -1,0 +1,16 @@
+.openlab-container{
+    position: absolute;
+    width: 910px;
+    height: 1151px;
+    left: 155px;
+    background: #FFFFFF;
+    margin-top: 75px;
+}
+
+.openlab-card-container{
+    position: relative;
+    width: 750px;
+    left: 50%;
+    top: 320px;
+    transform: translateX(-50%);
+}

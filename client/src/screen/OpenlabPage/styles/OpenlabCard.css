@@ -1,0 +1,47 @@
+.openlab-card{
+    position: relative;
+    width: 355px;
+    height: 150px;
+    background: #FFFFFF;
+    box-shadow: 0px 3px 4px 2px rgb(0 0 0 / 25%);
+    border-radius: 10px;
+    display: inline-block;
+    margin: 10px;
+}
+
+
+.openlab-title-name{
+    cursor: pointer;
+    position: relative;
+    left: 25px;
+    top: 17px;
+    font-size: 17px;
+    font-weight: bold;
+}
+.openlab-title-name:hover{
+    text-decoration: underline;
+}
+.openlab-title-professor{
+    position: relative;
+    left: -75px;
+    top: 40px;
+    font-size: 14px;
+}
+.openlab-card-recruit{
+    left: 289px;
+    top: -12px;
+    font-size: 12px;
+    position: relative;
+}
+.openlab-card-content{
+
+    position: relative;
+    top: 22px;
+    width: 306px;
+    left: 25px;
+    height: 75px;
+    overflow: hidden;
+}
+.openlab-card-content span{
+    font-size: 13px;
+}

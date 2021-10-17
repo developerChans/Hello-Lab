@@ -1,0 +1,29 @@
+.openlab-sort{
+    position: absolute;
+    width: 850px;
+    height: 27px;
+    left: 50%;
+    transform: translate(-50%);
+    top: 173px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 15px;
+    line-height: 27px;
+    color: #000000;
+    text-align: right;
+}
+
+.openlab-sort-btn{
+    font-weight: normal;
+    border: none;
+    background: none;
+    
+    padding-left: 5px;
+    padding-right: 0px;
+}
+
+.openlab-sort-click{
+
+    text-decoration: underline;
+    color: #FB5A00;
+}

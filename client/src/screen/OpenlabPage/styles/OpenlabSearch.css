@@ -1,0 +1,33 @@
+.openlab-search{
+    position: absolute;
+    width: 375px;
+    height: 100px;
+    left:60px;
+}
+.openlab-search form{
+    position: absolute;
+    width: 330px;
+    height: 34px;
+    background: #E3E3E3;
+    margin-top: 6px;
+    border-radius: 4px;
+}
+.openlab-search form input{
+
+    width: 290px;
+    height: 34px;
+    background: none;
+    border: none;
+}
+.openlab-search form input:focus{
+    outline:none;
+}
+.openlab-search-submit{
+    border: none;
+    background: none;
+    left: 296px;
+    position: absolute;
+    top: 2px;
+    width: 30px;
+    height: 34px;
+}

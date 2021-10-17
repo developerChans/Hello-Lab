@@ -1,0 +1,31 @@
+.openlab-header{
+    position: absolute;
+    width: 850px;
+    height: 160px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-bottom: solid 2px #bcbcbc;
+}
+
+.openlab-header img{
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    left: 50%;
+    top: 20px;
+    transform: translateX(-50%);
+}
+
+.openlab-header span{
+    position: absolute;
+    width: 200px;
+    left: 50%;
+    top: 100px;
+    transform: translateX(-50%);
+font-style: normal;
+font-weight: 600;
+font-size: 28px;
+line-height: 41px;
+text-align: center;
+color: #3F3F3F;
+}
