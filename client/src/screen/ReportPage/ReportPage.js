@@ -1,4 +1,4 @@
-import TotalReport from "./ReportContainer/TotalReport";
+import ReportForm from "screen/ReportPage/components/ReportForm";
 import "screen/ReportPage/styles/ReportPage.css";
 
 function Report() {
@@ -11,7 +11,7 @@ function Report() {
         <span id="reportTime">9월 5주차 리포트|</span>
         <span id="deadline">제출마감일: 2021년 10월 31일</span>
       </div>
-      <TotalReport />
+      <ReportForm />
     </div>
   );
 }
