@@ -77,6 +77,8 @@
 
   background: #f2f2f2;
   border-radius: 10px;
+
+  resize: none;
 }
 
 #discussion {
@@ -104,6 +106,8 @@
 
   background: #f2f2f2;
   border-radius: 10px;
+
+  resize: none;
 }
 
 #submit-Button {
