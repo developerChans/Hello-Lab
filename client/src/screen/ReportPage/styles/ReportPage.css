@@ -1,0 +1,58 @@
+#reportBody {
+  position: absolute;
+  width: 958px;
+  height: 532px;
+  left: 355px;
+  top: 200px;
+
+  background: #f6f6f6;
+}
+
+#projectName {
+  position: absolute;
+  width: 927px;
+  height: 46px;
+  left: 50px;
+  top: 20px;
+
+  background: #ececec;
+  border-radius: 10px;
+}
+
+#project-name-text {
+  position: absolute;
+  width: 352.77px;
+  height: 41.49px;
+  left: 5px;
+  top: 10px;
+
+  font-family: NanumGothic;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 24px;
+
+  color: #000000;
+}
+
+#projectDetail {
+  position: absolute;
+  width: 508px;
+  height: 21px;
+  left: 50px;
+  top: 75px;
+
+  font-family: NanumGothic;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 18px;
+
+  color: #606060;
+}
+
+#component-location {
+  position: absolute;
+  left: 30px;
+  top: 115px;
+}
