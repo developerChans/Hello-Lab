@@ -6,12 +6,14 @@ import LabPage from "pages/LabPage/LabPage";
 import OpenlabPage from "screen/OpenlabPage/OpenlabPage";
 import OpenlabDetailPage from "screen/OpenlabDetailPage/OpenlabDetailPage";
 import MenuBar from "pages/Bars/MenuBar/MenuBar";
+import ApplyPage from "screen/ApplyPage/ApplyPage";
 
 const AppRouter = ({ isLoggedIn, needMenubar }) => {
   return (
     <Router>
       {needMenubar ? <MenuBar isLoggedIn={isLoggedIn} /> : <></>}
       <Switch>
+        <Route exact path="/apply" component={ApplyPage} />
         <Route exact path="/" component={OpenlabPage} />
         <Route exact path="/open" component={OpenlabPage} />
         <Route exact path="/login">
