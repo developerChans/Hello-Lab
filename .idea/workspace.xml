@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4888be44-ae04-4dc1-8e37-cbf546b0fea2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/DK-Lab.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/config/database.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/config/database.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/config/express.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/config/express.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/app/LabMember/memberDao.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/app/LabMember/memberDao.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/AppRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/AppRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/screen/ApplyPage/ApplyPage.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +32,7 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/server/src/app" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\IntelliJ IDEA 2021.1.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -60,6 +58,10 @@
       <workItem from="1634220161867" duration="97000" />
       <workItem from="1634220348813" duration="2725000" />
       <workItem from="1634287407436" duration="12473000" />
+      <workItem from="1634465736231" duration="3457000" />
+      <workItem from="1634473549519" duration="10754000" />
+      <workItem from="1634540776145" duration="7389000" />
+      <workItem from="1634549355415" duration="4130000" />
     </task>
     <servers />
   </component>
