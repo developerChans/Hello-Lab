@@ -24,7 +24,7 @@ const MenuBar = ({isLoggedIn}) => {
             <a className="nav-link" href="/open">Open Lab</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/recruitment">Connect</a>
+            <a className="nav-link" href="/lab">My Lab</a>
           </li>
           <li className="nav-item">
             <a className="nav-link" target='_blank' href={user_univ}>

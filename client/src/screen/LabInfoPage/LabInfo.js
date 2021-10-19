@@ -13,17 +13,17 @@ import uml from '@toast-ui/editor-plugin-uml';
 
 import {useRef, useState, useEffect} from 'react'
 import axios from 'axios'
-import './style/markdown.css'
-import './style/LabInfo.css'
+import './styles/markdown.css'
+import './styles/LabInfo.css'
 
 
-const LabInfo = ({data}) => {
+const LabInfo = ({lab}) => {
     const text = useRef();
     const [info, setInfo] = useState();
     const [editing, setEditing] = useState(false);
 
     useEffect(()=>{
-        axios.get(`/app/lab/${data.lab.id}/introduction`)
+        axios.get(`/app/lab/${lab.id}/introduction`)
         .then(response => {
             if(response.data[0]){
                 console.log(response)
@@ -39,7 +39,7 @@ const LabInfo = ({data}) => {
         const editorInstance = text.current.getInstance();
         const content = editorInstance.getMarkdown();
         
-        axios.post(`/app/lab/${data.lab.id}/introduction`, {content:content})
+        axios.post(`/app/lab/${lab.id}/introduction`, {content:content})
 
         toggleEditing()
         window.location.reload()
@@ -52,22 +52,13 @@ const LabInfo = ({data}) => {
 
     return(
         <div>
-            <div style={{
-                    'position': 'fixed',
-                    'width': '850px',
-                    'height': '100px',
-                    'left': '300px',
-                    'top': '149px',
-                    'background':'white',
-                    'zIndex':'9'
-            }}>
-                <div id="info-headline">
-                    <h3 id="info-headline-txt">연구실 소개</h3>
-                    {!editing && <>
-                <button className="info-md-edit" onClick={toggleEditing}>수정</button>
-                {info && <Viewer initialValue={info} />}
-                </>}
-                </div>
+              
+            <div id="info-headline">
+                <h3 id="info-headline-txt">연구실 소개</h3>
+            {!editing && <>
+            <button className="info-md-edit" onClick={toggleEditing}>수정</button>
+            {info && <Viewer initialValue={info} />}
+            </>}
             </div>
             {editing &&<>
             <Editor
@@ -76,8 +67,10 @@ const LabInfo = ({data}) => {
                 plugins={[chart, codeSyntaxHighlight, colorSyntax, tableMergedCell, uml]}
                 ref={text}
             />
-            <button className="info-md-save" onClick={onSubmit}>저장</button>
-            <button className="info-md-cancel" onClick={toggleEditing}>취소</button>
+            <div className="info-md-btns">
+                <button className="info-md-save" onClick={onSubmit}>저장</button>
+                <button className="info-md-cancel" onClick={toggleEditing}>취소</button>
+            </div>
             </>
             }
         </div>

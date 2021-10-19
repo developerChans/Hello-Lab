@@ -98,6 +98,3 @@ const mapDispatchToProps = (dispatch) =>{
     updateTab: tab => dispatch(actionCreators.updateTab(tab))
   }
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(LabSideBar);
-

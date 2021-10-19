@@ -1,0 +1,16 @@
+.toastui-editor-defaultUI{
+    position: absolute;
+    width: 942px;
+    height: 500px;
+
+    left: 75px !important;
+    top: 79px !important;
+}
+
+.toastui-editor-contents{
+    position: absolute;
+    width: 800px;
+    height: 500px;
+    left: 20px !important;
+    top: 85px !important;
+}

@@ -17,9 +17,11 @@
     top: 17px;
     font-size: 17px;
     font-weight: bold;
+    color: black;
 }
 .openlab-title-name:hover{
     text-decoration: underline;
+    color: black
 }
 .openlab-title-professor{
     position: relative;
@@ -28,15 +30,16 @@
     font-size: 14px;
 }
 .openlab-card-recruit{
+
     left: 289px;
-    top: -12px;
+    top: 17px;
     font-size: 12px;
-    position: relative;
+    position: absolute;
 }
 .openlab-card-content{
 
     position: relative;
-    top: 22px;
+    top: 44px;
     width: 306px;
     left: 25px;
     height: 75px;
