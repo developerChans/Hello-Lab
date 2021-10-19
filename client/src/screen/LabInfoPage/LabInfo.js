@@ -40,9 +40,9 @@ const LabInfo = ({lab}) => {
         const content = editorInstance.getMarkdown();
         
         axios.post(`/app/lab/${lab.id}/introduction`, {content:content})
-
-        toggleEditing()
-        window.location.reload()
+        console.log(content)
+        // toggleEditing()
+        // window.location.reload()
     }
 
 

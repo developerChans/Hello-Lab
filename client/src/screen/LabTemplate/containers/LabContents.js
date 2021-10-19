@@ -1,4 +1,4 @@
-import LabInfo from "screen/LabInfoPage/LabInfo";
+import LabRouter from "../LabRouter";
 
 const LabContents = ({lab}) =>{
     return(
@@ -11,7 +11,7 @@ const LabContents = ({lab}) =>{
             'top': '141px',
             'overflowY':'scroll',
         }}>
-        <LabInfo lab={lab}/>
+        <LabRouter lab={lab}/>
     </div>)
 }
 

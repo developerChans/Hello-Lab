@@ -12,17 +12,6 @@ import ApplyPage from "screen/ApplyPage/ApplyPage";
 const AppRouter = ({ isLoggedIn, needMenubar }) => {
   return (
     <Router>
-<<<<<<< HEAD
-        {needMenubar ? <MenuBar isLoggedIn={isLoggedIn}/>:<></>}
-        <Switch>
-          <Route exact path="/" component={OpenlabPage} />
-          <Route exact path="/open" component={OpenlabPage} />
-          <Route exact path="/login">{isLoggedIn ? <OpenlabPage/>:<LoginPage/>}</Route>
-          <Route exact path="/register">{isLoggedIn ? <OpenlabPage/>:<RegisterPage/>}</Route>
-          <Route exact path="/mypage">{isLoggedIn ? <MyPage/>:<LoginPage/>}</Route>
-          <Route path="/lab"><LabTemplate/></Route>
-        </Switch>
-=======
       {needMenubar ? <MenuBar isLoggedIn={isLoggedIn} /> : <></>}
       <Switch>
         <Route exact path="/apply" component={ApplyPage} />
@@ -38,13 +27,12 @@ const AppRouter = ({ isLoggedIn, needMenubar }) => {
           {isLoggedIn ? <MyPage /> : <LoginPage />}
         </Route>
         <Route path="/lab">
-          <LabPage />
+          <LabTemplate />
         </Route>
         <Route exact path="/openlabdetail">
           <OpenlabDetailPage />{" "}
         </Route>
       </Switch>
->>>>>>> c8a31dd0ecf3dfd285632c36350655721afd457e
     </Router>
   );
 };

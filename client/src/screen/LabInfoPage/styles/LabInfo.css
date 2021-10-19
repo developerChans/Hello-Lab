@@ -21,16 +21,17 @@
     padding-left: 22px;
 }
 
-.info-id-btns{
-    left: 846px;
-    top: 595px;
+.info-md-btns{
+    left: 847px;
     position: absolute;
+    top: 600px;
 }
 
 .info-md-save{
     width: 85px;
     height: 45px;
-
+    left: -10px;
+    position: relative;
     background: #FFFFFF;
     border: 1px solid #9B9B9B;
     box-sizing: border-box;
