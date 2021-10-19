@@ -48,17 +48,11 @@ const researchList = [
     },
 ]
 
-const LabSideBar = ({data, updateTab}) =>{
+const LabSideBar = ({data, updateTab, updateCategory}) =>{
   
   const [drop, setDrop] = useState(false)
   const researchTabs = useRef()
-  const onTabHandler = async (section) =>{
-    updateTab(section.route);
-  }
 
-  const onResearchClick = () =>{
-    setDrop(prev=>!prev)
-  }
 
   useEffect(()=>{
     if(drop){
@@ -67,6 +61,19 @@ const LabSideBar = ({data, updateTab}) =>{
       researchTabs.current.style.display = "none"
     }
   }, [drop])
+  
+
+  const onTabHandler = (section) =>{
+    window.location.href=`/lab/${section.route}`
+  }
+  const onResearchHandler =(section)=>{
+    updateCategory("research")
+    updateTab(section.id)
+  } 
+  const onResearchClick = () =>{
+    setDrop(prev=>!prev)
+  }
+
 
     return(
     <div className="lab-sidebar">
@@ -92,7 +99,7 @@ const LabSideBar = ({data, updateTab}) =>{
           </div>
           <div ref={researchTabs} className="lab-sidebar-research-tabs">
           {researchList.map((section, index)=>(
-          <div key={index} className="lab-sidebar-research-tab" type="button">
+          <div key={index} className="lab-sidebar-research-tab" type="button" onClick={() => onResearchHandler(section)}>
                 <span className="">
                   {section.tab}
                 </span>
@@ -110,7 +117,8 @@ const mapStateToProps = (state)=>{
 }
 
 const mapDispatchToProps = (dispatch)=>{
-  return { updateTab: tab=>dispatch(actionCreators.updateTab(tab)) };
+  return { updateTab: tab=>dispatch(actionCreators.updateTab(tab)),
+    updateCategory: category=>dispatch(actionCreators.updateCategory(category)) };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LabSideBar);

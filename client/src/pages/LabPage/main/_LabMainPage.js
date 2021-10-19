@@ -15,7 +15,7 @@ const LabMainPage = ({data, job}) =>{
 
     return (
     <div>
-        <Route path="/lab/:id/main/info"><LabInfo job={job} data={data}/></Route>
+        
         <Route exact path="/lab/:id/main/notice"><LabNotice job={job} data={data}/></Route>
         <Route path='/lab/:id/main/notice/:id'><LabNoticeDetail labId={id}/></Route>
         <Route path="/lab/:id/main/ask"><LabAsk data={data}/></Route>
