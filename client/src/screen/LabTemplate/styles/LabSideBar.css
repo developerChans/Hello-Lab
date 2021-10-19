@@ -1,0 +1,80 @@
+
+.lab-sidebar{
+    background-color: white;
+    position: fixed;
+}
+.lab-sidebar-logo{
+    width: 107px;
+    height: 141px;
+    left: 0px;
+    top: 0px;
+    background-color: white;
+    position: fixed;
+    z-index: 10;
+
+}
+
+.lab-sidebar-logo img{
+    position: relative;
+    left: 50%;
+    top: 30px;
+    transform: translate(-50%);
+    width: 60px;
+}
+
+.lab-sidebar-tabs{
+    position: absolute;
+    width: 107px;
+    height: 200px;
+    left: 0px;
+    top: 141px;
+    background-color: white;
+
+}
+.lab-sidebar-tab{
+    position: relative;
+    width: 107px;
+    height: 47px;
+    left: 0px;
+    background-color: white;
+
+}
+
+.lab-sidebar-tab span{
+    position: relative;
+    left: 35px;
+    top:10px;
+}
+
+.lab-sidebar-research-dropdown{
+    position: relative;
+    width: 107px;
+    height: 47px;
+    left: 0px;
+    background-color: white;
+
+}
+
+.lab-sidebar-research-dropdown span{
+    position: relative;
+    left: 35px;
+    top:10px;
+
+}
+.lab-sidebar-research-tabs{
+    background-color: white;
+
+}
+.lab-sidebar-research-tab{
+    position: relative;
+    width: 107px;
+    height: 47px;
+    left: 0px;
+    background-color: white;
+
+}
+.lab-sidebar-research-tab span{
+    position: relative;
+    left: 25%;
+    top:10px;
+}

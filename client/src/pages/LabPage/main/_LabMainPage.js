@@ -1,6 +1,6 @@
 import {Route} from 'react-router-dom';
 import {useState, useEffect} from 'react';
-import LabInfo from 'pages/LabPage/main/LabInfo/LabInfo';
+import LabInfo from 'screen/LabInfoPage/LabInfo';
 import LabNotice from 'pages/LabPage/main/LabNotice/LabNotice';
 import LabCal from 'pages/LabPage/LabCalendar';
 import LabAsk from 'pages/LabPage/main/LabAsk/LabAsk';

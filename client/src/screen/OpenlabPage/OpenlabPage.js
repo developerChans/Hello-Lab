@@ -14,7 +14,10 @@ const OpenlabPage = () =>{
                 <OpenlabHeader/>
                 <OpenlabSort/>
                 <OpenlabFilters/>
-                <div className="openlab-card-container">
+                <div className="openlab-card-container"
+                style={{
+                    'zIndex':'-1'
+                }}>
                     <OpenlabCard/>
                 </div>
             </div>

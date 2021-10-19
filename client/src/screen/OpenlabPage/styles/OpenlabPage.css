@@ -5,6 +5,7 @@
     left: 155px;
     background: #FFFFFF;
     margin-top: 75px;
+    z-index: -2;
 }
 
 .openlab-card-container{

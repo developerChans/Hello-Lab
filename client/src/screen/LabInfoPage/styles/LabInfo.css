@@ -1,25 +1,36 @@
-.toastui-editor-defaultUI{
-    position: absolute;
-    width: 800px;
-    height: 500px;
-    left: 325px !important;
-    top: 261px !important;
+#info-headline{
+
+    position: fixed;
+    background: #ECECEC;
+    border-radius: 10px;
+    z-index: 100;
+    width: 943px;
+    height: 50px;
+    left: 181px;
+    top: 141px;
+
 }
 
-.toastui-editor-contents{
+#info-headline-txt{
+    font-family: NanumGothic;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 49px;
+    color: #000000;
+    padding-left: 22px;
+}
+
+.info-id-btns{
+    left: 846px;
+    top: 595px;
     position: absolute;
-    width: 800px;
-    height: 500px;
-    left: 20px !important;
-    top: 85px !important;
 }
 
 .info-md-save{
-    position: absolute;
     width: 85px;
     height: 45px;
-    left: 1040px;
-    top: 775px;
+
     background: #FFFFFF;
     border: 1px solid #9B9B9B;
     box-sizing: border-box;
@@ -28,11 +39,9 @@
 
 
 .info-md-cancel{
-    position: absolute;
     width: 85px;
     height: 45px;
-    left: 940px;
-    top: 775px;
+
     background: #FFFFFF;
     border: 1px solid #9B9B9B;
     box-sizing: border-box;
@@ -43,8 +52,8 @@
     position: absolute;
     width: 47px;
     height: 25px;
-    left: 768px;
-    top: 12px;
+    left: 880px;
+    top: 11px;
     border: none;
     color: #565656;
     background-color: transparent !important;
