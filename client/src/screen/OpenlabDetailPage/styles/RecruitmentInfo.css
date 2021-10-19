@@ -1,0 +1,36 @@
+.recruitment-Info {
+  position: relative;
+  width: 1020px;
+  top: 330px;
+  background: #fafafa;
+  border-radius: 10px;
+}
+.recruitment-Info-title {
+  position: relative;
+  width: 130px;
+  height: 35px;
+
+  font-family: NanumGothic;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 30px;
+
+  color: #5a5a5a;
+}
+.recruitment-Info-content {
+  position: relative;
+  width: 966px;
+  height: 602px;
+
+  font-family: NanumGothic;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 24px;
+
+  color: #5a5a5a;
+}
+hr {
+  color: black;
+}

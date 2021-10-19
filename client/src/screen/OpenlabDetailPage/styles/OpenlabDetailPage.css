@@ -1,0 +1,10 @@
+.openlabDetailPage {
+  position: absolute;
+  width: 1850px;
+  min-height: 3000px;
+  display: flex;
+  z-index: -1;
+  justify-content: center;
+  background: #fafafa;
+  border-radius: 10px;
+}
