@@ -5,6 +5,7 @@ import {actionCreators} from '_actions/lab_action'
 import {RiArrowDownSLine} from 'react-icons/ri'
 
 import 'screen/LabTemplate/styles/LabSideBar.css'
+import logo from'screen/LabTemplate/styles/logo.png'
 
 const tabs =[
     {
@@ -64,7 +65,7 @@ const LabSideBar = ({data, updateTab, updateCategory}) =>{
   
 
   const onTabHandler = (section) =>{
-    window.location.href=`/lab/${section.route}`
+    window.location.href=`/lab/${data.lab.id}/${section.route}`
   }
   const onResearchHandler =(section)=>{
     updateCategory("research")
@@ -78,7 +79,9 @@ const LabSideBar = ({data, updateTab, updateCategory}) =>{
     return(
     <div className="lab-sidebar">
       <div className="lab-sidebar-logo">
-        <img src="logo.ico"/>
+        <a href="/">
+        <img src={logo}/>
+        </a>
       </div>
       <div className="lab-sidebar-tabs">
         {tabs.map((section, index)=>(

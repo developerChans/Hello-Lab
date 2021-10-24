@@ -1,0 +1,38 @@
+.qna-q-container{
+    position: absolute;
+    width: 930px;
+    height: 200px;
+    left: 82px;
+    top: 85px;
+
+}
+
+.qna-q-input-text{
+    width: 930px;
+    height: 100px;
+    background: #FFFFFF;
+    border: 1px solid #9B9B9B;
+    box-sizing: border-box;
+    border-radius: 10px;
+    resize: none;
+}
+
+.qna-q-input-image{
+    border: none;
+    background-color: white;
+}
+
+.qna-q-submit{
+    position: absolute;
+    width: 77px;
+    height: 43px;
+    background: #FFFFFF;
+    border: 1px solid #9B9B9B;
+    box-sizing: border-box;
+    border-radius: 10px;
+    left: 854px;
+}
+.qna-q-attachment-x{
+    border:none;
+    background-color: white;
+}
