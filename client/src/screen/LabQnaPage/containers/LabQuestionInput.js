@@ -1,9 +1,9 @@
 import {useState} from 'react'
 import axios from 'axios'
 
-import 'screen/LabQnaPage/styles/LabQnaQuestion.css'
+import 'screen/LabQnaPage/styles/LabQuestionInput.css'
 
-const LabQnaQuestion = ({lab}) =>{
+const LabQuestionInput = ({lab}) =>{
     const [ask, setAsk] = useState();
     const [askAttachment, setAskAttachment] = useState();
 
@@ -51,4 +51,4 @@ const LabQnaQuestion = ({lab}) =>{
         </>}
     </div>)
 }
-export default LabQnaQuestion;
+export default LabQuestionInput;

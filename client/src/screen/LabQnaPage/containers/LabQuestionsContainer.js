@@ -12,14 +12,21 @@ const LabQuestionsContainer = ({lab}) =>{
         })
       }, [])
     
-    return(<div>
-        <div>
-          {questions && questions.map((question)=>(
-            <div key={question.id}>
-              <LabQuestion isWriter={isWriter} lab={lab} question={question}/>
-            </div>
-          ))}
+    return(
+    <div className="questions-container"
+    style={{
+      'width': '900px',
+      'left': '100px',
+      'height': 'maxContent',
+      'top': '280px',
+      'position': 'absolute',
+    }}>
+      {questions && questions.map((question)=>(
+        <div key={question.id}>
+          <LabQuestion isWriter={isWriter} lab={lab} question={question}/>
         </div>
-    </div>)
+      ))}
+    </div>
+    )
 }
 export default LabQuestionsContainer;
