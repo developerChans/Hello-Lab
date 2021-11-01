@@ -1,16 +1,16 @@
-#body {
+#report-body {
+
   position: absolute;
+  left: -5px;
+  top: 39px;
   width: 900px;
   height: 388px;
-  left: 30px;
-  top: 115px;
-
   background: #ffffff;
-  box-shadow: 0px 3px 4px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 3px 4px 2px rgb(0 0 0 / 25%);
   border-radius: 10px;
 }
 
-#title {
+#report-title {
   position: absolute;
   width: 46.65px;
   height: 33.49px;
@@ -20,36 +20,30 @@
   font-family: NanumGothic;
   font-style: normal;
   font-weight: bold;
-  font-size: 24px;
+  font-size: 18px;
   line-height: 24px;
 
   color: #000000;
 }
 
-#reportLimit {
+#report-title-input{    
   position: absolute;
   width: 756px;
   height: 44px;
   left: 105px;
-  top: 20px;
-
+  top: 12px;
   font-family: NanumGothic;
   font-style: normal;
   font-weight: normal;
-  font-size: 24px;
+  font-size: 18px;
   line-height: 24px;
-
   color: #000000;
+  border: none;
+  border-bottom: solid 1px;
+
 }
-
-#line {
-  position: absolute;
-  width: 854.01px;
-  height: 0px;
-  left: 20px;
-  top: 60px;
-
-  border: 1px solid #6a6a6a;
+#report-title-input:focus{
+  outline:none
 }
 
 #report {
@@ -62,7 +56,7 @@
   font-family: NanumGothic;
   font-style: normal;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 20px;
 
   color: #000000;
@@ -91,7 +85,7 @@
   font-family: NanumGothic;
   font-style: normal;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 20px;
 
   color: #000000;
@@ -110,19 +104,19 @@
   resize: none;
 }
 
+#reportInput:focus, 
+#discussionInput:focus{
+  outline: none;
+}
 #submit-Button {
   position: absolute;
-  width: 109px;
-  height: 30px;
-  left: 765px;
+  width: 80px;
+  height: 40px;
+  left: 780px;
   top: 325px;
 
-  font-family: NanumGothic;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 18px;
-  line-height: 18px;
-  text-align: center;
-
-  color: #4a4a4a;
+  background: #FFFFFF;
+  border: 1px solid #9B9B9B;
+  box-sizing: border-box;
+  border-radius: 10px;
 }

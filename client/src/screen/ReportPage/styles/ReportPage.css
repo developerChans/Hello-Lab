@@ -1,12 +1,9 @@
-#reportBody {
+.report-container{    
   position: absolute;
-  width: 958px;
-  height: 532px;
-  left: 355px;
-  top: 200px;
-
-  background: #f6f6f6;
+  top: 75px;
+  left: 98px;
 }
+
 
 #projectName {
   position: absolute;
@@ -35,18 +32,13 @@
   color: #000000;
 }
 
-#projectDetail {
-  position: absolute;
-  width: 508px;
-  height: 21px;
-  left: 50px;
-  top: 75px;
-
-  font-family: NanumGothic;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 18px;
-  line-height: 18px;
-
-  color: #606060;
+#project-detail {
+  position: fixed;
+    top: 205px;
+    font-family: NanumGothic;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 18px;
+    color: #606060;
 }
