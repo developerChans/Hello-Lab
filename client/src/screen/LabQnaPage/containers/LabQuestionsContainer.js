@@ -22,7 +22,7 @@ const LabQuestionsContainer = ({lab}) =>{
       'position': 'absolute',
     }}>
       {questions && questions.map((question)=>(
-        <div key={question.id}>
+        <div key={question.id} style={{'marginBottom':'20px'}}>
           <LabQuestion isWriter={isWriter} lab={lab} question={question}/>
         </div>
       ))}

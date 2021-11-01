@@ -92,10 +92,9 @@ const LabQuestion = ({isWriter, lab, question}) =>{
             <button className="question-answer-submit" type="submit">답글 등록</button>
         </form>
         {answers && answers.map((answer)=>(
-            <div key={answer.id}>
-                {answer.id}
-                <LabAnswer question={question} answer={answer} lab={lab} isWriter={isWriter}/>
-            </div>
+            answer.parentId === question.id && (<div key={answer.id}>
+                <LabAnswer answer={answer}/>
+            </div>)
         ))}
     </>):(
     <button className="question-toggle-answer-btn" onClick={onAnswerClick} >💬답글 보기</button>)}

@@ -68,8 +68,9 @@ const LabSideBar = ({data, updateTab, updateCategory}) =>{
     window.location.href=`/lab/${data.lab.id}/${section.route}`
   }
   const onResearchHandler =(section)=>{
-    updateCategory("research")
+    updateCategory('research')
     updateTab(section.id)
+    window.location.href=`/lab/${data.lab.id}/research/${section.id}`
   } 
   const onResearchClick = () =>{
     setDrop(prev=>!prev)
