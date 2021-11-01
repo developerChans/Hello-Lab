@@ -1,4 +1,4 @@
-import "/screen/ReportPage/styles/ReportForm.css";
+import "screen/ReportPage/styles/ReportForm.css";
 import { useState } from "react";
 
 function TotalReport() {
@@ -26,10 +26,12 @@ function TotalReport() {
   };
 
   return (
-    <div id="body">
-      <span id="title">제목</span>{" "}
-      <span id="reportLimit">9월 5주차 리포트</span>
-      <hr id="line" />
+    <div id="report-body">
+      <div>
+
+      <span id="report-title">제목</span>
+      <input id="report-title-input"/>
+      </div>
       <div>
         <span id="report">✔ 보고 사항</span>
         <textarea

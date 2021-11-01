@@ -1,0 +1,33 @@
+.research-tab{
+    position: fixed;
+    background: #ECECEC;
+    border-radius: 10px;
+    z-index: 100;
+    width: 943px;
+    height: 50px;
+    left: 181px;
+    top: 141px;
+}
+.research-name{
+
+    font-family: NanumGothic;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 49px;
+    color: #000000;
+    padding-left: 22px;
+    padding-right: 22px;
+}
+.research-tab-process{
+    padding: 13px;
+    cursor: pointer;
+}
+.research-tab-report{
+    padding: 13px;
+    cursor: pointer;
+}
+.research-tab-click{
+    font-weight: 500;
+    border-bottom: solid 3px orange;
+}
