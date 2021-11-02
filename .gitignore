@@ -12,3 +12,11 @@ log
 database.js
 
 .env.local
+
+setupProxy.js
+
+database.js
+
+.env.dev
+
+.env
