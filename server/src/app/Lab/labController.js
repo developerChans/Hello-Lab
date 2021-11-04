@@ -140,6 +140,24 @@ exports.updateJoinLab = async (req, res) => {
   }
 };
 
+exports.applyLabInfo = async (req, res) => {
+  const labId = req.params.labId;
+  const userId = req.userId;
+
+  try {
+    const labInfo = await labProvider.getOneLab(labId);
+    const userInfo = await userProvider.getUser(userId);
+
+    console.log(labInfo);
+    console.log(userInfo);
+
+    return res.status(200).send(labInfo, userInfo);
+  } catch (e) {
+    console.log(`Cotroller Error \n ${e}`);
+    return res.status(500).send("서버 에러");
+  }
+};
+
 exports.test = async (req, res) => {
   res.json({ success: true });
 };
