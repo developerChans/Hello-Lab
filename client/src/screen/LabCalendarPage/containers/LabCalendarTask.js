@@ -1,4 +1,6 @@
 import {useState} from 'react'
+import ReactColorPicker from '@super-effective/react-color-picker';
+
 const LabCalendarTask = () =>{
     const [color, setColor] = useState('#3cd6bf');
     const [calendarName, setCalendarName] = useState();
