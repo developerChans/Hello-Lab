@@ -30,6 +30,11 @@ const tabs =[
       route: "member"
 
     },
+    {
+      id: 5, 
+      tab: "일정",
+      route: "calendar"
+    }
   ]
 
 const researchList = [

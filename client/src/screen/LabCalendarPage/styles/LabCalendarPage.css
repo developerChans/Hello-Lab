@@ -1,0 +1,27 @@
+.lab-calendar-headline{
+    position: fixed;
+    background: #ECECEC;
+    border-radius: 10px;
+    z-index: 100;
+    width: 943px;
+    height: 50px;
+    left: 181px;
+    top: 141px;
+
+}
+.lab-calendar-headline-txt{
+    font-family: NanumGothic;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 49px;
+    color: #000000;
+    padding-left: 22px;
+}
+.lab-calendar-container{
+    width: 900px;
+    left: 100px;
+    height: maxContent;
+    top: 100px;
+    position: absolute;
+}

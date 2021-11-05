@@ -1,5 +1,8 @@
 import "screen/OpenlabDetailPage/styles/RecruitmentInfo.css";
 const RecruitmentInfo = () => {
+  const onApplyClick = () =>{
+    window.location.href = `/apply/:id`
+  }
   return (
     <div className="recruitment-Info">
       <div className="recruitment-Info-title">
@@ -27,8 +30,8 @@ const RecruitmentInfo = () => {
         <p>- 성실하고 적극적인 태도로 자기주도 학습 및 협업할 수 있는 학생</p>
       </div>
       <div className="btn-position">
-        <button className="transmission-input" onClick={console.log(`click!`)}>
-          지원
+        <button className="apply-btn" onClick={onApplyClick}>
+          연구실 지원하기
         </button>
       </div>
     </div>

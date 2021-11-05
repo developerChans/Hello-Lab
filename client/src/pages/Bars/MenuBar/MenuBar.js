@@ -7,11 +7,13 @@ import ProfileBtn from 'pages/Bars/MenuBar/ProfileBtn'
 import SignBtn from 'pages/Bars/MenuBar/SignBtn';
 // auth에 따라 보이기 안보이기 구현
 
+import {connect} from 'react-redux'
+
 const user_univ = "https://www.dankook.ac.kr/web/kor";
 
-const MenuBar = ({isLoggedIn}) => {
+const MenuBar = ({isLoggedIn, data}) => {
   const RISS_URL = "http://www.riss.kr/index.do";
-  
+  const lab_link = `/lab/${data.lab.id}/info`
   return (
     <div id="menu">
       <nav id="menubar" className="navbar navbar-expand bg-white navbar-light">
@@ -24,7 +26,7 @@ const MenuBar = ({isLoggedIn}) => {
             <a className="nav-link" href="/open">Open Lab</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/lab">My Lab</a>
+            <a className="nav-link" href={lab_link}>My Lab</a>
           </li>
           <li className="nav-item">
             <a className="nav-link" target='_blank' href={user_univ}>
@@ -48,4 +50,7 @@ const MenuBar = ({isLoggedIn}) => {
   );
 }
 
-export default MenuBar;
+const mapStateToProps = (state)=>{
+  return {data: state};
+}
+export default connect(mapStateToProps)(MenuBar);

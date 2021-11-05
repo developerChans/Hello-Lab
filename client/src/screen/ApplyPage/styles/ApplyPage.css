@@ -14,7 +14,7 @@
     right : 10%;
     height: 1700px;
 
-    top: 90px;
+    top: 70px;
 
     background: #FFFFFF;
 
@@ -29,7 +29,7 @@
     font-style: normal;
     font-weight: normal;
     font-weight: bold;
-    font-size: 24px;
+    font-size: 16px;
     padding-left: 20%;
     color: #5A5A5A;
 }
@@ -58,7 +58,7 @@
 
     font-style: normal;
     font-weight: bold;
-    font-size: 36px;
+    font-size: 24px;
     line-height: 36px;
     text-align: center;
 
@@ -76,7 +76,7 @@
 
     font-style: normal;
     font-weight: bold;
-    font-size: 25px;
+    font-size: 18px;
     line-height: 36px;
     text-align: center;
 
@@ -106,7 +106,7 @@
 
     font-style: normal;
     font-weight: bold;
-    font-size: 30px;
+    font-size: 24px;
 
     border-bottom-width : 2px;
     border-bottom-style : solid;
@@ -145,11 +145,12 @@
 }
 
 #apply-btns{
-    margin-left : 75%;
-    margin-top : 20px;
+    position:relative;
     width : 150px;
     height: 60px;
-
+    left: 50%;
+    transform: translateX(-50%);
+    top: -6%;
     font-weight: normal;
     font-size: 25px;
     font-weight: bold;
@@ -176,10 +177,10 @@
     margin-top : 20px;
 }
 
-#type{
-    margin-left: 5%;
+.apply-type-title{
+    margin-left: 6%;
 
-    font-weight: bold;
-    font-size : 25px;
+    font-weight: 600;
+    font-size : 16px;
     margin-bottom : 10px;
 }

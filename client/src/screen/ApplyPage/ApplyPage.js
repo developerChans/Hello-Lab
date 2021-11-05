@@ -37,15 +37,15 @@ const ApplyPage = () =>{
                 </div>
                 <div className="apply-lab-info">
                     <div id = "lab-type">
-                        <FaCheck size={30} color = "#000000" style={{
+                        <FaCheck size={26} color = "#000000" style={{
                         }}/> 담당 교수 : {name}
                     </div>
                     <div id = "lab-type">
-                        <FaCheck size={30} color = "#000000" style={{
+                        <FaCheck size={26} color = "#000000" style={{
                         }}/> 소속학과 : 소프트웨어학과
                     </div>
                     <div id = "lab-type">
-                        <FaCheck size={30} color = "#000000" style={{
+                        <FaCheck size={26} color = "#000000" style={{
                         }}/> 연구분야 : 기계학습,딥러닝,이미지처리,IoT,헬스케어
                     </div>
                 </div>
@@ -57,23 +57,23 @@ const ApplyPage = () =>{
                         </div>
                         <div className = "apply-type">
                             <div>
-                                <span id="type"><FaCheck size={30} color = "#000000" style={{
+                                <span className="apply-type-title"><FaCheck size={24} color = "#000000" style={{
                                 }}/> 이름 </span>
                             </div>
                             <div>
-                                 <span id="type"><FaCheck size={30} color = "#000000" style={{
+                                 <span className="apply-type-title"><FaCheck size={24} color = "#000000" style={{
                                  }}/> 학과 </span>
                             </div>
                             <div>
-                                 <span id="type"><FaCheck size={30} color = "#000000" style={{
+                                 <span className="apply-type-title"><FaCheck size={24} color = "#000000" style={{
                                  }}/> 학번 </span>
                             </div>
                             <div>
-                                 <span id="type"><FaCheck size={30} color = "#000000" style={{
+                                 <span className="apply-type-title"><FaCheck size={24} color = "#000000" style={{
                                  }}/> 휴대폰번호 </span>
                             </div>
                             <div className="apply-student-content">
-                                <span id="type"><FaCheck size={30} color = "#000000" style={{
+                                <span className="apply-type-title"><FaCheck size={24} color = "#000000" style={{
                                 }}/> 하고 싶은 말 </span>
                                 <form>
                                     <textarea
