@@ -70,6 +70,7 @@ const LabSideBar = ({data, updateTab, updateCategory}) =>{
   const onResearchHandler =(section)=>{
     updateCategory('research')
     updateTab(section.id)
+    localStorage.setItem('tab', 'process')
     window.location.href=`/lab/${data.lab.id}/research/${section.id}`
   } 
   const onResearchClick = () =>{
