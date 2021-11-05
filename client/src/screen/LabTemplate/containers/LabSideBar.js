@@ -30,6 +30,11 @@ const tabs =[
       route: "member"
 
     },
+    {
+      id: 5, 
+      tab: "일정",
+      route: "calendar"
+    }
   ]
 
 const researchList = [
@@ -70,6 +75,7 @@ const LabSideBar = ({data, updateTab, updateCategory}) =>{
   const onResearchHandler =(section)=>{
     updateCategory('research')
     updateTab(section.id)
+    localStorage.setItem('tab', 'process')
     window.location.href=`/lab/${data.lab.id}/research/${section.id}`
   } 
   const onResearchClick = () =>{

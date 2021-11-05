@@ -1,6 +1,7 @@
 .openlab-brief {
   position: absolute;
-  width: 1015px;
+  width: 900px;
+  left: 50px;
   top: 100px;
   z-index: 10;
   font-family: NanumGothic;
@@ -13,7 +14,7 @@
   font-family: NanumGothic;
   font-style: normal;
   font-weight: normal;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 40px;
 }
 .openlab-brief-title {
@@ -23,7 +24,7 @@
   font-family: NanumGothic;
   font-style: normal;
   font-weight: bold;
-  font-size: 36px;
+  font-size: 26px;
   line-height: 36px;
 
   color: #3f3f3f;
@@ -35,7 +36,7 @@
   font-family: NanumGothic;
   font-style: normal;
   font-weight: normal;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 24px;
 
   color: #5a5a5a;

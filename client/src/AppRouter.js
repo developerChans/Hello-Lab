@@ -29,8 +29,11 @@ const AppRouter = ({ isLoggedIn, needMenubar }) => {
         <Route path="/lab">
           <LabTemplate />
         </Route>
-        <Route exact path="/openlabdetail">
-          <OpenlabDetailPage />{" "}
+        <Route path="/open/detail">
+          <OpenlabDetailPage />
+        </Route>
+        <Route path="/apply">
+          <ApplyPage/>
         </Route>
       </Switch>
     </Router>
