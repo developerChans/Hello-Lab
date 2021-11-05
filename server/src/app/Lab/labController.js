@@ -2,6 +2,7 @@ const labProvider = require("./labProvider");
 const labService = require("./labService");
 const userProvider = require("../User/userProvider");
 const labJoi = require("./labJoi");
+const openProvider = require("../OpenLab/openProvider");
 
 exports.createLab = async (req, res) => {
   try {
@@ -94,15 +95,16 @@ exports.deleteLab = async (req, res) => {
   }
 };
 
-exports.joinLab = async (req, res) => {
+exports.applyLab = async (req, res) => {
   const userId = req.userId;
   const labId = req.params.labId;
+  const content = req.body.content;
 
-  const joinLabInfo = [userId, labId];
+  const applyLabInfo = [userId, labId, content];
   try {
-    const validateData = { userId, labId };
-    await labJoi.joinLabJoi.validateAsync(validateData);
-    const result = await labService.joinLab(joinLabInfo);
+    const validateData = { userId, labId, content };
+    await labJoi.applyLabJoi.validateAsync(validateData);
+    const result = await labService.applyLab(applyLabInfo);
     result
       ? res
           .status(201)
@@ -110,19 +112,17 @@ exports.joinLab = async (req, res) => {
       : res.status(400).json({ success: false });
   } catch (e) {
     console.log(`Controller error \n ${e}`);
-    return res
-      .status(500)
-      .send("서버 에러 발생\n userId or labId가 올바르지 않습니다.");
+    return res.status(400).send(e.message);
   }
 };
 
-exports.updateJoinLab = async (req, res) => {
+exports.treatApply = async (req, res) => {
   const requestId = req.params.requestId;
   const allow = req.body.allow;
 
   try {
     await labJoi.updateJoinLabJoi.validateAsync(allow);
-    const result = await labService.updateJoinLab(requestId, allow);
+    const result = await labService.treatApply(requestId, allow);
     if (result === undefined) {
       throw Error("최상단 에러를 확인하세요");
     }
@@ -137,6 +137,44 @@ exports.updateJoinLab = async (req, res) => {
     return res
       .status(400)
       .json({ success: false, message: "허가 여부(allow)는 필수 값 입니다." });
+  }
+};
+
+exports.applyLabInfo = async (req, res) => {
+  const labId = req.params.labId;
+  const userId = req.userId;
+
+  try {
+    const labInfo = await openProvider.getOpenLabs(labId);
+    const userInfo = await userProvider.getUser(userId);
+
+    const totalInfo = {
+      labName: labInfo[0].labName,
+      professorName: labInfo[0].professorName,
+      labMajor: labInfo[0].major,
+      field: labInfo[0].field,
+      userName: userInfo[0].name,
+      userMajor: userInfo[0].major,
+      userNum: userInfo[0].userNum,
+      userPhoneNum: userInfo[0].phoneNum,
+    };
+
+    return res.status(200).send(totalInfo);
+  } catch (e) {
+    console.log(`Cotroller Error \n ${e}`);
+    return res.status(500).send("서버 에러");
+  }
+};
+
+exports.getAllApply = async (req, res) => {
+  const professorId = req.userId;
+
+  try {
+    const result = await labProvider.getAllApplyByProfessorId(professorId);
+    return res.status(200).send(result);
+  } catch (e) {
+    console.log(`Controller error \n ${e}`);
+    return res.status(500).send("server error");
   }
 };
 

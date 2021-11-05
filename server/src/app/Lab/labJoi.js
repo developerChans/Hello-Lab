@@ -7,9 +7,10 @@ exports.createLabJoi = Joi.object({
 
 exports.getOneLabJoi = Joi.number().min(1);
 
-exports.joinLabJoi = Joi.object({
+exports.applyLabJoi = Joi.object({
   userId: Joi.number().min(1),
   labId: Joi.number().min(1),
+  content: Joi.string().required(),
 });
 
 exports.updateJoinLabJoi = Joi.boolean();
