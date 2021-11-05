@@ -47,9 +47,9 @@ exports.deleteLab = async (labId) => {
   }
 };
 
-exports.joinLab = async (joinLabInfo) => {
+exports.applyLab = async (joinLabInfo) => {
   const con = await pool.getConnection(async (conn) => conn);
-  const query = labDao.joinLabRequestQuery;
+  const query = labDao.applyLabRequestQuery;
   try {
     await con.beginTransaction();
     const row = await con.query(query, joinLabInfo);
@@ -57,13 +57,13 @@ exports.joinLab = async (joinLabInfo) => {
     return row[0];
   } catch (e) {
     await con.rollback();
-    console.log(`DB error \n${e}`);
+    console.log(`Service error \n${e}`);
   } finally {
     con.release();
   }
 };
 
-exports.updateJoinLab = async (requestId, allow) => {
+exports.treatApply = async (requestId, allow) => {
   const con = await pool.getConnection(async (conn) => conn);
   const insertQuery = labDao.insertStudentLabQeury;
   const getQeury = labDao.getNotieOfRequest;
@@ -72,10 +72,12 @@ exports.updateJoinLab = async (requestId, allow) => {
     await con.beginTransaction();
     if (allow) {
       const info = await con.query(getQeury, requestId);
-      const insertInfo = [info[0][0].userId, info[0][0].labId];
+      const insertInfo = [info[0][0].studentId, info[0][0].labId];
       await con.query(insertQuery, insertInfo);
     }
-    const row = await con.query(updateQuery, requestId);
+    // ApplicationForm table의 status 가입 허용시 1로 거부시 0으로 변경됨
+    const updateInfo = [allow, requestId];
+    const row = await con.query(updateQuery, updateInfo);
     await con.commit();
     return row[0];
   } catch (e) {

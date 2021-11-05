@@ -31,10 +31,17 @@ async function deleteLab(con, labId) {
   }
 }
 
-const joinLabRequestQuery = `INSERT INTO LabJoinRequest(userId, labId) VALUES(?, ?)`;
-const updateJoinLabQuery = `UPDATE LabJoinRequest SET status = 1 WHERE Id = ?`;
-const getNotieOfRequest = `SELECT r.userId, r.labId FROM LabJoinRequest r WHERE id = ?`;
+const applyLabRequestQuery = `INSERT INTO ApplicationForm(studentId, labId, content) VALUES(?,?,?)`;
+const updateJoinLabQuery = `UPDATE ApplicationForm SET status = ? WHERE Id = ?`;
+const getNotieOfRequest = `SELECT af.studentId, af.labId FROM ApplicationForm af WHERE id = ?`;
 const insertStudentLabQeury = `INSERT INTO UserLab(userId, labId) VALUES(?, ?) `;
+const getLabIdByProfessorId = `SELECT id FROM Lab WHERE professorId = ?`;
+const getAllApplyByLabId = `
+SELECT af.id, af.content, u.name, u.major, u.userNum, u.phoneNum
+FROM ApplicationForm af
+JOIN User u ON u.id = af.studentId
+WHERE af.labId = ? AND af.status = 2
+`;
 
 module.exports = {
   InsertLabInfoQuery,
@@ -42,8 +49,10 @@ module.exports = {
   insertUserLabProfessorQuery,
   updateLabInfo,
   deleteLab,
-  joinLabRequestQuery,
+  applyLabRequestQuery,
   updateJoinLabQuery,
   getNotieOfRequest,
   insertStudentLabQeury,
+  getLabIdByProfessorId,
+  getAllApplyByLabId,
 };

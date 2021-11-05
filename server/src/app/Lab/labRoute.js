@@ -21,14 +21,13 @@ module.exports = function (app) {
   app.get("/app/lab-apply/:labId", userAuth, controller.applyLabInfo);
 
   // lab 가입 요청 api
-  app.post("/app/lab-apply/:labId", studentAuth, controller.joinLab);
+  app.post("/app/lab-apply/:labId", userAuth, controller.applyLab);
+
+  // 미처리 lab 가입 요청들 확인 api
+  app.get("/app/lab-apply", professorAuth, controller.getAllApply);
 
   // lab 가입 요청 처리 api
-  app.patch(
-    "/app/labrequest/:requestId",
-    professorAuth,
-    controller.updateJoinLab
-  );
+  app.patch("/app/lab-apply/:requestId", professorAuth, controller.treatApply);
 
   // test
   app.get("/test", studentAuth, (req, res) => {

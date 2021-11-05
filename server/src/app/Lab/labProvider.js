@@ -17,3 +17,22 @@ exports.getOneLab = async (labId) => {
     con.release();
   }
 };
+
+exports.getAllApplyByProfessorId = async (professorId) => {
+  const con = await pool.getConnection(async (conn) => conn);
+  const getLabIdQuery = labDao.getLabIdByProfessorId;
+  const getAllApplyByLabId = labDao.getAllApplyByLabId;
+  try {
+    await con.beginTransaction();
+    const labId = await con.query(getLabIdQuery, professorId);
+    const row = await con.query(getAllApplyByLabId, labId[0][0].id);
+    console.log(row[0]);
+    await con.commit();
+    return row[0];
+  } catch (e) {
+    await con.rollback();
+    console.log(`Provider Error \n ${e}`);
+  } finally {
+    con.release();
+  }
+};
