@@ -3,12 +3,12 @@
   top: 10px;
 }
 .reply-name {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 500;
 }
 .reply-content {
   position: relative;
-  font-size: 18px;
+  font-size: 15px;
   line-height: 25px;
 }
 .reply-date {

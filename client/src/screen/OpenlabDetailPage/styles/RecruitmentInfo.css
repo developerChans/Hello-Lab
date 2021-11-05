@@ -1,6 +1,6 @@
 .recruitment-Info {
   position: relative;
-  width: 1020px;
+  width: 900px;
   top: 330px;
   background: #fafafa;
   border-radius: 10px;
@@ -13,7 +13,7 @@
   font-family: NanumGothic;
   font-style: normal;
   font-weight: bold;
-  font-size: 30px;
+  font-size: 24px;
   line-height: 30px;
 
   color: #5a5a5a;
@@ -21,16 +21,26 @@
 .recruitment-Info-content {
   position: relative;
   width: 966px;
-  height: 602px;
-
   font-family: NanumGothic;
   font-style: normal;
   font-weight: normal;
-  font-size: 24px;
+  font-size: 16px;
   line-height: 24px;
 
   color: #5a5a5a;
 }
 hr {
   color: black;
+}
+
+.apply-btn{
+  width: 210px;
+  height: 40px;
+  border-radius: 5px;
+  background-color: white;
+  position: relative;
+  border: none;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
 }

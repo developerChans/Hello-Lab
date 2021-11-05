@@ -32,18 +32,24 @@ const cards = [
     },
 ]
 
-const OpenlabCard = () =>{
+const OpenlabCard = ({openlabs}) =>{
+    const onLabClick= (item) =>{
+        console.log(item)
+        window.location.href = `/open/detail/${item.labId}`
+    }
     return(<>
-        {cards.map(item=>(
+        {openlabs && openlabs.result.map(item=>(
         <div className="openlab-card">
             <div className="openlab-card-title">
-                <a className="openlab-title-name">{item.name} 연구실</a>
-                <span className="openlab-title-professor">{item.professor} 교수</span>
+                <div className="openlab-title-name" onClick={()=>onLabClick(item)}>{item.labName} 
+                {!item.labName.includes("연구실") && <span> 연구실</span>}
+                </div>
+                <span className="openlab-title-professor">{item.professorName} 교수</span>
             </div>
-            {item.recruiting && <span className="openlab-card-recruit">모집 중🔥️️</span>}
+            {item.isRecruit===1 && <span className="openlab-card-recruit">모집 중🔥️️</span>}
             <div className="openlab-card-content">
                 <span style={{'fontWeight':'bold'}}>✔ 소속학과&nbsp;</span>
-                <span>{item.department}</span>
+                <span>{item.major}</span>
                 <br/>
                 <span style={{'fontWeight':'bold'}}>✔ 연구분야&nbsp;</span>
                 <span>{item.field}</span>
