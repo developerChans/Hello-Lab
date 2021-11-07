@@ -40,7 +40,7 @@ const LabNoticeForm = ({id}) =>{
         window.location.reload()
     }
 
-    return(<>
+    return(<div className="notice-form-container">
         <input className="notice-title-input" 
             type="text" 
             placeholder="제목"
@@ -54,7 +54,7 @@ const LabNoticeForm = ({id}) =>{
         onChange={(event, editor)=>onContentChange(event, editor)}
         />
         <button onClick={onClick} className="notice-submit-btn">저장</button>
-        </>)
+        </div>)
 }
 
 export default LabNoticeForm;

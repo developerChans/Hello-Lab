@@ -2,14 +2,13 @@
 #notice-headline{
 
   position: fixed;
-  width: 850px;
-  height: 50px;
-  left: 300px;
-  top: 190px;
   background: #ECECEC;
   border-radius: 10px;
   z-index: 100;
-
+  width: 943px;
+  height: 50px;
+  left: 181px;
+  top: 141px;
 }
 
 #notice-headline-txt{
@@ -23,11 +22,11 @@
 }
 
 #notice-writing-btn{
-  position: absolute;
+  position: relative;
   width: 74px;
   height: 42px;
-  left: 1052px;
-  top: 251px;
+  left: 915px;
+  top: 76px;
   background: #FFFFFF;
   border: 1px solid #9B9B9B;
   box-sizing: border-box;
@@ -48,8 +47,8 @@
   position: absolute;
   width: 74px;
   height: 40px;
-  left: 969px;
-  top: 881px;
+  left: 872px;
+  top: 715px;
   background: #FFFFFF;
   border: 1px solid #9B9B9B;
   box-sizing: border-box;

@@ -11,7 +11,6 @@ import 'screen/LabCalendarPage/styles/LabCalendarPage.css'
 
 import React, { useState, useCallback, useRef } from 'react'
 
-import ReactColorPicker from '@super-effective/react-color-picker';
 import LabCalendarTask from "./containers/LabCalendarTask";
 
 const start = new Date();
