@@ -1,10 +1,10 @@
-import logo from 'pages/hellolab.png';
+import logo from 'screen/hellolab.png';
 import {BiLinkExternal} from 'react-icons/bi';
 
 import './MenuBar.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import ProfileBtn from 'pages/Bars/MenuBar/ProfileBtn'
-import SignBtn from 'pages/Bars/MenuBar/SignBtn';
+import ProfileBtn from 'screen/MenuBar/ProfileBtn'
+import SignBtn from 'screen/MenuBar/SignBtn';
 // auth에 따라 보이기 안보이기 구현
 
 import {connect} from 'react-redux'

@@ -7,7 +7,7 @@ const LabNoticeList = ({labId, list})=>{
     const history = useHistory();
     const onClick = (section) =>{
         console.log(section)
-        history.push(`/lab/${labId}/main/notice/${section.id}`)
+        history.push(`/lab/${labId}/notice/${section.id}`)
     }
     console.log(list)
     return (

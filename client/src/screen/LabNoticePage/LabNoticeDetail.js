@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-import LabNoticeEdit from 'pages/LabPage/main/LabNotice/LabNoticeEdit'
+import LabNoticeEdit from 'screen/LabNoticePage/LabNoticeEdit'
 
 import './style/noticeDetail.css'
 import LabNoticeComments from "./LabNoticeComments";
@@ -15,8 +15,7 @@ const LabNoticeDetail = ({labId}) =>{
 
     const [editing, setEditing] = useState(false);
 
-    const noticeId = window.location.pathname.split('/')[5]
-
+    const noticeId = window.location.pathname.split('/')[4]
     useEffect(()=>{
         axios.get(`/app/users/auth`)
         .then(response=>{
@@ -31,11 +30,11 @@ const LabNoticeDetail = ({labId}) =>{
             const {data:{
                 content, title, updatedAt
             }} = response;
-            console.log(response)
             setTitle(title);
             setContent(content);
             setDate(updatedAt.split('T')[0])
         })
+        console.log(title, content, date)
     }, [])
 
     const onEditClick = ()=>{

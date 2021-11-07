@@ -9,22 +9,20 @@
 }
 .notice-detail-title{
     position: fixed;
-    width: 850px;
-    height: 50px;
-    left: 300px;
-    top: 190px;
     background: #ECECEC;
     border-radius: 10px;
     z-index: 100;
-    padding: 13px;
+    width: 943px;
+    height: 50px;
+    left: 181px;
+    top: 141px;
 }
 
 .notice-detail-content{
     position: absolute;
-    width: 800px;
-    height: auto;
-    left: 325px !important;
-    top: 261px !important;
+    left: 135px;
+    min-height: 500px;
+    top: 100px;
 }
 
 .notice-detail-edit{

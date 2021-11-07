@@ -1,4 +1,9 @@
-  
+.notice-form-container{
+  position: absolute;
+  left: 135px;
+  min-height: fit-content;
+  top: 100px;
+}
   .ck.ck-editor__editable:not(.ck-editor__nested-editable) {
     min-height: 500px;
   }
@@ -8,8 +13,8 @@
     width: 800px !important;
     height: 500px !important;
     min-height: 500px;
-    left: 325px !important;
-    top: 328px !important;
+    top: 60px !important;
+    left: 10px !important;
   }
 
   
@@ -18,8 +23,7 @@
     width: 800px;
     height: 40px;
     margin: 10px;
-    left: 315px;
-    top: 260px;
+
     border:1px #9B9B9B;
     border-style: solid;
     border-radius: 3px;
@@ -30,11 +34,11 @@
     position: absolute;
     width: 74px;
     height: 40px;
-    left: 1052px;
-    top: 881px;
     background: #FFFFFF;
     border: 1px solid #9B9B9B;
     box-sizing: border-box;
     border-radius: 10px;
     font-size: 14px;
+    left: 650px;
+    top: 615px;
   }

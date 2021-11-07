@@ -6,7 +6,7 @@ import OpenlabPage from "screen/OpenlabPage/OpenlabPage";
 import LabTemplate from 'screen/LabTemplate/LabTemplate'
 
 import OpenlabDetailPage from "screen/OpenlabDetailPage/OpenlabDetailPage";
-import MenuBar from "pages/Bars/MenuBar/MenuBar";
+import MenuBar from "screen/MenuBar/MenuBar";
 import ApplyPage from "screen/ApplyPage/ApplyPage";
 
 const AppRouter = ({ isLoggedIn, needMenubar }) => {

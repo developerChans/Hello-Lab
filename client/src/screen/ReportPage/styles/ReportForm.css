@@ -71,7 +71,7 @@
 
   background: #f2f2f2;
   border-radius: 10px;
-
+  border:none;
   resize: none;
 }
 
@@ -100,6 +100,7 @@
 
   background: #f2f2f2;
   border-radius: 10px;
+  border:none;
 
   resize: none;
 }
