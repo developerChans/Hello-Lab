@@ -48,6 +48,7 @@ module.exports = function () {
   require("../src/app/Process/processRoute")(app);
   require("../src/app/Research/researchRoute")(app);
   require("../src/app/OpenLab/openRoute")(app);
+  require("../src/app/LabReport/labReportRoute")(app);
 
   return app;
 };
