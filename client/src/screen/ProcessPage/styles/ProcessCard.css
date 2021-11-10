@@ -1,0 +1,75 @@
+.process-card {
+  position: relative;
+  width: 730px;
+  height: 180px;
+  background: #ffffff;
+  box-shadow: 0px 3px 4px 2px rgb(0 0 0 / 25%);
+  border-radius: 10px;
+  display: inline-block;
+  margin: 10px;
+  top: 50px;
+}
+
+.process-title-name {
+  cursor: pointer;
+  position: relative;
+  left: 25px;
+  top: 17px;
+  font-size: 17px;
+  font-weight: bold;
+  color: black;
+}
+.process-title-name:hover {
+  text-decoration: underline;
+  color: black;
+}
+.process-title-professor {
+  position: absolute;
+  left: 25px;
+  top: 45px;
+  font-size: 14px;
+}
+.process-card-recruit {
+  left: 289px;
+  top: 17px;
+  font-size: 12px;
+  position: absolute;
+}
+.process-card-content {
+  position: relative;
+  top: 44px;
+  width: 680px;
+  left: 25px;
+  height: 75px;
+  overflow: hidden;
+  justify-content: space-around;
+  display: flex;
+  flex-direction: column;
+}
+.process-card-content span {
+  font-size: 13px;
+}
+
+.process-progress {
+  position: relative;
+  width: 280px;
+  height: 50px;
+  left: 10px;
+  top: 10px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 14px;
+}
+
+.process-schedule {
+  position: relative;
+  width: 280px;
+  height: 50px;
+  left: 300px;
+  bottom: 28px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 14px;
+}
