@@ -4,7 +4,6 @@
     <list default="true" id="4888be44-ae04-4dc1-8e37-cbf546b0fea2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/screen/OpenlabDetailPage/containers/OpenlabBrief.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/screen/OpenlabDetailPage/containers/OpenlabBrief.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/screen/OpenlabDetailPage/containers/OpenlabReply.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/screen/OpenlabDetailPage/containers/OpenlabReply.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +67,7 @@
       <workItem from="1636004374621" duration="4128000" />
       <workItem from="1636283164738" duration="150000" />
       <workItem from="1636610854043" duration="2627000" />
-      <workItem from="1636638131317" duration="5735000" />
+      <workItem from="1636638131317" duration="6456000" />
     </task>
     <servers />
   </component>
