@@ -1,7 +1,7 @@
 import "screen/OpenlabDetailPage/styles/RecruitmentInfo.css";
 const RecruitmentInfo = () => {
   const onApplyClick = () =>{
-    window.location.href = `/apply/:id`
+    window.location.href = `/apply/1`
   }
   return (
     <div className="recruitment-Info">

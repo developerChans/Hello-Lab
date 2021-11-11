@@ -8,7 +8,7 @@ const ApplyPage = ({ lab }) => {
   const [applyInfo, setApplyInfo] = useState();
 
   useEffect(() => {
-    axios.get(`/app/lab-apply/${lab.id}`).then((response) => {
+    axios.get(`/app/lab-apply/1`).then((response) => {
       setApplyInfo(response.data);
       console.log(applyInfo);
     });
