@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="4888be44-ae04-4dc1-8e37-cbf546b0fea2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/config/express.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/config/express.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/screen/OpenlabDetailPage/containers/OpenlabBrief.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/screen/OpenlabDetailPage/containers/OpenlabBrief.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/screen/OpenlabDetailPage/containers/OpenlabReply.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/screen/OpenlabDetailPage/containers/OpenlabReply.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,7 +30,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/server/src/app/OpenLab" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\IntelliJ IDEA 2021.1.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
@@ -64,6 +65,10 @@
       <workItem from="1634549355415" duration="8766000" />
       <workItem from="1634573514690" duration="1219000" />
       <workItem from="1634611321210" duration="1305000" />
+      <workItem from="1636004374621" duration="4128000" />
+      <workItem from="1636283164738" duration="150000" />
+      <workItem from="1636610854043" duration="2627000" />
+      <workItem from="1636638131317" duration="5735000" />
     </task>
     <servers />
   </component>
