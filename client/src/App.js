@@ -20,7 +20,7 @@ function App() {
   }, [])
 
   useEffect(()=>{
-    if(!document.location.href.includes('lab')){
+    if(!document.location.href.includes('/lab/')){
       setNeedMenubar(true);
     }else{
       setNeedMenubar(false);
