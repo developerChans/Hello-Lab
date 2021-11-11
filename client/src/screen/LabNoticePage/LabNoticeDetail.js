@@ -61,9 +61,9 @@ const LabNoticeDetail = ({lab}) =>{
         </div>
         <div className="notice-detail-content">
             <div style={{'paddingBottom':'50px'}} dangerouslySetInnerHTML={ {__html: content} }></div>
-            {job && <>
+            {job ? <>
             <button className="notice-detail-edit" onClick={onEditClick}>수정</button>
-            <button className="notice-detail-delete" onClick={onDeleteClick}>삭제</button></>}
+            <button className="notice-detail-delete" onClick={onDeleteClick}>삭제</button></>:<></>}
         </div>
         <LabNoticeComments labId={lab.id} noticeId={noticeId}/>
         </>)}
