@@ -7,14 +7,15 @@
   z-index: 10;
   background-color: white;
 }
-
+.lab-header-span{
+    position: absolute;
+    left: 85px;
+    top: 90px;
+}
 .lab-header-name {
-  position: absolute;
+  position: relative;
   width: 178px;
   height: 35px;
-  left: 90px;
-  top: 86px;
-
   font-family: NanumGothic;
   font-style: normal;
   font-weight: 500;
@@ -29,7 +30,6 @@
     width: 143px;
     height: 27px;
     left: 15px;
-    top: -1px;
     font-family: NanumGothic;
     font-style: normal;
     font-weight: 600;
