@@ -11,7 +11,7 @@ const OpenlabBrief = () => {
       <div className="openlab-brief-content">
         <p>✔담당교수: 단꾸코</p>
         <p>✔소속학과: 소프트웨어학과</p>
-        <p>✔연구분야: 기계학습 딥러닝 이미지처리 IoT 헬스케어</p>
+        <p>✔연구분야: 웹개발 SW</p>
       </div>
     </div>
   );
