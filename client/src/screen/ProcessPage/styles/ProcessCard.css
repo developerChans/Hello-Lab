@@ -8,7 +8,7 @@
   display: inline-block;
   margin: 10px;
   top: 50px;
-  left: 60px;
+  left: 80px;
 }
 
 .process-title-name {
@@ -41,7 +41,7 @@
   top: 44px;
   width: 680px;
   left: 25px;
-  height: 75px;
+  height: 200px;
   overflow: hidden;
   justify-content: space-around;
   display: flex;
@@ -54,7 +54,7 @@
 .process-progress {
   position: relative;
   width: 280px;
-  height: 50px;
+  height: 100px;
   left: 10px;
   top: 10px;
   font-style: normal;
@@ -66,9 +66,9 @@
 .process-schedule {
   position: relative;
   width: 280px;
-  height: 50px;
+  height: 100px;
   left: 300px;
-  bottom: 28px;
+  bottom: 89px;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
