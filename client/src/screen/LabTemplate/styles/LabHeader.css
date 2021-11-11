@@ -1,44 +1,39 @@
-.lab-header{
-    position: fixed;
-    width: 1072px;
-    height: 141px;
-    left: 107px;
-    top: 0px;
-    z-index: 10;
-    background-color: white;
-
+.lab-header {
+  position: fixed;
+  width: 1072px;
+  height: 141px;
+  left: 107px;
+  top: 0px;
+  z-index: 10;
+  background-color: white;
 }
 
-.lab-header-span{
-    position: absolute;
-    left: 85px;
-    top: 90px;
+.lab-header-name {
+  position: absolute;
+  width: 178px;
+  height: 35px;
+  left: 90px;
+  top: 86px;
+
+  font-family: NanumGothic;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 35px;
+
+  color: #000000;
 }
 
-.lab-header-name{
-    
-    position: relative;
-    width: 178px;
-    height: 35px;
-
-    font-family: NanumGothic;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 24px;
-    line-height: 35px;
-
-    color: #000000;
-
-}
-
-.lab-header-professor{
-    position: relative;
-    width: 143px;
-    height: 27px;
-    font-family: NanumGothic;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 28px;
-    color: #595959;
+.lab-header-professor {
+  position: absolute;
+  width: 143px;
+  height: 27px;
+  left: 205px;
+  top: 90px;
+  font-family: NanumGothic;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 28px;
+  color: #595959;
 }
