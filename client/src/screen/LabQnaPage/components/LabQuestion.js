@@ -87,15 +87,15 @@ const LabQuestion = ({isWriter, lab, question}) =>{
 
     {showAnswer ? (<>
         <button className="question-toggle-answer-btn" onClick={toggleAnswer}>💬답글 숨기기</button>
-        <form className="question-answer-form" onSubmit={onAnswerSubmit}>
-            <textarea className="question-answer-input" type="text" placeholder="내용을 입력해주세요." onChange={onAnswerChange} required/>
-            <button className="question-answer-submit" type="submit">답글 등록</button>
-        </form>
         {answers && answers.map((answer)=>(
             answer.parentId === question.id && (<div key={answer.id}>
                 <LabAnswer answer={answer}/>
             </div>)
         ))}
+        <form className="question-answer-form" onSubmit={onAnswerSubmit}>
+            <textarea className="question-answer-input" type="text" placeholder="답글을 입력해주세요." onChange={onAnswerChange} required/>
+            <button className="question-answer-submit" type="submit">답글 등록</button>
+        </form>
     </>):(
     <button className="question-toggle-answer-btn" onClick={onAnswerClick} >💬답글 보기</button>)}
     </>
