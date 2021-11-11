@@ -36,7 +36,6 @@ const OpenlabInfo = () => {
           Sponsored by 정보통신산업진흥원
         </p>
         <p>✔ 교수 정보</p>
-        <p>최승용바보</p>
       </div>
     </div>
   );
