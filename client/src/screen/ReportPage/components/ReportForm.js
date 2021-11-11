@@ -39,13 +39,17 @@ function TotalReport() {
           id="reportInput"
           onChange={(event) => reportChange(event)}
         ></textarea>
+        <input className="report-file" type="file"/>
       </div>
+      
       <div>
         <span id="discussion">✔ 논의 사항</span>
         <textarea
           id="discussionInput"
           onChange={(event) => discussionSave(event)}
         ></textarea>
+        <input className="discussion-file" type="file"/>
+
       </div>
       <button id="submit-Button" onClick={clickSubmit}>
         제출

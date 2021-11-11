@@ -44,9 +44,9 @@ const ProcessCard = () => {
       {cards.map((item) => (
         <div className="process-card">
           <div className="process-card-title">
-            <span className="process-title">{item.title}</span>
+            <span className="process-title-name">{item.title}</span>
             <br />
-            <span className="process-name">
+            <span className="process-title-professor">
               {item.professor} | {item.date}
             </span>
           </div>
