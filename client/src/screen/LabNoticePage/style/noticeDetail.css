@@ -17,7 +17,19 @@
     left: 181px;
     top: 141px;
 }
-
+.notice-detail-title span:first-child{
+    left: 16px;
+    top: 12px;
+    position: relative;
+    font-weight: bold;
+}
+.notice-detail-title span:last-child{
+    font-size: 12px;
+    padding-left: 10px;
+    left: 20px;
+    position: relative;
+    top: 10px;
+}
 .notice-detail-content{
     position: absolute;
     left: 135px;

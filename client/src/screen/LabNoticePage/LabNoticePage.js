@@ -34,14 +34,14 @@ const LabNoticePage = ({lab}) =>{
             
             {toggleWriting? 
             <div>
-            <LabNoticeForm id={lab.id}/>
+            {lab && <LabNoticeForm id={lab.id}/>}
             <button className="notice-writing-cancel" onClick={onToggleWriting}>취소</button>
             </div>:
             <div>
                 <button id="notice-writing-btn" onClick={onToggleWriting}>글쓰기</button>
                 <div style={{"position":"absolute"}}>
                     <ul className="notice-list">
-                    <LabNoticeList labId={lab.id} list={list}/>
+                    {lab && <LabNoticeList labId={lab.id} list={list}/>}
                     </ul>
                 </div>
             </div>}

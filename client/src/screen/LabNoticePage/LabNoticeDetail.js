@@ -5,7 +5,7 @@ import LabNoticeEdit from 'screen/LabNoticePage/LabNoticeEdit'
 
 import './style/noticeDetail.css'
 import LabNoticeComments from "./LabNoticeComments";
-const LabNoticeDetail = ({labId}) =>{
+const LabNoticeDetail = ({lab}) =>{
     // 댓글 만들자
 
     const [title, setTitle] = useState();
@@ -25,7 +25,7 @@ const LabNoticeDetail = ({labId}) =>{
     }, [])
 
     useEffect(()=>{
-        axios.get(`/app/lab/${labId}/notices/${noticeId}`)
+        axios.get(`/app/lab/${lab.id}/notices/${noticeId}`)
         .then(response => {
             const {data:{
                 content, title, updatedAt
@@ -44,7 +44,7 @@ const LabNoticeDetail = ({labId}) =>{
     const onDeleteClick = ()=>{
         const confirm = window.confirm("정말 지우시겠습니까?")
         if (confirm){
-            axios.delete(`/app/lab/${labId}/notices/${noticeId}`)
+            axios.delete(`/app/lab/${lab.id}/notices/${noticeId}`)
             window.location.reload()
         }
     }
@@ -52,7 +52,7 @@ const LabNoticeDetail = ({labId}) =>{
     return(
         
     <div>
-        {job && editing ? (<><LabNoticeEdit labId={labId} noticeId={noticeId} prevTitle={title} prevContent={content}/></>):(<>
+        {job && editing ? (<><LabNoticeEdit labId={lab.id} noticeId={noticeId} prevTitle={title} prevContent={content}/></>):(<>
         <div className="notice-detail-header">
         <div className="notice-detail-title">
             <span>{title}</span>
@@ -65,7 +65,7 @@ const LabNoticeDetail = ({labId}) =>{
             <button className="notice-detail-edit" onClick={onEditClick}>수정</button>
             <button className="notice-detail-delete" onClick={onDeleteClick}>삭제</button></>}
         </div>
-        <LabNoticeComments labId={labId} noticeId={noticeId}/>
+        <LabNoticeComments labId={lab.id} noticeId={noticeId}/>
         </>)}
     </div>);
 }
