@@ -27,7 +27,7 @@ const AppRouter = ({ isLoggedIn, needMenubar }) => {
 }, [])
   return (
     <Router>
-      {needMenubar && lab ? <MenuBar lab={lab} isLoggedIn={isLoggedIn} /> : <></>}
+      {needMenubar ? <MenuBar isLoggedIn={isLoggedIn} /> : <></>}
       <Switch>
         <Route exact path="/apply" component={ApplyPage} />
         <Route exact path="/" component={OpenlabPage} />
