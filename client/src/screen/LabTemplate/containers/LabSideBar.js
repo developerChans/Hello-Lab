@@ -34,17 +34,17 @@ const tabs = [
 const researchList = [
   {
     id: 1,
-    tab: "연구 1",
+    tab: "Hello.Lab",
     state: true,
   },
   {
     id: 2,
-    tab: "연구 2",
+    tab: "Spring",
     state: false,
   },
   {
     id: 3,
-    tab: "연구 3",
+    tab: "Nodejs",
     state: false,
   },
 ];

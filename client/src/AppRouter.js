@@ -3,28 +3,29 @@ import LoginPage from "screen/LoginPage/LoginPage";
 import RegisterPage from "screen/RegisterPage/RegisterPage";
 import MyPage from "screen/MyPage/MyPage";
 import OpenlabPage from "screen/OpenlabPage/OpenlabPage";
-import LabTemplate from 'screen/LabTemplate/LabTemplate'
+import LabTemplate from "screen/LabTemplate/LabTemplate";
 
 import OpenlabDetailPage from "screen/OpenlabDetailPage/OpenlabDetailPage";
 import MenuBar from "screen/MenuBar/MenuBar";
 import ApplyPage from "screen/ApplyPage/ApplyPage";
 
-import {useState, useEffect} from 'react'
-import axios from 'axios'
+import { useState, useEffect } from "react";
+import axios from "axios";
 const AppRouter = ({ isLoggedIn, needMenubar }) => {
-  const [lab, setLab] = useState()
-  useEffect(()=>{
-    axios.get('/app/mypage')
-    .then(response=>{
-        console.log(response)
-        if(response.data[0]){
-            const {id, name, pname} = response.data[0];
-            setLab({
-                id, name, pname
-            })
-        }
-    })
-}, [])
+  const [lab, setLab] = useState();
+  useEffect(() => {
+    axios.get("/app/mypage").then((response) => {
+      console.log(response);
+      if (response.data[0]) {
+        const { id, name, pname } = response.data[0];
+        setLab({
+          id,
+          name,
+          pname,
+        });
+      }
+    });
+  }, []);
   return (
     <Router>
       {needMenubar ? <MenuBar isLoggedIn={isLoggedIn} /> : <></>}
@@ -42,13 +43,13 @@ const AppRouter = ({ isLoggedIn, needMenubar }) => {
           {isLoggedIn ? <MyPage /> : <LoginPage />}
         </Route>
         <Route path="/lab">
-          <LabTemplate lab={lab}/>
+          <LabTemplate lab={lab} />
         </Route>
         <Route path="/open/detail">
           <OpenlabDetailPage />
         </Route>
         <Route path="/apply">
-          {lab && <ApplyPage lab={lab}/>}
+          <ApplyPage lab={lab} />
         </Route>
       </Switch>
     </Router>
