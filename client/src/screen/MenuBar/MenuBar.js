@@ -6,14 +6,18 @@ import 'bootstrap/dist/css/bootstrap.css';
 import ProfileBtn from 'screen/MenuBar/ProfileBtn'
 import SignBtn from 'screen/MenuBar/SignBtn';
 // auth에 따라 보이기 안보이기 구현
+import {useEffect} from 'react'
+import axios from 'axios'
 
 import {connect} from 'react-redux'
 
 const user_univ = "https://www.dankook.ac.kr/web/kor";
 
-const MenuBar = ({isLoggedIn, data}) => {
+const MenuBar = ({isLoggedIn, lab}) => {
+  console.log(lab)
   const RISS_URL = "http://www.riss.kr/index.do";
-  const lab_link = `/lab/${data.lab.id}/info`
+  const lab_link = `/lab/${lab.id}/info`
+
   return (
     <div id="menu">
       <nav id="menubar" className="navbar navbar-expand bg-white navbar-light">

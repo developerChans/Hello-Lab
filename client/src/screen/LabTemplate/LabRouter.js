@@ -8,8 +8,8 @@ import LabQnaPage from "screen/LabQnaPage/LabQnaPage";
 import ResearchTemplate from "screen/ResearchTemplate/ResearchTemplate";
 
 const LabRouter = ({lab}) => {
-    return (
-      <Router>
+    return (<>
+      {lab && <Router>
         <Switch>
           <Route exact path="/lab/:id">
             <LabInfo lab={lab}/>
@@ -33,7 +33,7 @@ const LabRouter = ({lab}) => {
             <ResearchTemplate lab={lab}/>
           </Route>
         </Switch>
-      </Router>
+      </Router>}</>
     );
   };
   

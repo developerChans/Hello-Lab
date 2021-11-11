@@ -9,13 +9,17 @@
 
 }
 
+.lab-header-span{
+    position: absolute;
+    left: 85px;
+    top: 90px;
+}
+
 .lab-header-name{
     
-    position: absolute;
+    position: relative;
     width: 178px;
     height: 35px;
-    left: 90px;
-    top: 86px;
 
     font-family: NanumGothic;
     font-style: normal;
@@ -28,11 +32,9 @@
 }
 
 .lab-header-professor{
-    position: absolute;
+    position: relative;
     width: 143px;
     height: 27px;
-    left: 205px;
-    top: 90px;
     font-family: NanumGothic;
     font-style: normal;
     font-weight: 600;

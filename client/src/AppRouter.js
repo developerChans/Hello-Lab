@@ -9,12 +9,25 @@ import OpenlabDetailPage from "screen/OpenlabDetailPage/OpenlabDetailPage";
 import MenuBar from "screen/MenuBar/MenuBar";
 import ApplyPage from "screen/ApplyPage/ApplyPage";
 
-
-
+import {useState, useEffect} from 'react'
+import axios from 'axios'
 const AppRouter = ({ isLoggedIn, needMenubar }) => {
+  const [lab, setLab] = useState()
+  useEffect(()=>{
+    axios.get('/app/mypage')
+    .then(response=>{
+        console.log(response)
+        if(response.data[0]){
+            const {id, name, pname} = response.data[0];
+            setLab({
+                id, name, pname
+            })
+        }
+    })
+}, [])
   return (
     <Router>
-      {needMenubar ? <MenuBar isLoggedIn={isLoggedIn} /> : <></>}
+      {needMenubar && lab ? <MenuBar lab={lab} isLoggedIn={isLoggedIn} /> : <></>}
       <Switch>
         <Route exact path="/apply" component={ApplyPage} />
         <Route exact path="/" component={OpenlabPage} />
@@ -29,13 +42,13 @@ const AppRouter = ({ isLoggedIn, needMenubar }) => {
           {isLoggedIn ? <MyPage /> : <LoginPage />}
         </Route>
         <Route path="/lab">
-          <LabTemplate />
+          <LabTemplate lab={lab}/>
         </Route>
         <Route path="/open/detail">
           <OpenlabDetailPage />
         </Route>
         <Route path="/apply">
-          <ApplyPage/>
+          {lab && <ApplyPage lab={lab}/>}
         </Route>
       </Switch>
     </Router>
