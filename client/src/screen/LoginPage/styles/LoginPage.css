@@ -18,14 +18,14 @@
     top: 40%;
     transform: translateX(-50%);
     width: 450px;
-    height: 280px;
+    height: 310px;
     box-shadow: 0px 1px 2px 1px rgb(196, 196, 196);
 }
 
 #login-form{
     position: relative;
     left: 50%;
-    top: 20%;
+    top: 13%;
     transform: translateX(-50%);
     width: 50%;
 }

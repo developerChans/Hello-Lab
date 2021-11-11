@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import AppRouter from 'AppRouter';
 import axios from 'axios'
-
+import 'screen/app.css'
 function App() {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);

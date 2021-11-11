@@ -4,7 +4,7 @@ import { useState } from "react";
 function TotalReport() {
   const [report, setReport] = useState("");
   const [discussion, setDiscussiont] = useState("");
-
+  const [submit, setSubmit] = useState(false)
   const reportChange = (event) => {
     const {
       target: { value },
@@ -23,14 +23,15 @@ function TotalReport() {
     console.log("버튼 클릭");
     console.log({ report });
     console.log({ discussion });
+    setSubmit(true)
   };
 
   return (
-    <div id="report-body">
+    <>
+    {!submit ? (<div id="report-body">
       <div>
-
-      <span id="report-title">제목</span>
-      <input id="report-title-input"/>
+        <span id="report-title">제목</span>
+        <input id="report-title-input"/>
       </div>
       <div>
         <span id="report">✔ 보고 사항</span>
@@ -49,7 +50,12 @@ function TotalReport() {
       <button id="submit-Button" onClick={clickSubmit}>
         제출
       </button>
-    </div>
+    </div>):(
+      <div style={{'fontSize':'22pt'}}>
+        제출이 완료되었습니다.
+      </div>
+    )}
+    </>
   );
 }
 

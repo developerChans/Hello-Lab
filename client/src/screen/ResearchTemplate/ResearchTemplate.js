@@ -19,7 +19,7 @@ const ResearchTemplate = ({lab}) =>{
     }, [])
     const onProcessClick=()=>{
         localStorage.setItem('tab', 'process')
-        window.location.href=`/lab/${lab.id}/research/${lab.tab}`
+        window.location.href=`/lab/${lab.id}/research/${lab.tab}/process`
     }
     const onReportClick = () =>{
         localStorage.setItem('tab', 'report')
