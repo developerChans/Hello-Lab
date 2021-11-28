@@ -1,8 +1,10 @@
 # 👋 Hello. Lab
-### 연구실 통합 관리 플랫폼 Hello. Lab
-- [아이디어 계획서](./.github/아이디어계획서_단꾸코.pdf)
-- [1차 PT](./.github/단꾸코_경소톤_1차_PT.pdf)
-- [최종 PT](./.github/단꾸코_경소톤_최종_PT.pdf)
+- 연구실 통합 관리 플랫폼 Hello. Lab
+- 단국대학교 경소톤 출품작
+
+  - [아이디어 계획서](./.github/아이디어계획서_단꾸코.pdf)
+  - [1차 PT](./.github/단꾸코_경소톤_1차_PT.pdf)
+  - [최종 PT](./.github/단꾸코_경소톤_최종_PT.pdf)
 
 ## 🙋‍♂️ Dankkuko Members
 - 최승용 [@SeungYongChoi](https://github.com/SeungYongChoi)
