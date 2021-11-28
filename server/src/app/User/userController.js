@@ -71,14 +71,8 @@ exports.login = async function (req, res) {
   return signInResponse.isSuccess
     ? res
         .status(200)
-        .cookie("access", signInResponse.result.accessJwt, {
-          httpOnly: true,
-          secure: true,
-        })
-        .cookie("userId", signInResponse.result.userId, {
-          httpOnly: true,
-          secure: true,
-        })
+        .cookie("access", signInResponse.result.accessJwt, {})
+        .cookie("userId", signInResponse.result.userId, {})
         .send(signInResponse)
     : res.status(203).send(signInResponse);
 };
@@ -101,9 +95,7 @@ exports.logout = async (req, res) => {
     if (result === undefined) {
       throw Error("최상단 에러 확인");
     }
-    res
-      .cookie("access", "", { maxAge: 0, secure: true })
-      .cookie("userId", "", { maxAge: 0, secure: true });
+    res.cookie("access", "", { maxAge: 0 }).cookie("userId", "", { maxAge: 0 });
     return result
       ? res.status(200).json({ success: true, message: "로그아웃 성공" })
       : res.status(400).json({ success: false, message: "로그아웃 실패" });
