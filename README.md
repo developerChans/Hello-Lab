@@ -6,7 +6,7 @@
   - [1차 PT](./.github/단꾸코_경소톤_1차_PT.pdf)
   - [최종 PT](./.github/단꾸코_경소톤_최종_PT.pdf)
 
-## 🙋‍♂️ Dankkuko Members
+## 🙋‍♂️ Team 단꾸코
 - 최승용 [@SeungYongChoi](https://github.com/SeungYongChoi)
   - Leader(Backend/Database)
 - 김지민 [@cji-mango](https://github.com/ji-mango)
@@ -22,3 +22,4 @@
 - Frontend: `React.js`
 - Backend: `Node.js` `Express`
 - Database: `Mysql` `AWS RDS`
+- Infra: `Nginx`, `NHN Toast`
