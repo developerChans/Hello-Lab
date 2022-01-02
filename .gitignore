@@ -12,3 +12,9 @@ log
 database.js
 
 .env.local
+
+.env
+
+.env.dev
+
+database.js
