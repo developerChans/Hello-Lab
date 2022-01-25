@@ -26,3 +26,6 @@
 - Backend: `Node.js` `Express`
 - Database: `Mysql` `AWS RDS`
 - Infra: `Nginx`, `NHN Toast`
+
+## 📽️ Screen
+[시연 영상](https://api-storage.cloud.toast.com/v1/AUTH_c7a133d981484d1687bdce877f0e4537/DK-LAB-IMAGE/%E1%84%89%E1%85%B5%E1%84%8B%E1%85%A7%E1%86%AB%E1%84%8B%E1%85%A7%E1%86%BC%E1%84%89%E1%85%A1%E1%86%BC%20%E1%84%91%E1%85%A7%E1%86%AB%E1%84%8C%E1%85%B5%E1%86%B8%E1%84%87%E1%85%A9%E1%86%AB.mp4)
